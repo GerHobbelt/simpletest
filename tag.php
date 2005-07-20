@@ -656,8 +656,7 @@
             $encoding->attach(
                     $this->getName(),
                     implode('', file($this->getValue())),
-                    basename($this->getValue()),
-                    'text/plain');
+                    basename($this->getValue()));
         }
     }
     

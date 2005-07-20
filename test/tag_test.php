@@ -495,8 +495,7 @@
             $encoding->expectOnce('attach', array(
                     'a',
                     'Sample for testing file upload',
-                    'upload_sample.txt',
-                    'text/plain'));
+                    'upload_sample.txt'));
             $upload = &new SimpleUploadTag(array('name' => 'a'));
             $upload->setValue(dirname(__FILE__) . '/support/upload_sample.txt');
             $upload->write($encoding);
