@@ -405,17 +405,17 @@
             $this->assertCookie('day_cookie', 'C');
         }
         
-        function testOfClockOverDrift() {
+        function testOfClockOverDriftBy100Seconds() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
-            $this->restart(time() + 160);        // Allows sixty second drift.
+            $this->restart(time() + 200);
             $this->assertNoCookie(
                     'short_cookie',
                     '%s->Please check your computer clock setting if you are not using NTP');
         }
         
-        function testOfClockUnderDrift() {
+        function testOfClockUnderDriftBy100Seconds() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
-            $this->restart(time() + 40);         // Allows sixty second drift.
+            $this->restart(time() + 0);
             $this->assertCookie(
                     'short_cookie',
                     'B',
@@ -761,9 +761,7 @@
                     dirname(__FILE__) . '/support/upload_sample.txt'));
             $this->assertField('Content:', dirname(__FILE__) . '/support/upload_sample.txt');
             $this->click('Go!');
-            //$this->showRequest();
-            //$this->showSource();
-            //$this->assertWantedText('Sample for testing file upload');
+            $this->assertWantedText('Sample for testing file upload');
         }
     }
     

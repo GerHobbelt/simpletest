@@ -73,7 +73,7 @@
             $url->addRequestParameter('b', 'B');
             $this->assertEqual($url->getEncodedRequest(), '?a=A&b=B');
             $url->addRequestParameter('a', 'aaa');
-            $this->assertEqual($url->getEncodedRequest(), '?a=A&a=aaa&b=B');
+            $this->assertEqual($url->getEncodedRequest(), '?a=A&b=B&a=aaa');
         }
         
         function testClearingParameters() {

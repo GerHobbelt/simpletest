@@ -653,11 +653,11 @@
             if (! file_exists($this->getValue())) {
                 return;
             }
-            $encoding->addMime(
+            $encoding->attach(
                     $this->getName(),
                     implode('', file($this->getValue())),
-                    array('filename' => basename($this->getValue())),
-                    array('Content-type: text/plain'));
+                    basename($this->getValue()),
+                    'text/plain');
         }
     }
     
