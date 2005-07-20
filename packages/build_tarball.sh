@@ -74,6 +74,7 @@ FILES=(simpletest/errors.php \
           simpletest/test/support/collector/collectable.2 \
           simpletest/test/support/upload_sample.txt \
           simpletest/test/support/supplementary_upload_sample.txt \
+          simpletest/test/support/latin1_sample.txt \
           simpletest/docs/en/docs.css \
           simpletest/docs/en/index.html \
           simpletest/docs/en/overview.html \

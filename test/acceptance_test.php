@@ -776,6 +776,15 @@
             $this->assertWantedText('Sample for testing file upload');
             $this->assertWantedText('Some more text content');
         }
+        
+        function testBinaryFileUpload() {
+            $this->get('http://www.lastcraft.com/test/upload_form.html');
+            $this->assertTrue($this->setField('Content:',
+                    dirname(__FILE__) . '/support/latin1_sample'));
+            $this->click('Go!');
+            $this->assertWantedText(
+                    implode('', file(dirname(__FILE__) . '/support/latin1_sample')));
+        }
     }
     
     class TestOfLiveHistoryNavigation extends WebTestCase {        

@@ -90,20 +90,17 @@
         var $_key;
         var $_content;
         var $_filename;
-        var $_mime;
         
         /**
          *    Stashes the data for rendering later.
          *    @param string $key          Key to add value to.
          *    @param string $content      Raw data.
          *    @param hash $filename       Original filename.
-         *    @param string $mime         MIME type.
          */
-        function SimpleAttachment($key, $content, $filename, $mime) {
+        function SimpleAttachment($key, $content, $filename) {
             $this->_key = $key;
             $this->_content = $content;
             $this->_filename = $filename;
-            $this->_mime = $mime;
         }
         
         /**
@@ -124,9 +121,36 @@
             $part = 'Content-Disposition: form-data; ';
             $part .= 'name="' . $this->_key . '"; ';
             $part .= 'filename="' . $this->_filename . '"';
-            $part .= "\r\nContent-Type: " . $this->_mime;
+            $part .= "\r\nContent-Type: " . $this->_deduceMimeType();
             $part .= "\r\n\r\n" . $this->_content;
             return $part;
+        }
+        
+        /**
+         *    Attempts to figure out the MIME type from the
+         *    file extension and the content.
+         *    @return string        MIME type.
+         *    @access private
+         */
+        function _deduceMimeType() {
+            if ($this->_isOnlyAscii($this->_content)) {
+                return 'text/plain';
+            }
+            return 'application/octet-stream';
+        }
+        
+        /**
+         *    Tests each character is in the range 0-127.
+         *    @param string $ascii    String to test.
+         *    @access private
+         */
+        function _isOnlyAscii($ascii) {
+            for ($i = 0, $length = strlen($ascii); $i < $length; $i++) {
+                if (ord($ascii[$i]) > 127) {
+                    return false;
+                }
+            }
+            return true;
         }
         
         /**
@@ -225,11 +249,10 @@
          *    @param string $key          Key to add value to.
          *    @param string $content      Raw data.
          *    @param hash $filename       Original filename.
-         *    @param string $mime         MIME type.
          *    @access public
          */
-        function attach($key, $content, $filename, $mime) {
-            $this->_request[] = new SimpleAttachment($key, $content, $filename, $mime);
+        function attach($key, $content, $filename) {
+            $this->_request[] = new SimpleAttachment($key, $content, $filename);
         }
         
         /**

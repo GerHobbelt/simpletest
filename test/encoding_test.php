@@ -21,7 +21,7 @@
         }
         
         function testAttachmentEncodedAsHeadersWithDispositionAndContent() {
-            $part = new SimpleAttachment('a', 'A', 'aaa.txt', 'text/plain');
+            $part = new SimpleAttachment('a', 'A', 'aaa.txt');
             $this->assertEqual(
                     $part->asMime(),
                     "Content-Disposition: form-data; name=\"a\"; filename=\"aaa.txt\"\r\n" .
@@ -152,7 +152,7 @@
         
         function testAttachment() {
             $encoding = &new SimpleMultipartEncoding(array(), 'boundary');
-            $encoding->attach('a', 'aaa', 'aaa.txt', 'text/plain');
+            $encoding->attach('a', 'aaa', 'aaa.txt');
             $this->assertIdentical($encoding->getValue('a'), 'aaa.txt');
             $this->assertwritten($encoding,
                     "--boundary\r\n" .
