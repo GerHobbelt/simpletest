@@ -763,6 +763,19 @@
             $this->click('Go!');
             $this->assertWantedText('Sample for testing file upload');
         }
+        
+        function testMultipleFileUpload() {
+            $this->get('http://www.lastcraft.com/test/upload_form.html');
+            $this->assertTrue($this->setField('Content:',
+                    dirname(__FILE__) . '/support/upload_sample.txt'));
+            $this->assertTrue($this->setField('Supplemental:',
+                    dirname(__FILE__) . '/support/supplementary_upload_sample.txt'));
+            $this->assertField('Supplemental:',
+                    dirname(__FILE__) . '/support/supplementary_upload_sample.txt');
+            $this->click('Go!');
+            $this->assertWantedText('Sample for testing file upload');
+            $this->assertWantedText('Some more text content');
+        }
     }
     
     class TestOfLiveHistoryNavigation extends WebTestCase {        

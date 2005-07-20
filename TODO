@@ -1,5 +1,5 @@
 TODO
-This is immediate stuff only for this iteration (1.1alpha1) of 35 hours (25 done).
+This is immediate stuff only for this iteration (1.1alpha1) of 37 hours (25 done).
 
 $Id$
 
@@ -12,6 +12,7 @@ Add donated fix for assertReference() from Knak-Nielsen (1/1) - done.
 Promote assertEqual() to other test cases (1/1) - done.
 Create separate group test files for unit and acceptance tests (1/1) - done.
 Remove class_exists() auto loading disabling flag  (1).
+Confirm no notices under PHP4.4 (2).
 
 Reporter
 --------
