@@ -482,7 +482,7 @@
         }
     }
     
-    class TestofUploadWidget extends UnitTestCase {
+    class TestOfUploadWidget extends UnitTestCase {
         
         function testValueIsFilePath() {
             $upload = &new SimpleUploadTag(array('name' => 'a'));
@@ -492,11 +492,11 @@
         
         function testSubmitsFileContents() {
             $encoding = &new MockSimpleMultipartEncoding($this);
-            $encoding->expectOnce('addMime', array(
+            $encoding->expectOnce('attach', array(
                     'a',
                     'Sample for testing file upload',
-                    array('filename' => 'upload_sample.txt'),
-                    array('Content-type: text/plain')));
+                    'upload_sample.txt',
+                    'text/plain'));
             $upload = &new SimpleUploadTag(array('name' => 'a'));
             $upload->setValue(dirname(__FILE__) . '/support/upload_sample.txt');
             $upload->write($encoding);

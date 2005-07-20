@@ -1,5 +1,5 @@
 TODO
-This is immediate stuff only for this iteration (1.1alpha1) of 46 hours (23 done).
+This is immediate stuff only for this iteration (1.1alpha1) of 35 hours (25 done).
 
 $Id$
 
@@ -18,9 +18,6 @@ Reporter
 
 Mock objects
 ------------
-Change semantics of expectAtLeastOnce() for Jason (2).
-Add expectOrder() for loose order checking (3).
-Add expectSequence() or strict order checking (3).
 Fix bug with PHP5 subclasses failing to mock with PHP4 constructors (2).
 
 Parser
@@ -28,26 +25,23 @@ Parser
 
 Browser
 -------
-Add file uploading (3/6).
+Add file uploading (3/8).
 Add form-data encoding for forms (5/9) - done.
 Single click() method for links, buttons or images (2/1) - done.
 setCookie() should be able to create a new one (1).
 Simultaneous POST and GET parameters (3/2) - done.
 Fix split bug with simple URLs not being parsed correctly (1/1) - done.
 Fix double slash bug in URL (1/1) - done.
-Add referer header (3).
 Add &nbsp; to space normalisation (1).
 Add label tag parsing (3/10) - done.
 Fix bug with redirect authorisation failing on directory without trailing slash (1).
 
 Web tester
 ----------
-Allow expectations to be used for title comparisons (2).
 Add assertSubmit() test (1).
 
 Documentation
 -------------
-Note that additional parameters can be added to get(), post(), etc (2).
 
 Build
 -----
