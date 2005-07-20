@@ -250,8 +250,10 @@
         function attachLabelBySelector($selector, $label) {
             for ($i = 0, $count = count($this->_widgets); $i < $count; $i++) {
                 if ($selector->isMatch($this->_widgets[$i])) {
-                    $this->_widgets[$i]->setLabel($label);
-                    return;
+                    if (method_exists($this->_widgets[$i], 'setLabel')) {
+                        $this->_widgets[$i]->setLabel($label);
+                        return;
+                    }
                 }
             }
         }
