@@ -330,7 +330,11 @@
          *    @access public
          */
         function addTestClass($class) {
-            $this->_test_cases[] = $class;
+            if ($this->_getBaseTestCase($class) == 'grouptest') {
+                $this->_test_cases[] = &new $class();
+            } else {
+                $this->_test_cases[] = $class;
+            }
         }
 
         /**
@@ -366,10 +370,10 @@
             include($file);
             $error = isset($php_errormsg) ? $php_errormsg : false;
             $this->_disableErrorReporting();
-            $self_inflicted = array(
+            $self_inflicted_errors = array(
                     'Assigning the return value of new by reference is deprecated',
                     'var: Deprecated. Please use the public/private/protected modifiers');
-            if (in_array($error, $self_inflicted)) {
+            if (in_array($error, $self_inflicted_errors)) {
                 return false;
             }
             return $error;
@@ -417,10 +421,9 @@
                 if (in_array($class, $existing_classes)) {
                     continue;
                 }
-                if (! $this->_isTestCase($class)) {
-                    continue;
+                if ($this->_getBaseTestCase($class)) {
+                    $classes[] = $class;
                 }
-                $classes[] = $class;
             }
             return $classes;
         }
@@ -446,15 +449,15 @@
 
         /**
          *    Test to see if a class is derived from the
-         *    TestCase class.
+         *    SimpleTestCase class.
          *    @param string $class     Class name.
          *    @access private
          */
-        function _isTestCase($class) {
+        function _getBaseTestCase($class) {
             while ($class = get_parent_class($class)) {
                 $class = strtolower($class);
                 if ($class == "simpletestcase" || $class == "grouptest") {
-                    return true;
+                    return $class;
                 }
             }
             return false;
