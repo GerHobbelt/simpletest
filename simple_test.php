@@ -60,7 +60,8 @@
          *    @access public
          */
         function &createInvoker() {
-            return new SimpleErrorTrappingInvoker(new SimpleInvoker($this));
+            $invoker = &new SimpleErrorTrappingInvoker(new SimpleInvoker($this));
+            return $invoker;
         }
 
         /**
@@ -72,7 +73,8 @@
          *    @access protected
          */
         function &_createRunner(&$reporter) {
-            return new SimpleRunner($this, $reporter);
+            $runner = &new SimpleRunner($this, $reporter);
+            return $runner;
         }
 
         /**

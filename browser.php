@@ -189,7 +189,8 @@
          *    @access protected
          */
         function &_createUserAgent() {
-            return new SimpleUserAgent();
+            $user_agent = &new SimpleUserAgent();
+            return $user_agent;
         }
         
         /**
@@ -198,7 +199,8 @@
          *    @access protected
          */
         function &_createHistory() {
-            return new SimpleBrowserHistory();
+            $history = &new SimpleBrowserHistory();
+            return $history;
         }
         
         /**
@@ -252,9 +254,11 @@
         function &_fetch($url, $encoding, $depth = 0) {
             $response = &$this->_user_agent->fetchResponse($url, $encoding);
             if ($response->isError()) {
-                return new SimplePage($response);
+                $page = &new SimplePage($response);
+            } else {
+                $page = &$this->_parse($response, $depth);
             }
-            return $this->_parse($response, $depth);
+            return $page;
         }
         
         /**

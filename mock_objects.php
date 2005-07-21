@@ -367,7 +367,8 @@
         function &findFirstMatch($parameters) {
             $slot = $this->_findFirstSlot($parameters);
             if (!isset($slot)) {
-                return null;
+                $null = null;
+                return $null;
             }
             return $slot["content"];
         }
@@ -398,7 +399,8 @@
                     return $this->_map[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
     }
     
@@ -460,7 +462,8 @@
             $method = strtolower($method);
             $step = $this->getCallCount($method);
             $this->_addCall($method, $args);
-            return $this->_getReturn($method, $args, $step);
+            $result = &$this->_getReturn($method, $args, $step);
+            return $result;
         }
         
         /**
@@ -612,13 +615,16 @@
         function &_getReturn($method, $args, $step) {
             if (isset($this->_return_sequence[$method][$step])) {
                 if ($this->_return_sequence[$method][$step]->isMatch($args)) {
-                    return $this->_return_sequence[$method][$step]->findFirstMatch($args);
+                    $result = &$this->_return_sequence[$method][$step]->findFirstMatch($args);
+                    return $result;
                 }
             }
             if (isset($this->_returns[$method])) {
-                return $this->_returns[$method]->findFirstMatch($args);
+                $result = &$this->_returns[$method]->findFirstMatch($args);
+                return $result;
             }
-            return null;
+            $null = null;
+            return $null;
         }
     }
     
@@ -861,7 +867,8 @@
             $step = $this->getCallCount($method);
             $this->_addCall($method, $args);
             $this->_checkExpectations($method, $args, $step);
-            return $this->_getReturn($method, $args, $step);
+            $result = &$this->_getReturn($method, $args, $step);
+            return $result;
         }
         
         /**
@@ -1043,7 +1050,8 @@
                 }
                 $code .= Stub::_createFunctionDeclaration($method);
                 $code .= "        \$args = func_get_args();\n";
-                $code .= "        return \$this->_invoke(\"$method\", \$args);\n";
+                $code .= "        \$result = &\$this->_invoke(\"$method\", \$args);\n";
+                $code .= "        return \$result;\n";
                 $code .= "    }\n";
             }
             return $code;
@@ -1247,7 +1255,8 @@
         function _bailOutIfNotMocked($alias) {
             $code  = "        if (! in_array($alias, \$this->_mocked_methods)) {\n";
             $code .= "            trigger_error(\"Method [$alias] is not mocked\");\n";
-            $code .= "            return;\n";
+            $code .= "            \$null = null;\n";
+            $code .= "            return \$null;\n";
             $code .= "        }\n";
             return $code;
         }
@@ -1336,7 +1345,8 @@
             foreach ($methods as $method) {
                 $code .= Stub::_createFunctionDeclaration($method);
                 $code .= "        \$args = func_get_args();\n";
-                $code .= "        return \$this->_mock->_invoke(\"$method\", \$args);\n";
+                $code .= "        \$result = &\$this->_mock->_invoke(\"$method\", \$args);\n";
+                $code .= "        return \$result;\n";
                 $code .= "    }\n";
             }
             return $code;
