@@ -299,7 +299,8 @@
          *    @access protected
          */
         function &_createShell() {
-            return new SimpleShell();
+            $shell = &new SimpleShell();
+            return $shell;
         }
     }
 ?>

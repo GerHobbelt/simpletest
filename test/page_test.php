@@ -504,7 +504,8 @@
         
         function &parse($response) {
             $builder = &new SimplePageBuilder();
-            return $builder->parse($response);
+            $page = &$builder->parse($response);
+            return $page;
         }
         
         function testEmptyPage() {

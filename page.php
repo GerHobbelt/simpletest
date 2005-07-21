@@ -33,7 +33,7 @@
          *    @return SimpleTag          Tag object.
          *    @access public
          */
-        function &createTag($name, $attributes) {
+        function createTag($name, $attributes) {
             static $map = array(
                     'a' => 'SimpleAnchorTag',
                     'title' => 'SimpleTitleTag',
@@ -61,7 +61,7 @@
          *    @return SimpleTag          Tag object.
          *    @access protected
          */
-        function &_createSelectionTag($attributes) {
+        function _createSelectionTag($attributes) {
             if (isset($attributes['multiple'])) {
                 return new MultipleSelectionTag($attributes);
             }
@@ -74,7 +74,7 @@
          *    @return SimpleTag          Tag object.
          *    @access protected
          */
-        function &_createInputTag($attributes) {
+        function _createInputTag($attributes) {
             if (! isset($attributes['type'])) {
                 return new SimpleTextTag($attributes);
             }
@@ -136,7 +136,7 @@
          *    @return SimplePage                   Newly parsed page.
          *    @access public
          */
-        function parse($response) {
+        function &parse($response) {
             $this->_tags = array();
             $this->_page = &$this->_createPage($response);
             $parser = &$this->_createParser($this);
@@ -151,7 +151,8 @@
          *    @access protected
          */
         function &_createPage($response) {
-            return new SimplePage($response);
+            $page = &new SimplePage($response);
+            return $page;
         }
         
         /**
@@ -162,7 +163,8 @@
          *    @access protected
          */
         function &_createParser(&$listener) {
-            return new SimpleSaxParser($listener);
+            $parser = &new SimpleSaxParser($listener);
+            return $parser;
         }
         
         /**
@@ -175,7 +177,7 @@
          */
         function startElement($name, $attributes) {
             $factory = &new SimpleTagBuilder();
-            $tag = &$factory->createTag($name, $attributes);
+            $tag = $factory->createTag($name, $attributes);
             if (! $tag) {
                 return true;
             }
@@ -893,7 +895,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
@@ -990,7 +993,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**

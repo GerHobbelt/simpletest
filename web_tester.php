@@ -495,7 +495,8 @@
          *    @access public
          */
         function &createInvoker() {
-            return new WebTestCaseInvoker(parent::createInvoker());
+            $invoker = &new WebTestCaseInvoker(parent::createInvoker());
+            return $invoker;
         }
         
         /**
@@ -536,7 +537,8 @@
          *    @access public
          */
         function &createBrowser() {
-            return new SimpleBrowser();
+            $browser = &new SimpleBrowser();
+            return $browser;
         }
         
         /**
