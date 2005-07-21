@@ -990,13 +990,13 @@
          *    @access public
          */
         function generate($class, $stub_class = false, $methods = false) {
-            if (! SimpleTestCompatibility::classExists($class)) {
+            if (! class_exists($class)) {
                 return false;
             }
             if (! $stub_class) {
                 $stub_class = "Stub" . $class;
             }
-            if (SimpleTestCompatibility::classExists($stub_class)) {
+            if (class_exists($stub_class)) {
                 return false;
             }
             return eval(Stub::_createClassCode(
@@ -1150,13 +1150,13 @@
          *    @access public
          */
         function generate($class, $mock_class = false, $methods = false) {
-            if (! SimpleTestCompatibility::classExists($class)) {
+            if (! class_exists($class)) {
                 return false;
             }
             if (! $mock_class) {
                 $mock_class = "Mock" . $class;
             }
-            if (SimpleTestCompatibility::classExists($mock_class)) {
+            if (class_exists($mock_class)) {
                 return false;
             }
             return eval(Mock::_createClassCode(
@@ -1178,10 +1178,10 @@
          *    @access public
          */
         function generatePartial($class, $mock_class, $methods) {
-            if (! SimpleTestCompatibility::classExists($class)) {
+            if (! class_exists($class)) {
                 return false;
             }
-            if (SimpleTestCompatibility::classExists($mock_class)) {
+            if (class_exists($mock_class)) {
                 trigger_error("Partial mock class [$mock_class] already exists");
                 return false;
             }

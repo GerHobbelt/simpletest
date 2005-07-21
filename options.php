@@ -318,21 +318,6 @@
         }
         
         /**
-         *    Autoload safe version of class_exists().
-         *    @param string $class        Name of class to look for.
-         *    @return boolean             True if class is defined.
-         *    @access public
-         *    @static
-         */
-        function classExists($class) {
-            if (version_compare(phpversion(), '5') >= 0) {
-                return class_exists($class, false);
-            } else {
-                return class_exists($class);
-            }
-        }
-        
-        /**
          *    Sets a socket timeout for each chunk.
          *    @param resource $handle    Socket handle.
          *    @param integer $timeout    Limit in seconds.
