@@ -373,11 +373,13 @@
         function testCookieSetting() {
             $this->setCookie('a', 'Test cookie a', 'www.lastcraft.com');
             $this->setCookie('b', 'Test cookie b', 'www.lastcraft.com', 'test');
+            $this->setCookie('c', 'Test cookie c');
             $this->get('http://www.lastcraft.com/test/network_confirm.php');
             $this->assertWantedPattern('/Test cookie a/');
             $this->assertWantedPattern('/Test cookie b/');
             $this->assertCookie('a');
             $this->assertCookie('b', 'Test cookie b');
+            $this->assertCookie('c', 'Test cookie c');
             $this->assertTrue($this->getCookie('a') == 'Test cookie a');
             $this->assertTrue($this->getCookie('b') == 'Test cookie b');
         }

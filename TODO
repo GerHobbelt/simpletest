@@ -1,5 +1,5 @@
 TODO
-This is immediate stuff only for this iteration (1.1alpha1) of 37 hours (30 done).
+This is immediate stuff only for this iteration (1.1alpha1) of 36 hours (30 done).
 
 $Id$
 
@@ -29,21 +29,18 @@ Browser
 Add file uploading (3/9) - done.
 Add form-data encoding for forms (5/9) - done.
 Single click() method for links, buttons or images (2/1) - done.
-setCookie() should be able to create a new one (1).
+setCookie() should be able to create a new one (1/0) - done.
 Simultaneous POST and GET parameters (3/2) - done.
 Fix split bug with simple URLs not being parsed correctly (1/1) - done.
 Fix double slash bug in URL (1/1) - done.
-Add &nbsp; to space normalisation (1).
 Add label tag parsing (3/10) - done.
 Fix bug with redirect authorisation failing on directory without trailing slash (1).
 
 Web tester
 ----------
-Add assertSubmit() test (1).
 
 Documentation
 -------------
 
 Build
 -----
-
