@@ -93,9 +93,8 @@
         function _createAction($action, $base) {
             if (is_bool($action)) {
                 return $base;
-            } else {
-                $url = new SimpleUrl($action);
             }
+            $url = new SimpleUrl($action);
             return $url->makeAbsolute($base);
         }
         

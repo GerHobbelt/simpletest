@@ -371,17 +371,18 @@
         }
         
         function testCookieSetting() {
-            $this->setCookie('a', 'Test cookie a', 'www.lastcraft.com');
-            $this->setCookie('b', 'Test cookie b', 'www.lastcraft.com', 'test');
-            $this->setCookie('c', 'Test cookie c');
+            $this->setCookie('a', 'Test cookie a');
+            $this->setCookie('b', 'Test cookie b', 'www.lastcraft.com');
+            $this->setCookie('c', 'Test cookie c', 'www.lastcraft.com', 'test');
             $this->get('http://www.lastcraft.com/test/network_confirm.php');
             $this->assertWantedPattern('/Test cookie a/');
             $this->assertWantedPattern('/Test cookie b/');
+            $this->assertWantedPattern('/Test cookie c/');
             $this->assertCookie('a');
             $this->assertCookie('b', 'Test cookie b');
-            $this->assertCookie('c', 'Test cookie c');
             $this->assertTrue($this->getCookie('a') == 'Test cookie a');
             $this->assertTrue($this->getCookie('b') == 'Test cookie b');
+            $this->assertTrue($this->getCookie('c') == 'Test cookie c');
         }
         
         function testCookieReading() {
@@ -398,38 +399,38 @@
             $this->assertCookie('day_cookie', 'C');
         }
         
-        function testTimedCookieExpiry() {
+        function testTimedCookieExpiryWith100SecondMargin() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
             $this->ageCookies(3600);
-            $this->restart(time() + 60);    // Includes a 60 sec. clock drift margin.
+            $this->restart(time() + 100);
             $this->assertNoCookie('session_cookie');
             $this->assertNoCookie('hour_cookie');
             $this->assertCookie('day_cookie', 'C');
         }
         
-        function testOfClockOverDriftBy100Seconds() {
+        function testNoClockOverDriftBy100Seconds() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
             $this->restart(time() + 200);
             $this->assertNoCookie(
                     'short_cookie',
-                    '%s->Please check your computer clock setting if you are not using NTP');
+                    '%s -> Please check your computer clock setting if you are not using NTP');
         }
         
-        function testOfClockUnderDriftBy100Seconds() {
+        function testNoClockUnderDriftBy100Seconds() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
             $this->restart(time() + 0);
             $this->assertCookie(
                     'short_cookie',
                     'B',
-                    '%s->Please check your computer clock setting if you are not using NTP');
+                    '%s -> Please check your computer clock setting if you are not using NTP');
         }
         
         function testCookiePath() {
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
-            $this->assertNoCookie("path_cookie", "D");
+            $this->assertNoCookie('path_cookie', 'D');
             $this->get('./path/show_cookies.php');
             $this->assertWantedPattern('/path_cookie/');
-            $this->assertCookie("path_cookie", "D");
+            $this->assertCookie('path_cookie', 'D');
         }
     }
     
@@ -873,11 +874,32 @@
             $this->assertResponse(200);
         }
         
+        function testTrailingSlashImpliedWithinRealm() {
+            $this->get('http://www.lastcraft.com/test/protected/');
+            $this->authenticate('test', 'secret');
+            $this->assertResponse(200);
+            $this->get('http://www.lastcraft.com/test/protected');
+            $this->assertResponse(200);
+        }
+        
+        function testTrailingSlashImpliedSettingRealm() {
+            $this->get('http://www.lastcraft.com/test/protected');
+            $this->authenticate('test', 'secret');
+            $this->assertResponse(200);
+            $this->get('http://www.lastcraft.com/test/protected/');
+            $this->assertResponse(200);
+        }
+        
         function testEncodedAuthenticationFetchesPage() {
             $this->get('http://test:secret@www.lastcraft.com/test/protected/');
             $this->assertResponse(200);
         }
-        
+
+        function testEncodedAuthenticationFetchesPageAfterTrailingSlashRedirect() {
+            $this->get('http://test:secret@www.lastcraft.com/test/protected');
+            $this->assertResponse(200);
+        }
+
         function testRealmExtendsToWholeDirectory() {
             $this->get('http://www.lastcraft.com/test/protected/1.html');
             $this->authenticate('test', 'secret');
@@ -890,6 +912,12 @@
         function testRedirectKeepsAuthentication() {
             $this->get('http://www.lastcraft.com/test/protected/local_redirect.php');
             $this->authenticate('test', 'secret');
+            $this->assertTitle('Simple test target file');
+        }
+        
+        function testRedirectKeepsEncodedAuthentication() {
+            $this->get('http://test:secret@www.lastcraft.com/test/protected/local_redirect.php');
+            $this->assertResponse(200);
             $this->assertTitle('Simple test target file');
         }
         

@@ -431,10 +431,9 @@
          */
         function &fetch($timeout) {
             $socket = &$this->_route->createConnection($this->_encoding->getMethod(), $timeout);
-            if ($socket->isError()) {
-                return $this->_createResponse($socket);
+            if (! $socket->isError()) {
+                $this->_dispatchRequest($socket, $this->_encoding);
             }
-            $this->_dispatchRequest($socket, $this->_encoding);
             $response = &$this->_createResponse($socket);
             return $response;
         }
