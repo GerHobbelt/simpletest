@@ -912,7 +912,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
@@ -928,7 +929,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
@@ -944,7 +946,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
@@ -960,7 +963,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
@@ -976,7 +980,8 @@
                     return $this->_complete_forms[$i];
                 }
             }
-            return null;
+            $null = null;
+            return $null;
         }
         
         /**
