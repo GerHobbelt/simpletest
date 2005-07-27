@@ -204,7 +204,7 @@
         function assertOutputPattern($pattern, $message = "%s") {
             $shell = &$this->_getShell();
             return $this->assert(
-                    new WantedPatternExpectation($pattern),
+                    new PatternExpectation($pattern),
                     $shell->getOutput(),
                     $message);
         }
@@ -220,7 +220,7 @@
         function assertNoOutputPattern($pattern, $message = "%s") {
             $shell = &$this->_getShell();
             return $this->assert(
-                    new UnwantedPatternExpectation($pattern),
+                    new NoPatternExpectation($pattern),
                     $shell->getOutput(),
                     $message);
         }
@@ -261,7 +261,7 @@
         function assertFilePattern($pattern, $path, $message = "%s") {
             $shell = &$this->_getShell();
             return $this->assert(
-                    new WantedPatternExpectation($pattern),
+                    new PatternExpectation($pattern),
                     implode('', file($path)),
                     $message);
         }
@@ -278,7 +278,7 @@
         function assertNoFilePattern($pattern, $path, $message = "%s") {
             $shell = &$this->_getShell();
             return $this->assert(
-                    new UnwantedPatternExpectation($pattern),
+                    new NoPatternExpectation($pattern),
                     implode('', file($path)),
                     $message);
         }

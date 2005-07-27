@@ -253,7 +253,7 @@
          */
         function assertPattern($pattern, $subject, $message = "%s") {
             return $this->assert(
-                    new WantedPatternExpectation($pattern),
+                    new PatternExpectation($pattern),
                     $subject,
                     $message);
         }
@@ -277,7 +277,7 @@
          */
         function assertNoPattern($pattern, $subject, $message = "%s") {
             return $this->assert(
-                    new UnwantedPatternExpectation($pattern),
+                    new NoPatternExpectation($pattern),
                     $subject,
                     $message);
         }
@@ -350,7 +350,7 @@
          *    @deprecated
          */
         function assertErrorPattern($pattern, $message = "%s") {
-            return $this->assertError(new WantedPatternExpectation($pattern), $message);
+            return $this->assertError(new PatternExpectation($pattern), $message);
         }
     }
 ?>

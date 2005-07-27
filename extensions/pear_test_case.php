@@ -141,10 +141,7 @@
          *    @public
          */
         function assertRegExp($pattern, $subject, $message = "%s") {
-            $this->assert(
-                    new WantedPatternExpectation($pattern),
-                    $subject,
-                    $message);
+            $this->assert(new PatternExpectation($pattern), $subject, $message);
         }
         
         /**
