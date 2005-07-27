@@ -139,7 +139,7 @@
          *    @access public
          */
         function assertEqual($first, $second, $message = "%s") {
-            return $this->assertExpectation(
+            return $this->assert(
                     new EqualExpectation($first),
                     $second,
                     $message);
@@ -156,7 +156,7 @@
          *    @access public
          */
         function assertNotEqual($first, $second, $message = "%s") {
-            return $this->assertExpectation(
+            return $this->assert(
                     new NotEqualExpectation($first),
                     $second,
                     $message);
@@ -187,7 +187,7 @@
          */
         function assertOutput($expected, $message = "%s") {
             $shell = &$this->_getShell();
-            return $this->assertExpectation(
+            return $this->assert(
                     new EqualExpectation($expected),
                     $shell->getOutput(),
                     $message);
@@ -203,7 +203,7 @@
          */
         function assertOutputPattern($pattern, $message = "%s") {
             $shell = &$this->_getShell();
-            return $this->assertExpectation(
+            return $this->assert(
                     new WantedPatternExpectation($pattern),
                     $shell->getOutput(),
                     $message);
@@ -219,7 +219,7 @@
          */
         function assertNoOutputPattern($pattern, $message = "%s") {
             $shell = &$this->_getShell();
-            return $this->assertExpectation(
+            return $this->assert(
                     new UnwantedPatternExpectation($pattern),
                     $shell->getOutput(),
                     $message);
@@ -260,7 +260,7 @@
          */
         function assertFilePattern($pattern, $path, $message = "%s") {
             $shell = &$this->_getShell();
-            return $this->assertExpectation(
+            return $this->assert(
                     new WantedPatternExpectation($pattern),
                     implode('', file($path)),
                     $message);
@@ -277,7 +277,7 @@
          */
         function assertNoFilePattern($pattern, $path, $message = "%s") {
             $shell = &$this->_getShell();
-            return $this->assertExpectation(
+            return $this->assert(
                     new UnwantedPatternExpectation($pattern),
                     implode('', file($path)),
                     $message);

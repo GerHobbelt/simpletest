@@ -9,10 +9,8 @@
     /**#@+
      * include SimpleTest files
      */
-    require_once dirname(__FILE__).DIRECTORY_SEPARATOR
-            .'..'.DIRECTORY_SEPARATOR . 'unit_tester.php';
-    require_once dirname(__FILE__).DIRECTORY_SEPARATOR
-            .'..'.DIRECTORY_SEPARATOR . 'expectation.php';
+    require_once(dirname(__FILE__) . '/../unit_tester.php');
+    require_once(dirname(__FILE__) . '/../expectation.php');
     /**#@-*/
     
     /**
@@ -52,22 +50,21 @@
          *    @public
          */
         function assertEquals($first, $second, $message = false) {
-            $this->assertExpectation(
+            parent::assert(
                     new EqualExpectation($first),
                     $second,
                     $message);
         }
         
         /**
-         *    Will test straight equality if set to loose
-         *    typing, or identity if not.
+         *    Simple string equality.
          *    @param $first          First value.
          *    @param $second         Comparison value.
          *    @param $message        Message to display.
          *    @public
          */
         function assertEqualsMultilineStrings($first, $second, $message = false) {
-            $this->assertExpectation(
+            parent::assert(
                     new EqualExpectation($first),
                     $second,
                     $message);
@@ -81,7 +78,7 @@
          *    @public
          */
         function assertRegexp($pattern, $subject, $message = false) {
-            $this->assertExpectation(
+            parent::assert(
                     new WantedPatternExpectation($pattern),
                     $subject,
                     $message);
@@ -94,7 +91,7 @@
          *    @public
          */
         function error($message) {
-            parent::assertTrue(false, "Error triggered [$message]");
+            parent::fail("Error triggered [$message]");
         }
          
         /**

@@ -9,10 +9,10 @@
     /**#@+
      * include SimpleTest files
      */
-    require_once dirname(__FILE__) . '/../dumper.php';
-    require_once dirname(__FILE__) . '/../options.php';
-    require_once dirname(__FILE__) . '/../simple_test.php';
-    require_once dirname(__FILE__) . '/../expectation.php';
+    require_once(dirname(__FILE__) . '/../dumper.php');
+    require_once(dirname(__FILE__) . '/../options.php');
+    require_once(dirname(__FILE__) . '/../simple_test.php');
+    require_once(dirname(__FILE__) . '/../expectation.php');
 	/**#@-*/
    
     /**
@@ -48,7 +48,7 @@
             } else {
                 $expectation = &new IdenticalExpectation($first);
             }
-            $this->assertExpectation($expectation, $second, $message);
+            $this->assert($expectation, $second, $message);
         }
         
         /**
@@ -141,7 +141,7 @@
          *    @public
          */
         function assertRegExp($pattern, $subject, $message = "%s") {
-            $this->assertExpectation(
+            $this->assert(
                     new WantedPatternExpectation($pattern),
                     $subject,
                     $message);

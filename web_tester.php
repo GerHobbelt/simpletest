@@ -970,7 +970,7 @@
          *    @access public
          */
         function assertEqual($first, $second, $message = "%s") {
-            return $this->assertExpectation(
+            return $this->assert(
                     new EqualExpectation($first),
                     $second,
                     $message);
@@ -987,7 +987,7 @@
          *    @access public
          */
         function assertNotEqual($first, $second, $message = "%s") {
-            return $this->assertExpectation(
+            return $this->assert(
                     new NotEqualExpectation($first),
                     $second,
                     $message);
@@ -1107,7 +1107,7 @@
                         isset($value),
                         sprintf($message, "Field [$label] should exist"));
             } else {
-                return $this->assertExpectation(
+                return $this->assert(
                         new FieldExpectation($expected),
                         $value,
                         sprintf($message, "Field [$label] should match with [%s]"));
@@ -1134,7 +1134,7 @@
                         isset($value),
                         sprintf($message, "Field name [$name] should exist"));
             } else {
-                return $this->assertExpectation(
+                return $this->assert(
                         new FieldExpectation($expected),
                         $value,
                         sprintf($message, "Field name [$name] should match with [%s]"));
@@ -1161,7 +1161,7 @@
                         isset($value),
                         sprintf($message, "Field of ID [$id] should exist"));
             } else {
-                return $this->assertExpectation(
+                return $this->assert(
                         new FieldExpectation($expected),
                         $value,
                         sprintf($message, "Field of ID [$id] should match with [%s]"));
@@ -1263,7 +1263,7 @@
          *    @access public
          */
         function assertHeader($header, $value = false, $message = '%s') {
-            return $this->assertExpectation(
+            return $this->assert(
                     new HttpHeaderExpectation($header, $value),
                     $this->_browser->getHeaders(),
                     $message);
@@ -1277,7 +1277,7 @@
          *    @access public
          */
         function assertHeaderPattern($header, $pattern, $message = '%s') {
-            return $this->assertExpectation(
+            return $this->assert(
                     new HttpHeaderPatternExpectation($header, $pattern),
                     $this->_browser->getHeaders(),
                     $message);
@@ -1293,7 +1293,7 @@
          *    @access public
          */
         function assertNoUnwantedHeader($header, $message = '%s') {
-            return $this->assertExpectation(
+            return $this->assert(
                     new HttpUnwantedHeaderExpectation($header),
                     $this->_browser->getHeaders(),
                     $message);
@@ -1323,7 +1323,7 @@
          *    @access public
          */
         function assertWantedText($text, $message = '%s') {
-            return $this->assertExpectation(
+            return $this->assert(
                     new WantedTextExpectation($text),
                     $this->_browser->getContentAsText(),
                     $message);
@@ -1338,7 +1338,7 @@
          *    @access public
          */
         function assertNoUnwantedText($text, $message = '%s') {
-            return $this->assertExpectation(
+            return $this->assert(
                     new UnwantedTextExpectation($text),
                     $this->_browser->getContentAsText(),
                     $message);
@@ -1353,11 +1353,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertWantedPattern($pattern, $message = '%s') {
-            return $this->assertExpectation(
+        function assertPattern($pattern, $message = '%s') {
+            return $this->assert(
                     new WantedPatternExpectation($pattern),
                     $this->_browser->getContent(),
                     $message);
+        }
+        
+        /**
+         *	  @deprecated
+         */
+        function assertWantedPattern($pattern, $message = '%s') {
+        	return $this->assertPattern($pattern, $message);
         }
         
         /**
@@ -1369,11 +1376,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertNoUnwantedPattern($pattern, $message = '%s') {
-            return $this->assertExpectation(
+        function assertNoPattern($pattern, $message = '%s') {
+            return $this->assert(
                     new UnwantedPatternExpectation($pattern),
                     $this->_browser->getContent(),
                     $message);
+        }
+        
+        /**
+         *	  @deprecated
+         */
+        function assertNoUnwantedPattern($pattern, $message = '%s') {
+        	return $this->assertNoPattern($pattern, $message);
         }
         
         /**

@@ -44,8 +44,8 @@
 
         function testExpectation() {
             $expectation = &new EqualExpectation(25, 'My expectation message: %s');
-            $this->assertExpectation($expectation, 25, 'My assert message : %s');
-            $this->assertExpectation($expectation, 24, 'My assert message : %s');        // Fail.
+            $this->assert($expectation, 25, 'My assert message : %s');
+            $this->assert($expectation, 24, 'My assert message : %s');        // Fail.
         }
 
         function testNull() {
@@ -153,10 +153,10 @@
         }
 
         function testPatterns() {
-            $this->assertWantedPattern('/hello/i', "Hello there", "%s -> Pass");
-            $this->assertNoUnwantedPattern('/hello/', "Hello there", "%s -> Pass");
-            $this->assertWantedPattern('/hello/', "Hello there", "%s -> Fail");            // Fail.
-            $this->assertNoUnwantedPattern('/hello/i', "Hello there", "%s -> Fail");      // Fail.
+            $this->assertPattern('/hello/i', "Hello there", "%s -> Pass");
+            $this->assertNoPattern('/hello/', "Hello there", "%s -> Pass");
+            $this->assertPattern('/hello/', "Hello there", "%s -> Fail");            // Fail.
+            $this->assertNoPattern('/hello/i', "Hello there", "%s -> Fail");      // Fail.
         }
 
         function testLongStrings() {
