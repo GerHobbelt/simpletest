@@ -401,7 +401,7 @@
 	 *	  @package SimpleTest
 	 *	  @subpackage UnitTester
      */
-    class WantedPatternExpectation extends SimpleExpectation {
+    class PatternExpectation extends SimpleExpectation {
         var $_pattern;
         
         /**
@@ -410,7 +410,7 @@
          *    @param string $message    Customised message on failure.
          *    @access public
          */
-        function WantedPatternExpectation($pattern, $message = '%s') {
+        function PatternExpectation($pattern, $message = '%s') {
             $this->SimpleExpectation($message);
             $this->_pattern = $pattern;
         }
@@ -472,12 +472,18 @@
     }
     
     /**
+     *	  @deprecated
+     */
+    class WantedPatternExpectation extends PatternExpectation {
+    }
+    
+    /**
      *    Fail if a pattern is detected within the
      *    comparison.
 	 *	  @package SimpleTest
 	 *	  @subpackage UnitTester
      */
-    class UnwantedPatternExpectation extends WantedPatternExpectation {
+    class NoPatternExpectation extends PatternExpectation {
         
         /**
          *    Sets the reject pattern
@@ -485,8 +491,8 @@
          *    @param string $message    Customised message on failure.
          *    @access public
          */
-        function UnwantedPatternExpectation($pattern, $message = '%s') {
-            $this->WantedPatternExpectation($pattern, $message);
+        function NoPatternExpectation($pattern, $message = '%s') {
+            $this->PatternExpectation($pattern, $message);
         }
         
         /**
@@ -517,6 +523,12 @@
                 return $this->_describePatternMatch($this->_getPattern(), $compare);
             }
         }
+    }
+    
+    /**
+     *	  @deprecated
+     */
+    class UnwantedPatternExpectation extends NoPatternExpectation {
     }
     
     /**

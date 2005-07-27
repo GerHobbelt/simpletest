@@ -50,10 +50,7 @@
          *    @public
          */
         function assertEquals($first, $second, $message = false) {
-            parent::assert(
-                    new EqualExpectation($first),
-                    $second,
-                    $message);
+            parent::assert(new EqualExpectation($first), $second, $message);
         }
         
         /**
@@ -64,10 +61,7 @@
          *    @public
          */
         function assertEqualsMultilineStrings($first, $second, $message = false) {
-            parent::assert(
-                    new EqualExpectation($first),
-                    $second,
-                    $message);
+            parent::assert(new EqualExpectation($first), $second, $message);
         }                             
         
         /**
@@ -78,10 +72,7 @@
          *    @public
          */
         function assertRegexp($pattern, $subject, $message = false) {
-            parent::assert(
-                    new WantedPatternExpectation($pattern),
-                    $subject,
-                    $message);
+            parent::assert(new PatternExpectation($pattern), $subject, $message);
         }
         
         /**

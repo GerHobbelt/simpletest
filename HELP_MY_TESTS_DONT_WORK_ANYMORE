@@ -5,6 +5,16 @@ written with earlier versions will fail with the newest ones. The most
 dramatic changes are in the alpha releases. Here is a list of possible
 problems and their fixes...
 
+No class WantedPatternExpectation
+---------------------------------
+This was deprecated in 1.0.1alpha in favour of the simpler
+name PatternExpectation.
+
+No class NoUnwantedPatternExpectation
+-------------------------------------
+This was deprecated in 1.0.1alpha in favour of the simpler
+name NoPatternExpectation.
+
 No method assertNoUnwantedPattern()
 -----------------------------------
 This has been renamed to assertNoPattern() in 1.0.1alpha and

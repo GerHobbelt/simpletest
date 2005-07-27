@@ -214,13 +214,13 @@
     class TestOfPatterns extends UnitTestCase {
         
         function testWanted() {
-            $pattern = &new WantedPatternExpectation('/hello/i');
+            $pattern = &new PatternExpectation('/hello/i');
             $this->assertTrue($pattern->test("Hello world"));
             $this->assertFalse($pattern->test("Goodbye world"));
         }
         
         function testUnwanted() {
-            $pattern = &new UnwantedPatternExpectation('/hello/i');
+            $pattern = &new NoPatternExpectation('/hello/i');
             $this->assertFalse($pattern->test("Hello world"));
             $this->assertTrue($pattern->test("Goodbye world"));
         }

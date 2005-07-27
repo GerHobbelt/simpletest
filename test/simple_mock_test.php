@@ -54,7 +54,7 @@
         
         function testOtherExpectations() {
             $expectation = new ParametersExpectation(
-                    array(new WantedPatternExpectation('/hello/i')));
+                    array(new PatternExpectation('/hello/i')));
             $this->assertFalse($expectation->test(array('Goodbye')));
             $this->assertTrue($expectation->test(array('hello')));
             $this->assertTrue($expectation->test(array('Hello')));
@@ -389,7 +389,7 @@
             $mock->setReturnValue(
                     "aMethod",
                     "aaa",
-                    array(new wantedPatternExpectation('/hello/i')));
+                    array(new PatternExpectation('/hello/i')));
             $this->assertIdentical($mock->aMethod('Hello'), "aaa");
             $this->assertNull($mock->aMethod('Goodbye'));
         }

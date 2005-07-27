@@ -21,7 +21,7 @@ class TestOfCollector extends UnitTestCase {
         $group->expectMinimumCallCount('addTestFile', 2);
         $group->expectArguments(
                 'addTestFile',
-                array(new WantedPatternExpectation('/collectable\\.(1|2)$/')));
+                array(new PatternExpectation('/collectable\\.(1|2)$/')));
         
         $collector = &new SimpleCollector();
         $collector->collect($group, dirname(__FILE__) . '/support/collector/');
@@ -37,7 +37,7 @@ class TestOfPatternCollector extends UnitTestCase {
         $group->expectCallCount('addTestFile', 2);
         $group->expectArguments(
                 'addTestFile',
-                array(new WantedPatternExpectation('/collectable\\.(1|2)$/')));
+                array(new PatternExpectation('/collectable\\.(1|2)$/')));
         
         $collector = &new SimplePatternCollector();
         $collector->collect($group, dirname(__FILE__) . '/support/collector/', '/.*/');

@@ -14,12 +14,14 @@ Create separate group test files for unit and acceptance tests (1/1) - done.
 Remove class_exists() auto loading disabling flag  (1/0) - done.
 Confirm no notices under PHP4.4 (2/1) - done.
 Fix GroupTest counting bug (2/1) - done.
+Shorten pattern method names (1/2) - done.
 
 Reporter
 --------
 
 Mock objects
 ------------
+Fix constructor bug (2).
 
 Parser
 ------

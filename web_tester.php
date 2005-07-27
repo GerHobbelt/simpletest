@@ -1355,7 +1355,7 @@
          */
         function assertPattern($pattern, $message = '%s') {
             return $this->assert(
-                    new WantedPatternExpectation($pattern),
+                    new PatternExpectation($pattern),
                     $this->_browser->getContent(),
                     $message);
         }
@@ -1378,7 +1378,7 @@
          */
         function assertNoPattern($pattern, $message = '%s') {
             return $this->assert(
-                    new UnwantedPatternExpectation($pattern),
+                    new NoPatternExpectation($pattern),
                     $this->_browser->getContent(),
                     $message);
         }
