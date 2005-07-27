@@ -58,7 +58,7 @@
         function _setEncodingClass($tag) {
             if (strtolower($tag->getAttribute('method')) == 'post') {
                 if (strtolower($tag->getAttribute('enctype')) == 'multipart/form-data') {
-                    'SimpleMultipartEncoding';
+                    return 'SimpleMultipartEncoding';
                 }
                 return 'SimplePostEncoding';
             }

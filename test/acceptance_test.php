@@ -11,8 +11,8 @@
             $browser = &new SimpleBrowser();
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $this->assertTrue($browser->get('http://www.lastcraft.com/test/network_confirm.php'));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/', $browser->getContent());
             $this->assertEqual($browser->getTitle(), 'Simple test target file');
             $this->assertEqual($browser->getResponseCode(), 200);
             $this->assertEqual($browser->getMimeType(), 'text/html');
@@ -22,8 +22,8 @@
             $browser = &new SimpleBrowser();
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $this->assertTrue($browser->post('http://www.lastcraft.com/test/network_confirm.php'));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
         }
         
         function testAbsoluteLinkFollowing() {
@@ -31,7 +31,7 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($browser->clickLink('Absolute'));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
         }
         
         function testRelativeLinkFollowing() {
@@ -39,7 +39,7 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($browser->clickLink('Relative'));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
         }
         
         function testUnifiedClickLinkClicking() {
@@ -47,7 +47,7 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($browser->click('Relative'));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
         }
         
         function testIdLinkFollowing() {
@@ -55,7 +55,7 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($browser->clickLinkById(1));
-            $this->assertWantedPattern('/target for the SimpleTest/', $browser->getContent());
+            $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
         }
         
         function testCookieReading() {
@@ -72,8 +72,8 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($browser->clickSubmit('Go!'));
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
-            $this->assertWantedPattern('/go=\[Go!\]/', $browser->getContent());
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
+            $this->assertPattern('/go=\[Go!\]/', $browser->getContent());
         }
         
         function testUnifiedClickCanSubmit() {
@@ -81,7 +81,7 @@
             $browser->addHeader('User-Agent: SimpleTest ' . SimpleTestOptions::getVersion());
             $browser->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($browser->click('Go!'));
-            $this->assertWantedPattern('/go=\[Go!\]/', $browser->getContent());
+            $this->assertPattern('/go=\[Go!\]/', $browser->getContent());
         }
     }
     
@@ -94,7 +94,7 @@
             $this->assertTrue($this->get('http://www.lastcraft.com/test/network_confirm.php'));
             $this->assertEqual($this->getUrl(), 'http://www.lastcraft.com/test/network_confirm.php');
             $this->assertWantedText('target for the SimpleTest');
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertTitle('Simple test target file');
             $this->assertResponse(200);
             $this->assertMime('text/html');
@@ -112,18 +112,18 @@
         function testPost() {
             $this->assertTrue($this->post('http://www.lastcraft.com/test/network_confirm.php'));
             $this->assertWantedText('target for the SimpleTest');
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         }
         
         function testGetWithData() {
             $this->get('http://www.lastcraft.com/test/network_confirm.php', array("a" => "aaa"));
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[aaa]');
         }
         
         function testPostWithData() {
             $this->post('http://www.lastcraft.com/test/network_confirm.php', array("a" => "aaa"));
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
             $this->assertWantedText('a=[aaa]');
         }
         
@@ -251,16 +251,16 @@
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('Empty query');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/Simple test front controller/');
-            $this->assertWantedPattern('/raw get data.*?\[\].*?get data/si');
+            $this->assertPattern('/Simple test front controller/');
+            $this->assertPattern('/raw get data.*?\[\].*?get data/si');
         }
         
         function testJumpToUnnamedPageWithEmptyLink() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('Empty link');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/Simple test front controller/');
-            $this->assertWantedPattern('/raw get data.*?\[\].*?get data/si');
+            $this->assertPattern('/Simple test front controller/');
+            $this->assertPattern('/raw get data.*?\[\].*?get data/si');
         }
         
         function testJumpBackADirectoryLevel() {
@@ -375,9 +375,9 @@
             $this->setCookie('b', 'Test cookie b', 'www.lastcraft.com');
             $this->setCookie('c', 'Test cookie c', 'www.lastcraft.com', 'test');
             $this->get('http://www.lastcraft.com/test/network_confirm.php');
-            $this->assertWantedPattern('/Test cookie a/');
-            $this->assertWantedPattern('/Test cookie b/');
-            $this->assertWantedPattern('/Test cookie c/');
+            $this->assertPattern('/Test cookie a/');
+            $this->assertPattern('/Test cookie b/');
+            $this->assertPattern('/Test cookie c/');
             $this->assertCookie('a');
             $this->assertCookie('b', 'Test cookie b');
             $this->assertTrue($this->getCookie('a') == 'Test cookie a');
@@ -429,7 +429,7 @@
             $this->get('http://www.lastcraft.com/test/set_cookies.php');
             $this->assertNoCookie('path_cookie', 'D');
             $this->get('./path/show_cookies.php');
-            $this->assertWantedPattern('/path_cookie/');
+            $this->assertPattern('/path_cookie/');
             $this->assertCookie('path_cookie', 'D');
         }
     }
@@ -442,7 +442,7 @@
         function testSimpleSubmit() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
             $this->assertWantedText('go=[Go!]');
         }
         
@@ -622,7 +622,7 @@
         function testButtonSubmissionByLabel() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmit('Button go!', 10, 12));
-            $this->assertWantedPattern('/go=\[ButtonGo\]/s');
+            $this->assertPattern('/go=\[ButtonGo\]/s');
         }
         
         function testSelfSubmit() {
@@ -764,8 +764,6 @@
                     dirname(__FILE__) . '/support/upload_sample.txt'));
             $this->assertField('Content:', dirname(__FILE__) . '/support/upload_sample.txt');
             $this->click('Go!');
-            // Problem with Windows and PHP5.
-            // $this->showRequest();
             $this->assertWantedText('Sample for testing file upload');
         }
         
@@ -799,11 +797,11 @@
         
         function testRetry() {
             $this->get('http://www.lastcraft.com/test/cookie_based_counter.php');
-            $this->assertWantedPattern('/count: 1/i');
+            $this->assertPattern('/count: 1/i');
             $this->retry();
-            $this->assertWantedPattern('/count: 2/i');
+            $this->assertPattern('/count: 2/i');
             $this->retry();
-            $this->assertWantedPattern('/count: 3/i');
+            $this->assertPattern('/count: 3/i');
         }
         
         function testOfBackButton() {
@@ -820,10 +818,10 @@
         function testGetRetryResubmitsData() {
             $this->assertTrue($this->get(
                     'http://www.lastcraft.com/test/network_confirm.php?a=aaa'));
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[aaa]');
             $this->retry();
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[aaa]');
         }
         
@@ -831,10 +829,10 @@
             $this->assertTrue($this->get(
                     'http://www.lastcraft.com/test/network_confirm.php',
                     array('a' => 'aaa')));
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[aaa]');
             $this->retry();
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[aaa]');
         }
         
@@ -842,20 +840,20 @@
             $this->assertTrue($this->post(
                     'http://www.lastcraft.com/test/network_confirm.php',
                     array('a' => 'aaa')));
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
             $this->assertWantedText('a=[aaa]');
             $this->retry();
-            $this->assertWantedPattern('/Request method.*?<dd>POST<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
             $this->assertWantedText('a=[aaa]');
         }
         
         function testGetRetryResubmitsRepeatedData() {
             $this->assertTrue($this->get(
                     'http://www.lastcraft.com/test/network_confirm.php?a=1&a=2'));
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[1, 2]');
             $this->retry();
-            $this->assertWantedPattern('/Request method.*?<dd>GET<\/dd>/');
+            $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertWantedText('a=[1, 2]');
         }
     }
@@ -1059,7 +1057,7 @@
         
         function testJumpToNamedPageReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
-            $this->assertWantedPattern('/Simple test front controller/');
+            $this->assertPattern('/Simple test front controller/');
             $this->clickLink('Index');
             $this->assertResponse(200);
             $this->assertWantedText('[action=index]');
@@ -1088,30 +1086,30 @@
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('Empty query');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/Simple test front controller/');
-            $this->assertWantedPattern('/raw get data.*?\[\].*?get data/si');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/Simple test front controller/');
+            $this->assertPattern('/raw get data.*?\[\].*?get data/si');
+            $this->assertPattern('/Count: 1/');
         }
         
         function testJumpToUnnamedPageWithEmptyLinkReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('Empty link');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/Simple test front controller/');
-            $this->assertWantedPattern('/raw get data.*?\[\].*?get data/si');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/Simple test front controller/');
+            $this->assertPattern('/raw get data.*?\[\].*?get data/si');
+            $this->assertPattern('/Count: 1/');
         }
         
         function testJumpBackADirectoryLevelReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('Down one');
-            $this->assertWantedPattern('/index of \/test/i');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/index of \/test/i');
+            $this->assertPattern('/Count: 1/');
         }
         
         function testSubmitToNamedPageReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
-            $this->assertWantedPattern('/Simple test front controller/');
+            $this->assertPattern('/Simple test front controller/');
             $this->clickSubmit('Index');
             $this->assertResponse(200);
             $this->assertWantedText('[action=Index]');
@@ -1145,8 +1143,8 @@
         function testSubmitBackADirectoryLevelReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickSubmit('Down one');
-            $this->assertWantedPattern('/index of \/test/i');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/index of \/test/i');
+            $this->assertPattern('/Count: 1/');
         }
         
         function testTopLinkExitsFrameset() {
@@ -1218,23 +1216,23 @@
             $this->get('http://www.lastcraft.com/test/nested_frameset.html');
             $this->assertTitle('Nested frameset for testing of SimpleTest');
             
-            $this->assertWantedPattern('/This is frame A/');
-            $this->assertWantedPattern('/This is frame B/');
-            $this->assertWantedPattern('/Simple test front controller/');
+            $this->assertPattern('/This is frame A/');
+            $this->assertPattern('/This is frame B/');
+            $this->assertPattern('/Simple test front controller/');
             $this->assertLink('2');
             $this->assertLink('Set one to 2');
-            $this->assertWantedPattern('/Count: 1/');
-            $this->assertWantedPattern('/r=rrr/');
+            $this->assertPattern('/Count: 1/');
+            $this->assertPattern('/r=rrr/');
             
             $this->setFrameFocus('pair');
-            $this->assertWantedPattern('/This is frame A/');
-            $this->assertWantedPattern('/This is frame B/');
-            $this->assertNoUnwantedPattern('/Simple test front controller/');
+            $this->assertPattern('/This is frame A/');
+            $this->assertPattern('/This is frame B/');
+            $this->assertNoPattern('/Simple test front controller/');
             $this->assertNoLink('2');
             
             $this->setFrameFocus('aaa');
-            $this->assertWantedPattern('/This is frame A/');
-            $this->assertNoUnwantedPattern('/This is frame B/');
+            $this->assertPattern('/This is frame A/');
+            $this->assertNoPattern('/This is frame B/');
             
             $this->clearFrameFocus();
             $this->assertResponse(200);
@@ -1242,28 +1240,28 @@
             $this->assertResponse(200);
             $this->setFrameFocus('Front controller');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/Simple test front controller/');
+            $this->assertPattern('/Simple test front controller/');
             $this->assertNoLink('2');
         }
         
         function testReloadingFramesetPage() {
             $this->get('http://www.lastcraft.com/test/nested_frameset.html');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/Count: 1/');
             $this->retry();
-            $this->assertWantedPattern('/Count: 2/');
+            $this->assertPattern('/Count: 2/');
             $this->retry();
-            $this->assertWantedPattern('/Count: 3/');
+            $this->assertPattern('/Count: 3/');
         }
         
         function testRetryingNestedPageOnlyRetriesThatSet() {
             $this->get('http://www.lastcraft.com/test/nested_frameset.html');
-            $this->assertWantedPattern('/Count: 1/');
+            $this->assertPattern('/Count: 1/');
             $this->setFrameFocus('messy');
             $this->retry();
-            $this->assertWantedPattern('/Count: 2/');
+            $this->assertPattern('/Count: 2/');
             $this->setFrameFocus('Counter');
             $this->retry();
-            $this->assertWantedPattern('/Count: 3/');
+            $this->assertPattern('/Count: 3/');
             
             $this->clearFrameFocus();
             $this->setFrameFocus('messy');
@@ -1271,7 +1269,7 @@
             $this->retry();
             
             $this->clearFrameFocus();
-            $this->assertWantedPattern('/Count: 3/');
+            $this->assertPattern('/Count: 3/');
         }
         
         function testAuthenticatingNestedPage() {
@@ -1284,7 +1282,7 @@
             
             $this->authenticate('test', 'secret');
             $this->assertResponse(200);
-            $this->assertWantedPattern('/A target for the SimpleTest test suite/');
+            $this->assertPattern('/A target for the SimpleTest test suite/');
         }
     }
 ?>

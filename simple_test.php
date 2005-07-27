@@ -171,15 +171,22 @@
          *    Runs an expectation directly, for extending the
          *    tests with new expectation classes.
          *    @param SimpleExpectation $expectation  Expectation subclass.
-         *    @param mixed $test_value               Value to compare.
+         *    @param mixed $compare               Value to compare.
          *    @param string $message                 Message to display.
          *    @return boolean                        True on pass
          *    @access public
          */
-        function assertExpectation(&$expectation, $test_value, $message = '%s') {
+        function assert(&$expectation, $compare, $message = '%s') {
             return $this->assertTrue(
-                    $expectation->test($test_value),
-                    sprintf($message, $expectation->overlayMessage($test_value)));
+                    $expectation->test($compare),
+                    sprintf($message, $expectation->overlayMessage($compare)));
+        }
+        
+        /**
+         *	  @deprecated
+         */
+        function assertExpectation(&$expectation, $compare, $message = '%s') {
+        	return $this->assert($expectation, $compare, $message);
         }
 
         /**

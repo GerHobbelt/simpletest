@@ -8,7 +8,7 @@
         function testSimpleInteger() {
             $expectation = new AnythingExpectation();
             $this->assertTrue($expectation->test(33));
-            $this->assertWantedPattern(
+            $this->assertPattern(
                     '/matches.*33/i',
                     $expectation->testMessage(33));
         }

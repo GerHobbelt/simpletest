@@ -14,7 +14,7 @@
         function testBadSocket() {
             $socket = &new SimpleSocket('bad_url', 111, 5);
             $this->assertTrue($socket->isError());
-            $this->assertWantedPattern(
+            $this->assertPattern(
                     '/Cannot open \\[bad_url:111\\] with \\[/',
                     $socket->getError());
             $this->assertFalse($socket->isOpen());

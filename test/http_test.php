@@ -458,7 +458,7 @@
 
             $response = &new SimpleHttpResponse($socket, new SimpleUrl('here'), new SimpleGetEncoding());
             $this->assertTrue($response->isError());
-            $this->assertWantedPattern('/Nothing fetched/', $response->getError());
+            $this->assertPattern('/Nothing fetched/', $response->getError());
             $this->assertIdentical($response->getContent(), false);
             $this->assertIdentical($response->getSent(), '');
         }
