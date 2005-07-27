@@ -764,6 +764,8 @@
                     dirname(__FILE__) . '/support/upload_sample.txt'));
             $this->assertField('Content:', dirname(__FILE__) . '/support/upload_sample.txt');
             $this->click('Go!');
+            // Problem with Windows and PHP5.
+            // $this->showRequest();
             $this->assertWantedText('Sample for testing file upload');
         }
         

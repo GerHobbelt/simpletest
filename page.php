@@ -605,7 +605,7 @@
                     $this->_last_widget->setLabel($this->_label->getText());
                     unset($this->_last_widget);
                 } else {
-                    $this->_left_over_labels[] = $this->_label;
+                    $this->_left_over_labels[] = SimpleTestCompatibility::copy($this->_label);
                 }
                 unset($this->_label);
             }
