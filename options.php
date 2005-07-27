@@ -201,6 +201,21 @@
      *  @package	SimpleTest
      */
     class SimpleTestCompatibility {
+    	
+    	/**
+    	 *	  Creates a copy whether in PHP5 or PHP4.
+    	 *	  @param object $object		Thing to copy.
+    	 *	  @return object			A copy.
+    	 *	  @access public
+    	 *	  @static
+    	 */
+    	function copy($object) {
+            if (version_compare(phpversion(), '5') >= 0) {
+            	eval('$copy = clone $object;');
+            	return $copy;
+            }
+            return $object;
+    	}
         
         /**
          *    Identity test. Drops back to equality + types for PHP5
@@ -208,6 +223,7 @@
          *    stronger reference constraint.
          *    @param mixed $first    Test subject.
          *    @param mixed $second   Comparison object.
+         *	  @return boolean		 True if identical.
          *    @access public
          *    @static
          */
@@ -225,6 +241,7 @@
          *    Recursive type test.
          *    @param mixed $first    Test subject.
          *    @param mixed $second   Comparison object.
+         *	  @return boolean		 True if same type.
          *    @access private
          *    @static
          */
@@ -250,6 +267,7 @@
          *    Recursive type test for each element of an array.
          *    @param mixed $first    Test subject.
          *    @param mixed $second   Comparison object.
+         *	  @return boolean		 True if identical.
          *    @access private
          *    @static
          */
@@ -272,6 +290,7 @@
          *    Test for two variables being aliases.
          *    @param mixed $first    Test subject.
          *    @param mixed $second   Comparison object.
+         *	  @return boolean		 True if same.
          *    @access public
          *    @static
          */
@@ -299,6 +318,7 @@
          *    class hiearchy.
          *    @param object $object    Object to test.
          *    @param string $class     Root name of hiearchy.
+         *	  @return boolean		   True if class in hiearchy.
          *    @access public
          *    @static
          */
