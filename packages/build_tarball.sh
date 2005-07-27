@@ -4,9 +4,10 @@
 #
 cd ../..
 
-NAME=php_simpletest_`cat simpletest/VERSION`.tar.gz
+NAME=simpletest_`cat simpletest/VERSION`.tar.gz
 FILES=(simpletest/errors.php \
           simpletest/options.php \
+          simpletest/collector.php \
           simpletest/dumper.php \
           simpletest/expectation.php \
           simpletest/socket.php \
@@ -40,7 +41,9 @@ FILES=(simpletest/errors.php \
           simpletest/HELP_MY_TESTS_DONT_WORK_ANYMORE \
           simpletest/test/all_tests.php \
           simpletest/test/unit_tests.php \
+          simpletest/test/test_groups.php \
           simpletest/test/acceptance_test.php \
+          simpletest/test/collector_test.php \
           simpletest/test/errors_test.php \
           simpletest/test/options_test.php \
           simpletest/test/dumper_test.php \
@@ -74,7 +77,7 @@ FILES=(simpletest/errors.php \
           simpletest/test/support/collector/collectable.2 \
           simpletest/test/support/upload_sample.txt \
           simpletest/test/support/supplementary_upload_sample.txt \
-          simpletest/test/support/latin1_sample.txt \
+          simpletest/test/support/latin1_sample \
           simpletest/docs/en/docs.css \
           simpletest/docs/en/index.html \
           simpletest/docs/en/overview.html \
