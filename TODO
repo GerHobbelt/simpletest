@@ -1,48 +1,42 @@
 TODO
-This is immediate stuff only for this iteration (1.1alpha1) of 35 hours.
+This is immediate stuff only for this iteration (1.0.1beta) of 41 hours.
 
 $Id$
 
 Unit tester
 -----------
-Keep original raw URL for as long as possible (3/2) - done.
-Allow expectation to be passed to assertError() method (2/3) - done.
-Add floating point equality (2/1) - done.
-Add donated fix for assertReference() from Knak-Nielsen (1/1) - done.
-Promote assertEqual() to other test cases (1/1) - done.
-Create separate group test files for unit and acceptance tests (1/1) - done.
-Remove class_exists() auto loading disabling flag  (1/0) - done.
-Confirm no notices under PHP4.4 (2/1) - done.
-Fix GroupTest counting bug (2/1) - done.
-Shorten pattern method names (1/2) - done.
 
 Reporter
 --------
 
 Mock objects
 ------------
-Fix constructor bug (2).
+Allow mocking of interfaces (5).
+Carry interfaces to pass type hints (3).
+Add expectSequence() method (5).
+Change expectOnce(), etc to act by signature (3).
+Remove $this passing in mocks (5).
 
 Parser
 ------
 
 Browser
 -------
-Add file uploading (3/9) - done.
-Add form-data encoding for forms (5/9) - done.
-Single click() method for links, buttons or images (2/1) - done.
-setCookie() should be able to create a new one (1/0) - done.
-Simultaneous POST and GET parameters (3/2) - done.
-Fix split bug with simple URLs not being parsed correctly (1/1) - done.
-Fix double slash bug in URL (1/1) - done.
-Add label tag parsing (3/10) - done.
-Fix bug with redirect authorisation failing without trailing slash (1/3) - done.
+Add assertSubmit() method (1).
+Promote selector classes and factor out excessive chaining (3).
 
 Web tester
 ----------
+Change assertWantedText(), etc to assertText() method (1).
+Pass expectations to assertTitle() (3).
+Pass expectations to assertHeader() (3).
 
 Documentation
 -------------
+Fix XSLT issues for PHPDoc build (4).
+Document new method name changes (3).
+Document assertWithin() method (1).
+Document click() method (1).
 
 Build
 -----
