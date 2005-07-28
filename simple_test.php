@@ -17,6 +17,9 @@
     require_once(dirname(__FILE__) . '/expectation.php');
     require_once(dirname(__FILE__) . '/dumper.php');
     if (! defined('SIMPLE_TEST')) {
+    	/**
+	 * @ignore
+	 */
         define('SIMPLE_TEST', dirname(__FILE__) . '/');
     }
     /**#@-*/
