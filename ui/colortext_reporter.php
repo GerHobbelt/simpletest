@@ -1,6 +1,14 @@
 <?php
-// $Id$
+    /**
+     *  Base include file for SimpleTest
+     *  @package        SimpleTest
+     *  @subpackage     UnitTester
+     *  @version        $Id$
+     */
 
+/**
+ * include base reporter
+ */
 require_once(dirname(__FILE__) . '/../reporter.php');
 
 

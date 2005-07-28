@@ -262,7 +262,6 @@
          *    Test to see if a form has a submit button.
          *    @param SimpleSelector $selector   Criteria to apply.
          *    @return boolean                   True if present.
-         *    @access private
          *    @access public
          */
         function hasSubmit($selector) {
