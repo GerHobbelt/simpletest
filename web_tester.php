@@ -321,7 +321,7 @@
 	 *	  @package SimpleTest
 	 *	  @subpackage UnitTester
      */
-    class WantedTextExpectation extends SimpleExpectation {
+    class TextExpectation extends SimpleExpectation {
         var $_substring;
         
         /**
@@ -330,7 +330,7 @@
          *    @param string $message    Customised message on failure.
          *    @access public
          */
-        function WantedTextExpectation($substring, $message = '%s') {
+        function TextExpectation($substring, $message = '%s') {
             $this->SimpleExpectation($message);
             $this->_substring = $substring;
         }
@@ -395,7 +395,7 @@
 	 *	  @package SimpleTest
 	 *	  @subpackage UnitTester
      */
-    class UnwantedTextExpectation extends WantedTextExpectation {
+    class NoTextExpectation extends TextExpectation {
         
         /**
          *    Sets the reject pattern
@@ -403,8 +403,8 @@
          *    @param string $message    Customised message on failure.
          *    @access public
          */
-        function UnwantedTextExpectation($substring, $message = '%s') {
-            $this->WantedTextExpectation($substring, $message);
+        function NoTextExpectation($substring, $message = '%s') {
+            $this->TextExpectation($substring, $message);
         }
         
         /**
@@ -1301,11 +1301,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertWantedText($text, $message = '%s') {
+        function assertText($text, $message = '%s') {
             return $this->assert(
-                    new WantedTextExpectation($text),
+                    new TextExpectation($text),
                     $this->_browser->getContentAsText(),
                     $message);
+        }
+        
+        /**
+         *	  @deprecated
+         */
+        function assertWantedText($text, $message = '%s') {
+        	return $this->assertText($text, $message);
         }
         
         /**
@@ -1316,11 +1323,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertNoUnwantedText($text, $message = '%s') {
+        function assertNoText($text, $message = '%s') {
             return $this->assert(
-                    new UnwantedTextExpectation($text),
+                    new NoTextExpectation($text),
                     $this->_browser->getContentAsText(),
                     $message);
+        }
+        
+        /**
+         *	  @deprecated
+         */
+        function assertNoUnwantedText($text, $message = '%s') {
+        	return $this->assertNoText($text, $message);
         }
         
         /**

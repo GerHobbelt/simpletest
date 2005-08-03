@@ -93,7 +93,7 @@
         function testGet() {
             $this->assertTrue($this->get('http://www.lastcraft.com/test/network_confirm.php'));
             $this->assertEqual($this->getUrl(), 'http://www.lastcraft.com/test/network_confirm.php');
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
             $this->assertTitle('Simple test target file');
             $this->assertResponse(200);
@@ -111,58 +111,58 @@
         
         function testPost() {
             $this->assertTrue($this->post('http://www.lastcraft.com/test/network_confirm.php'));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
             $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         }
         
         function testGetWithData() {
             $this->get('http://www.lastcraft.com/test/network_confirm.php', array("a" => "aaa"));
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
         }
         
         function testPostWithData() {
             $this->post('http://www.lastcraft.com/test/network_confirm.php', array("a" => "aaa"));
             $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
         }
         
         function testRelativeGet() {
             $this->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($this->get('network_confirm.php'));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
         }
         
         function testRelativePost() {
             $this->post('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($this->post('network_confirm.php'));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
         }
         
         function testAbsoluteLinkFollowing() {
             $this->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertLink('Absolute');
             $this->assertTrue($this->clickLink('Absolute'));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
         }
         
         function testRelativeLinkFollowing() {
             $this->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertTrue($this->clickLink('Relative'));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
         }
         
         function testLinkIdFollowing() {
             $this->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->assertLinkById(1);
             $this->assertTrue($this->clickLinkById(1));
-            $this->assertWantedText('target for the SimpleTest');
+            $this->assertText('target for the SimpleTest');
         }
         
         function testAbsoluteUrlBehavesAbsolutely() {
             $this->get('http://www.lastcraft.com/test/link_confirm.php');
             $this->get('http://www.lastcraft.com');
-            $this->assertWantedText('No guarantee of quality is given or even intended');
+            $this->assertText('No guarantee of quality is given or even intended');
         }
     }
     
@@ -183,14 +183,14 @@
             $this->get('http://www.lastcraft.com/test/front_controller_style/a_page.php');
             $this->clickLink('No page');
             $this->assertTitle('Simple test page with links');
-            $this->assertWantedText('[action=no_page]');
+            $this->assertText('[action=no_page]');
         }
         
         function testClickToBareActionReturnsToSamePage() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/a_page.php');
             $this->clickLink('Bare action');
             $this->assertTitle('Simple test page with links');
-            $this->assertWantedText('[action=]');
+            $this->assertText('[action=]');
         }
         
         function testClickToSingleQuestionMarkReturnsToSamePage() {
@@ -214,7 +214,7 @@
         function testClickBackADirectoryLevel() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('Down one');
-            $this->assertWantedText('Index of /test');
+            $this->assertText('Index of /test');
         }
     }
     
@@ -225,26 +225,26 @@
         
         function testJumpToNamedPage() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
-            $this->assertWantedText('Simple test front controller');
+            $this->assertText('Simple test front controller');
             $this->clickLink('Index');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=index]');
+            $this->assertText('[action=index]');
         }
         
         function testJumpToUnnamedPage() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('No page');
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
-            $this->assertWantedText('[action=no_page]');
+            $this->assertText('Simple test front controller');
+            $this->assertText('[action=no_page]');
         }
         
         function testJumpToUnnamedPageWithBareParameter() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('Bare action');
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
-            $this->assertWantedText('[action=]');
+            $this->assertText('Simple test front controller');
+            $this->assertText('[action=]');
         }
         
         function testJumpToUnnamedPageWithEmptyQuery() {
@@ -266,42 +266,42 @@
         function testJumpBackADirectoryLevel() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickLink('Down one');
-            $this->assertWantedText('Index of /test');
+            $this->assertText('Index of /test');
         }
         
         function testSubmitToNamedPage() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
-            $this->assertWantedText('Simple test front controller');
+            $this->assertText('Simple test front controller');
             $this->clickSubmit('Index');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Index]');
+            $this->assertText('[action=Index]');
         }
         
         function testSubmitToSameDirectory() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/index.php');
             $this->clickSubmit('Same directory');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Same+directory]');
+            $this->assertText('[action=Same+directory]');
         }
         
         function testSubmitToEmptyAction() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/index.php');
             $this->clickSubmit('Empty action');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Empty+action]');
+            $this->assertText('[action=Empty+action]');
         }
         
         function testSubmitToNoAction() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/index.php');
             $this->clickSubmit('No action');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=No+action]');
+            $this->assertText('[action=No+action]');
         }
         
         function testSubmitBackADirectoryLevel() {
             $this->get('http://www.lastcraft.com/test/front_controller_style/');
             $this->clickSubmit('Down one');
-            $this->assertWantedText('Index of /test');
+            $this->assertText('Index of /test');
         }
     }
     
@@ -338,18 +338,18 @@
         
         function testRedirectLosesGetData() {
             $this->get('http://www.lastcraft.com/test/redirect.php', array('a' => 'aaa'));
-            $this->assertNoUnwantedText('a=[aaa]');
+            $this->assertNoText('a=[aaa]');
         }
         
         function testRedirectKeepsExtraRequestDataOfItsOwn() {
             $this->get('http://www.lastcraft.com/test/redirect.php');
-            $this->assertWantedText('r=[rrr]');
+            $this->assertText('r=[rrr]');
         }
         
         function testRedirectLosesPostData() {
             $this->post('http://www.lastcraft.com/test/redirect.php', array('a' => 'aaa'));
             $this->assertTitle('Simple test target file');
-            $this->assertNoUnwantedText('a=[aaa]');
+            $this->assertNoText('a=[aaa]');
         }
         
         function testRedirectWithBaseUrlChange() {
@@ -443,7 +443,7 @@
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmit('Go!'));
             $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
-            $this->assertWantedText('go=[Go!]');
+            $this->assertText('go=[Go!]');
         }
         
         function testDefaultFormValues() {
@@ -458,14 +458,14 @@
             $this->assertFieldByName('h', 2);
             $this->assertFieldByName('go', 'Go!');
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('go=[Go!]');
-            $this->assertWantedText('a=[]');
-            $this->assertWantedText('b=[Default text]');
-            $this->assertWantedText('c=[]');
-            $this->assertWantedText('d=[d1]');
-            $this->assertNoUnwantedText('e=[');
-            $this->assertWantedText('f=[on]');
-            $this->assertWantedText('g=[g3]');
+            $this->assertText('go=[Go!]');
+            $this->assertText('a=[]');
+            $this->assertText('b=[Default text]');
+            $this->assertText('c=[]');
+            $this->assertText('d=[d1]');
+            $this->assertNoText('e=[');
+            $this->assertText('f=[on]');
+            $this->assertText('g=[g3]');
         }
         
         function testFormSubmissionByButtonLabel() {
@@ -479,40 +479,40 @@
             $this->setFieldByName('g', 'g2');
             $this->setFieldByName('h', 1);
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[aaa]');
-            $this->assertWantedText('b=[bbb]');
-            $this->assertWantedText('c=[ccc]');
-            $this->assertWantedText('d=[d2]');
-            $this->assertWantedText('e=[on]');
-            $this->assertNoUnwantedText('f=[');
-            $this->assertWantedText('g=[g2]');
+            $this->assertText('a=[aaa]');
+            $this->assertText('b=[bbb]');
+            $this->assertText('c=[ccc]');
+            $this->assertText('d=[d2]');
+            $this->assertText('e=[on]');
+            $this->assertNoText('f=[');
+            $this->assertText('g=[g2]');
         }
         
         function testAdditionalFormValues() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmit('Go!', array('add' => 'A')));
-            $this->assertWantedText('go=[Go!]');
-            $this->assertWantedText('add=[A]');
+            $this->assertText('go=[Go!]');
+            $this->assertText('add=[A]');
         }
         
         function testFormSubmissionByName() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->setFieldByName('a', 'A');
             $this->assertTrue($this->clickSubmitByName('go'));
-            $this->assertWantedText('a=[A]');
+            $this->assertText('a=[A]');
         }
         
         function testFormSubmissionByNameAndAdditionalParameters() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmitByName('go', array('add' => 'A')));
-            $this->assertWantedText('go=[Go!]');
-            $this->assertWantedText('add=[A]');
+            $this->assertText('go=[Go!]');
+            $this->assertText('add=[A]');
         }
         
         function testFormSubmissionBySubmitButtonLabeledSubmit() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickSubmitByName('test'));
-            $this->assertWantedText('test=[Submit]');
+            $this->assertText('test=[Submit]');
         }
         
         function testFormSubmissionWithIds() {
@@ -534,15 +534,15 @@
             $this->setFieldById(8, 'g2');
             $this->setFieldById(11, 'H1');
             $this->assertTrue($this->clickSubmitById(99));
-            $this->assertWantedText('a=[aaa]');
-            $this->assertWantedText('b=[bbb]');
-            $this->assertWantedText('c=[ccc]');
-            $this->assertWantedText('d=[d2]');
-            $this->assertWantedText('e=[on]');
-            $this->assertNoUnwantedText('f=[');
-            $this->assertWantedText('g=[g2]');
-            $this->assertWantedText('h=[1]');
-            $this->assertWantedText('go=[Go!]');
+            $this->assertText('a=[aaa]');
+            $this->assertText('b=[bbb]');
+            $this->assertText('c=[ccc]');
+            $this->assertText('d=[d2]');
+            $this->assertText('e=[on]');
+            $this->assertNoText('f=[');
+            $this->assertText('g=[g2]');
+            $this->assertText('h=[1]');
+            $this->assertText('go=[Go!]');
         }
         
         function testFormSubmissionWithLabels() {
@@ -564,59 +564,59 @@
             $this->setField('2', 'g2');
             $this->setField('Selection H', 'H1');
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[aaa]');
-            $this->assertWantedText('b=[bbb]');
-            $this->assertWantedText('c=[ccc]');
-            $this->assertWantedText('d=[d2]');
-            $this->assertWantedText('e=[on]');
-            $this->assertNoUnwantedText('f=[');
-            $this->assertWantedText('g=[g2]');
-            $this->assertWantedText('h=[1]');
-            $this->assertWantedText('go=[Go!]');
+            $this->assertText('a=[aaa]');
+            $this->assertText('b=[bbb]');
+            $this->assertText('c=[ccc]');
+            $this->assertText('d=[d2]');
+            $this->assertText('e=[on]');
+            $this->assertNoText('f=[');
+            $this->assertText('g=[g2]');
+            $this->assertText('h=[1]');
+            $this->assertText('go=[Go!]');
         }
         
         function testFormSubmissionWithMixedPostAndGet() {
             $this->get('http://www.lastcraft.com/test/form_with_mixed_post_and_get.html');
             $this->setFieldByName('a', 'A');
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[A]');
-            $this->assertWantedText('x=[X]');
-            $this->assertWantedText('y=[Y]');
+            $this->assertText('a=[A]');
+            $this->assertText('x=[X]');
+            $this->assertText('y=[Y]');
         }
         
         function testFormSubmissionWithoutAction() {
             $this->get('http://www.lastcraft.com/test/form_without_action.php?test=test');
-            $this->assertWantedText('_GET : [test]');
+            $this->assertText('_GET : [test]');
             $this->assertTrue($this->clickSubmit('Submit Post With Empty Action'));
-            $this->assertWantedText('_GET : [test]');
-            $this->assertWantedText('_POST : [test]');
+            $this->assertText('_GET : [test]');
+            $this->assertText('_POST : [test]');
         }
 
 		function testImageSubmissionByLabel() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickImage('Image go!', 10, 12));
-            $this->assertWantedText('go_x=[10]');
-            $this->assertWantedText('go_y=[12]');
+            $this->assertText('go_x=[10]');
+            $this->assertText('go_y=[12]');
         }
         
         function testImageSubmissionByLabelWithAdditionalParameters() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickImage('Image go!', 10, 12, array('add' => 'A')));
-            $this->assertWantedText('add=[A]');
+            $this->assertText('add=[A]');
         }
         
         function testImageSubmissionByName() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickImageByName('go', 10, 12));
-            $this->assertWantedText('go_x=[10]');
-            $this->assertWantedText('go_y=[12]');
+            $this->assertText('go_x=[10]');
+            $this->assertText('go_y=[12]');
         }
         
         function testImageSubmissionById() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->clickImageById(97, 10, 12));
-            $this->assertWantedText('go_x=[10]');
-            $this->assertWantedText('go_y=[12]');
+            $this->assertText('go_x=[10]');
+            $this->assertText('go_y=[12]');
         }
         
         function testButtonSubmissionByLabel() {
@@ -627,11 +627,11 @@
         
         function testSelfSubmit() {
             $this->get('http://www.lastcraft.com/test/self_form.php');
-            $this->assertNoUnwantedText('[Submitted]');
-            $this->assertNoUnwantedText('[Wrong form]');
+            $this->assertNoText('[Submitted]');
+            $this->assertNoText('[Wrong form]');
             $this->assertTrue($this->clickSubmit());
-            $this->assertWantedText('[Submitted]');
-            $this->assertNoUnwantedText('[Wrong form]');
+            $this->assertText('[Submitted]');
+            $this->assertNoText('[Wrong form]');
             $this->assertTitle('Test of form self submission');
         }
         
@@ -639,14 +639,14 @@
             $this->get('http://www.lastcraft.com/test/self_form.php');
             $this->setFieldByName('visible', 'Resent');
             $this->assertTrue($this->clickSubmit());
-            $this->assertWantedText('[Resent]');
+            $this->assertText('[Resent]');
         }
         
         function testSettingOfBlankOption() {
             $this->get('http://www.lastcraft.com/test/form.html');
             $this->assertTrue($this->setFieldByName('d', ''));
             $this->clickSubmit('Go!');
-            $this->assertWantedText('d=[]');
+            $this->assertText('d=[]');
         }
         
         function testSendingMultipartFormDataEncodedForm() {
@@ -668,15 +668,15 @@
             $this->setField('2', 'g2');
             $this->setField('Selection H', 'H1');
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[aaa]');
-            $this->assertWantedText('b=[bbb]');
-            $this->assertWantedText('c=[ccc]');
-            $this->assertWantedText('d=[d2]');
-            $this->assertWantedText('e=[on]');
-            $this->assertNoUnwantedText('f=[');
-            $this->assertWantedText('g=[g2]');
-            $this->assertWantedText('h=[1]');
-            $this->assertWantedText('go=[Go!]');
+            $this->assertText('a=[aaa]');
+            $this->assertText('b=[bbb]');
+            $this->assertText('c=[ccc]');
+            $this->assertText('d=[d2]');
+            $this->assertText('e=[on]');
+            $this->assertNoText('f=[');
+            $this->assertText('g=[g2]');
+            $this->assertText('h=[1]');
+            $this->assertText('go=[Go!]');
         }
     }
     
@@ -691,9 +691,9 @@
             $this->assertFieldByName('b', array('b2', 'b3'));
             $this->assertFieldByName('c[]', array('c2', 'c3'));
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[a2, a3]');
-            $this->assertWantedText('b=[b2, b3]');
-            $this->assertWantedText('c=[c2, c3]');
+            $this->assertText('a=[a2, a3]');
+            $this->assertText('b=[b2, b3]');
+            $this->assertText('c=[c2, c3]');
         }
         
         function testSubmittingMultipleValues() {
@@ -706,9 +706,9 @@
             $this->setFieldByName('c[]', array('c1', 'c4'));
             $this->assertField('c[]', array('c1', 'c4'));
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[a1, a4]');
-            $this->assertWantedText('b=[b1, b4]');
-            $this->assertWantedText('c=[c1, c4]');
+            $this->assertText('a=[a1, a4]');
+            $this->assertText('b=[b1, b4]');
+            $this->assertText('c=[c1, c4]');
         }
           
         function testSubmittingMultipleValuesByLabel() {
@@ -719,8 +719,8 @@
             $this->setField('multiple selection C', array('c1', 'c4'));
             $this->assertField('multiple selection C', array('c1', 'c4'));
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[a1, a4]');
-            $this->assertWantedText('c=[c1, c4]');
+            $this->assertText('a=[a1, a4]');
+            $this->assertText('c=[c1, c4]');
         }
       
         function testSavantStyleHiddenFieldDefaults() {
@@ -728,8 +728,8 @@
             $this->assertFieldByName('a', array('a0'));
             $this->assertFieldByName('b', array('b0'));
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[a0]');
-            $this->assertWantedText('b=[b0]');
+            $this->assertText('a=[a0]');
+            $this->assertText('b=[b0]');
         }
         
         function testSavantStyleHiddenDefaultsAreOverridden() {
@@ -737,8 +737,8 @@
             $this->assertTrue($this->setFieldByName('a', array('a1')));
             $this->assertTrue($this->setFieldByName('b', 'b1'));
             $this->assertTrue($this->clickSubmit('Go!'));
-            $this->assertWantedText('a=[a1]');
-            $this->assertWantedText('b=[b1]');
+            $this->assertText('a=[a1]');
+            $this->assertText('b=[b1]');
         }
         
         function testSavantStyleFormSettingById() {
@@ -748,8 +748,8 @@
             $this->assertTrue($this->setFieldById(2, 'a1'));
             $this->assertTrue($this->setFieldById(5, 'b1'));
             $this->assertTrue($this->clickSubmitById(99));
-            $this->assertWantedText('a=[a1]');
-            $this->assertWantedText('b=[b1]');
+            $this->assertText('a=[a1]');
+            $this->assertText('b=[b1]');
         }
     }
     
@@ -764,7 +764,7 @@
                     dirname(__FILE__) . '/support/upload_sample.txt'));
             $this->assertField('Content:', dirname(__FILE__) . '/support/upload_sample.txt');
             $this->click('Go!');
-            $this->assertWantedText('Sample for testing file upload');
+            $this->assertText('Sample for testing file upload');
         }
         
         function testMultipleFileUpload() {
@@ -776,8 +776,8 @@
             $this->assertField('Supplemental:',
                     dirname(__FILE__) . '/support/supplementary_upload_sample.txt');
             $this->click('Go!');
-            $this->assertWantedText('Sample for testing file upload');
-            $this->assertWantedText('Some more text content');
+            $this->assertText('Sample for testing file upload');
+            $this->assertText('Some more text content');
         }
         
         function testBinaryFileUpload() {
@@ -785,7 +785,7 @@
             $this->assertTrue($this->setField('Content:',
                     dirname(__FILE__) . '/support/latin1_sample'));
             $this->click('Go!');
-            $this->assertWantedText(
+            $this->assertText(
                     implode('', file(dirname(__FILE__) . '/support/latin1_sample')));
         }
     }
@@ -819,10 +819,10 @@
             $this->assertTrue($this->get(
                     'http://www.lastcraft.com/test/network_confirm.php?a=aaa'));
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
             $this->retry();
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
         }
         
         function testGetRetryResubmitsExtraData() {
@@ -830,10 +830,10 @@
                     'http://www.lastcraft.com/test/network_confirm.php',
                     array('a' => 'aaa')));
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
             $this->retry();
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
         }
         
         function testPostRetryResubmitsData() {
@@ -841,20 +841,20 @@
                     'http://www.lastcraft.com/test/network_confirm.php',
                     array('a' => 'aaa')));
             $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
             $this->retry();
             $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
-            $this->assertWantedText('a=[aaa]');
+            $this->assertText('a=[aaa]');
         }
         
         function testGetRetryResubmitsRepeatedData() {
             $this->assertTrue($this->get(
                     'http://www.lastcraft.com/test/network_confirm.php?a=1&a=2'));
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[1, 2]');
+            $this->assertText('a=[1, 2]');
             $this->retry();
             $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
-            $this->assertWantedText('a=[1, 2]');
+            $this->assertText('a=[1, 2]');
         }
     }
     
@@ -940,13 +940,13 @@
             $this->ignoreFrames();
             $this->get('http://www.lastcraft.com/test/one_page_frameset.html');
             $this->assertTitle('Frameset for testing of SimpleTest');
-            $this->assertWantedText('This content is for no frames only');
+            $this->assertText('This content is for no frames only');
         }
         
         function testPatternMatchCanReadTheOnlyFrame() {
             $this->get('http://www.lastcraft.com/test/one_page_frameset.html');
-            $this->assertWantedText('A target for the SimpleTest test suite');
-            $this->assertNoUnwantedText('This content is for no frames only');
+            $this->assertText('A target for the SimpleTest test suite');
+            $this->assertNoText('This content is for no frames only');
         }
         
         function testMessyFramesetResponsesByName() {
@@ -956,7 +956,7 @@
             
             $this->assertTrue($this->setFrameFocus('Front controller'));
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
+            $this->assertText('Simple test front controller');
             
             $this->assertTrue($this->setFrameFocus('One'));
             $this->assertResponse(200);
@@ -968,11 +968,11 @@
             
             $this->assertTrue($this->setFrameFocus('Counter'));
             $this->assertResponse(200);
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
             
             $this->assertTrue($this->setFrameFocus('Redirected'));
             $this->assertResponse(200);
-            $this->assertWantedText('r=rrr');
+            $this->assertText('r=rrr');
             
             $this->assertTrue($this->setFrameFocus('Protected'));
             $this->assertResponse(401);
@@ -982,7 +982,7 @@
             
             $this->assertTrue($this->setFrameFocusByIndex(1));
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
+            $this->assertText('Simple test front controller');
             
             $this->assertTrue($this->setFrameFocusByIndex(2));
             $this->assertResponse(200);
@@ -998,7 +998,7 @@
             
             $this->assertTrue($this->setFrameFocusByIndex(5));
             $this->assertResponse(200);
-            $this->assertWantedText('r=rrr');
+            $this->assertText('r=rrr');
             
             $this->assertTrue($this->setFrameFocusByIndex(6));
             $this->assertResponse(401);
@@ -1008,51 +1008,51 @@
         
         function testReloadingFramesetPage() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
             $this->retry();
-            $this->assertWantedText('Count: 2');
+            $this->assertText('Count: 2');
             $this->retry();
-            $this->assertWantedText('Count: 3');
+            $this->assertText('Count: 3');
         }
         
         function testReloadingSingleFrameWithCookieCounter() {
             $this->get('http://www.lastcraft.com/test/counting_frameset.html');
             $this->setFrameFocus('a');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
             $this->setFrameFocus('b');
-            $this->assertWantedText('Count: 2');
+            $this->assertText('Count: 2');
             
             $this->setFrameFocus('a');
             $this->retry();
-            $this->assertWantedText('Count: 3');
+            $this->assertText('Count: 3');
             $this->retry();
-            $this->assertWantedText('Count: 4');
+            $this->assertText('Count: 4');
             $this->setFrameFocus('b');
-            $this->assertWantedText('Count: 2');
+            $this->assertText('Count: 2');
         }
         
         function testReloadingFrameWhenUnfocusedReloadsWholeFrameset() {
             $this->get('http://www.lastcraft.com/test/counting_frameset.html');
             $this->setFrameFocus('a');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
             $this->setFrameFocus('b');
-            $this->assertWantedText('Count: 2');
+            $this->assertText('Count: 2');
             
             $this->clearFrameFocus('a');
             $this->retry();
             
             $this->assertTitle('Frameset for testing of SimpleTest');
             $this->setFrameFocus('a');
-            $this->assertWantedText('Count: 3');
+            $this->assertText('Count: 3');
             $this->setFrameFocus('b');
-            $this->assertWantedText('Count: 4');
+            $this->assertText('Count: 4');
         }
         
         function testClickingNormalLinkReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('2');
             $this->assertLink('3');
-            $this->assertWantedText('Simple test front controller');
+            $this->assertText('Simple test front controller');
         }
         
         function testJumpToNamedPageReplacesJustThatFrame() {
@@ -1060,26 +1060,26 @@
             $this->assertPattern('/Simple test front controller/');
             $this->clickLink('Index');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=index]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('[action=index]');
+            $this->assertText('Count: 1');
         }
         
         function testJumpToUnnamedPageReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('No page');
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
-            $this->assertWantedText('[action=no_page]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Simple test front controller');
+            $this->assertText('[action=no_page]');
+            $this->assertText('Count: 1');
         }
         
         function testJumpToUnnamedPageWithBareParameterReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickLink('Bare action');
             $this->assertResponse(200);
-            $this->assertWantedText('Simple test front controller');
-            $this->assertWantedText('[action=]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Simple test front controller');
+            $this->assertText('[action=]');
+            $this->assertText('Count: 1');
         }
         
         function testJumpToUnnamedPageWithEmptyQueryReplacesJustThatFrame() {
@@ -1112,32 +1112,32 @@
             $this->assertPattern('/Simple test front controller/');
             $this->clickSubmit('Index');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Index]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('[action=Index]');
+            $this->assertText('Count: 1');
         }
         
         function testSubmitToSameDirectoryReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickSubmit('Same directory');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Same+directory]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('[action=Same+directory]');
+            $this->assertText('Count: 1');
         }
         
         function testSubmitToEmptyActionReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickSubmit('Empty action');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=Empty+action]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('[action=Empty+action]');
+            $this->assertText('Count: 1');
         }
         
         function testSubmitToNoActionReplacesJustThatFrame() {
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->clickSubmit('No action');
             $this->assertResponse(200);
-            $this->assertWantedText('[action=No+action]');
-            $this->assertWantedText('Count: 1');
+            $this->assertText('[action=No+action]');
+            $this->assertText('Count: 1');
         }
         
         function testSubmitBackADirectoryLevelReplacesJustThatFrame() {
@@ -1182,7 +1182,7 @@
             $this->get('http://www.lastcraft.com/test/messy_frameset.html');
             $this->setFrameFocus('Protected');
             $this->assertResponse(200);
-            $this->assertWantedText('A target for the SimpleTest test suite');
+            $this->assertText('A target for the SimpleTest test suite');
         }
         
         function testCanAuthenticateFrame() {
@@ -1190,9 +1190,9 @@
             $this->setFrameFocus('Protected');
             $this->authenticate('test', 'secret');
             $this->assertResponse(200);
-            $this->assertWantedText('A target for the SimpleTest test suite');
+            $this->assertText('A target for the SimpleTest test suite');
             $this->clearFrameFocus();
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
         }
         
         function testCanAuthenticateRedirectedFrame() {
@@ -1201,9 +1201,9 @@
             $this->assertResponse(401);
             $this->authenticate('test', 'secret');
             $this->assertResponse(200);
-            $this->assertWantedText('A target for the SimpleTest test suite');
+            $this->assertText('A target for the SimpleTest test suite');
             $this->clearFrameFocus();
-            $this->assertWantedText('Count: 1');
+            $this->assertText('Count: 1');
         }
     }
     
