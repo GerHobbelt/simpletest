@@ -111,7 +111,7 @@
     class TestOfLexer extends UnitTestCase {
         
         function testEmptyPage() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->expectNever("accept");
             $handler->setReturnValue("accept", true);
             $handler->expectNever("accept");
@@ -122,7 +122,7 @@
         }
         
         function testSinglePattern() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->expectArgumentsAt(0, "accept", array("aaa", LEXER_MATCHED));
             $handler->expectArgumentsAt(1, "accept", array("x", LEXER_UNMATCHED));
             $handler->expectArgumentsAt(2, "accept", array("a", LEXER_MATCHED));
@@ -140,7 +140,7 @@
         }
         
         function testMultiplePattern() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $target = array("a", "b", "a", "bb", "x", "b", "a", "xxxxxx", "a", "x");
             for ($i = 0; $i < count($target); $i++) {
                 $handler->expectArgumentsAt($i, "accept", array($target[$i], '*'));
@@ -158,7 +158,7 @@
     class TestOfLexerModes extends UnitTestCase {
         
         function testIsolatedPattern() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->expectArgumentsAt(0, "a", array("a", LEXER_MATCHED));
             $handler->expectArgumentsAt(1, "a", array("b", LEXER_UNMATCHED));
             $handler->expectArgumentsAt(2, "a", array("aa", LEXER_MATCHED));
@@ -177,7 +177,7 @@
         }
         
         function testModeChange() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->expectArgumentsAt(0, "a", array("a", LEXER_MATCHED));
             $handler->expectArgumentsAt(1, "a", array("b", LEXER_UNMATCHED));
             $handler->expectArgumentsAt(2, "a", array("aa", LEXER_MATCHED));
@@ -204,7 +204,7 @@
         }
         
         function testNesting() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->setReturnValue("a", true);
             $handler->setReturnValue("b", true);
             $handler->expectArgumentsAt(0, "a", array("aa", LEXER_MATCHED));
@@ -230,7 +230,7 @@
         }
         
         function testSingular() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->setReturnValue("a", true);
             $handler->setReturnValue("b", true);
             $handler->expectArgumentsAt(0, "a", array("aa", LEXER_MATCHED));
@@ -249,7 +249,7 @@
         }
         
         function testUnwindTooFar() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->setReturnValue("a", true);
             $handler->expectArgumentsAt(0, "a", array("aa", LEXER_MATCHED));
             $handler->expectArgumentsAt(1, "a", array(")", LEXER_EXIT));
@@ -265,7 +265,7 @@
     class TestOfLexerHandlers extends UnitTestCase {
         
         function testModeMapping() {
-            $handler = &new MockTestParser($this);
+            $handler = &new MockTestParser();
             $handler->setReturnValue("a", true);
             $handler->expectArgumentsAt(0, "a", array("aa", LEXER_MATCHED));
             $handler->expectArgumentsAt(1, "a", array("(", LEXER_ENTER));
@@ -294,7 +294,7 @@
         var $_lexer;
         
         function setUp() {
-            $this->_handler = &new MockSimpleSaxParser($this);
+            $this->_handler = &new MockSimpleSaxParser();
             $this->_handler->setReturnValue("acceptStartToken", true);
             $this->_handler->setReturnValue("acceptEndToken", true);
             $this->_handler->setReturnValue("acceptAttributeToken", true);
@@ -525,8 +525,8 @@
         var $_lexer;
         
         function setUp() {
-            $this->_listener = &new MockSimpleSaxListener($this);
-            $this->_lexer = &new MockSimpleLexer($this);
+            $this->_listener = &new MockSimpleSaxListener();
+            $this->_lexer = &new MockSimpleLexer();
             $this->_parser = &new TestSimpleSaxParser($this->_listener, $this->_lexer);
         }
         

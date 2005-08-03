@@ -491,7 +491,7 @@
         }
         
         function testSubmitsFileContents() {
-            $encoding = &new MockSimpleMultipartEncoding($this);
+            $encoding = &new MockSimpleMultipartEncoding();
             $encoding->expectOnce('attach', array(
                     'a',
                     'Sample for testing file upload',
