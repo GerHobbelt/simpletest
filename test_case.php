@@ -96,6 +96,15 @@
             $reporter->paintCaseEnd($this->getLabel());
             return $reporter->getStatus();
         }
+        
+        /**
+         *    Announces the start of the test.
+         *    @param string $method    Test method just started.
+         *    @access public
+         */
+        function before($method) {
+            $this->_runner->paintMethodStart($method);
+        }
 
         /**
          *    Sets up unit test wide variables at the start
@@ -112,6 +121,15 @@
          *    @access public
          */
         function tearDown() {
+        }
+        
+        /**
+         *    Announces the end of the test. Includes private clean up.
+         *    @param string $method    Test method just finished.
+         *    @access public
+         */
+        function after($method) {
+            $this->_runner->paintMethodEnd($method);
         }
 
         /**

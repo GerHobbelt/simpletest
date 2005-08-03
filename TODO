@@ -15,7 +15,7 @@ Allow mocking of interfaces (5).
 Carry interfaces to pass type hints (3).
 Add expectSequence() method (5).
 Change expectOnce(), etc to act by signature (3).
-Remove $this passing in mocks (5).
+Remove $this passing in mocks (5/4) - done.
 
 Parser
 ------

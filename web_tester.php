@@ -438,36 +438,6 @@
     }
     
     /**
-     *    Extension that builds a web browser at the start of each
-     *    test.
-	 *    @package SimpleTest
-	 *    @subpackage WebTester
-     */
-    class WebTestCaseInvoker extends SimpleInvokerDecorator {
-        
-        /**
-         *    Takes in the test case and reporter to mediate between.
-         *    @param SimpleTestCase $test_case  Test case to run.
-         *    @param SimpleScorer $scorer       Reporter to receive events.
-         */
-        function WebTestCaseInvoker(&$invoker) {
-            $this->SimpleInvokerDecorator($invoker);
-        }
-        
-        /**
-         *    Builds the browser and runs the test.
-         *    @param string $method    Test method to call.
-         *    @access public
-         */
-        function invoke($method) {
-            $test = &$this->getTestCase();
-            $test->setBrowser($test->createBrowser());
-            parent::invoke($method);
-            $test->unsetBrowser();
-        }
-    }
-    
-    /**
      *    Test case for testing of web pages. Allows
      *    fetching of pages, parsing of HTML and
      *    submitting forms.
@@ -489,14 +459,23 @@
         }
         
         /**
-         *    Sets the invoker to one that restarts the browser on
-         *    each request.
-         *    @return SimpleInvoker        Invoker for each method.
+         *    Announces the start of the test.
+         *    @param string $method    Test method just started.
          *    @access public
          */
-        function &createInvoker() {
-            $invoker = &new WebTestCaseInvoker(parent::createInvoker());
-            return $invoker;
+        function before($method) {
+            parent::before($method);
+            $this->setBrowser($this->createBrowser());
+        }
+
+        /**
+         *    Announces the end of the test. Includes private clean up.
+         *    @param string $method    Test method just finished.
+         *    @access public
+         */
+        function after($method) {
+            $this->unsetBrowser();
+            parent::after($method);
         }
         
         /**
