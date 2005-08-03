@@ -654,10 +654,21 @@
          */
         function SimpleMock($wildcard, $is_strict = true) {
             $this->SimpleStub($wildcard, $is_strict);
+            $test = &$this->_getCurrentTestCase();
+            $test->tell($this);
             $this->_expected_counts = array();
             $this->_max_counts = array();
             $this->_expected_args = array();
             $this->_expected_args_at = array();
+        }
+        
+        /**
+         *    Finds currently running test.
+         *    @return SimpeTestCase    Current test case.
+         *    @access protected
+         */
+        function &_getCurrentTestCase() {
+            return SimpleTest::getCurrent();
         }
         
         /**
@@ -814,6 +825,12 @@
         }
         
         /**
+         *    @deprecated
+         */
+        function tally() {
+        }
+        
+        /**
          *    Totals up the call counts and triggers a test
          *    assertion if a test is present for expected
          *    call counts.
@@ -821,7 +838,7 @@
          *    count assertions to be triggered.
          *    @access public
          */
-        function tally() {
+        function _tally() {
             foreach ($this->_expected_counts as $method => $expectation) {
                 $this->_assertTrue(
                         $expectation->test($this->getCallCount($method)),
@@ -834,6 +851,16 @@
                             $expectation->overlayMessage($this->getCallCount($method)));
                 }
             }
+        }
+        
+        /**
+         *    Receives event from unit test that the current
+         *    test method has finished.
+         *    @param string $method    Current method name.
+         *    @access public
+         */
+        function atTestEnd($method) {
+            $this->_tally();
         }
 
         /**
@@ -894,7 +921,7 @@
          *    @access protected
          */
         function _assertTrue($assertion, $message) {
-            $test = &SimpleTest::getCurrent();
+            $test = &$this->_getCurrentTestCase();
             $test->assertTrue($assertion, $message);
         }
     }

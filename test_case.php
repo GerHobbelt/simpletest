@@ -36,6 +36,7 @@
     class SimpleTestCase {
         var $_label = false;
         var $_runner = false;
+        var $_observers;
 
         /**
          *    Sets up the test with no display.
@@ -104,6 +105,7 @@
          */
         function before($method) {
             $this->_runner->paintMethodStart($method);
+            $this->_observers = array();
         }
 
         /**
@@ -129,7 +131,20 @@
          *    @access public
          */
         function after($method) {
+            for ($i = 0; $i < count($this->_observers); $i++) {
+                $this->_observers[$i]->atTestEnd($method);
+            }
             $this->_runner->paintMethodEnd($method);
+        }
+
+        /**
+         *    Sets up an observer for the test end.
+         *    @param object $observer    Must have atTestEnd()
+         *                               method.
+         *    @access public
+         */
+        function tell(&$observer) {
+            $this->_observers[] = &$observer;
         }
 
         /**
