@@ -5,8 +5,8 @@
     require_once(dirname(__FILE__) . '/../http.php');
     require_once(dirname(__FILE__) . '/../options.php');
 
-    if (SimpleTestOptions::getDefaultProxy()) {
-        SimpleTestOptions::ignore('LiveHttpTestCase');
+    if (SimpleTest::getDefaultProxy()) {
+        SimpleTest::ignore('LiveHttpTestCase');
     }
     
     class LiveHttpTestCase extends UnitTestCase {

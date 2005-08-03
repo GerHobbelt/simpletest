@@ -9,7 +9,7 @@
     /**#@+
      *	include other SimpleTest class files
      */
-    require_once(dirname(__FILE__) . '/simple_test.php');
+    require_once(dirname(__FILE__) . '/test_case.php');
     require_once(dirname(__FILE__) . '/browser.php');
     require_once(dirname(__FILE__) . '/page.php');
     require_once(dirname(__FILE__) . '/expectation.php');

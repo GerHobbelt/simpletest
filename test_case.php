@@ -16,10 +16,11 @@
     require_once(dirname(__FILE__) . '/scorer.php');
     require_once(dirname(__FILE__) . '/expectation.php');
     require_once(dirname(__FILE__) . '/dumper.php');
+    require_once(dirname(__FILE__) . '/simpletest.php');
     if (! defined('SIMPLE_TEST')) {
-    	/**
-	 * @ignore
-	 */
+        /**
+         * @ignore
+         */
         define('SIMPLE_TEST', dirname(__FILE__) . '/');
     }
     /**#@-*/
@@ -46,6 +47,7 @@
             if ($label) {
                 $this->_label = $label;
             }
+            SimpleTest::setCurrent($this);
         }
 
         /**
@@ -451,7 +453,7 @@
         function _createGroupFromClasses($title, $classes) {
             $group = new GroupTest($title);
             foreach ($classes as $class) {
-                if (SimpleTestOptions::isIgnored($class)) {
+                if (SimpleTest::isIgnored($class)) {
                     continue;
                 }
                 $group->addTestClass($class);

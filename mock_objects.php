@@ -10,7 +10,7 @@
      * include SimpleTest files
      */
     require_once(dirname(__FILE__) . '/expectation.php');
-    require_once(dirname(__FILE__) . '/options.php');
+    require_once(dirname(__FILE__) . '/simpletest.php');
     require_once(dirname(__FILE__) . '/dumper.php');
     /**#@-*/
     
@@ -47,7 +47,7 @@
          */
         function testMessage($compare) {
             $dumper = &$this->_getDumper();
-            return 'Wildcard always matches [' . $dumper->describeValue($compare) . ']';
+            return 'Anything always matches [' . $dumper->describeValue($compare) . ']';
         }
     }
     
@@ -638,7 +638,6 @@
 	 *    @subpackage MockObjects
      */
     class SimpleMock extends SimpleStub {
-        var $_test;
         var $_expected_counts;
         var $_max_counts;
         var $_expected_args;
@@ -655,25 +654,10 @@
          */
         function SimpleMock(&$test, $wildcard, $is_strict = true) {
             $this->SimpleStub($wildcard, $is_strict);
-            if (! $test) {
-                trigger_error('No unit tester for mock object', E_USER_ERROR);
-                return;
-            }
-            $this->_test = SimpleMock::registerTest($test);
             $this->_expected_counts = array();
             $this->_max_counts = array();
             $this->_expected_args = array();
             $this->_expected_args_at = array();
-        }
-        
-        /**
-         *    Accessor for attached unit test so that when
-         *    subclassed, new expectations can be added easily.
-         *    @return SimpleTestCase      Unit test passed in constructor.
-         *    @access public
-         */
-        function &getTest() {
-            return $this->_test;
         }
         
         /**
@@ -910,52 +894,8 @@
          *    @access protected
          */
         function _assertTrue($assertion, $message) {
-            $test = &SimpleMock::injectTest($this->_test);
+            $test = &SimpleTest::getCurrent();
             $test->assertTrue($assertion, $message);
-        }
-        
-        /**
-         *    Stashes the test case for later recovery.
-         *    @param SimpleTestCase $test    Test case.
-         *    @return string                 Key to find it again.
-         *    @access public
-         *    @static
-         */
-        function registerTest(&$test) {
-            $registry = &SimpleMock::_getRegistry();
-            $registry[$class = get_class($test)] = &$test;
-            return $class;
-        }
-        
-        /**
-         *    Resolves the dependency on the test case.
-         *    @param string $class      Key to look up test case in.
-         *    @return SimpleTestCase    Test case to send results to.
-         *    @access public
-         *    @static
-         */
-        function &injectTest($key) {
-            $registry = &SimpleMock::_getRegistry();
-            return $registry[$key];
-        }
-        
-        /**
-         *    Registry for test cases. The reason for this is
-         *    to break the reference between the test cases and
-         *    the mocks. It was leading to a fatal error due to
-         *    recursive dependencies during comparisons. See
-         *    http://bugs.php.net/bug.php?id=31449 for the PHP
-         *    bug.
-         *    @return array        List of references.
-         *    @access private
-         *    @static
-         */
-        function &_getRegistry() {
-            static $registry;
-            if (! isset($registry)) {
-                $registry = array();
-            }
-            return $registry;
         }
     }
     
@@ -1014,7 +954,7 @@
          *    @access private
          */
         function _createClassCode($class, $stub_class, $methods) {
-            $stub_base = SimpleTestOptions::getStubBaseClass();
+            $stub_base = SimpleTest::getStubBaseClass();
             $code = "class $stub_class extends $stub_base {\n";
             $code .= "    function $stub_class(\$wildcard = MOCK_ANYTHING) {\n";
             $code .= "        \$this->$stub_base(\$wildcard);\n";
@@ -1198,7 +1138,7 @@
          *    @access private
          */
         function _createClassCode($class, $mock_class, $methods) {
-            $mock_base = SimpleTestOptions::getMockBaseClass();
+            $mock_base = SimpleTest::getMockBaseClass();
             $code = "class $mock_class extends $mock_base {\n";
             $code .= "    function $mock_class(&\$test, \$wildcard = MOCK_ANYTHING) {\n";
             $code .= "        \$this->$mock_base(\$test, \$wildcard);\n";
@@ -1220,7 +1160,7 @@
          *    @access private
          */
         function _extendClassCode($class, $mock_class, $methods) {
-            $mock_base = SimpleTestOptions::getMockBaseClass();
+            $mock_base = SimpleTest::getMockBaseClass();
             $code  = "class $mock_class extends $class {\n";
             $code .= "    var \$_mock;\n";
             $code .= Mock::_addMethodList($methods);
@@ -1231,7 +1171,7 @@
             $code .= Mock::_chainMockReturns();
             $code .= Mock::_chainMockExpectations();
             $code .= Mock::_overrideMethods($methods);
-            $code .= SimpleTestOptions::getPartialMockCode();
+            $code .= SimpleTest::getPartialMockCode();
             $code .= "}\n";
             return $code;
         }

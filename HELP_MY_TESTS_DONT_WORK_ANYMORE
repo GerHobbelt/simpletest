@@ -5,6 +5,18 @@ written with earlier versions will fail with the newest ones. The most
 dramatic changes are in the alpha releases. Here is a list of possible
 problems and their fixes...
 
+No class SimpleTestOptions
+--------------------------
+This was replced by the shorter SimpleTest in 1.0.1beta1
+and is since deprecated.
+
+No file simple_test.php
+-----------------------
+This was renamed test_case.php in 1.0.1beta to more accurately
+reflect it's purpose. This file should never be directly
+included in test suites though, as it's part of the
+underlying mechanics and has a tendency to be refactored.
+
 No class WantedPatternExpectation
 ---------------------------------
 This was deprecated in 1.0.1alpha in favour of the simpler
