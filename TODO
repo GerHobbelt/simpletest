@@ -29,7 +29,7 @@ Allow ignoring of cookies (2).
 
 Web tester
 ----------
-Change assertWantedText(), etc to assertText() method (1).
+Change assertWantedText(), etc to assertText() method (1/1) - done.
 Pass expectations to assertTitle() (3).
 Pass expectations to assertHeader() (3).
 
