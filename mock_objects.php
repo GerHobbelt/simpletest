@@ -652,7 +652,7 @@
          *                                   expectations.
          *    @access public
          */
-        function SimpleMock(&$test, $wildcard, $is_strict = true) {
+        function SimpleMock($wildcard, $is_strict = true) {
             $this->SimpleStub($wildcard, $is_strict);
             $this->_expected_counts = array();
             $this->_max_counts = array();
@@ -1140,8 +1140,8 @@
         function _createClassCode($class, $mock_class, $methods) {
             $mock_base = SimpleTest::getMockBaseClass();
             $code = "class $mock_class extends $mock_base {\n";
-            $code .= "    function $mock_class(&\$test, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->$mock_base(\$test, \$wildcard);\n";
+            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
+            $code .= "        \$this->$mock_base(\$wildcard);\n";
             $code .= "    }\n";
             $code .= Stub::_createHandlerCode($class, $mock_base, $methods);
             $code .= "}\n";
@@ -1165,8 +1165,8 @@
             $code .= "    var \$_mock;\n";
             $code .= Mock::_addMethodList($methods);
             $code .= "\n";
-            $code .= "    function $mock_class(&\$test, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->_mock = &new $mock_base(\$test, \$wildcard, false);\n";
+            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
+            $code .= "        \$this->_mock = &new $mock_base(\$wildcard, false);\n";
             $code .= "    }\n";
             $code .= Mock::_chainMockReturns();
             $code .= Mock::_chainMockExpectations();
