@@ -52,6 +52,12 @@
         }
     }
     
+    class TestOfUnitTestCase extends UnitTestCase {
+        
+        function testObserverNotifiedOfTestEnd() {
+        }
+    }
+    
     class JBehaveStyleRunner extends SimpleRunner {
         function JBehaveStyleRunner(&$test_case, &$scorer) {
             $this->SimpleRunner($test_case, $scorer);

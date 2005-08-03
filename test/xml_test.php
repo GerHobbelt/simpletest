@@ -1,7 +1,6 @@
 <?php
     // $Id$
     require_once(dirname(__FILE__) . '/../xml.php');
-    
     Mock::generate('SimpleScorer');
     
     if (! function_exists('xml_parser_create')) {
@@ -10,7 +9,6 @@
     }
     
     class TestOfNestingTags extends UnitTestCase {
-        
         function testGroupSize() {
             $nesting = new NestingGroupTag(array('SIZE' => 2));
             $this->assertEqual($nesting->getSize(), 2);
