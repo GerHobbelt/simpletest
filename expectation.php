@@ -10,7 +10,7 @@
      *    include other SimpleTest class files
      */
     require_once(dirname(__FILE__) . '/dumper.php');
-    require_once(dirname(__FILE__) . '/options.php');
+    require_once(dirname(__FILE__) . '/compatibility.php');
     /**#@-*/
     
     /**

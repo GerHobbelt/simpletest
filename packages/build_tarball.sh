@@ -6,7 +6,7 @@ cd ../..
 
 NAME=simpletest_`cat simpletest/VERSION`.tar.gz
 FILES=(simpletest/errors.php \
-          simpletest/options.php \
+          simpletest/compatibility.php \
           simpletest/collector.php \
           simpletest/dumper.php \
           simpletest/expectation.php \
@@ -45,8 +45,9 @@ FILES=(simpletest/errors.php \
           simpletest/test/test_groups.php \
           simpletest/test/acceptance_test.php \
           simpletest/test/collector_test.php \
+          simpletest/test/simpletest_test.php \
           simpletest/test/errors_test.php \
-          simpletest/test/options_test.php \
+          simpletest/test/compatibility_test.php \
           simpletest/test/dumper_test.php \
           simpletest/test/expectation_test.php \
           simpletest/test/adapter_test.php \
@@ -63,7 +64,7 @@ FILES=(simpletest/errors.php \
           simpletest/test/frames_test.php \
           simpletest/test/page_test.php \
           simpletest/test/remote_test.php \
-          simpletest/test/simple_mock_test.php \
+          simpletest/test/mock_objects_test.php \
           simpletest/test/visual_test.php \
           simpletest/test/shell_test.php \
           simpletest/test/web_tester_test.php \
