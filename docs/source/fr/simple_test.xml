@@ -133,7 +133,7 @@ class TestOfLogging extends UnitTestCase {
 }
 ?></strong>
 ]]></php>
-                Ensuite nous créons un nouveau fichier appelé <em>tests/all_tests.php</em>. On y insert le code suivant...
+                Ensuite nous créons un nouveau fichier appelé <em>tests/all_tests.php</em>. On y insère le code suivant...
 <php><![CDATA[
 <strong><?php
 require_once('simpletest/unit_tester.php');
