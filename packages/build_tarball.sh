@@ -28,7 +28,8 @@ FILES=(simpletest/errors.php \
           simpletest/scorer.php \
           simpletest/reporter.php \
           simpletest/mock_objects.php \
-          simpletest/simple_test.php \
+          simpletest/simpletest.php \
+          simpletest/test_case.php \
           simpletest/unit_tester.php \
           simpletest/web_tester.php \
           simpletest/shell_tester.php \

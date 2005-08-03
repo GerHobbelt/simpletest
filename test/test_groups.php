@@ -40,11 +40,11 @@
     // Uncomment and modify the following line if you are accessing
     // the net via a proxy server.
     //
-    // SimpleTestOptions::useProxy('http://my-proxy', 'optional username', 'optional password');
+    // SimpleTest::useProxy('http://my-proxy', 'optional username', 'optional password');
         
     class AllTests extends GroupTest {
         function AllTests() {
-            $this->GroupTest('All tests for SimpleTest ' . SimpleTestOptions::getVersion());
+            $this->GroupTest('All tests for SimpleTest ' . SimpleTest::getVersion());
             $this->addTestCase(new UnitTests());
             $this->addTestFile(dirname(__FILE__) . '/shell_test.php');
             $this->addTestFile(dirname(__FILE__) . '/live_test.php');

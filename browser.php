@@ -9,7 +9,7 @@
     /**#@+
      *	include other SimpleTest class files
      */
-    require_once(dirname(__FILE__) . '/options.php');
+    require_once(dirname(__FILE__) . '/simpletest.php');
     require_once(dirname(__FILE__) . '/http.php');
     require_once(dirname(__FILE__) . '/encoding.php');
     require_once(dirname(__FILE__) . '/page.php');
@@ -174,9 +174,9 @@
         function SimpleBrowser() {
             $this->_user_agent = &$this->_createUserAgent();
             $this->_user_agent->useProxy(
-                    SimpleTestOptions::getDefaultProxy(),
-                    SimpleTestOptions::getDefaultProxyUsername(),
-                    SimpleTestOptions::getDefaultProxyPassword());
+                    SimpleTest::getDefaultProxy(),
+                    SimpleTest::getDefaultProxyUsername(),
+                    SimpleTest::getDefaultProxyPassword());
             $this->_page = &new SimplePage();
             $this->_history = &$this->_createHistory();
             $this->_ignore_frames = false;

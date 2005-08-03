@@ -1,13 +1,12 @@
 <?php
     // $Id$
-    
     require_once(dirname(__FILE__) . '/../xml.php');
     
     Mock::generate('SimpleScorer');
     
     if (! function_exists('xml_parser_create')) {
-        SimpleTestOptions::ignore('TestOfXmlStructureParsing');
-        SimpleTestOptions::ignore('TestOfXmlResultsParsing');
+        SimpleTest::ignore('TestOfXmlStructureParsing');
+        SimpleTest::ignore('TestOfXmlResultsParsing');
     }
     
     class TestOfNestingTags extends UnitTestCase {
