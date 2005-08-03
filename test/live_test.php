@@ -3,7 +3,7 @@
     require_once(dirname(__FILE__) . '/../unit_tester.php');
     require_once(dirname(__FILE__) . '/../socket.php');
     require_once(dirname(__FILE__) . '/../http.php');
-    require_once(dirname(__FILE__) . '/../options.php');
+    require_once(dirname(__FILE__) . '/../compatibility.php');
 
     if (SimpleTest::getDefaultProxy()) {
         SimpleTest::ignore('LiveHttpTestCase');

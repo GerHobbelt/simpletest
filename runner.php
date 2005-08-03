@@ -11,7 +11,7 @@
      * for dependent libraries.
      */
     require_once(dirname(__FILE__) . '/errors.php');
-    require_once(dirname(__FILE__) . '/options.php');
+    require_once(dirname(__FILE__) . '/compatibility.php');
     require_once(dirname(__FILE__) . '/scorer.php');
     require_once(dirname(__FILE__) . '/expectation.php');
     require_once(dirname(__FILE__) . '/dumper.php');

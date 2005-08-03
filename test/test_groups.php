@@ -12,12 +12,13 @@
             $this->GroupTest('Unit tests');
             $test_path = dirname(__FILE__);
             $this->addTestFile($test_path . '/errors_test.php');
-            $this->addTestFile($test_path . '/options_test.php');
+            $this->addTestFile($test_path . '/compatibility_test.php');
+            $this->addTestFile($test_path . '/simpletest_test.php');
             $this->addTestFile($test_path . '/dumper_test.php');
             $this->addTestFile($test_path . '/expectation_test.php');
             $this->addTestFile($test_path . '/unit_tester_test.php');
             $this->addTestFile($test_path . '/collector_test.php');
-            $this->addTestFile($test_path . '/simple_mock_test.php');
+            $this->addTestFile($test_path . '/mock_objects_test.php');
             $this->addTestFile($test_path . '/adapter_test.php');
             $this->addTestFile($test_path . '/socket_test.php');
             $this->addTestFile($test_path . '/encoding_test.php');
