@@ -1,6 +1,6 @@
 <?php
     // $Id$
-    require_once(dirname(__FILE__).DIRECTORY_SEPARATOR . '../expectation.php');
+    require_once(dirname(__FILE__) . '/../expectation.php');
 
     class TestOfEquality extends UnitTestCase {
         

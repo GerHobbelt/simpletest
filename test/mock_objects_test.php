@@ -650,7 +650,6 @@
             $mock->expectArgumentsAt(1, "anotherMethod", array(66));
             $mock->anotherMethod(77);
             $mock->anotherMethod(66);
-            $mock->tally();
         }
         
         function testAdditionalPartialMockCode() {

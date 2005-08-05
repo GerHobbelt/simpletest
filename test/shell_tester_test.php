@@ -21,7 +21,6 @@
             $this->_mock_shell->expectOnce('execute', array('ls'));
             $this->assertTrue($this->execute('ls'));
             $this->assertExitCode(0);
-            $this->_mock_shell->tally();
         }
         
         function testOutput() {

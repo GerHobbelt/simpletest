@@ -40,7 +40,6 @@
             $this->assertTrue($parser->parse("<name>a_group</name>\n"));
             $this->assertTrue($parser->parse("</group>\n"));
             $parser->parse("</run>\n");
-            $listener->tally();
         }
         
         function testEmptyCase() {
@@ -54,7 +53,6 @@
             $this->assertTrue($parser->parse("<name>a_case</name>\n"));
             $this->assertTrue($parser->parse("</case>\n"));
             $parser->parse("</run>\n");
-            $listener->tally();
         }
         
         function testEmptyMethod() {
@@ -73,7 +71,6 @@
             $this->assertTrue($parser->parse("</test>\n"));
             $parser->parse("</case>\n");
             $parser->parse("</run>\n");
-            $listener->tally();
         }
         
         function testNestedGroup() {
@@ -84,9 +81,11 @@
             $listener->expectArgumentsAt(0, 'paintGroupEnd', array('b_group'));
             $listener->expectArgumentsAt(1, 'paintGroupEnd', array('a_group'));
             $listener->expectCallCount('paintGroupEnd', 2);
+            
             $parser = &new SimpleTestXmlParser($listener);
             $parser->parse("<?xml version=\"1.0\"?>\n");
             $parser->parse("<run>\n");
+            
             $this->assertTrue($parser->parse("<group size=\"7\">\n"));
             $this->assertTrue($parser->parse("<name>a_group</name>\n"));
             $this->assertTrue($parser->parse("<group size=\"3\">\n"));
@@ -94,7 +93,6 @@
             $this->assertTrue($parser->parse("</group>\n"));
             $this->assertTrue($parser->parse("</group>\n"));
             $parser->parse("</run>\n");
-            $listener->tally();
         }
     }
     
@@ -126,7 +124,6 @@
             $this->sendValidStart($parser);
             $this->assertTrue($parser->parse("<pass>a_message</pass>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
         
         function testFail() {
@@ -136,7 +133,6 @@
             $this->sendValidStart($parser);
             $this->assertTrue($parser->parse("<fail>a_message</fail>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
         
         function testException() {
@@ -146,7 +142,6 @@
             $this->sendValidStart($parser);
             $this->assertTrue($parser->parse("<exception>a_message</exception>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
         
         function testSignal() {
@@ -160,7 +155,6 @@
                     "<signal type=\"a_signal\"><![CDATA[" .
                     serialize($signal) . "]]></signal>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
         
         function testMessage() {
@@ -170,7 +164,6 @@
             $this->sendValidStart($parser);
             $this->assertTrue($parser->parse("<message>a_message</message>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
         
         function testFormattedMessage() {
@@ -180,7 +173,6 @@
             $this->sendValidStart($parser);
             $this->assertTrue($parser->parse("<formatted><![CDATA[\na\tmessage\n]]></formatted>\n"));
             $this->sendValidEnd($parser);
-            $listener->tally();
         }
     }
 ?>

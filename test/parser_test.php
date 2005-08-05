@@ -136,7 +136,6 @@
             $lexer = &new SimpleLexer($handler);
             $lexer->addPattern("a+");
             $this->assertTrue($lexer->parse("aaaxayyyaxaaaz"));
-            $handler->tally();
         }
         
         function testMultiplePattern() {
@@ -151,7 +150,6 @@
             $lexer->addPattern("a+");
             $lexer->addPattern("b+");
             $this->assertTrue($lexer->parse("ababbxbaxxxxxxax"));
-            $handler->tally();
         }
     }
 
@@ -173,7 +171,6 @@
             $lexer->addPattern("a+", "a");
             $lexer->addPattern("b+", "b");
             $this->assertTrue($lexer->parse("abaabxbaaaxaaaax"));
-            $handler->tally();
         }
         
         function testModeChange() {
@@ -200,7 +197,6 @@
             $lexer->addEntryPattern(":", "a", "b");
             $lexer->addPattern("b+", "b");
             $this->assertTrue($lexer->parse("abaabaaa:ababbabbba"));
-            $handler->tally();
         }
         
         function testNesting() {
@@ -226,7 +222,6 @@
             $lexer->addPattern("b+", "b");
             $lexer->addExitPattern(")", "b");
             $this->assertTrue($lexer->parse("aabaab(bbabb)aab"));
-            $handler->tally();
         }
         
         function testSingular() {
@@ -245,7 +240,6 @@
             $lexer->addPattern("a+", "a");
             $lexer->addSpecialPattern("b+", "a", "b");
             $this->assertTrue($lexer->parse("aabaaxxbbbxx"));
-            $handler->tally();
         }
         
         function testUnwindTooFar() {
@@ -258,7 +252,6 @@
             $lexer->addPattern("a+", "a");
             $lexer->addExitPattern(")", "a");
             $this->assertFalse($lexer->parse("aa)aa"));
-            $handler->tally();
         }
     }
 
@@ -283,7 +276,6 @@
             $lexer->mapHandler("mode_a", "a");
             $lexer->mapHandler("mode_b", "a");
             $this->assertTrue($lexer->parse("aa(bbabb)b"));
-            $handler->tally();
         }
     }
     

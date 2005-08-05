@@ -1,5 +1,5 @@
 TODO
-This is immediate stuff only for this iteration (1.0.1beta) of 39 hours.
+This is immediate stuff only for this iteration (1.0.1beta) of 42 hours.
 
 $Id$
 
@@ -16,7 +16,7 @@ Carry interfaces to pass type hints (3).
 Add expectSequence() method (5).
 Change expectOnce(), etc to act by signature (3).
 Remove $this passing in mocks (5/4) - done.
-Remove the need for tally() call (2/2) - done.
+Remove the need for tally() call (2/3) - done.
 
 Parser
 ------
