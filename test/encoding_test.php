@@ -167,21 +167,19 @@
     class TestOfFormHeaders extends UnitTestCase {
         
         function testEmptyEncodingWritesZeroContentLength() {
-            $socket = &new MockSimpleSocket($this);
+            $socket = &new MockSimpleSocket();
             $socket->expectArgumentsAt(0, 'write', array("Content-Length: 0\r\n"));
             $socket->expectArgumentsAt(1, 'write', array("Content-Type: application/x-www-form-urlencoded\r\n"));
             $encoding = &new SimplePostEncoding();
             $encoding->writeHeadersTo($socket);
-            $socket->tally();
         }
         
         function testEmptyMultipartEncodingWritesEndBoundaryContentLength() {
-            $socket = &new MockSimpleSocket($this);
+            $socket = &new MockSimpleSocket();
             $socket->expectArgumentsAt(0, 'write', array("Content-Length: 14\r\n"));
             $socket->expectArgumentsAt(1, 'write', array("Content-Type: multipart/form-data, boundary=boundary\r\n"));
             $encoding = &new SimpleMultipartEncoding(array(), 'boundary');
             $encoding->writeHeadersTo($socket);
-            $socket->tally();
         }
     }
 ?>

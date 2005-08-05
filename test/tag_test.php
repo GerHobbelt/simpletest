@@ -499,7 +499,6 @@
             $upload = &new SimpleUploadTag(array('name' => 'a'));
             $upload->setValue(dirname(__FILE__) . '/support/upload_sample.txt');
             $upload->write($encoding);
-            $encoding->tally();
         }
     }
     

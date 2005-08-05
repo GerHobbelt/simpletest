@@ -831,14 +831,14 @@
         }
         
         /**
-         *    Totals up the call counts and triggers a test
-         *    assertion if a test is present for expected
-         *    call counts.
-         *    This method must be called explicitly for the call
-         *    count assertions to be triggered.
+         *    Receives event from unit test that the current
+         *    test method has finished. Totals up the call
+         *    counts and triggers a test assertion if a test
+         *    is present for expected call counts.
+         *    @param string $method    Current method name.
          *    @access public
          */
-        function _tally() {
+        function atTestEnd($method) {
             foreach ($this->_expected_counts as $method => $expectation) {
                 $this->_assertTrue(
                         $expectation->test($this->getCallCount($method)),
@@ -851,16 +851,6 @@
                             $expectation->overlayMessage($this->getCallCount($method)));
                 }
             }
-        }
-        
-        /**
-         *    Receives event from unit test that the current
-         *    test method has finished.
-         *    @param string $method    Current method name.
-         *    @access public
-         */
-        function atTestEnd($method) {
-            $this->_tally();
         }
 
         /**
@@ -1123,7 +1113,7 @@
             if (! $mock_class) {
                 $mock_class = "Mock" . $class;
             }
-            if (class_exists($mock_class)) {
+            if (SimpleTestCompatibility::classExistsSansAutoload($mock_class)) {
                 return false;
             }
             return eval(Mock::_createClassCode(

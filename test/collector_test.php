@@ -17,43 +17,34 @@ class PathEqualExpectation extends EqualExpectation {
 class TestOfCollector extends UnitTestCase {
     
     function testCollectionIsAddedToGroup() {
-        $group = &new MockGroupTest($this);
+        $group = &new MockGroupTest();
         $group->expectMinimumCallCount('addTestFile', 2);
         $group->expectArguments(
                 'addTestFile',
                 array(new PatternExpectation('/collectable\\.(1|2)$/')));
-        
         $collector = &new SimpleCollector();
         $collector->collect($group, dirname(__FILE__) . '/support/collector/');
-        
-        $group->tally();
     }
 }
     
 class TestOfPatternCollector extends UnitTestCase {
     
     function testAddingEverythingToGroup() {
-        $group = &new MockGroupTest($this);
+        $group = &new MockGroupTest();
         $group->expectCallCount('addTestFile', 2);
         $group->expectArguments(
                 'addTestFile',
                 array(new PatternExpectation('/collectable\\.(1|2)$/')));
-        
         $collector = &new SimplePatternCollector();
         $collector->collect($group, dirname(__FILE__) . '/support/collector/', '/.*/');
-        
-        $group->tally();
     }
         
     function testOnlyMatchedFilesAreAddedToGroup() {
-        $group = &new MockGroupTest($this);
+        $group = &new MockGroupTest();
         $group->expectOnce('addTestFile', array(new PathEqualExpectation(
         		dirname(__FILE__) . '/support/collector/collectable.1')));
-        
         $collector = &new SimplePatternCollector();
         $collector->collect($group, dirname(__FILE__) . '/support/collector/', '/1$/');
-        
-        $group->tally();
     }
 }
 ?>

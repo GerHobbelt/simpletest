@@ -223,18 +223,14 @@
             $dummy = &new MockDummy();
             $dummy->expectCallCount('a', 1, 'My message: %s');
             $dummy->a();
-            $dummy->tally();
             $dummy->a();
-            $dummy->tally();
         }
 
         function testMinimumCallCounts() {
             $dummy = &new MockDummy();
             $dummy->expectMinimumCallCount('a', 2, 'My message: %s');
             $dummy->a();
-            $dummy->tally();
             $dummy->a();
-            $dummy->tally();
         }
 
         function testEmptyMatching() {

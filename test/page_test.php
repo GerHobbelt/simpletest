@@ -36,8 +36,6 @@
                     array('href' => 'http://somewhere')));
             $this->assertTrue($builder->addContent('Label'));
             $this->assertTrue($builder->endElement('a'));
-            
-            $page->tally();
         }
         
         function testLinkWithId() {
@@ -59,8 +57,6 @@
                     array("href" => "http://somewhere", "id" => "44")));
             $this->assertTrue($builder->addContent("Label"));
             $this->assertTrue($builder->endElement("a"));
-            
-            $page->tally();
         }
         
         function testLinkExtraction() {
@@ -84,8 +80,6 @@
             $this->assertTrue($builder->addContent("Label"));
             $this->assertTrue($builder->endElement("a"));
             $this->assertTrue($builder->addContent("Trailing stuff"));
-            
-            $page->tally();
         }
         
         function testMultipleLinks() {
@@ -113,8 +107,6 @@
             $builder->startElement("a", array("href" => "http://elsewhere"));
             $builder->addContent("2");
             $builder->endElement("a");
-            
-            $page->tally();
         }
         
         function testTitle() {
@@ -135,8 +127,6 @@
             $builder->addContent("Here");
             $builder->addContent("There");
             $builder->endElement("title");
-            
-            $page->tally();
         }
         
         function testForm() {
@@ -153,7 +143,6 @@
             $builder->startElement("form", array());
             $builder->addContent("Stuff");
             $builder->endElement("form");
-            $page->tally();
         }
     }
     
@@ -173,10 +162,7 @@
             
             $response = &new MockSimpleHttpResponse();
             $response->setReturnValue('getContent', 'stuff');
-
             $builder->parse($response);
-            $parser->tally();
-            $page->tally();
         }
     }
     

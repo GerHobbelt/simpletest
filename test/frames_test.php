@@ -116,10 +116,7 @@
             $frameset->addFrame($frame1);
             $frameset->addFrame($frame2);
             $frameset->addFrame($frame3);
-            
             $this->assertIdentical($frameset->getFieldByName('a'), 'A');
-            $frame1->tally();
-            $frame2->tally();
         }
         
         function testFrameReplacementByIndex() {
@@ -525,8 +522,6 @@
             
             $frameset->setFieldByName('a', 'A');
             $frameset->setFieldById(22, 'A');
-            $frame1->tally();
-            $frame2->tally();
         }
         
         function testOnlySettingFieldFromFocusedFrame() {
@@ -545,7 +540,6 @@
             
             $frameset->setField('a', 'A');
             $frameset->setFieldById(22, 'A');
-            $frame1->tally();
         }
         
         function testOnlyGettingFieldFromFocusedFrame() {

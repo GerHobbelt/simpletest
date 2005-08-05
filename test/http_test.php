@@ -125,7 +125,6 @@
             $route->SimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
             
             $this->assertReference($route->createConnection('GET', 15), $socket);
-            $socket->tally();
         }
         
         function testDefaultPostRequest() {
@@ -140,7 +139,6 @@
             $route->SimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
             
             $route->createConnection('POST', 15);
-            $socket->tally();
         }
         
         function testGetWithPort() {
@@ -155,7 +153,6 @@
             $route->SimpleRoute(new SimpleUrl('http://a.valid.host:81/here.html'));
             
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
         
         function testGetWithParameters() {
@@ -170,7 +167,6 @@
             $route->SimpleRoute(new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'));
             
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
     }
     
@@ -188,9 +184,7 @@
             $route->SimpleProxyRoute(
                     new SimpleUrl('http://a.valid.host/here.html'),
                     new SimpleUrl('http://my-proxy'));
-            
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
         
         function testDefaultPost() {
@@ -205,9 +199,7 @@
             $route->SimpleProxyRoute(
                     new SimpleUrl('http://a.valid.host/here.html'),
                     new SimpleUrl('http://my-proxy'));
-            
             $route->createConnection('POST', 15);
-            $socket->tally();
         }
         
         function testGetWithPort() {
@@ -222,9 +214,7 @@
             $route->SimpleProxyRoute(
                     new SimpleUrl('http://a.valid.host:81/here.html'),
                     new SimpleUrl('http://my-proxy:8081'));
-            
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
         
         function testGetWithParameters() {
@@ -239,9 +229,7 @@
             $route->SimpleProxyRoute(
                     new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'),
                     new SimpleUrl('http://my-proxy'));
-            
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
         
         function testGetWithAuthentication() {
@@ -261,9 +249,7 @@
                     new SimpleUrl('http://my-proxy'),
                     'Me',
                     'Secret');
-            
             $route->createConnection('GET', 15);
-            $socket->tally();
         }
     }
 
@@ -290,8 +276,6 @@
             
             $request = &new SimpleHttpRequest($route, new SimpleGetEncoding());
             $this->assertIsA($request->fetch(15), 'SimpleHttpResponse');
-            $socket->tally();
-            $route->tally();
         }
         
         function testWritingAdditionalHeaders() {
@@ -306,8 +290,6 @@
             $request = &new SimpleHttpRequest($route, new SimpleGetEncoding());
             $request->addHeaderLine('My: stuff');
             $request->fetch(15);
-            
-            $socket->tally();
         }
         
         function testCookieWriting() {
@@ -322,8 +304,6 @@
             $request = &new SimpleHttpRequest($route, new SimpleGetEncoding());
             $request->setCookie(new SimpleCookie('a', 'A'));
             $this->assertIsA($request->fetch(15), 'SimpleHttpResponse');
-            
-            $socket->tally();
         }
         
         function testMultipleCookieWriting() {
@@ -337,8 +317,6 @@
             $request->setCookie(new SimpleCookie('a', 'A'));
             $request->setCookie(new SimpleCookie('b', 'B'));
             $request->fetch(15);
-            
-            $socket->tally();
         }
     }
     
@@ -351,7 +329,6 @@
             $route->setReturnReference('createConnection', $socket);
             
             $request = &new SimpleHttpRequest($route, new SimplePostEncoding());
-            
             $reponse = &$request->fetch(15);
             $this->assertTrue($reponse->isError());
         }
@@ -369,9 +346,6 @@
             
             $request = &new SimpleHttpRequest($route, new SimplePostEncoding());
             $this->assertIsA($request->fetch(15), 'SimpleHttpResponse');
-            
-            $socket->tally();
-            $route->tally();
         }
         
         function testContentHeadersCalculated() {
@@ -389,9 +363,6 @@
                     $route,
                     new SimplePostEncoding(array('a' => 'A')));
             $this->assertIsA($request->fetch(15), 'SimpleHttpResponse');
-            
-            $socket->tally();
-            $route->tally();
         }
     }
         
