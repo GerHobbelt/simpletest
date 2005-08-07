@@ -785,7 +785,7 @@
          */
         function setValue($value) {
             for ($i = 0, $count = count($this->_options); $i < $count; $i++) {
-                if (trim($this->_options[$i]->getContent()) == trim($value)) {
+                if ($this->_options[$i]->isValue($value)) {
                     $this->_choice = $i;
                     return true;
                 }
@@ -872,7 +872,7 @@
             foreach ($values as $value) {
                 $is_option = false;
                 for ($i = 0, $count = count($this->_options); $i < $count; $i++) {
-                    if (trim($this->_options[$i]->getContent()) == trim($value)) {
+                    if ($this->_options[$i]->isValue($value)) {
                         $is_option = true;
                         break;
                     }
@@ -920,6 +920,20 @@
          */
         function setValue($value) {
             return false;
+        }
+        
+        /**
+         *    Test to see if a value matches the option.
+         *    @param string $compare    Value to compare with.
+         *    @return boolean           True if possible match.
+         *    @access public
+         */
+        function isValue($compare) {
+            $compare = trim($compare);
+            if (trim($this->getValue()) == $compare) {
+                return true;
+            }
+            return trim($this->getContent()) == $compare;
         }
         
         /**

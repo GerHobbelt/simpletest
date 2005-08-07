@@ -232,6 +232,8 @@
             $tag->addTag($c);
             $tag->setValue('AAA');
             $this->assertEqual($tag->getValue(), 'aaa');
+            $tag->setValue('ccc');
+            $this->assertEqual($tag->getValue(), 'ccc');
         }
         
         function testSelectionDespiteSpuriousWhitespace() {
