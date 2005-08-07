@@ -35,7 +35,7 @@ Web tester
 Change assertWantedText(), etc to assertText() method (1/1) - done.
 Pass expectations to assertTitle() (3).
 Pass expectations to assertHeader() (3).
-Fix bug with multiple selection fields not being selected by label (1).
+Fix bug with multiple selection fields not being selected by label (1/1) - done.
 
 Documentation
 -------------

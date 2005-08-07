@@ -326,12 +326,12 @@
             $b = &new SimpleOptionTag(array());
             $b->addContent('BBB');
             $tag->addTag($b);
-            $c = &new SimpleOptionTag(array('selected' => ''));
+            $c = &new SimpleOptionTag(array('selected' => '', 'value' => 'ccc'));
             $c->addContent('CCC');
             $tag->addTag($c);
-            $this->assertIdentical($tag->getDefault(), array('AAA', 'CCC'));
-            $this->assertTrue($tag->setValue(array('BBB', 'CCC')));
-            $this->assertIdentical($tag->getValue(), array('BBB', 'CCC'));
+            $this->assertIdentical($tag->getDefault(), array('AAA', 'ccc'));
+            $this->assertTrue($tag->setValue(array('BBB', 'ccc')));
+            $this->assertIdentical($tag->getValue(), array('BBB', 'ccc'));
             $this->assertTrue($tag->setValue(array()));
             $this->assertIdentical($tag->getValue(), array());
         }
