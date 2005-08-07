@@ -863,25 +863,29 @@
         }
         
         /**
-         *    Can only set allowed values.
-         *    @param array $values       New choices.
-         *    @return boolean            True if allowed.
+         *    Can only set allowed values. Any illegal value
+         *    will result in a failure, but all correct values
+         *    will be set.
+         *    @param array $desired      New choices.
+         *    @return boolean            True if all allowed.
          *    @access public
          */
-        function setValue($values) {
-            foreach ($values as $value) {
-                $is_option = false;
+        function setValue($desired) {
+            $achieved = array();
+            foreach ($desired as $value) {
+                $success = false;
                 for ($i = 0, $count = count($this->_options); $i < $count; $i++) {
                     if ($this->_options[$i]->isValue($value)) {
-                        $is_option = true;
+                        $achieved[] = $this->_options[$i]->getValue();
+                        $success = true;
                         break;
                     }
                 }
-                if (! $is_option) {
+                if (! $success) {
                     return false;
                 }
             }
-            $this->_values = $values;
+            $this->_values = $achieved;
             return true;
         }
         

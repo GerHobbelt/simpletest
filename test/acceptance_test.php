@@ -691,11 +691,13 @@
             $this->assertFieldByName('b', array('b2', 'b3'));
             $this->assertFieldByName('c[]', array('c2', 'c3'));
             $this->assertFieldByName('d', array('2', '3'));
+            $this->assertFieldByName('e', array('2', '3'));
             $this->assertTrue($this->clickSubmit('Go!'));
             $this->assertText('a=[a2, a3]');
             $this->assertText('b=[b2, b3]');
             $this->assertText('c=[c2, c3]');
             $this->assertText('d=[2, 3]');
+            $this->assertText('e=[2, 3]');
         }
         
         function testSubmittingMultipleValues() {
@@ -709,11 +711,14 @@
             $this->assertField('c[]', array('c1', 'c4'));
             $this->setFieldByName('d', array('1', '4'));
             $this->assertField('d', array('1', '4'));
+            $this->setFieldByName('e', array('e1', 'e4'));
+            $this->assertField('e', array('1', '4'));
             $this->assertTrue($this->clickSubmit('Go!'));
             $this->assertText('a=[a1, a4]');
             $this->assertText('b=[b1, b4]');
             $this->assertText('c=[c1, c4]');
             $this->assertText('d=[1, 4]');
+            $this->assertText('e=[1, 4]');
         }
         
         function testSettingByOptionValue() {
