@@ -165,17 +165,6 @@
         }
         
         /**
-         *    Needed to kill the autoload feature in PHP5
-         *    for classes created dynamically.
-         */
-        function classExistsSansAutoload($class) {
-            if (version_compare(phpversion(), '5') >= 0) {
-                return class_exists($class, false);
-            }
-            return class_exists($class);
-        }
-        
-        /**
          *    Gets the current stack trace topmost first.
          *    @return array        List of stack frames.
          *    @access public

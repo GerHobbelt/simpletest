@@ -23,6 +23,7 @@ FILES=(simpletest/errors.php \
           simpletest/form.php \
           simpletest/frames.php \
           simpletest/page.php \
+          simpletest/reflection_php4.php \
           simpletest/remote.php \
           simpletest/runner.php \
           simpletest/scorer.php \

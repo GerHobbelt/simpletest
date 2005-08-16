@@ -12,6 +12,7 @@
     require_once(dirname(__FILE__) . '/expectation.php');
     require_once(dirname(__FILE__) . '/simpletest.php');
     require_once(dirname(__FILE__) . '/dumper.php');
+    require_once(dirname(__FILE__) . '/reflection_php4.php');
     /**#@-*/
     
     /**
@@ -405,8 +406,7 @@
     }
     
     /**
-     *    An empty collection of methods that can have their
-     *    return values set. Used for prototyping.
+     *    @deprecated
 	 *    @package SimpleTest
 	 *    @subpackage MockObjects
      */
@@ -474,7 +474,7 @@
          *    @access protected
          */
         function _dieOnNoMethod($method, $task) {
-            if ($this->_is_strict && !method_exists($this, $method)) {
+            if ($this->_is_strict && ! method_exists($this, $method)) {
                 trigger_error(
                         "Cannot $task as no ${method}() in class " . get_class($this),
                         E_USER_ERROR);
@@ -918,65 +918,117 @@
     
     /**
      *    Static methods only service class for code generation of
-     *    server stubs.
+     *    mock objects.
 	 *    @package SimpleTest
 	 *    @subpackage MockObjects
      */
-    class Stub {
+    class Mock {
         
         /**
-         *    Factory for server stub classes.
+         *    Factory for mock object classes.
+         *    @access public
          */
-        function Stub() {
-            trigger_error('Stub factory methods are class only.');
+        function Mock() {
+            trigger_error('Mock factory methods are class only.');
         }
         
         /**
-         *    Clones a class' interface and creates a stub version
-         *    that can have return values set.
-         *    @param string $class        Class to clone.
-         *    @param string $stub_class   New class name. Default is
-         *                                the old name with "Stub"
-         *                                prepended.
-         *    @param array $methods       Additional methods to add beyond
-         *                                those in the cloned class. Use this
-         *                                to emulate the dynamic addition of
-         *                                methods in the cloned class or when
-         *                                the class hasn't been written yet.
+         *    Clones a class' interface and creates a mock version
+         *    that can have return values and expectations set.
+         *    @param string $class         Class to clone.
+         *    @param string $mock_class    New class name. Default is
+         *                                 the old name with "Mock"
+         *                                 prepended.
+         *    @param array $methods        Additional methods to add beyond
+         *                                 those in th cloned class. Use this
+         *                                 to emulate the dynamic addition of
+         *                                 methods in the cloned class or when
+         *                                 the class hasn't been written yet.
          *    @static
          *    @access public
          */
-        function generate($class, $stub_class = false, $methods = false) {
-            if (! class_exists($class)) {
+        function generate($class, $mock_class = false, $methods = false) {
+            if (! SimpleReflection::classOrInterfaceExists($class)) {
                 return false;
             }
-            if (! $stub_class) {
-                $stub_class = "Stub" . $class;
+            if (! $mock_class) {
+                $mock_class = "Mock" . $class;
             }
-            if (class_exists($stub_class)) {
+            if (SimpleReflection::classOrInterfaceExistsSansAutoload($mock_class)) {
                 return false;
             }
-            return eval(Stub::_createClassCode(
+            return eval(Mock::_createClassCode(
                     $class,
-                    $stub_class,
+                    $mock_class,
                     $methods ? $methods : array()) . " return true;");
         }
         
         /**
-         *    The new server stub class code in string form.
+         *    Generates a version of a class with selected
+         *    methods mocked only. Inherits the old class
+         *    and chains the mock methods of an aggregated
+         *    mock object.
+         *    @param string $class            Class to clone.
+         *    @param string $mock_class       New class name.
+         *    @param array $methods           Methods to be overridden
+         *                                    with mock versions.
+         *    @static
+         *    @access public
+         */
+        function generatePartial($class, $mock_class, $methods) {
+            if (! SimpleReflection::classOrInterfaceExists($class)) {
+                return false;
+            }
+            if (SimpleReflection::classOrInterfaceExistsSansAutoload($mock_class)) {
+                trigger_error("Partial mock class [$mock_class] already exists");
+                return false;
+            }
+            return eval(Mock::_extendClassCode($class, $mock_class, $methods));
+        }
+
+        /**
+         *    The new mock class code as a string.
          *    @param string $class           Class to clone.
          *    @param string $mock_class      New class name.
          *    @param array $methods          Additional methods.
+         *    @return string                 Code for new mock class.
          *    @static
          *    @access private
          */
-        function _createClassCode($class, $stub_class, $methods) {
-            $stub_base = SimpleTest::getStubBaseClass();
-            $code = "class $stub_class extends $stub_base {\n";
-            $code .= "    function $stub_class(\$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->$stub_base(\$wildcard);\n";
+        function _createClassCode($class, $mock_class, $methods) {
+            $mock_base = SimpleTest::getMockBaseClass();
+            $code = "class $mock_class extends $mock_base {\n";
+            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
+            $code .= "        \$this->$mock_base(\$wildcard);\n";
             $code .= "    }\n";
-            $code .= Stub::_createHandlerCode($class, $stub_base, $methods);
+            $code .= Mock::_createHandlerCode($class, $mock_base, $methods);
+            $code .= "}\n";
+            return $code;
+        }
+
+        /**
+         *    The extension class code as a string. The class
+         *    composites a mock object and chains mocked methods
+         *    to it.
+         *    @param string $class         Class to extend.
+         *    @param string $mock_class    New class name.
+         *    @param array  $methods       Mocked methods.
+         *    @return string               Code for a new class.
+         *    @static
+         *    @access private
+         */
+        function _extendClassCode($class, $mock_class, $methods) {
+            $mock_base = SimpleTest::getMockBaseClass();
+            $code  = "class $mock_class extends $class {\n";
+            $code .= "    var \$_mock;\n";
+            $code .= Mock::_addMethodList($methods);
+            $code .= "\n";
+            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
+            $code .= "        \$this->_mock = &new $mock_base(\$wildcard, false);\n";
+            $code .= "    }\n";
+            $code .= Mock::_chainMockReturns();
+            $code .= Mock::_chainMockExpectations();
+            $code .= Mock::_overrideMethods($methods);
             $code .= "}\n";
             return $code;
         }
@@ -987,7 +1039,7 @@
          *    with the method name and the arguments in an
          *    array.
          *    @param string $class     Class to clone.
-         *    @param string $base      Base mock/stub class with methods that
+         *    @param string $base      Base mock class with methods that
          *                             cannot be cloned. Otherwise you
          *                             would be stubbing the accessors used
          *                             to set the stubs.
@@ -996,16 +1048,16 @@
          *    @access private
          */
         function _createHandlerCode($class, $base, $methods) {
-            $code = "";
-            $methods = array_merge($methods, get_class_methods($class));
+            $code = '';
+            $methods = array_merge($methods, SimpleReflection::getMethods($class));
             foreach ($methods as $method) {
-                if (Stub::_isConstructor($method)) {
+                if (Mock::_isConstructor($method)) {
                     continue;
                 }
-                if (in_array($method, get_class_methods($base))) {
+                if (in_array($method, SimpleReflection::getMethods($base))) {
                     continue;
                 }
-                $code .= Stub::_createFunctionDeclaration($method);
+                $code .= Mock::_createFunctionDeclaration($method);
                 $code .= "        \$args = func_get_args();\n";
                 $code .= "        \$result = &\$this->_invoke(\"$method\", \$args);\n";
                 $code .= "        return \$result;\n";
@@ -1023,7 +1075,7 @@
          *    @static
          */
         function _createFunctionDeclaration($method) {
-            $arguments = Stub::_determineArguments($method);
+            $arguments = Mock::_determineArguments($method);
             return sprintf("    function &%s(%s) {\n", $method, $arguments);
         }
         
@@ -1037,7 +1089,7 @@
          */
         function _determineArguments($method) {
             $code = '';
-            if (Stub::_isSpecial($method)) {
+            if (Mock::_isSpecial($method)) {
                 $args = array(
                     '__call' => '$method, $value',
                     '__get' => '$key',
@@ -1072,125 +1124,6 @@
             return in_array(
                     strtolower($method),
                     array('__get', '__set', '__call'));
-        }
-    }
-    
-    /**
-     *    Static methods only service class for code generation of
-     *    mock objects.
-	 *    @package SimpleTest
-	 *    @subpackage MockObjects
-     */
-    class Mock {
-        
-        /**
-         *    Factory for mock object classes.
-         *    @access public
-         */
-        function Mock() {
-            trigger_error('Mock factory methods are class only.');
-        }
-        
-        /**
-         *    Clones a class' interface and creates a mock version
-         *    that can have return values and expectations set.
-         *    @param string $class         Class to clone.
-         *    @param string $mock_class    New class name. Default is
-         *                                 the old name with "Mock"
-         *                                 prepended.
-         *    @param array $methods        Additional methods to add beyond
-         *                                 those in th cloned class. Use this
-         *                                 to emulate the dynamic addition of
-         *                                 methods in the cloned class or when
-         *                                 the class hasn't been written yet.
-         *    @static
-         *    @access public
-         */
-        function generate($class, $mock_class = false, $methods = false) {
-            if (! class_exists($class)) {
-                return false;
-            }
-            if (! $mock_class) {
-                $mock_class = "Mock" . $class;
-            }
-            if (SimpleTestCompatibility::classExistsSansAutoload($mock_class)) {
-                return false;
-            }
-            return eval(Mock::_createClassCode(
-                    $class,
-                    $mock_class,
-                    $methods ? $methods : array()) . " return true;");
-        }
-        
-        /**
-         *    Generates a version of a class with selected
-         *    methods mocked only. Inherits the old class
-         *    and chains the mock methods of an aggregated
-         *    mock object.
-         *    @param string $class            Class to clone.
-         *    @param string $mock_class       New class name.
-         *    @param array $methods           Methods to be overridden
-         *                                    with mock versions.
-         *    @static
-         *    @access public
-         */
-        function generatePartial($class, $mock_class, $methods) {
-            if (! class_exists($class)) {
-                return false;
-            }
-            if (class_exists($mock_class)) {
-                trigger_error("Partial mock class [$mock_class] already exists");
-                return false;
-            }
-            return eval(Mock::_extendClassCode($class, $mock_class, $methods));
-        }
-
-        /**
-         *    The new mock class code as a string.
-         *    @param string $class           Class to clone.
-         *    @param string $mock_class      New class name.
-         *    @param array $methods          Additional methods.
-         *    @return string                 Code for new mock class.
-         *    @static
-         *    @access private
-         */
-        function _createClassCode($class, $mock_class, $methods) {
-            $mock_base = SimpleTest::getMockBaseClass();
-            $code = "class $mock_class extends $mock_base {\n";
-            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->$mock_base(\$wildcard);\n";
-            $code .= "    }\n";
-            $code .= Stub::_createHandlerCode($class, $mock_base, $methods);
-            $code .= "}\n";
-            return $code;
-        }
-
-        /**
-         *    The extension class code as a string. The class
-         *    composites a mock object and chains mocked methods
-         *    to it.
-         *    @param string $class         Class to extend.
-         *    @param string $mock_class    New class name.
-         *    @param array  $methods       Mocked methods.
-         *    @return string               Code for a new class.
-         *    @static
-         *    @access private
-         */
-        function _extendClassCode($class, $mock_class, $methods) {
-            $mock_base = SimpleTest::getMockBaseClass();
-            $code  = "class $mock_class extends $class {\n";
-            $code .= "    var \$_mock;\n";
-            $code .= Mock::_addMethodList($methods);
-            $code .= "\n";
-            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->_mock = &new $mock_base(\$wildcard, false);\n";
-            $code .= "    }\n";
-            $code .= Mock::_chainMockReturns();
-            $code .= Mock::_chainMockExpectations();
-            $code .= Mock::_overrideMethods($methods);
-            $code .= SimpleTest::getPartialMockCode();
-            $code .= "}\n";
-            return $code;
         }
         
         /**
@@ -1326,5 +1259,11 @@
             }
             return SimpleDumper::getFormattedAssertionLine($stack, $format, 'expect');
         }
+    }
+    
+    /**
+     *    @deprecated
+     */
+    class Stub extends Mock {
     }
 ?>

@@ -51,32 +51,6 @@
         
         /**
          *    The base class name is settable here. This is the
-         *    class that a new stub will inherited from.
-         *    To modify the generated stubs simply extend the
-         *    SimpleStub class and set it's name
-         *    with this method before any stubs are generated.
-         *    @param string $stub_base     Server stub class to use.
-         *    @static
-         *    @access public
-         */
-        function setStubBaseClass($stub_base) {
-            $registry = &SimpleTest::_getRegistry();
-            $registry['StubBaseClass'] = $stub_base;
-        }
-        
-        /**
-         *    Accessor for the currently set stub base class.
-         *    @return string        Class name to inherit from.
-         *    @static
-         *    @access public
-         */
-        function getStubBaseClass() {
-            $registry = &SimpleTest::_getRegistry();
-            return $registry['StubBaseClass'];
-        }
-        
-        /**
-         *    The base class name is settable here. This is the
          *    class that a new mock will inherited from.
          *    To modify the generated mocks simply extend the
          *    SimpleMock class and set it's name
@@ -91,30 +65,11 @@
         }
         
         /**
-         *    Accessor for the currently set mock base class.
-         *    @return string           Class name to inherit from.
-         *    @static
-         *    @access public
+         *    @deprecated
          */
         function getMockBaseClass() {
             $registry = &SimpleTest::_getRegistry();
             return $registry['MockBaseClass'];
-        }
-        
-        /**
-         *    @deprecated
-         */
-        function addPartialMockCode($code = '') {
-            $registry = &SimpleTest::_getRegistry();
-            $registry['AdditionalPartialMockCode'] = $code;
-        }
-        
-        /**
-         *    @deprecated
-         */
-        function getPartialMockCode() {
-            $registry = &SimpleTest::_getRegistry();
-            return $registry['AdditionalPartialMockCode'];
         }
         
         /**
@@ -213,7 +168,6 @@
                     'StubBaseClass' => 'SimpleStub',
                     'MockBaseClass' => 'SimpleMock',
                     'IgnoreList' => array(),
-                    'AdditionalPartialMockCode' => '',
                     'DefaultProxy' => false,
                     'DefaultProxyUsername' => false,
                     'DefaultProxyPassword' => false);
@@ -249,20 +203,6 @@
         /**
          *    @deprecated
          */
-        function setStubBaseClass($stub_base) {
-            return Simpletest::setStubBaseClass($stub_base);
-        }
-        
-        /**
-         *    @deprecated
-         */
-        function getStubBaseClass() {
-            return Simpletest::getStubBaseClass();
-        }
-        
-        /**
-         *    @deprecated
-         */
         function setMockBaseClass($mock_base) {
             return Simpletest::setMockBaseClass($mock_base);
         }
@@ -272,20 +212,6 @@
          */
         function getMockBaseClass() {
             return Simpletest::getMockBaseClass();
-        }
-        
-        /**
-         *    @deprecated
-         */
-        function addPartialMockCode($code = '') {
-            return Simpletest::addPartialMockCode($code);
-        }
-        
-        /**
-         *    @deprecated
-         */
-        function getPartialMockCode() {
-            return Simpletest::getPartialMockCode();
         }
         
         /**
