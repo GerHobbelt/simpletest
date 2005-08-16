@@ -156,18 +156,18 @@
         }
     }
     
-    Stub::generate("Dummy");
-    Stub::generate("Dummy", "AnotherStubDummy");
-    Stub::generate("Dummy", "StubDummyWithExtraMethods", array("extraMethod"));
+    Stub::generate('Dummy', 'StubDummy');
+    Stub::generate('Dummy', 'AnotherStubDummy');
+    Stub::generate('Dummy', 'StubDummyWithExtraMethods', array('extraMethod'));
     
     class SpecialSimpleStub extends SimpleStub {
         function SpecialSimpleStub($wildcard) {
             $this->SimpleStub($wildcard);
         }
     }
-    SimpleTest::setStubBaseClass("SpecialSimpleStub");
+    SimpleTest::setMockBaseClass("SpecialSimpleStub");
     Stub::generate("Dummy", "SpecialStubDummy");
-    SimpleTest::setStubBaseClass("SimpleStub");
+    SimpleTest::setMockBaseClass("SimpleMock");
     
     class TestOfStubGeneration extends UnitTestCase {
         
@@ -217,20 +217,6 @@
             $this->assertReference($stub->aMethod(1, 2, 3), $object);
         }
         
-        function testWildcardReturn() {
-            $stub = &new StubDummy("wild");
-            $stub->setReturnValue("aMethod", "aaa", array(1, "wild", 3));
-            $this->assertIdentical($stub->aMethod(1, "something", 3), "aaa");
-            $this->assertIdentical($stub->aMethod(1, "anything", 3), "aaa");
-        }
-        
-        function testAllWildcardReturn() {
-            $stub = &new StubDummy("wild");
-            $stub->setReturnValue("aMethod", "aaa");
-            $this->assertIdentical($stub->aMethod(1, 2, 3), "aaa");
-            $this->assertIdentical($stub->aMethod(), "aaa");
-        }
-        
         function testCallCount() {
             $stub = &new StubDummy();
             $this->assertEqual($stub->getCallCount("aMethod"), 0);
@@ -273,12 +259,12 @@
         }
         
         function testComplicatedReturnSequence() {
-            $stub = &new StubDummy("wild");
+            $stub = &new StubDummy();
             $object = new Dummy();
             $stub->setReturnValueAt(1, "aMethod", "aaa", array("a"));
             $stub->setReturnValueAt(1, "aMethod", "bbb");
-            $stub->setReturnReferenceAt(2, "aMethod", $object, array("wild", 2));
-            $stub->setReturnValueAt(2, "aMethod", "value", array("wild", 3));
+            $stub->setReturnReferenceAt(2, "aMethod", $object, array('*', 2));
+            $stub->setReturnValueAt(2, "aMethod", "value", array('*', 3));
             $stub->setReturnValue("aMethod", 3, array(3));
             $this->assertNull($stub->aMethod());
             $this->assertEqual($stub->aMethod("a"), "aaa");
@@ -614,9 +600,7 @@
         }
     }
     
-    SimpleTest::addPartialMockCode('function sayHello() { return "Hello"; }');
     Mock::generatePartial("Dummy", "TestDummy", array("anotherMethod"));
-    SimpleTest::addPartialMockCode();
     
     class TestOfPartialMocks extends UnitTestCase {
         
@@ -650,11 +634,6 @@
             $mock->expectArgumentsAt(1, "anotherMethod", array(66));
             $mock->anotherMethod(77);
             $mock->anotherMethod(66);
-        }
-        
-        function testAdditionalPartialMockCode() {
-            $dummy = &new TestDummy();
-            $this->assertEqual($dummy->sayHello(), 'Hello');
         }
         
         function testSettingExpectationOnMissingMethodThrowsError() {

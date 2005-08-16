@@ -11,15 +11,15 @@ Reporter
 
 Mock objects
 ------------
-Allow mocking of interfaces (5).
+Allow mocking of interfaces (5/1).
 Carry interfaces to pass type hints (3).
 Add expectSequence() method (5).
 Change expectOnce(), etc to act by signature (3).
 Remove $this passing in mocks (5/4) - done.
 Remove the need for tally() call (2/3) - done.
-Add gives() method with PHP5 reference rules (1).
-Change setReturn*() to gives*() and deprecate (1).
 Fix autoload glitch (1/1) - done.
+Deprecate SimpleStub (1).
+Deprecate Stub (1/1) - done.
 
 Parser
 ------

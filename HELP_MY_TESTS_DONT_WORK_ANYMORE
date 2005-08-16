@@ -5,6 +5,34 @@ written with earlier versions will fail with the newest ones. The most
 dramatic changes are in the alpha releases. Here is a list of possible
 problems and their fixes...
 
+No methods setStubBaseClass()/getStubBaseClass()
+------------------------------------------------
+As mocks are now used instead of stubs, these methods
+stopped working and are now removed as of the 1.0.1beta
+release. The mock objects may be freely used instead.
+
+No method addPartialMockCode()
+------------------------------
+The ability to insert arbitrary partial mock code
+has been removed. This was a low value feature
+causing needless complications.It was removed
+in the 1.0.1beta release.
+
+No method setMockBaseClass()
+----------------------------
+The ability to change the mock base class has been
+scheduled for removal and is deprecated since the
+1.0.1beta version. This was a rarely used feature
+except as a workaround for PHP5 limitations. As
+these limitations are being resolved it's hoped
+that the bundled mocks can be used directly.
+
+No class Stub
+-------------
+Server stubs are deprecated from 1.0.1 as the mocks now
+have exactly the same interface. Just use mock objects
+instead.
+
 No class SimpleTestOptions
 --------------------------
 This was replced by the shorter SimpleTest in 1.0.1beta1
