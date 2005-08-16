@@ -160,9 +160,9 @@
     Stub::generate('Dummy', 'AnotherStubDummy');
     Stub::generate('Dummy', 'StubDummyWithExtraMethods', array('extraMethod'));
     
-    class SpecialSimpleStub extends SimpleStub {
+    class SpecialSimpleStub extends SimpleMock {
         function SpecialSimpleStub($wildcard) {
-            $this->SimpleStub($wildcard);
+            $this->SimpleMock(null, $wildcard);
         }
     }
     SimpleTest::setMockBaseClass("SpecialSimpleStub");

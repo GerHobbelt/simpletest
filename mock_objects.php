@@ -406,29 +406,85 @@
     }
     
     /**
-     *    @deprecated
+     *    An empty collection of methods that can have their
+     *    return values set and expectations made of the
+     *    calls upon them. The mock will assert the
+     *    expectations against it's attached test case in
+     *    addition to the server stub behaviour.
 	 *    @package SimpleTest
 	 *    @subpackage MockObjects
      */
-    class SimpleStub {
+    class SimpleMock {
         var $_wildcard;
         var $_is_strict;
         var $_returns;
         var $_return_sequence;
         var $_call_counts;
+        var $_expected_counts;
+        var $_max_counts;
+        var $_expected_args;
+        var $_expected_args_at;
         
         /**
-         *    Sets up the wildcard and everything else empty.
-         *    @param mixed $wildcard      Parameter matching wildcard.
-         *    @param boolean $is_strict   Enables method name checks.
+         *    Creates an empty return list and expectation list.
+         *    All call counts are set to zero.
+         *    @param SimpleTestCase $test    Test case to test expectations in.
+         *    @param mixed $wildcard         Parameter matching wildcard.
+         *    @param boolean $is_strict      Enables method name checks on
+         *                                   expectations.
          *    @access public
          */
-        function SimpleStub($wildcard, $is_strict = true) {
+        function SimpleMock($wildcard, $is_strict = true) {
             $this->_wildcard = $wildcard;
             $this->_is_strict = $is_strict;
             $this->_returns = array();
             $this->_return_sequence = array();
             $this->_call_counts = array();
+            $test = &$this->_getCurrentTestCase();
+            $test->tell($this);
+            $this->_expected_counts = array();
+            $this->_max_counts = array();
+            $this->_expected_args = array();
+            $this->_expected_args_at = array();
+        }
+        
+        /**
+         *    Finds currently running test.
+         *    @return SimpeTestCase    Current test case.
+         *    @access protected
+         */
+        function &_getCurrentTestCase() {
+            return SimpleTest::getCurrent();
+        }
+        
+        /**
+         *    Die if bad arguments array is passed
+         *    @param mixed $args     The arguments value to be checked.
+         *    @param string $task    Description of task attempt.
+         *    @return boolean        Valid arguments
+         *    @access private
+         */
+        function _checkArgumentsIsArray($args, $task) {
+        	if (! is_array($args)) {
+        		trigger_error(
+        			"Cannot $task as \$args parameter is not an array",
+        			E_USER_ERROR);
+        	}
+        }
+        
+        /**
+         *    Triggers a PHP error if the method is not part
+         *    of this object.
+         *    @param string $method        Name of method.
+         *    @param string $task          Description of task attempt.
+         *    @access protected
+         */
+        function _dieOnNoMethod($method, $task) {
+            if ($this->_is_strict && ! method_exists($this, $method)) {
+                trigger_error(
+                        "Cannot $task as no ${method}() in class " . get_class($this),
+                        E_USER_ERROR);
+            }
         }
         
         /**
@@ -449,36 +505,6 @@
                 }
             }
             return $args;
-        }
-        
-        /**
-         *    Returns the expected value for the method name.
-         *    @param string $method       Name of method to simulate.
-         *    @param array $args          Arguments as an array.
-         *    @return mixed               Stored return.
-         *    @access private
-         */
-        function &_invoke($method, $args) {
-            $method = strtolower($method);
-            $step = $this->getCallCount($method);
-            $this->_addCall($method, $args);
-            $result = &$this->_getReturn($method, $args, $step);
-            return $result;
-        }
-        
-        /**
-         *    Triggers a PHP error if the method is not part
-         *    of this object.
-         *    @param string $method        Name of method.
-         *    @param string $task          Description of task attempt.
-         *    @access protected
-         */
-        function _dieOnNoMethod($method, $task) {
-            if ($this->_is_strict && ! method_exists($this, $method)) {
-                trigger_error(
-                        "Cannot $task as no ${method}() in class " . get_class($this),
-                        E_USER_ERROR);
-            }
         }
         
         /**
@@ -599,91 +625,6 @@
                 $this->_return_sequence[$method][$timing] = new CallMap();
             }
             $this->_return_sequence[$method][$timing]->addReference($args, $reference);
-        }
-        
-        /**
-         *    Finds the return value matching the incoming
-         *    arguments. If there is no matching value found
-         *    then an error is triggered.
-         *    @param string $method      Method name.
-         *    @param array $args         Calling arguments.
-         *    @param integer $step       Current position in the
-         *                               call history.
-         *    @return mixed              Stored return.
-         *    @access protected
-         */
-        function &_getReturn($method, $args, $step) {
-            if (isset($this->_return_sequence[$method][$step])) {
-                if ($this->_return_sequence[$method][$step]->isMatch($args)) {
-                    $result = &$this->_return_sequence[$method][$step]->findFirstMatch($args);
-                    return $result;
-                }
-            }
-            if (isset($this->_returns[$method])) {
-                $result = &$this->_returns[$method]->findFirstMatch($args);
-                return $result;
-            }
-            $null = null;
-            return $null;
-        }
-    }
-    
-    /**
-     *    An empty collection of methods that can have their
-     *    return values set and expectations made of the
-     *    calls upon them. The mock will assert the
-     *    expectations against it's attached test case in
-     *    addition to the server stub behaviour.
-	 *    @package SimpleTest
-	 *    @subpackage MockObjects
-     */
-    class SimpleMock extends SimpleStub {
-        var $_expected_counts;
-        var $_max_counts;
-        var $_expected_args;
-        var $_expected_args_at;
-        
-        /**
-         *    Creates an empty return list and expectation list.
-         *    All call counts are set to zero.
-         *    @param SimpleTestCase $test    Test case to test expectations in.
-         *    @param mixed $wildcard         Parameter matching wildcard.
-         *    @param boolean $is_strict      Enables method name checks on
-         *                                   expectations.
-         *    @access public
-         */
-        function SimpleMock($wildcard, $is_strict = true) {
-            $this->SimpleStub($wildcard, $is_strict);
-            $test = &$this->_getCurrentTestCase();
-            $test->tell($this);
-            $this->_expected_counts = array();
-            $this->_max_counts = array();
-            $this->_expected_args = array();
-            $this->_expected_args_at = array();
-        }
-        
-        /**
-         *    Finds currently running test.
-         *    @return SimpeTestCase    Current test case.
-         *    @access protected
-         */
-        function &_getCurrentTestCase() {
-            return SimpleTest::getCurrent();
-        }
-        
-        /**
-         *    Die if bad arguments array is passed
-         *    @param mixed $args     The arguments value to be checked.
-         *    @param string $task    Description of task attempt.
-         *    @return boolean        Valid arguments
-         *    @access private
-         */
-        function _checkArgumentsIsArray($args, $task) {
-        	if (! is_array($args)) {
-        		trigger_error(
-        			"Cannot $task as \$args parameter is not an array",
-        			E_USER_ERROR);
-        	}
         }
         
         /**
@@ -870,6 +811,31 @@
             $this->_checkExpectations($method, $args, $step);
             $result = &$this->_getReturn($method, $args, $step);
             return $result;
+        }
+        /**
+         *    Finds the return value matching the incoming
+         *    arguments. If there is no matching value found
+         *    then an error is triggered.
+         *    @param string $method      Method name.
+         *    @param array $args         Calling arguments.
+         *    @param integer $step       Current position in the
+         *                               call history.
+         *    @return mixed              Stored return.
+         *    @access protected
+         */
+        function &_getReturn($method, $args, $step) {
+            if (isset($this->_return_sequence[$method][$step])) {
+                if ($this->_return_sequence[$method][$step]->isMatch($args)) {
+                    $result = &$this->_return_sequence[$method][$step]->findFirstMatch($args);
+                    return $result;
+                }
+            }
+            if (isset($this->_returns[$method])) {
+                $result = &$this->_returns[$method]->findFirstMatch($args);
+                return $result;
+            }
+            $null = null;
+            return $null;
         }
         
         /**
