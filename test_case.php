@@ -48,7 +48,6 @@
             if ($label) {
                 $this->_label = $label;
             }
-            SimpleTest::setCurrent($this);
         }
 
         /**
@@ -91,9 +90,11 @@
          *    @access public
          */
         function run(&$reporter) {
+            SimpleTest::setCurrent($this);
             $reporter->paintCaseStart($this->getLabel());
             $this->_runner = &$this->_createRunner($reporter);
             $this->_runner->run();
+            $this->_runner = false;
             $reporter->paintCaseEnd($this->getLabel());
             return $reporter->getStatus();
         }
