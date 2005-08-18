@@ -5,6 +5,11 @@ written with earlier versions will fail with the newest ones. The most
 dramatic changes are in the alpha releases. Here is a list of possible
 problems and their fixes...
 
+Wildcard override has no effect in mocks
+----------------------------------------
+As of 1.0.1beta this is now set with setWildcard() instead
+of in the constructor.
+
 No methods setStubBaseClass()/getStubBaseClass()
 ------------------------------------------------
 As mocks are now used instead of stubs, these methods
