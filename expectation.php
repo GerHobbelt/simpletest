@@ -57,7 +57,7 @@
         
         /**
          *    Overlays the generated message onto the stored user
-         *    message.
+         *    message. An additional message can be interjected.
          *    @param mixed $compare      Comparison value.
          *    @return string             Description of success
          *                               or failure.
