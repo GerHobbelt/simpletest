@@ -161,13 +161,13 @@
     Stub::generate('Dummy', 'StubDummyWithExtraMethods', array('extraMethod'));
     
     class SpecialSimpleStub extends SimpleMock {
-        function SpecialSimpleStub($wildcard) {
-            $this->SimpleMock(null, $wildcard);
+        function SpecialSimpleStub() {
+            $this->SimpleMock();
         }
     }
-    SimpleTest::setMockBaseClass("SpecialSimpleStub");
-    Stub::generate("Dummy", "SpecialStubDummy");
-    SimpleTest::setMockBaseClass("SimpleMock");
+    SimpleTest::setMockBaseClass('SpecialSimpleStub');
+    Stub::generate('Dummy', 'SpecialStubDummy');
+    SimpleTest::setMockBaseClass('SimpleMock');
     
     class TestOfStubGeneration extends UnitTestCase {
         
@@ -303,15 +303,11 @@
         }
     }
     
-    Mock::generate("Dummy");
-    Mock::generate("Dummy", "AnotherMockDummy");
-    Mock::generate("Dummy", "MockDummyWithExtraMethods", array("extraMethod"));
+    Mock::generate('Dummy');
+    Mock::generate('Dummy', 'AnotherMockDummy');
+    Mock::generate('Dummy', 'MockDummyWithExtraMethods', array('extraMethod'));
     
-    class SpecialSimpleMock extends SimpleMock {
-        function SpecialSimpleMock($wildcard) {
-            $this->SimpleMock($wildcard);
-        }
-    }
+    class SpecialSimpleMock extends SimpleMock { }
     
     SimpleTest::setMockBaseClass("SpecialSimpleMock");
     Mock::generate("Dummy", "SpecialMockDummy");
@@ -359,10 +355,11 @@
         }
         
         function testWildcardReturn() {
-            $mock = &new MockDummy(null, "wild");
-            $mock->setReturnValue("aMethod", "aaa", array(1, "wild", 3));
-            $this->assertIdentical($mock->aMethod(1, "something", 3), "aaa");
-            $this->assertIdentical($mock->aMethod(1, "anything", 3), "aaa");
+            $mock = &new MockDummy();
+            $mock->setWildcard('wild');
+            $mock->setReturnValue('aMethod', 'a', array(1, 'wild', 3));
+            $this->assertIdentical($mock->aMethod(1, 'something', 3), 'a');
+            $this->assertIdentical($mock->aMethod(1, 'anything', 3), 'a');
         }
         
         function testPatternMatchReturn() {
@@ -396,15 +393,12 @@
     }
     
     class TestOfSpecialMethods extends UnitTestCase {
-        
         function testReturnFromSpecialMethod() {
             $mock = &new MockDummy();
             $mock->setReturnValue('__get', '1st Return', array('first'));
             $mock->setReturnValue('__get', '2nd Return', array('second'));
-            
             $this->assertEqual($mock->__get('first'), '1st Return');
             $this->assertEqual($mock->__get('second'), '2nd Return');
-            
             if (phpversion() >= 5) {
                 $this->assertEqual($mock->first, $mock->__get('first'));
                 $this->assertEqual($mock->second, $mock->__get('second'));
@@ -417,7 +411,6 @@
         function testZeroCallCount() {
             $mock = &new MockDummy();
             $mock->expectCallCount("aMethod", 0);
-            $mock->tally();
         }
         
         function testExpectedCallCount() {
@@ -425,7 +418,6 @@
             $mock->expectCallCount("aMethod", 2);
             $mock->aMethod();
             $mock->aMethod();
-            $mock->tally();
         }
     }
     

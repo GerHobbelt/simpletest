@@ -415,8 +415,8 @@
 	 *    @subpackage MockObjects
      */
     class SimpleMock {
-        var $_wildcard;
-        var $_is_strict;
+        var $_wildcard = MOCK_ANYTHING;
+        var $_is_strict = true;
         var $_returns;
         var $_return_sequence;
         var $_call_counts;
@@ -432,11 +432,8 @@
          *    @param mixed $wildcard         Parameter matching wildcard.
          *    @param boolean $is_strict      Enables method name checks on
          *                                   expectations.
-         *    @access public
          */
-        function SimpleMock($wildcard, $is_strict = true) {
-            $this->_wildcard = $wildcard;
-            $this->_is_strict = $is_strict;
+        function SimpleMock() {
             $this->_returns = array();
             $this->_return_sequence = array();
             $this->_call_counts = array();
@@ -446,6 +443,24 @@
             $this->_max_counts = array();
             $this->_expected_args = array();
             $this->_expected_args_at = array();
+        }
+        
+        /**
+         *    Disables a name check when setting expectations.
+         *    This hack is needed for the partial mocks.
+         *    @access public
+         */
+        function disableExpectationNameChecks() {
+            $this->_is_strict = false;
+        }
+        
+        /**
+         *    Changes the default wildcard object.
+         *    @param mixed $wildcard         Parameter matching wildcard.
+         *    @access public
+         */
+        function setWildcard($wildcard) {
+            $this->_wildcard = $wildcard;
         }
         
         /**
@@ -918,7 +933,7 @@
                 return false;
             }
             if (! $mock_class) {
-                $mock_class = "Mock" . $class;
+                $mock_class = "Mock$class";
             }
             if (SimpleReflection::classOrInterfaceExistsSansAutoload($mock_class)) {
                 return false;
@@ -964,8 +979,8 @@
         function _createClassCode($class, $mock_class, $methods) {
             $mock_base = SimpleTest::getMockBaseClass();
             $code = "class $mock_class extends $mock_base {\n";
-            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->$mock_base(\$wildcard);\n";
+            $code .= "    function $mock_class() {\n";
+            $code .= "        \$this->$mock_base();\n";
             $code .= "    }\n";
             $code .= Mock::_createHandlerCode($class, $mock_base, $methods);
             $code .= "}\n";
@@ -989,8 +1004,9 @@
             $code .= "    var \$_mock;\n";
             $code .= Mock::_addMethodList($methods);
             $code .= "\n";
-            $code .= "    function $mock_class(\$test = null, \$wildcard = MOCK_ANYTHING) {\n";
-            $code .= "        \$this->_mock = &new $mock_base(\$wildcard, false);\n";
+            $code .= "    function $mock_class() {\n";
+            $code .= "        \$this->_mock = &new $mock_base();\n";
+            $code .= "        \$this->_mock->disableExpectationNameChecks();\n";
             $code .= "    }\n";
             $code .= Mock::_chainMockReturns();
             $code .= Mock::_chainMockExpectations();
