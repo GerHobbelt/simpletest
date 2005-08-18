@@ -28,8 +28,8 @@
          *    @param mixed $value        Test value to match.
          *    @access public
          */
-        function FieldExpectation($value) {
-            $this->SimpleExpectation();
+        function FieldExpectation($value, $message = '%s') {
+            $this->SimpleExpectation($message);
             if (is_array($value)) {
                 sort($value);
             }
@@ -1079,17 +1079,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertField($label, $expected = true, $message = "%s") {
+        function assertField($label, $expected = true, $message = '%s') {
             $value = $this->_browser->getField($label);
             if ($expected === true) {
                 return $this->assertTrue(
                         isset($value),
                         sprintf($message, "Field [$label] should exist"));
             } else {
+                $label = str_replace('%', '%%', $label);
                 return $this->assert(
-                        new FieldExpectation($expected),
+                        new FieldExpectation($expected, "Field [$label] should match with [%s]"),
                         $value,
-                        sprintf($message, "Field [$label] should match with [%s]"));
+                        $message);
             }
         }
         
@@ -1106,17 +1107,18 @@
          *    @return boolean           True if pass.
          *    @access public
          */
-        function assertFieldByName($name, $expected = true, $message = "%s") {
+        function assertFieldByName($name, $expected = true, $message = '%s') {
             $value = $this->_browser->getFieldByName($name);
             if ($expected === true) {
                 return $this->assertTrue(
                         isset($value),
                         sprintf($message, "Field name [$name] should exist"));
             } else {
+                $name = str_replace('%', '%%', $name);
                 return $this->assert(
-                        new FieldExpectation($expected),
+                        new FieldExpectation($expected, "Field named [$name] should match with [%s]"),
                         $value,
-                        sprintf($message, "Field name [$name] should match with [%s]"));
+                        $message);
             }
         }
          
@@ -1133,7 +1135,7 @@
          *    @return boolean            True if pass.
          *    @access public
          */
-        function assertFieldById($id, $expected = true, $message = "%s") {
+        function assertFieldById($id, $expected = true, $message = '%s') {
             $value = $this->_browser->getFieldById($id);
             if ($expected === true) {
                 return $this->assertTrue(
@@ -1141,9 +1143,9 @@
                         sprintf($message, "Field of ID [$id] should exist"));
             } else {
                 return $this->assert(
-                        new FieldExpectation($expected),
+                        new FieldExpectation($expected, "Field of ID [$id] should match with [%s]"),
                         $value,
-                        sprintf($message, "Field of ID [$id] should match with [%s]"));
+                        $message);
             }
         }
        
