@@ -24,6 +24,7 @@ FILES=(simpletest/errors.php \
           simpletest/frames.php \
           simpletest/page.php \
           simpletest/reflection_php4.php \
+          simpletest/reflection_php5.php \
           simpletest/remote.php \
           simpletest/runner.php \
           simpletest/scorer.php \
@@ -64,6 +65,8 @@ FILES=(simpletest/errors.php \
           simpletest/test/form_test.php \
           simpletest/test/frames_test.php \
           simpletest/test/page_test.php \
+          simpletest/test/reflection_php4_test.php \
+          simpletest/test/reflection_php5_test.php \
           simpletest/test/remote_test.php \
           simpletest/test/mock_objects_test.php \
           simpletest/test/visual_test.php \
