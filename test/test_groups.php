@@ -18,6 +18,11 @@
             $this->addTestFile($test_path . '/expectation_test.php');
             $this->addTestFile($test_path . '/unit_tester_test.php');
             $this->addTestFile($test_path . '/collector_test.php');
+            if (version_compare(phpversion(), '5') >= 0) {
+                $this->addTestFile($test_path . '/reflection_php5_test.php');
+            } else {
+                $this->addTestFile($test_path . '/reflection_php4_test.php');
+            }
             $this->addTestFile($test_path . '/mock_objects_test.php');
             $this->addTestFile($test_path . '/adapter_test.php');
             $this->addTestFile($test_path . '/socket_test.php');

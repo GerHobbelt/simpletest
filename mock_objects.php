@@ -12,7 +12,11 @@
     require_once(dirname(__FILE__) . '/expectation.php');
     require_once(dirname(__FILE__) . '/simpletest.php');
     require_once(dirname(__FILE__) . '/dumper.php');
-    require_once(dirname(__FILE__) . '/reflection_php4.php');
+    if (version_compare(phpversion(), '5') >= 0) {
+        require_once(dirname(__FILE__) . '/reflection_php5.php');
+    } else {
+        require_once(dirname(__FILE__) . '/reflection_php4.php');
+    }
     /**#@-*/
     
     /**

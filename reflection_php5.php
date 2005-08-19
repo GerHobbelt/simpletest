@@ -32,7 +32,7 @@
          *    @static
          */
         function classOrInterfaceExistsSansAutoload($class) {
-            return class_exists($class);
+            return class_exists($class, false);
         }
         
         /**
