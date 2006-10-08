@@ -70,6 +70,9 @@
             if (is_array($first) && is_array($second)) {
                 return SimpleTestCompatibility::_isArrayOfIdenticalTypes($first, $second);
             }
+            if ($first !== $second) {
+                return false;
+            }
             return true;
         }
         
