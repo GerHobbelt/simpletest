@@ -199,6 +199,11 @@
         	if ($name == '__set') {
         		return 'function __set($key, $value)';
         	}
+            if (version_compare(phpversion(), '5.1.0', '>=')) {
+                if ($name == '__isset') {
+                    return 'function __isset($key)';
+                }
+            }
         	if (! is_callable(array($this->_interface, $name))) {
         		return "function $name()";
         	}
