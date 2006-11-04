@@ -214,4 +214,5 @@
             @trigger_error('Ouch!', E_USER_ERROR);
         }
     }
+// TODO: Add stacked error handler test
 ?>
