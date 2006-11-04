@@ -36,25 +36,20 @@
          *    @param string $method    Test method to call.
          */
         function invoke($method) {
-            $context = SimpleTest::getContext();
-            $trap = $context->get('SimpleExceptionTrap');
+            $trap = SimpleTest::getContext()->get('SimpleExceptionTrap');
             $trap->clear();
             try {
                 parent::invoke($method);
             } catch (Exception $exception) {
-                $this->compareException($trap, $exception);
+	            if (! $trap->isExpected($this->getTestCase(), $exception)) {
+	                $this->getTestCase()->exception($exception);
+	            }
 	            $trap->clear();			
             }
 			if ($message = $trap->getOutstanding()) {
 				$this->getTestCase()->fail($message);
 			}
         }
-
-		private function compareException($trap, $exception) {
-            if (! $trap->isExpected($this->getTestCase(), $exception)) {
-                $this->getTestCase()->exception($exception);
-            }
-		}
     }
 
     /**
