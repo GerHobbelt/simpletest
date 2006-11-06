@@ -119,7 +119,6 @@
          *    Paints a PHP error or exception.
          *    @param string $message        Message is ignored.
          *    @access public
-         *    @abstract
          */
         function paintError($message) {
             parent::paintError($message);
@@ -129,6 +128,20 @@
             print implode(" -&gt; ", $breadcrumb);
             print " -&gt; <strong>" . $this->_htmlEntities($message) . "</strong><br />\n";
         }
+		
+		/**
+		 *    Prints the message for skipping tests.
+         *    @param string $message    Text of skip condition.
+         *    @access public
+         */
+		function paintSkip($message) {
+            parent::paintFail($message);
+            print "<span class=\"fail\">Skip</span>: ";
+            $breadcrumb = $this->getTestList();
+            array_shift($breadcrumb);
+            print implode(" -&gt; ", $breadcrumb);
+            print " -&gt; " . $this->_htmlEntities($message) . "<br />\n";
+		}
 
         /**
          *    Paints formatted text such as dumped variables.

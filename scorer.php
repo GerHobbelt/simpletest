@@ -158,6 +158,14 @@
         function paintError($message) {
             $this->_exceptions++;
         }
+		
+		/**
+		 *    Prints the message for skipping tests.
+         *    @param string $message    Text of skip condition.
+         *    @access public
+         */
+		function paintSkip($message) {
+		}
 
         /**
          *    Accessor for the number of passes so far.
@@ -526,6 +534,15 @@
         function paintError($message) {
             $this->_reporter->paintError($message);
         }
+		
+		/**
+		 *    Prints the message for skipping tests.
+         *    @param string $message    Text of skip condition.
+         *    @access public
+         */
+		function paintSkip($message) {
+            $this->_reporter->paintSkip($message);
+		}
 
         /**
          *    Chains to the wrapped reporter.
@@ -736,6 +753,17 @@
                 $this->_reporters[$i]->paintError($message);
             }
         }
+		
+		/**
+		 *    Prints the message for skipping tests.
+         *    @param string $message    Text of skip condition.
+         *    @access public
+         */
+		function paintSkip($message) {
+            for ($i = 0; $i < count($this->_reporters); $i++) {
+                $this->_reporters[$i]->paintSkip($message);
+            }
+		}
 
         /**
          *    Chains to the wrapped reporter.
