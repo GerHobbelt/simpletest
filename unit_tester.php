@@ -358,7 +358,7 @@
         function expectException($expected = false, $message = '%s') {
             $context = &SimpleTest::getContext();
             $queue = &$context->get('SimpleExceptionTrap');
-            $queue->expectException($expected, $message);
+            $queue->expectException($expected, $message . $this->getAssertionLine());
         }
 
         /**
