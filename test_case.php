@@ -41,6 +41,7 @@
         var $_label = false;
         var $_reporter;
         var $_observers;
+		var $_should_skip = false;
 
         /**
          *    Sets up the test with no display.
@@ -64,14 +65,40 @@
         }
 
         /**
-         *    If this method returns true, the test case will not run.
-         *    @return boolean          False to run.
+         *    This is a placeholder for skipping tests. In this
+         *    method you place skipIf() and skipUnless() calls to
+         *    set the skipping state.
          *    @access public
          */
         function skip() {
-            return false;
         }
-
+		
+        /**
+         *    Will issue a message to the reporter and tell the test
+         *    case to skip if the incoming flag is true.
+         *    @param string $should_skip    Condition causing the tests to be skipped.
+         *    @param string $message    	Text of skip condition.
+         *    @access public
+         */
+        function skipIf($should_skip, $message = '%s') {
+			if ($should_skip && ! $this->_should_skip) {
+				$this->_should_skip = true;
+				$message = sprintf($message, 'Skipping [' . get_class($this) . ']');
+				$this->_reporter->paintSkip($message . $this->getAssertionLine());
+			}
+        }
+		
+        /**
+         *    Will issue a message to the reporter and tell the test
+         *    case to skip if the incoming flag is false.
+         *    @param string $shouldnt_skip  Condition causing the tests to be run.
+         *    @param string $message    	Text of skip condition.
+         *    @access public
+         */
+        function skipUnless($shouldnt_skip, $message = false) {
+			$this->skipIf(! $shouldnt_skip, $message);
+        }
+		
         /**
          *    Used to invoke the single tests.
          *    @return SimpleInvoker        Individual test runner.
@@ -93,22 +120,23 @@
          *    @access public
          */
         function run(&$reporter) {
-            if (! $this->skip()) {
-                $context = &SimpleTest::getContext();
-                $context->setTest($this);
-                $this->_reporter = &$reporter;
-                $this->_reporter->paintCaseStart($this->getLabel());
+			$context = &SimpleTest::getContext();
+			$context->setTest($this);
+            $this->_reporter = &$reporter;
+            $reporter->paintCaseStart($this->getLabel());
+			$this->skip();
+            if (! $this->_should_skip) {
                 foreach ($this->getTests() as $method) {
-                    if ($this->_reporter->shouldInvoke($this->getLabel(), $method)) {
+                    if ($reporter->shouldInvoke($this->getLabel(), $method)) {
                         $invoker = &$this->_reporter->createInvoker($this->createInvoker());
                         $invoker->before($method);
                         $invoker->invoke($method);
                         $invoker->after($method);
                     }
                 }
-                $this->_reporter->paintCaseEnd($this->getLabel());
-                unset($this->_reporter);
             }
+            $reporter->paintCaseEnd($this->getLabel());
+            unset($this->_reporter);
             return $reporter->getStatus();
         }
 
@@ -327,7 +355,7 @@
          *    @access public
          */
         function getAssertionLine() {
-            $trace = new SimpleStackTrace(array('assert', 'expect', 'pass', 'fail'));
+            $trace = new SimpleStackTrace(array('assert', 'expect', 'pass', 'fail', 'skip'));
             return $trace->traceMethod();
         }
 
