@@ -193,15 +193,15 @@
          *    @access public
          */
         function getSignature($name) {
-        	if ($name == '__get') {
-        		return 'function __get($key)';
-        	}
         	if ($name == '__set') {
         		return 'function __set($key, $value)';
         	}
+        	if ($name == '__call') {
+        		return 'function __call($method, $arguments)';
+        	}
             if (version_compare(phpversion(), '5.1.0', '>=')) {
-                if ($name == '__isset' || $name == '__unset') {
-                return "function {$name}(\$key)";
+                if (in_array($name, array('__get', '__isset', $name == '__unset'))) {
+                    return "function {$name}(\$key)";
                 }
             }
         	if (! is_callable(array($this->_interface, $name))) {

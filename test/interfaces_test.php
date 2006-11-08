@@ -94,15 +94,4 @@
             $mock->extraMethod();
         }
     }
-
-    class ClassWithSpecialMethods {
-    }
-    Mock::generate('ClassWithSpecialMethods');
-
-    class TestOfSpecialMethodsInMocks extends UnitTestCase {
-        
-        function testCanMockTheThingAtAll() {
-            $mock = new MockClassWithSpecialMethods();
-        }
-    }
 ?>

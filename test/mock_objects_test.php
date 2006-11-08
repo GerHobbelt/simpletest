@@ -149,10 +149,6 @@
         function anotherMethod() {
             return true;
         }
-
-        function __get($key) {
-            return $key;
-        }
     }
 
     Stub::generate('Dummy', 'StubDummy');
@@ -391,17 +387,65 @@
         }
     }
 
+    class ClassWithSpecialMethods {
+        
+        function __get($name) {
+        }
+        
+        function __set($name, $value) {
+        }
+        
+        function __isset($name) {
+        }
+        
+        function __unset($name) {
+        }
+        
+        function __call($method, $arguments) {
+        }
+    }
+    Mock::generate('ClassWithSpecialMethods');
+
     class TestOfSpecialMethods extends UnitTestCase {
         function skip() {
             $this->skipIf(version_compare(phpversion(), '5', '<='), 'Overloading not tested for PHP 4');
         }
         
-        function testReturnFromSpecialMethod() {
-            $mock = &new MockDummy();
+        function testCanMockTheThingAtAll() {
+            $mock = new MockClassWithSpecialMethods();
+        }
+        
+        function testReturnFromSpecialAccessor() {
+            $mock = &new MockClassWithSpecialMethods();
             $mock->setReturnValue('__get', '1st Return', array('first'));
             $mock->setReturnValue('__get', '2nd Return', array('second'));
             $this->assertEqual($mock->first, '1st Return');
             $this->assertEqual($mock->second, '2nd Return');
+        }
+        
+        function testcanExpectTheSettingOfValue() {
+            $mock = &new MockClassWithSpecialMethods();
+            $mock->expectOnce('__set', array('a', 'A'));
+            $mock->a = 'A';
+        }
+        
+        function testCanSimulateAnOverloadmethod() {
+            $mock = &new MockClassWithSpecialMethods();
+            $mock->expectOnce('__call', array('amOverloaded', array('A')));
+            $mock->setReturnValue('__call', 'aaa');
+            $this->assertIdentical($mock->amOverloaded('A'), 'aaa');
+        }
+        
+        function testCanEmulateIsset() {
+            $mock = &new MockClassWithSpecialMethods();
+            $mock->setReturnValue('__isset', true);
+            $this->assertIdentical(isset($mock->a), true);
+        }
+        
+        function testCanExpectUnset() {
+            $mock = &new MockClassWithSpecialMethods();
+            $mock->expectOnce('__unset', array('a'));
+            unset($mock->a);
         }
     }
 
@@ -428,7 +472,7 @@
         }
     }
 
-    Mock::generate("SimpleTestCase");
+    Mock::generate('SimpleTestCase');
 
     class TestOfMockExpectations extends UnitTestCase {
         var $_test;
@@ -640,11 +684,10 @@
     }
 
     class ConstructorSubClass extends ConstructorSuperClass {
-
     }
 
     class TestOfPHP4StyleSuperClassConstruct extends UnitTestCase {
-        /**
+        /*
          * This addresses issue #1231401.  Without the fix in place, this will
 		 * generate a fatal PHP error.
 		 */
