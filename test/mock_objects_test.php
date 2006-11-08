@@ -392,16 +392,16 @@
     }
 
     class TestOfSpecialMethods extends UnitTestCase {
+        function skip() {
+            $this->skipIf(phpversion() >= 5, 'Overloading not tested for PHP 4');
+        }
+        
         function testReturnFromSpecialMethod() {
             $mock = &new MockDummy();
             $mock->setReturnValue('__get', '1st Return', array('first'));
             $mock->setReturnValue('__get', '2nd Return', array('second'));
-            $this->assertEqual($mock->__get('first'), '1st Return');
-            $this->assertEqual($mock->__get('second'), '2nd Return');
-            if (phpversion() >= 5) {
-                $this->assertEqual($mock->first, $mock->__get('first'));
-                $this->assertEqual($mock->second, $mock->__get('second'));
-            }
+            $this->assertEqual($mock->first, '1st Return');
+            $this->assertEqual($mock->second, '2nd Return');
         }
     }
 

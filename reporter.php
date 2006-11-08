@@ -135,8 +135,8 @@
          *    @access public
          */
 		function paintSkip($message) {
-            parent::paintFail($message);
-            print "<span class=\"fail\">Skip</span>: ";
+            parent::paintSkip($message);
+            print "<span class=\"fail\">Skipped</span>: ";
             $breadcrumb = $this->getTestList();
             array_shift($breadcrumb);
             print implode(" -&gt; ", $breadcrumb);
@@ -240,6 +240,16 @@
             parent::paintError($message);
             print "Exception " . $this->getExceptionCount() . "!\n$message\n";
         }
+		
+		/**
+		 *    Prints the message for skipping tests.
+         *    @param string $message    Text of skip condition.
+         *    @access public
+         */
+		function paintSkip($message) {
+            parent::paintSkip($message);
+            print "Skip: $message\n";
+		}
 
         /**
          *    Paints formatted text such as dumped variables.
