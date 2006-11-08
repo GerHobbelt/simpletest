@@ -20,13 +20,13 @@
             $this->addTestFile($path . '/dumper_test.php');
             $this->addTestFile($path . '/expectation_test.php');
             $this->addTestFile($path . '/unit_tester_test.php');
-            if (version_compare(phpversion(), '5') >= 0) {
+            if (version_compare(phpversion(), '5', '>=')) {
                 $this->addTestFile($path . '/reflection_php5_test.php');
             } else {
                 $this->addTestFile($path . '/reflection_php4_test.php');
             }
             $this->addTestFile($path . '/mock_objects_test.php');
-            if (version_compare(phpversion(), '5') >= 0) {
+            if (version_compare(phpversion(), '5', '>=')) {
                 $this->addTestFile($path . '/interfaces_test.php');
             }
             $this->addTestFile($path . '/collector_test.php');

@@ -73,7 +73,6 @@
         function &referenceMethod(&$a) { }
         function extraMethod($a = false) { }
     }
-
     Mock::generate('ImplementsDummy');
 
     class TestOfImplementations extends UnitTestCase {
@@ -93,6 +92,17 @@
         function testNoSpuriousWarningsWhenSkippingDefaultedParameter() {
             $mock = new MockImplementsDummy();
             $mock->extraMethod();
+        }
+    }
+
+    class ClassWithSpecialMethods() {
+    }
+    Mock::generate('ClassWithSpecialMethods');
+
+    class TestOfSpecialMethodsInMocks extends UnitTestCase {
+        
+        function testCanMockTheThingAtAll() {
+            $mock = new MockClassWithSpecialMethods();
         }
     }
 ?>
