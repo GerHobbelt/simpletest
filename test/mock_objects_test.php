@@ -383,7 +383,7 @@
         function testReturnReferenceSequence() {
             $mock = &new MockDummy();
             $object = new Dummy();
-            $mock->setReturnReferenceAt(1, "aMethod", $object);
+            $mock->setReturnReferenceAt(1, 'aMethod', $object);
             $this->assertNull($mock->aMethod());
             $this->assertReference($zref =& $mock->aMethod(), $object);
             $this->assertNull($mock->aMethod());
@@ -393,7 +393,7 @@
 
     class TestOfSpecialMethods extends UnitTestCase {
         function skip() {
-            $this->skipIf(phpversion() >= 5, 'Overloading not tested for PHP 4');
+            $this->skipIf(version_compare(phpversion(), '5', '<='), 'Overloading not tested for PHP 4');
         }
         
         function testReturnFromSpecialMethod() {
@@ -409,12 +409,12 @@
 
         function testZeroCallCount() {
             $mock = &new MockDummy();
-            $mock->expectCallCount("aMethod", 0);
+            $mock->expectCallCount('aMethod', 0);
         }
 
         function testExpectedCallCount() {
             $mock = &new MockDummy();
-            $mock->expectCallCount("aMethod", 2);
+            $mock->expectCallCount('aMethod', 2);
             $mock->aMethod();
             $mock->aMethod();
         }

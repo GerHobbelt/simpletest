@@ -75,7 +75,9 @@
          *    @access protected
          */
         function _getCss() {
-            return ".fail { background-color: inherit; color: red; } pre { background-color: lightgray; color: inherit; }";
+            return ".fail { background-color: inherit; color: red; }" .
+                    ".pass { background-color: inherit; color: green; }" .
+                    " pre { background-color: lightgray; color: inherit; }";
         }
 
         /**
@@ -136,7 +138,7 @@
          */
 		function paintSkip($message) {
             parent::paintSkip($message);
-            print "<span class=\"fail\">Skipped</span>: ";
+            print "<span class=\"pass\">Skipped</span>: ";
             $breadcrumb = $this->getTestList();
             array_shift($breadcrumb);
             print implode(" -&gt; ", $breadcrumb);
