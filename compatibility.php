@@ -108,8 +108,7 @@
          *    @static
          */
         function isReference(&$first, &$second) {
-            if (version_compare(phpversion(), '5', '>=')
-	    	    && is_object($first)) {
+            if (version_compare(phpversion(), '5', '>=') && is_object($first)) {
 	    	    return ($first === $second);
 	        }
 	        if (is_object($first) && is_object($second)) {
