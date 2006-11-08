@@ -531,12 +531,16 @@
             $this->skipUnless(true);
         }
         
+        function testFail() {
+            $this->fail('We should see this message');
+        }
+        
         function testPass() {
             $this->pass('We should see this message');
         }
     }
 
-    $test = &new GroupTest("Visual test with 49 passes, 49 fails and 8 exceptions");
+    $test = &new GroupTest("Visual test with 50 passes, 50 fails and 7 exceptions");
     $test->addTestCase(new PassingUnitTestCaseOutput());
     $test->addTestCase(new FailingUnitTestCaseOutput());
     $test->addTestCase(new VisualTestOfErrors());

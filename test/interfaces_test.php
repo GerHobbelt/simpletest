@@ -95,7 +95,7 @@
         }
     }
 
-    class ClassWithSpecialMethods() {
+    class ClassWithSpecialMethods {
     }
     Mock::generate('ClassWithSpecialMethods');
 
