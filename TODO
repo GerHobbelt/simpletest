@@ -1,5 +1,5 @@
 TODO
-This is immediate stuff only for this iteration (1.0.1beta) of 7 hours.
+This is immediate stuff only for this iteration (1.0.1beta) of 13 hours.
 
 $Id$
 
@@ -10,6 +10,8 @@ Add expectException() and expectError() (13/2) - done.
 
 Reporter
 --------
+expectException() should receive the exception (2).
+Dumper shoudl come from the reporter (4).
 
 Mock objects
 ------------
