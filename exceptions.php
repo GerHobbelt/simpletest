@@ -44,7 +44,7 @@
 	            if (! $trap->isExpected($this->getTestCase(), $exception)) {
 	                $this->getTestCase()->exception($exception);
 	            }
-	            $trap->clear();			
+	            $trap->clear();
             }
 			if ($message = $trap->getOutstanding()) {
 				$this->getTestCase()->fail($message);
