@@ -388,21 +388,12 @@
     }
 
     class ClassWithSpecialMethods {
-        
-        function __get($name) {
-        }
-        
-        function __set($name, $value) {
-        }
-        
-        function __isset($name) {
-        }
-        
-        function __unset($name) {
-        }
-        
-        function __call($method, $arguments) {
-        }
+        function __get($name) { }
+        function __set($name, $value) { }
+        function __isset($name) { }
+        function __unset($name) { }
+        function __call($method, $arguments) { }
+        function __toString() { }
     }
     Mock::generate('ClassWithSpecialMethods');
 
@@ -446,6 +437,17 @@
             $mock = &new MockClassWithSpecialMethods();
             $mock->expectOnce('__unset', array('a'));
             unset($mock->a);
+        }
+        
+        function testToStringMagic() {
+            $mock = &new MockClassWithSpecialMethods();
+            $mock->expectOnce('__toString');
+            $mock->setReturnValue('__toString', 'AAA');
+            ob_start();
+            print $mock;
+            $output = ob_get_contents();
+            ob_end_clean();
+            $this->assertEqual($output, 'AAA');
         }
     }
 
