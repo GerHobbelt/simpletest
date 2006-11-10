@@ -150,7 +150,8 @@
          *    @deprecated
          */
         function assertNoErrors($message) {
-            return $this->_test->assertTrue(
+            return $this->_test->assert(
+					new TrueExpectation(),
                     count($this->_queue) == 0,
                     sprintf($message, 'Should be no errors'));
         }
