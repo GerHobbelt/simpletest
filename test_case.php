@@ -299,9 +299,11 @@
          *    @access public
          */
         function assert(&$expectation, $compare, $message = '%s') {
-            return $this->assertTrue(
-                    $expectation->test($compare),
-                    sprintf($message, $expectation->overlayMessage($compare)));
+            if ($expectation->test($compare)) {
+                return $this->pass(sprintf($message, $expectation->overlayMessage($compare)));
+            } else {
+                return $this->fail(sprintf($message, $expectation->overlayMessage($compare)));
+            }
         }
 
         /**
@@ -309,43 +311,6 @@
          */
         function assertExpectation(&$expectation, $compare, $message = '%s') {
         	return $this->assert($expectation, $compare, $message);
-        }
-
-        /**
-         *    Called from within the test methods to register
-         *    passes and failures.
-         *    @param boolean $result    Pass on true.
-         *    @param string $message    Message to display describing
-         *                              the test state.
-         *    @return boolean           True on pass
-         *    @access public
-         */
-        function assertTrue($result, $message = false) {
-            if (! $message) {
-                $message = 'True assertion got ' . ($result ? 'True' : 'False');
-            }
-            if ($result) {
-                return $this->pass($message);
-            } else {
-                return $this->fail($message);
-            }
-        }
-
-        /**
-         *    Will be true on false and vice versa. False
-         *    is the PHP definition of false, so that null,
-         *    empty strings, zero and an empty array all count
-         *    as false.
-         *    @param boolean $result    Pass on false.
-         *    @param string $message    Message to display.
-         *    @return boolean           True on pass
-         *    @access public
-         */
-        function assertFalse($result, $message = false) {
-            if (! $message) {
-                $message = 'False assertion got ' . ($result ? 'True' : 'False');
-            }
-            return $this->assertTrue(! $result, $message);
         }
 
         /**

@@ -882,7 +882,7 @@
          */
         function _assertTrue($assertion, $message) {
             $test = &$this->_getCurrentTestCase();
-            $test->assertTrue($assertion, $message);
+            $test->assert(new TrueExpectation(), $assertion, $message);
         }
     }
 

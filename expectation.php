@@ -121,6 +121,66 @@
             return 'Anything always matches [' . $dumper->describeValue($compare) . ']';
         }
     }
+
+    /**
+     *    An expectation that passes on boolean true.
+	 *    @package SimpleTest
+	 *    @subpackage MockObjects
+     */
+    class TrueExpectation extends SimpleExpectation {
+
+        /**
+         *    Tests the expectation.
+         *    @param mixed $compare  Should be true.
+         *    @return boolean        True on match.
+         *    @access public
+         */
+        function test($compare) {
+            return (boolean)$compare;
+        }
+
+        /**
+         *    Returns a human readable test message.
+         *    @param mixed $compare      Comparison value.
+         *    @return string             Description of success
+         *                               or failure.
+         *    @access public
+         */
+        function testMessage($compare) {
+            $dumper = &$this->_getDumper();
+            return 'Expected true, got [' . $dumper->describeValue($compare) . ']';
+        }
+    }
+    
+    /**
+     *    An expectation that passes on boolean false.
+	 *    @package SimpleTest
+	 *    @subpackage MockObjects
+     */
+    class FalseExpectation extends SimpleExpectation {
+
+        /**
+         *    Tests the expectation.
+         *    @param mixed $compare  Should be false.
+         *    @return boolean        True on match.
+         *    @access public
+         */
+        function test($compare) {
+            return ! (boolean)$compare;
+        }
+
+        /**
+         *    Returns a human readable test message.
+         *    @param mixed $compare      Comparison value.
+         *    @return string             Description of success
+         *                               or failure.
+         *    @access public
+         */
+        function testMessage($compare) {
+            $dumper = &$this->_getDumper();
+            return 'Expected false, got [' . $dumper->describeValue($compare) . ']';
+        }
+    }
     
     /**
      *    Test for equality.
