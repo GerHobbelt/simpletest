@@ -91,6 +91,7 @@
          *    @access public
          */
         function add($severity, $content, $filename, $line) {
+			$content = str_replace('%', '%%', $content);
             if (count($this->_expectation_queue)) {
                 $this->_testLatestError($severity, $content, $filename, $line);
             } else {
