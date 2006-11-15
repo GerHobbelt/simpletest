@@ -147,6 +147,16 @@
             $this->expectError(new PatternExpectation('/ouch/i'));
             trigger_error('Ouch!');
         }
+		
+		/*
+		 * Regression Test for Error messages producing
+		 * sprintf errors if they contain standalone % char
+		 */
+		function testErrorWithPercentsPassesWithNoSprintfError()
+		{
+			$this->expectError("%");
+			trigger_error('%');
+		}
     }
 
     class TestOfErrors extends UnitTestCase {
@@ -213,6 +223,16 @@
             error_reporting(E_ALL);
             @trigger_error('Ouch!', E_USER_ERROR);
         }
+
+		/*
+		 * Regression Test for Error messages producing
+		 * sprintf errors if they contain standalone % char
+		 */
+		function testErrorWithPercentsReportedWithNoSprintfError()
+		{
+			trigger_error('%');
+			$this->assertError('%');
+		}
     }
 // TODO: Add stacked error handler test
 ?>

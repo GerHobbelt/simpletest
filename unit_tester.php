@@ -403,6 +403,9 @@
             if (SimpleTestCompatibility::isA($expected, 'SimpleExpectation')) {
                 return $expected;
             }
+			if(is_string($expected)) {
+				$expected = str_replace('%', '%%', $expected);
+			}
             return new EqualExpectation($expected);
         }
 
