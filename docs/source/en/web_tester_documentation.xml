@@ -95,7 +95,7 @@ class TestOfLastcraft extends WebTestCase {
     
     function testHomepage() {<strong>
         $this->get('http://www.lastcraft.com/');
-        $this->assertTest('Why the last craft');</strong>
+        $this->assertText('Why the last craft');</strong>
     }
 }
 ]]></php>
