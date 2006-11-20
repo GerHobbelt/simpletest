@@ -489,7 +489,7 @@
         }
 
         function testMaxCallsDetectsOverrun() {
-            $this->test->expectOnce('assert', array(new MaximumCallCountExpectation('aMethod', 2), 3));
+            $this->test->expectOnce('assert', array(new IsAExpectation('MaximumCallCountExpectation'), 3));
             $mock = &new MockDummyWithInjectedTestCase();
             $mock->expectMaximumCallCount('aMethod', 2);
             $mock->aMethod();
@@ -499,7 +499,7 @@
         }
 
         function testTallyOnMaxCallsSendsPassOnUnderrun() {
-            $this->test->expectOnce('assert', array(new MaximumCallCountExpectation('aMethod', 2), 2));
+            $this->test->expectOnce('assert', array(new IsAExpectation('MaximumCallCountExpectation'), 2));
             $mock = &new MockDummyWithInjectedTestCase();
             $mock->expectMaximumCallCount("aMethod", 2);
             $mock->aMethod();
@@ -540,14 +540,14 @@
         }
 
         function testUnderOnce() {
-            $this->test->expectOnce('assert', array(new CallCountExpectation('aMethod', 1), 0));
+            $this->test->expectOnce('assert', array(new IsAExpectation('CallCountExpectation'), 0));
             $mock = &new MockDummyWithInjectedTestCase();
             $mock->expectOnce('aMethod');
             $mock->atTestEnd('testSomething', $this->test);
         }
 
         function testOverOnce() {
-            $this->test->expectOnce('assert', array(new CallCountExpectation('aMethod', 1), 2));
+            $this->test->expectOnce('assert', array(new IsAExpectation('CallCountExpectation'), 2));
             $mock = &new MockDummyWithInjectedTestCase();
             $mock->expectOnce('aMethod');
             $mock->aMethod();
@@ -557,7 +557,7 @@
         }
 
         function testUnderAtLeastOnce() {
-            $this->test->expectOnce('assert', array(new MinimumCallCountExpectation('aMethod', 1), 0));
+            $this->test->expectOnce('assert', array(new IsAExpectation('MinimumCallCountExpectation'), 0));
             $mock = &new MockDummyWithInjectedTestCase();
             $mock->expectAtLeastOnce("aMethod");
             $mock->atTestEnd('testSomething', $this->test);
