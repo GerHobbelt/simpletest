@@ -245,6 +245,16 @@
             $this->_size = null;
             $this->_progress = 0;
         }
+        
+        /**
+         *    Gets the formatter for variables and other small
+         *    generic data items.
+         *    @return SimpleDumper          Formatter.
+         *    @access public
+         */
+        function getDumper() {
+            return new SimpleDumper();
+        }
 
         /**
          *    Paints the start of a group test. Will also paint
@@ -451,6 +461,16 @@
         function &createInvoker(&$invoker) {
             return $this->_reporter->createInvoker($invoker);
         }
+        
+        /**
+         *    Gets the formatter for variables and other small
+         *    generic data items.
+         *    @return SimpleDumper          Formatter.
+         *    @access public
+         */
+        function getDumper() {
+            return $this->_reporter->getDumper();
+        }
 
         /**
          *    Paints the start of a group test.
@@ -651,6 +671,16 @@
                 $invoker = &$this->_reporters[$i]->createInvoker($invoker);
             }
             return $invoker;
+        }
+        
+        /**
+         *    Gets the formatter for variables and other small
+         *    generic data items.
+         *    @return SimpleDumper          Formatter.
+         *    @access public
+         */
+        function getDumper() {
+            return new SimpleDumper();
         }
 
         /**

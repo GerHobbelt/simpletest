@@ -120,8 +120,8 @@
             } else {
                 return "Field expectation [" . $dumper->describeValue($this->_value) .
                         "] fails with [" .
-                        $this->_dumper->describeValue($compare) . "] " .
-                        $this->_dumper->describeDifference($this->_value, $compare);
+                        $dumper->describeValue($compare) . "] " .
+                        $dumper->describeDifference($this->_value, $compare);
             }
         }
     }
@@ -242,7 +242,7 @@
          */
         function testMessage($compare) {
             if (SimpleExpectation::isExpectation($this->_expected_value)) {
-                $message = $this->_expected_value->testMessage($compare);
+                $message = $this->_expected_value->overlayMessage($compare, $this->_getDumper());
             } else {
                 $message = $this->_expected_header .
                         ($this->_expected_value ? ': ' . $this->_expected_value : '');

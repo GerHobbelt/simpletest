@@ -11,12 +11,12 @@ Add expectException() and expectError() (13/2) - done.
 Reporter
 --------
 expectException() should receive the exception (2).
-Dumper should come from the reporter (4).
+Dumper should come from the reporter (4/1).
 
 Mock objects
 ------------
 Fix bug in PHP 5 mocking objects with __call() method (1/1) - done.
-Fix other special method bugs in PHP5 (2/1).
+Fix other special method bugs in PHP5 (2/1) - done.
 Fix new type hinting bug in PHP 5.0.2 and above (1).
 
 Parser

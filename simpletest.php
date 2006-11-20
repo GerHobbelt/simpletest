@@ -210,6 +210,7 @@
      */
     class SimpleTestContext {
         var $_test;
+        var $_reporter;
         var $_resources;
 
         /**
@@ -217,7 +218,6 @@
          *    @access public
          */
         function clear() {
-            $this->_test = null;
             $this->_resources = array();
         }
 
@@ -240,6 +240,27 @@
          */
         function &getTest() {
             return $this->_test;
+        }
+
+        /**
+         *    Sets the current reporter. This
+         *    global instance can be used by the mock objects
+         *    to send messages.
+         *    @param SimpleReporter $reporter     Reporter to register.
+         *    @access public
+         */
+        function setReporter(&$reporter) {
+            $this->clear();
+            $this->_reporter = &$reporter;
+        }
+
+        /**
+         *    Accessor for current reporter.
+         *    @return SimpleReporter    Current reporter.
+         *    @acess pubic
+         */
+        function &getReporter() {
+            return $this->_reporter;
         }
 
         /**

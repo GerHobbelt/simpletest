@@ -117,11 +117,13 @@
          *    starting with the string "test" unless a method
          *    is specified.
          *    @param SimpleReporter $reporter    Current test reporter.
+         *    @return boolean                    True if all tests passed.
          *    @access public
          */
         function run(&$reporter) {
 			$context = &SimpleTest::getContext();
 			$context->setTest($this);
+			$context->setReporter($reporter);
             $this->_reporter = &$reporter;
             $reporter->paintCaseStart($this->getLabel());
 			$this->skip();
@@ -207,7 +209,7 @@
          */
         function after($method) {
             for ($i = 0; $i < count($this->_observers); $i++) {
-                $this->_observers[$i]->atTestEnd($method);
+                $this->_observers[$i]->atTestEnd($method, $this);
             }
             $this->_reporter->paintMethodEnd($method);
         }
@@ -300,9 +302,13 @@
          */
         function assert(&$expectation, $compare, $message = '%s') {
             if ($expectation->test($compare)) {
-                return $this->pass(sprintf($message, $expectation->overlayMessage($compare)));
+                return $this->pass(sprintf(
+                        $message,
+                        $expectation->overlayMessage($compare, $this->_reporter->getDumper())));
             } else {
-                return $this->fail(sprintf($message, $expectation->overlayMessage($compare)));
+                return $this->fail(sprintf(
+                        $message,
+                        $expectation->overlayMessage($compare, $this->_reporter->getDumper())));
             }
         }
 
@@ -334,7 +340,8 @@
          *    @access public
          */
         function dump($variable, $message = false) {
-            $formatted = SimpleDumper::dump($variable);
+            $dumper = $this->_reporter->getDumper();
+            $formatted = $dumper->dump($variable);
             if ($message) {
                 $formatted = $message . "\n" . $formatted;
             }
