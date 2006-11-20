@@ -25,7 +25,7 @@
     }
     if (! defined('SIMPLE_TEST')) {
         /** @ignore */
-        define('SIMPLE_TEST', dirname(__FILE__) . SEPARATOR);
+        define('SIMPLE_TEST', dirname(__FILE__) . DIRECTORY_SEPARATOR);
     }
     /**#@-*/
 

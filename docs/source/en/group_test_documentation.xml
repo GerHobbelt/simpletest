@@ -164,7 +164,7 @@ class SocketTester extends UnitTestCase { ... }
                 We can now invoke the tests from a separate runner file...
 <php><![CDATA[
 <?php
-    require_once('file_group_test.php');
+    require_once('file_test_suite.php');
     <strong>
     $test = &new FileTestSuite();
     $test->run(new HtmlReporter());</strong>
@@ -177,7 +177,7 @@ class SocketTester extends UnitTestCase { ... }
 <?php
     <strong>
     $test = &new BigTestSuite('Big group');
-    $test->addTestFile('file_group_test.php');
+    $test->addTestFile('file_test_suite.php');
     $test->addTestFile('some_test_case.php');</strong>
     $test->run(new HtmlReporter());
 ?>
@@ -215,7 +215,7 @@ class SocketTester extends UnitTestCase { ... }
 <php><![CDATA[
 <?php<strong>
     define('RUNNER', true);</strong>
-    require_once('file_group_test.php');
+    require_once('file_test_suite.php');
 
     $test = &new BigTestSuite('Big group');
     $test->addTestCase(new FileTestSuite());
@@ -230,7 +230,7 @@ class SocketTester extends UnitTestCase { ... }
     define('RUNNER', true);
 
     $test = &new BigTestSuite('Big group');<strong>
-    $test->addTestFile('file_group_test.php');
+    $test->addTestFile('file_test_suite.php');
     $test->addTestFile(...);</strong>
     $test->run(new HtmlReporter());
 ?>
