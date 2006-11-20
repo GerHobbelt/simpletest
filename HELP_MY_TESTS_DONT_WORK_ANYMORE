@@ -5,6 +5,12 @@ written with earlier versions will fail with the newest ones. The most
 dramatic changes are in the alpha releases. Here is a list of possible
 problems and their fixes...
 
+No method _getTest() on mocks
+-----------------------------
+This has finally been removed. It was a pretty esoteric
+flex point anyway. It was there to allow the mocks to
+work with other test tools, but no one does this anyway.
+
 No method assertError(), assertNoErrors(), swallowErrors()
 ----------------------------------------------------------
 These have been deprecated in 1.0.1beta in favour of

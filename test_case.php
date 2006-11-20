@@ -374,7 +374,7 @@
 	 *    @package		SimpleTest
 	 *    @subpackage	UnitTester
      */
-    class GroupTest {
+    class TestSuite {
         var $_label;
         var $_test_cases;
         var $_old_track_errors;
@@ -386,7 +386,7 @@
          *                            of the test.
          *    @access public
          */
-        function GroupTest($label = false) {
+        function TestSuite($label = false) {
             $this->_label = $label ? $label : get_class($this);
             $this->_test_cases = array();
             $this->_old_track_errors = ini_get('track_errors');
@@ -424,7 +424,7 @@
          *    @access public
          */
         function addTestClass($class) {
-            if ($this->_getBaseTestCase($class) == 'grouptest') {
+            if ($this->_getBaseTestCase($class) == 'testsuite' || $this->_getBaseTestCase($class) == 'grouptest') {
                 $this->_test_cases[] = &new $class();
             } else {
                 $this->_test_cases[] = $class;
@@ -441,12 +441,12 @@
         function addTestFile($test_file) {
             $existing_classes = get_declared_classes();
             if ($error = $this->_requireWithError($test_file)) {
-                $this->addTestCase(new BadGroupTest($test_file, $error));
+                $this->addTestCase(new BadTestSuite($test_file, $error));
                 return;
             }
             $classes = $this->_selectRunnableTests($existing_classes, get_declared_classes());
             if (count($classes) == 0) {
-                $this->addTestCase(new BadGroupTest($test_file, "No runnable test cases in [$test_file]"));
+                $this->addTestCase(new BadTestSuite($test_file, "No runnable test cases in [$test_file]"));
                 return;
             }
             $group = &$this->_createGroupFromClasses($test_file, $classes);
@@ -535,13 +535,13 @@
          *    Builds a group test from a class list.
          *    @param string $title       Title of new group.
          *    @param array $classes      Test classes.
-         *    @return GroupTest          Group loaded with the new
+         *    @return TestSuite          Group loaded with the new
          *                               test cases.
          *    @access private
          */
         function &_createGroupFromClasses($title, $classes) {
             SimpleTest::ignoreParentsIfIgnored($classes);
-            $group = &new GroupTest($title);
+            $group = &new TestSuite($title);
             foreach ($classes as $class) {
                 if (! SimpleTest::isIgnored($class)) {
                     $group->addTestClass($class);
@@ -559,7 +559,7 @@
         function _getBaseTestCase($class) {
             while ($class = get_parent_class($class)) {
                 $class = strtolower($class);
-                if ($class == "simpletestcase" || $class == "grouptest") {
+                if ($class == 'simpletestcase' || $class == 'testsuite' || $class == 'grouptest') {
                     return $class;
                 }
             }
@@ -616,6 +616,11 @@
             return $count;
         }
     }
+    
+    /**
+     *    @deprecated
+     */
+    class GroupTest extends TestSuite { }
 
     /**
      *    This is a failing group test for when a test suite hasn't
@@ -623,7 +628,7 @@
 	 *    @package		SimpleTest
 	 *    @subpackage	UnitTester
      */
-    class BadGroupTest {
+    class BadTestSuite {
         var $_label;
         var $_error;
 
@@ -633,7 +638,7 @@
          *                            of the test.
          *    @access public
          */
-        function BadGroupTest($label, $error) {
+        function BadTestSuite($label, $error) {
             $this->_label = $label;
             $this->_error = $error;
         }
@@ -654,7 +659,7 @@
          */
         function run(&$reporter) {
             $reporter->paintGroupStart($this->getLabel(), $this->getSize());
-            $reporter->paintFail('Bad GroupTest [' . $this->getLabel() .
+            $reporter->paintFail('Bad TestSuite [' . $this->getLabel() .
                     '] with error [' . $this->_error . ']');
             $reporter->paintGroupEnd($this->getLabel());
             return $reporter->getStatus();
@@ -669,4 +674,9 @@
             return 0;
         }
     }
+    
+    /**
+     *    @deprecated
+     */
+    class BadGroupTest extends BadTestSuite { }
 ?>
