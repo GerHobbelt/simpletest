@@ -274,11 +274,7 @@
          *    @access public
          */
         function exception($exception) {
-            $this->_reporter->paintError(
-                    'Unexpected exception of type [' . get_class($exception) .
-                    '] with message ['. $exception->getMessage() .
-                    '] in ['. $exception->getFile() .
-                    ' line ' . $exception->getLine() . ']');
+            $this->_reporter->paintException($exception);
         }
 
         /**

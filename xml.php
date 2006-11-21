@@ -23,7 +23,9 @@
         var $_namespace;
 
         /**
-         *    Does nothing yet.
+         *    Sets up indentation and namespace.
+         *    @param string $namespace        Namespace to add to each tag.
+         *    @param string $indent           Indenting to add on each nesting.
          *    @access public
          */
         function XmlReporter($namespace = false, $indent = '  ') {
@@ -174,6 +176,23 @@
             parent::paintError($message);
             print $this->_getIndent(1);
             print "<" . $this->_namespace . "exception>";
+            print $this->toParsedXml($message);
+            print "</" . $this->_namespace . "exception>\n";
+        }
+
+        /**
+		 *    Paints exception as XML.
+         *    @param Exception $exception    Exception to encode.
+         *    @access public
+         */
+        function paintException($exception) {
+            parent::paintException($exception);
+            print $this->_getIndent(1);
+            print "<" . $this->_namespace . "exception>";
+            $message = 'Unexpected exception of type [' . get_class($exception) .
+                    '] with message ['. $exception->getMessage() .
+                    '] in ['. $exception->getFile() .
+                    ' line ' . $exception->getLine() . ']';
             print $this->toParsedXml($message);
             print "</" . $this->_namespace . "exception>\n";
         }

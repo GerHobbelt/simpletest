@@ -118,7 +118,7 @@
         }
 
         /**
-         *    Paints a PHP error or exception.
+         *    Paints a PHP error.
          *    @param string $message        Message is ignored.
          *    @access public
          */
@@ -128,6 +128,24 @@
             $breadcrumb = $this->getTestList();
             array_shift($breadcrumb);
             print implode(" -&gt; ", $breadcrumb);
+            print " -&gt; <strong>" . $this->_htmlEntities($message) . "</strong><br />\n";
+        }
+
+        /**
+         *    Paints a PHP exception.
+         *    @param Exception $exception        Exception to display.
+         *    @access public
+         */
+        function paintException($exception) {
+            parent::paintException($exception);
+            print "<span class=\"fail\">Exception</span>: ";
+            $breadcrumb = $this->getTestList();
+            array_shift($breadcrumb);
+            print implode(" -&gt; ", $breadcrumb);
+            $message = 'Unexpected exception of type [' . get_class($exception) .
+                    '] with message ['. $exception->getMessage() .
+                    '] in ['. $exception->getFile() .
+                    ' line ' . $exception->getLine() . ']';
             print " -&gt; <strong>" . $this->_htmlEntities($message) . "</strong><br />\n";
         }
 		
@@ -234,12 +252,27 @@
 
         /**
          *    Paints a PHP error or exception.
-         *    @param string $message        Message is ignored.
+         *    @param string $message        Message to be shown.
          *    @access public
          *    @abstract
          */
         function paintError($message) {
             parent::paintError($message);
+            print "Exception " . $this->getExceptionCount() . "!\n$message\n";
+        }
+
+        /**
+         *    Paints a PHP error or exception.
+         *    @param Exception $exception      Exception to describe.
+         *    @access public
+         *    @abstract
+         */
+        function paintException($exception) {
+            parent::paintException($exception);
+            $message = 'Unexpected exception of type [' . get_class($exception) .
+                    '] with message ['. $exception->getMessage() .
+                    '] in ['. $exception->getFile() .
+                    ' line ' . $exception->getLine() . ']';
             print "Exception " . $this->getExceptionCount() . "!\n$message\n";
         }
 		
