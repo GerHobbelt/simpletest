@@ -149,13 +149,21 @@
         }
 
         /**
-         *    Deals with PHP 4 throwing an error or PHP 5
-         *    throwing an exception.
+         *    Deals with PHP 4 throwing an error.
          *    @param string $message    Text of error formatted by
          *                              the test case.
          *    @access public
          */
         function paintError($message) {
+            $this->_exceptions++;
+        }
+
+        /**
+         *    Deals with PHP 5 throwing an exception.
+         *    @param Exception $exception    The actual exception thrown.
+         *    @access public
+         */
+        function paintException($exception) {
             $this->_exceptions++;
         }
 		
@@ -554,6 +562,15 @@
         function paintError($message) {
             $this->_reporter->paintError($message);
         }
+
+        /**
+         *    Chains to the wrapped reporter.
+         *    @param Exception $exception        Exception to show.
+         *    @access public
+         */
+        function paintException($exception) {
+            $this->_reporter->paintException($exception);
+        }
 		
 		/**
 		 *    Prints the message for skipping tests.
@@ -784,6 +801,17 @@
             }
         }
 		
+        /**
+         *    Chains to the wrapped reporter.
+         *    @param Exception $exception    Exception to display.
+         *    @access public
+         */
+        function paintException($exception) {
+            for ($i = 0; $i < count($this->_reporters); $i++) {
+                $this->_reporters[$i]->paintException($exception);
+            }
+        }
+
 		/**
 		 *    Prints the message for skipping tests.
          *    @param string $message    Text of skip condition.
