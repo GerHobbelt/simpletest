@@ -7,11 +7,11 @@ Unit tester
 -----------
 Add decent skip facility (5/1) - done.
 Add expectException() and expectError() (13/2) - done.
-Rename GroupTest to TestSuite (1).
+Rename GroupTest to TestSuite (1/0) - done.
 
 Reporter
 --------
-expectException() should receive the exception (2).
+expectException() should receive the exception (2/0) - done.
 Dumper should come from the reporter (4/1) - done.
 
 Mock objects
