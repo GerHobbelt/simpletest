@@ -19,7 +19,7 @@ if (! defined('E_STRICT')) {
 require_once dirname(__FILE__) . '/invoker.php';
 require_once dirname(__FILE__) . '/test_case.php';
 require_once dirname(__FILE__) . '/expectation.php';
-/**#@-/
+/**#@-*/
 
 /**
  *    Extension that traps errors into an error queue.
