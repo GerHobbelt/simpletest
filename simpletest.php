@@ -20,6 +20,7 @@
      *    Registry and test context. Includes a few
      *    global options that I'm slowly getting rid of.
      *	  @package	SimpleTest
+     *    @subpackage	UnitTester
      */
     class SimpleTest {
 
@@ -236,7 +237,7 @@
         /**
          *    Accessor for currently running test case.
          *    @return SimpleTestCase    Current test.
-         *    @acess pubic
+         *    @access pubic
          */
         function &getTest() {
             return $this->_test;
@@ -257,7 +258,7 @@
         /**
          *    Accessor for current reporter.
          *    @return SimpleReporter    Current reporter.
-         *    @acess pubic
+         *    @access pubic
          */
         function &getReporter() {
             return $this->_reporter;
@@ -363,6 +364,8 @@
     }
 
     /**
+	 *	  @package SimpleTest
+	 *	  @subpackage UnitTester
      *    @deprecated
      */
     class SimpleTestOptions extends SimpleTest {

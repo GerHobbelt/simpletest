@@ -24,7 +24,9 @@
         require_once(dirname(__FILE__) . '/reflection_php4.php');
     }
     if (! defined('SIMPLE_TEST')) {
-        /** @ignore */
+        /**
+         * @ignore 
+         */
         define('SIMPLE_TEST', dirname(__FILE__) . DIRECTORY_SEPARATOR);
     }
     /**#@-*/
@@ -614,6 +616,8 @@
     }
     
     /**
+	 *    @package		SimpleTest
+	 *    @subpackage	UnitTester
      *    @deprecated
      */
     class GroupTest extends TestSuite { }
@@ -672,6 +676,8 @@
     }
     
     /**
+	 *    @package		SimpleTest
+	 *    @subpackage	UnitTester
      *    @deprecated
      */
     class BadGroupTest extends BadTestSuite { }
