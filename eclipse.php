@@ -1,16 +1,23 @@
 <?php
 /**
-*	base include file for eclipse plugin 
-*	@package	SimpleTest
-*	@version	$Id$
-*/
-include_once('unit_tester.php');
-include_once('test_case.php');
-include_once('invoker.php');
-include_once('socket.php');
-include_once('mock_objects.php');
+ *	base include file for eclipse plugin  
+ *	@package	SimpleTest
+ *	@version	$Id$
+ */
+/**#@+
+ * simpletest include files
+ */
+include_once 'unit_tester.php';
+include_once 'test_case.php';
+include_once 'invoker.php';
+include_once 'socket.php';
+include_once 'mock_objects.php';
+/**#@-*/
 
-
+/**
+ *	base reported class for eclipse plugin  
+ *	@package	SimpleTest
+ */
 class EclipseReporter extends SimpleScorer {
 	var $_listener;
 	function EclipseReporter(&$listener){
@@ -104,6 +111,10 @@ class EclipseReporter extends SimpleScorer {
 	}
 }
 
+/**
+ *	base invoker class for eclipse plugin  
+ *	@package	SimpleTest
+ */
 class EclipseInvoker extends SimpleInvokerDecorator{
 	var $_listener;
 	
