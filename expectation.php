@@ -185,8 +185,8 @@
     
     /**
      *    Test for equality.
-     *      @package SimpleTest
-     *      @subpackage UnitTester
+     *    @package SimpleTest
+     *    @subpackage UnitTester
      */
     class EqualExpectation extends SimpleExpectation {
         var $_value;
@@ -241,8 +241,8 @@
     
     /**
      *    Test for inequality.
-     *      @package SimpleTest
-     *      @subpackage UnitTester
+     *    @package SimpleTest
+     *    @subpackage UnitTester
      */
     class NotEqualExpectation extends EqualExpectation {
         
@@ -289,8 +289,8 @@
     
     /**
      *    Test for being within a range.
-     *      @package SimpleTest
-     *      @subpackage UnitTester
+     *    @package SimpleTest
+     *    @subpackage UnitTester
      */
     class WithinMarginExpectation extends SimpleExpectation {
         var $_upper;
@@ -364,8 +364,8 @@
     
     /**
      *    Test for being outside of a range.
-     *      @package SimpleTest
-     *      @subpackage UnitTester
+     *    @package SimpleTest
+     *    @subpackage UnitTester
      */
     class OutsideMarginExpectation extends WithinMarginExpectation {
         
@@ -562,8 +562,6 @@
         /**
          *    Describes a pattern match including the string
          *    found and it's position.
-         *    @package SimpleTest
-         *    @subpackage UnitTester
          *    @param string $pattern        Regex to match against.
          *    @param string $subject        Subject to search.
          *    @access protected
@@ -580,7 +578,9 @@
     }
     
     /**
-     *      @deprecated
+     *    @package SimpleTest
+     *    @subpackage UnitTester
+     *    @deprecated
      */
     class WantedPatternExpectation extends PatternExpectation {
     }
@@ -588,8 +588,8 @@
     /**
      *    Fail if a pattern is detected within the
      *    comparison.
-     *      @package SimpleTest
-     *      @subpackage UnitTester
+     *    @package SimpleTest
+     *    @subpackage UnitTester
      */
     class NoPatternExpectation extends PatternExpectation {
         

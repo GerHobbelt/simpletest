@@ -2,6 +2,7 @@
 /**
  *	base include file for eclipse plugin  
  *	@package	SimpleTest
+ *	@subpackage	Eclipse
  *	@version	$Id$
  */
 /**#@+
@@ -17,6 +18,7 @@ include_once 'mock_objects.php';
 /**
  *	base reported class for eclipse plugin  
  *	@package	SimpleTest
+ *	@subpackage	Eclipse
  */
 class EclipseReporter extends SimpleScorer {
 	var $_listener;
@@ -114,6 +116,7 @@ class EclipseReporter extends SimpleScorer {
 /**
  *	base invoker class for eclipse plugin  
  *	@package	SimpleTest
+ *	@subpackage	Eclipse
  */
 class EclipseInvoker extends SimpleInvokerDecorator{
 	var $_listener;

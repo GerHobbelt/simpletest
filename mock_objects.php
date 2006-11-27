@@ -161,6 +161,8 @@
 
     /**
      *    Confirms that the number of calls on a method is as expected.
+     *	@package	SimpleTest
+     *	@subpackage	MockObjects
      */
     class CallCountExpectation extends SimpleExpectation {
         var $_method;
@@ -204,6 +206,8 @@
 
     /**
      *    Confirms that the number of calls on a method is as expected.
+     *	@package	SimpleTest
+     *	@subpackage	MockObjects
      */
     class MinimumCallCountExpectation extends SimpleExpectation {
         var $_method;
@@ -247,6 +251,8 @@
 
     /**
      *    Confirms that the number of calls on a method is as expected.
+     *	@package	SimpleTest
+     *	@subpackage	MockObjects
      */
     class MaximumCallCountExpectation extends SimpleExpectation {
         var $_method;
@@ -931,6 +937,8 @@
     }
 
     /**
+     *	@package	SimpleTest
+     *	@subpackage	MockObjects
      *    @deprecated
      */
     class Stub extends Mock {
