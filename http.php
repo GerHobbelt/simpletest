@@ -260,7 +260,16 @@ class SimpleHttpRequest {
     function addHeaderLine($header_line) {
         $this->headers[] = $header_line;
     }
-    
+
+    /**
+     *    Get the headers to be sent with the request.
+     *    @access public
+     *    @return array
+     */
+    function getHeaders() {
+        return $this->headers;
+    }
+
     /**
      *    Reads all the relevant cookies from the
      *    cookie jar.

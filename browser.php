@@ -300,6 +300,11 @@ class SimpleBrowser {
      *    @access private
      */
     protected function fetch($url, $encoding, $depth = 0) {
+        if ($http_referer = $this->history->getUrl()) {
+            $this->user_agent->setReferer($http_referer->asString());
+        } else {
+            $this->user_agent->setReferer(null);
+        }
         $response = $this->user_agent->fetchResponse($url, $encoding);
         if ($response->isError()) {
             return new SimplePage($response);
