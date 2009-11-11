@@ -298,6 +298,25 @@ class TestOfUrl extends UnitTestCase {
         $url = new SimpleUrl($string);
         $this->assertEqual($url->asString(), $string);
     }
+
+    function testUrlWithRequestKeyEncoded() {
+        $url = new SimpleUrl('/?foo%5B1%5D=bar');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar');
+        $url->addRequestParameter('a[1]', 'b[]');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar&a%5B1%5D=b%5B%5D');
+
+        $url = new SimpleUrl('/');
+        $url->addRequestParameter('a[1]', 'b[]');
+        $this->assertEqual($url->getEncodedRequest(), '?a%5B1%5D=b%5B%5D');
+
+        // param name, looking like pair
+        $url = new SimpleUrl('/');
+        $url->addRequestParameter('foo[]=bar', '');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
+        $url = new SimpleUrl('/?foo%5B%5D%3Dbar=');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
+    }
+
 }
 
 class TestOfAbsoluteUrls extends UnitTestCase {
