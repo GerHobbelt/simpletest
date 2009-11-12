@@ -473,14 +473,14 @@ class SimpleCallSchedule {
             if ($this->at[$method][$step]->isMatch($args)) {
                 $action = $this->at[$method][$step]->findFirstAction($args);
                 if (isset($action)) {
-                    return $action->act();
+                    return $action->act($step, $method, $args);
                 }
             }
         }
         if (isset($this->always[$method])) {
             $action = $this->always[$method]->findFirstAction($args);
             if (isset($action)) {
-                return $action->act();
+                return $action->act($step, $method, $args);
             }
         }
         $null = null;
@@ -534,7 +534,9 @@ class SimpleReturn {
      *    @return mixed    Whatever was stashed.
      *    @access public
      */
-    function act() {
+    function act($step, $method, $args) {
+        if (is_callable($this->value))
+            return call_user_func($this->value, $step, $method, $args);
         return $this->value;
     }
 }
