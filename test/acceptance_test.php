@@ -8,8 +8,7 @@ require_once(dirname(__FILE__) . '/../unit_tester.php');
 
 class SimpleTestAcceptanceTest extends WebTestCase {
     static function samples() {
-        //return 'http://www.lastcraft.com/test/';
-        return 'http://simpletest.localhost/test/site/';
+        return 'http://www.lastcraft.com/test/';
     }
 }
 
@@ -122,17 +121,16 @@ class TestOfLocalFileBrowser extends UnitTestCase {
 }
 
 class TestOfRequestMethods extends UnitTestCase {
-
     function samples() {
         return SimpleTestAcceptanceTest::samples();
-    }	
-	
+    }
+
 	function testHeadRequest() {
 		$browser = new SimpleBrowser();
 		$this->assertTrue($browser->head($this->samples() . 'request_methods.php'));
 		$this->assertEqual($browser->getResponseCode(), 202);
 	}
-	
+
 	function testGetRequest() {
 		$browser = new SimpleBrowser();
 		$this->assertTrue($browser->get($this->samples() . 'request_methods.php'));
@@ -141,39 +139,39 @@ class TestOfRequestMethods extends UnitTestCase {
 
 	function testPostWithPlainEncoding() {
 		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', "A content message"));
+		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', 'A content message'));
 		$this->assertEqual($browser->getResponseCode(), 406);
-		$this->assertPattern("/Please ensure content type is an XML format/", $browser->getContent());
+		$this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
 	}
 
 	function testPostWithXmlEncoding() {
 		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', "<a><b>c</b></a>", "text/xml"));
+		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'text/xml'));
 		$this->assertEqual($browser->getResponseCode(), 201);
-		$this->assertPattern("/c/", $browser->getContent());
+		$this->assertPattern('/c/', $browser->getContent());
 	}
 
 	function testPutWithPlainEncoding() {
 		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', "A content message"));
+		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', 'A content message'));
 		$this->assertEqual($browser->getResponseCode(), 406);
-		$this->assertPattern("/Please ensure content type is an XML format/", $browser->getContent());
+		$this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
 	}
 
 	function testPutWithXmlEncoding() {
 		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', "<a><b>c</b></a>", "application/xml"));
+		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'application/xml'));
 		$this->assertEqual($browser->getResponseCode(), 201);
-		$this->assertPattern("/c/", $browser->getContent());
+		$this->assertPattern('/c/', $browser->getContent());
 	}
 
 	function testDeleteRequest() {
 		$browser = new SimpleBrowser();
 		$browser->delete($this->samples() . 'request_methods.php');
 		$this->assertEqual($browser->getResponseCode(), 202);
-		$this->assertPattern("/Your delete request was accepted/", $browser->getContent());
+		$this->assertPattern('/Your delete request was accepted/', $browser->getContent());
 	}
-	
+
 }
 
 class TestRadioFields extends SimpleTestAcceptanceTest {
@@ -283,7 +281,7 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     }
 
     function testRelativePost() {
-        $this->post($this->samples() . 'link_confirm.php');
+        $this->post($this->samples() . 'link_confirm.php', array('a' => '123'));
         $this->assertTrue($this->post('network_confirm.php'));
         $this->assertText('target for the SimpleTest');
     }

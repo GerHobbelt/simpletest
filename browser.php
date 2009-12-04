@@ -321,13 +321,6 @@ class SimpleBrowser {
      *    @access private
      */
     protected function load($url, $parameters) {
-        if (! is_object($url)) {
-            $url = new SimpleUrl($url);
-        }
-        if ($this->getUrl()) {
-            $url = $url->makeAbsolute($this->getUrl());
-        }
-        
         $frame = $url->getTarget();
         if (! $frame || ! $this->page->hasFrames() || (strtolower($frame) == '_top')) {
             return $this->loadPage($url, $parameters);
@@ -363,8 +356,8 @@ class SimpleBrowser {
         $page = $this->fetch($url, $parameters);
         $this->page->setFrame($frames, $page);
         return $page->getRaw();
-    }  
-    
+    }
+
     /**
      *    Removes expired and temporary cookies as if
      *    the browser was closed and re-opened.
@@ -507,6 +500,12 @@ class SimpleBrowser {
      *    @access public
      */
     function get($url, $parameters = false) {
+        if (! is_object($url)) {
+            $url = new SimpleUrl($url);
+        }
+        if ($this->getUrl()) {
+            $url = $url->makeAbsolute($this->getUrl());
+        }
         return $this->load($url, new SimpleGetEncoding($parameters));
     }
 
@@ -519,9 +518,15 @@ class SimpleBrowser {
      *    @access public
      */
     function post($url, $parameters = false, $content_type = false) {
+        if (! is_object($url)) {
+            $url = new SimpleUrl($url);
+        }
+        if ($this->getUrl()) {
+            $url = $url->makeAbsolute($this->getUrl());
+        }
         return $this->load($url, new SimplePostEncoding($parameters, $content_type));
     }
-    
+
     /**
      *    Fetches the page content with a PUT request.
      *    @param string/SimpleUrl $url                Target to fetch as string.
@@ -531,9 +536,12 @@ class SimpleBrowser {
      *    @access public
      */
     function put($url, $parameters = false, $content_type = false) {
+        if (! is_object($url)) {
+            $url = new SimpleUrl($url);
+        }
         return $this->load($url, new SimplePutEncoding($parameters, $content_type));
     }
-    
+
     /**
      *    Sends a DELETE request and fetches the response.
      *    @param string/SimpleUrl $url                Target to fetch.
@@ -543,6 +551,9 @@ class SimpleBrowser {
      *    @access public
      */
     function delete($url, $parameters = false) {
+        if (! is_object($url)) {
+            $url = new SimpleUrl($url);
+        }
         return $this->load($url, new SimpleDeleteEncoding($parameters));
     }
 
