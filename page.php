@@ -186,6 +186,22 @@ class SimplePage {
     }
 
     /**
+     *    Accessor for current charset.
+     *    @return string    charset as string; e.g. 'utf-8'
+     *    @access public
+     */
+    function getCharset() {
+        $mimetype = $this->getMimeType();
+        if( preg_match('~charset\s*=\s*(["\']?)([\w-]+)\1~', $mimetype, $m) ) {
+            $charset = strtoupper($m[2]);
+            if ($charset == 'UTF8' )
+                $charset = 'UTF-8';
+            return $charset;
+        }
+        return false;
+    }
+
+    /**
      *    Accessor for HTTP response code.
      *    @return integer    HTTP response code received.
      *    @access public
