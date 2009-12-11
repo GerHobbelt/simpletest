@@ -106,7 +106,7 @@ class SimplePage {
      */
     function getText() {
         if (! $this->text) {
-            $this->text = SimplePage::normalise($this->raw);
+            $this->text = SimplePage::normalise($this->raw, $this->getCharset());
         }
         return $this->text;
     }
@@ -550,14 +550,25 @@ class SimplePage {
      *    @return string             Plain text.
      *    @access public
      */
-    static function normalise($html) {
+    static function normalise($html, $charset = NULL) {
         $text = preg_replace('#<!--.*?-->#si', '', $html);
         $text = preg_replace('#<(script|option|textarea)[^>]*>.*?</\1>#si', '', $text);
         $text = preg_replace('#<img[^>]*alt\s*=\s*("([^"]*)"|\'([^\']*)\'|([a-zA-Z_]+))[^>]*>#', ' \2\3\4 ', $text);
         $text = preg_replace('#<[^>]*>#', '', $text);
-        $text = html_entity_decode($text, ENT_QUOTES);
-        $text = preg_replace('#\s+#', ' ', $text);
-        return trim(trim($text), "\xA0");        // TODO: The \xAO is a &nbsp;. Add a test for this.
+
+        # TODO: should use page encoding (from mime type charset)
+        if( function_exists('mb_regex_encoding') && $charset == 'UTF-8' )
+        { // $text is utf-8. Special handling to not mess up by removing only 160 for "nbsp" (which is 194+160 in UTF8)
+            $text = html_entity_decode($text, ENT_QUOTES, 'UTF-8');
+            $old_encoding = mb_regex_encoding();
+            mb_regex_encoding('UTF-8');
+            $text = mb_ereg_replace('[[:space:]]+', ' ', $text);
+            mb_regex_encoding($old_encoding);
+        } else {
+            $text = html_entity_decode($text, ENT_QUOTES);
+            $text = preg_replace('#\s+#', ' ', $text);
+        }
+        return trim($text);
     }
 }
 ?>
