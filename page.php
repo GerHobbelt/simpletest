@@ -174,6 +174,11 @@ class SimplePage {
      *    @access public
      */
     function getMimeType() {
+        if ($this->raw && preg_match('~<meta[^>]+http-equiv=(["\'])?content-type\1[^>]*>~i', substr($this->raw, 0, 10000), $m)) {
+            if (preg_match('~content\s*=\s*(["\'])(.+?)\1~', $m[0], $m)) {
+                return $m[2];
+            }
+        }
         if ($this->headers) {
             return $this->headers->getMimeType();
         }
