@@ -162,5 +162,30 @@ class TestOfHtmlStrippingAndNormalisation extends UnitTestCase {
                 SimplePage::normalise('&lt;&gt;&quot;&amp;&#039;'),
                 '<>"&\'');
     }
+
+    function testUtf8WhitespaceNbsp() {
+        $this->assertEqual(
+                SimplePage::normalise(' § '.html_entity_decode('&nbsp;', ENT_COMPAT, 'UTF-8').'729', 'UTF-8'), // chr(194).chr(160)
+                '§ 729');
+        $this->assertEqual(
+                SimplePage::normalise(html_entity_decode('&nbsp;', ENT_COMPAT, 'UTF-8'), 'UTF-8'),
+                '');
+        $this->assertEqual(
+                strlen(SimplePage::normalise(html_entity_decode('a&nbsp;b', ENT_COMPAT, 'UTF-8'), 'UTF-8')),
+                3);
+        $this->assertEqual(
+                strlen(SimplePage::normalise(html_entity_decode('a&nbsp; b', ENT_COMPAT, 'ISO-8859-1'), 'ISO-8859-1')),
+                3);
+        $this->assertEqual(
+                SimplePage::normalise('&raquo; &raquo;', 'UTF-8'),
+                '» »');
+        $this->assertEqual(
+                SimplePage::normalise('&raquo; &raquo;', 'ISO-8859-1'),
+                utf8_decode('» »'));
+        # latin1 strings should not get converted to utf8
+        $this->assertEqual(
+                strlen(SimplePage::normalise(utf8_decode('ä'))),
+                1);
+    }
 }
 ?>

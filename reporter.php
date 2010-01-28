@@ -178,7 +178,13 @@ class HtmlReporter extends SimpleReporter {
      *    @access protected
      */
     protected function htmlEntities($message) {
-        return htmlentities($message, ENT_COMPAT, $this->character_set);
+        # TODO: character set is meant to define the source (of $message). That's not $this->character_set
+        $r = htmlentities($message, ENT_COMPAT, $this->character_set);
+        if( $r == '' && $message != '' ) {
+            # Conversion failed, keep original.
+            $r = $message;
+        }
+        return $r;
     }
 }
 

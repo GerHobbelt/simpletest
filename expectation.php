@@ -684,6 +684,26 @@ class PatternExpectation extends SimpleExpectation {
 }
 
 /**
+ *    Test for a pattern, ignoring (amout of) whitespace.
+ *    NOTE: WIP, see https://sourceforge.net/tracker/?func=detail&aid=2896060&group_id=76550&atid=547458
+ *    @package SimpleTest
+ *    @subpackage UnitTester
+ */
+class IgnoreWhitespaceExpectation extends PatternExpectation {
+    /**
+     *    Sets the value to compare against.
+     *    @param string $pattern    Pattern to search for.
+     *    @param string $message    Customised message on failure.
+     *    @access public
+     */
+    function __construct($pattern, $message = '%s') {
+        $pattern = '~^\s*'.preg_quote($pattern, '~').'\s*$~';
+        $pattern = preg_replace('~\s+~', '\\s+', $pattern);
+    		parent::__construct($pattern, $message);
+    }
+}
+
+/**
  *    Fail if a pattern is detected within the
  *    comparison.
  *    @package SimpleTest

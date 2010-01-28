@@ -452,14 +452,14 @@ class SimpleCallSchedule {
             if ($this->at[$method][$step]->isMatch($args)) {
                 $action = $this->at[$method][$step]->findFirstAction($args);
                 if (isset($action)) {
-                    return $action->act();
+                    return $action->act($step, $method, $args);
                 }
             }
         }
         if (isset($this->always[$method])) {
             $action = $this->always[$method]->findFirstAction($args);
             if (isset($action)) {
-                return $action->act();
+                return $action->act($step, $method, $args);
             }
         }
         $null = null;
@@ -510,7 +510,9 @@ class SimpleReturn {
      *    Returns the value stored earlier.
      *    @return mixed    Whatever was stashed.
      */
-    function act() {
+    function act($step, $method, $args) {
+        if (is_callable($this->value))
+            return call_user_func($this->value, $step, $method, $args);
         return $this->value;
     }
 }
@@ -1397,7 +1399,7 @@ class MockGenerator {
      */
     protected function extendClassCode($methods) {
         $code  = "class " . $this->mock_class . " extends " . $this->class . " {\n";
-        $code .= "    protected \$mock;\n";
+        $code .= "    public \$mock;\n";
         $code .= $this->addMethodList($methods);
         $code .= "\n";
         $code .= "    function " . $this->mock_class . "() {\n";
