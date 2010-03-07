@@ -173,6 +173,20 @@ class ShellTestCase extends SimpleTestCase {
     }
     
     /**
+     *    Pass-thru for assertEqual
+     *
+     *    @see assertEqual()
+     *    @param mixed $first          Value to compare.
+     *    @param mixed $second         Value to compare.
+     *    @param string $message       Message to display.
+     *    @return boolean              True on pass
+     *    @access public
+     */
+    function assertEquals($first, $second, $message = "%s") {
+        return $this->assertEqual($first, $second, $message);
+    }
+
+    /**
      *    Will trigger a pass if the two parameters have
      *    a different value. Otherwise a fail. This
      *    is for testing hand extracted text, etc.
