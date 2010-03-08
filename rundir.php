@@ -12,7 +12,7 @@ class AutoRunDirAllTests extends TestSuite {
 
 	function AutoRunDirAllTests() {
 		if ($_SERVER['argc']>=2) {
-			$starthere = array_pop($_SERVER['argv']);
+			$starthere = rtrim(array_pop($_SERVER['argv']), DIRECTORY_SEPARATOR);
 			$startname = 'Top Level Test Dir';
 		} else {
 			$starthere = '.';
