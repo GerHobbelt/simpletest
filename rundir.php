@@ -18,6 +18,10 @@ class AutoRunDirAllTests extends TestSuite {
 			$starthere = '.';
 			$startname = $starthere;
 		}
+		if (!is_dir($starthere)) {
+			$this->addFile($starthere);
+			return;
+		}
 		$testdir = dir($starthere);
 
 		$this->TestSuite($startname);
