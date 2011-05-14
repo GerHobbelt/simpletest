@@ -2,7 +2,7 @@
         <dl>
             <dt>Protocol version</dt><dd><?php print $_SERVER['SERVER_PROTOCOL']; ?></dd>
             <dt>Request method</dt><dd><?php print $_SERVER['REQUEST_METHOD']; ?></dd>
-            <dt>Accept header</dt><dd><?php print $_SERVER['HTTP_ACCEPT']; ?></dd>
+            <dt>Accept header</dt><dd><?php print (isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '---'); ?></dd>
         </dl>
         <h1>Cookies</h1>
         <?php
@@ -30,7 +30,7 @@
         ?>
         <h1>Raw POST data</h1>
         <?php
-            print "[" . $HTTP_RAW_POST_DATA . "]";
+            print "[" . file_get_contents("php://input") . "]";	// HTTP_RAW_POST_DATA -- http://us.php.net/manual/en/wrappers.php.php
         ?>
         <pre><?php print_r(PageRequest::post()); ?></pre>
         <h1>POST data</h1>

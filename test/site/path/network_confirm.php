@@ -1,18 +1,4 @@
 <?php
-    if (count($HTTP_COOKIE_VARS) > 0) {
-        $_COOKIE = $HTTP_COOKIE_VARS;
-    }
-    if (count($HTTP_GET_VARS) > 0) {
-        $_GET = $HTTP_GET_VARS;
-    }
-    if (count($HTTP_POST_VARS) > 0) {
-        $_POST = $HTTP_POST_VARS;
-    }
-    if (!isset($_SERVER)) {
-        $_SERVER = $HTTP_SERVER_VARS;
-    }
-    global $HTTP_RAW_POST_DATA;
-    
     require_once('../page_request.php');
 ?><html>
     <head><title>Simple test target file in folder</title></head>
@@ -22,7 +8,7 @@
         <dl>
             <dt>Protocol version</dt><dd><?php print $_SERVER['SERVER_PROTOCOL']; ?></dd>
             <dt>Request method</dt><dd><?php print $_SERVER['REQUEST_METHOD']; ?></dd>
-            <dt>Accept header</dt><dd><?php print $_SERVER['HTTP_ACCEPT']; ?></dd>
+            <dt>Accept header</dt><dd><?php print (isset($_SERVER['HTTP_ACCEPT']) ? $_SERVER['HTTP_ACCEPT'] : '---'); ?></dd>
         </dl>
         <h1>Cookies</h1>
         <?php
@@ -50,7 +36,7 @@
         ?>
         <h1>Raw POST data</h1>
         <?php
-            print "[" . $HTTP_RAW_POST_DATA . "]";
+            print "[" . file_get_contents("php://input") . "]";	// HTTP_RAW_POST_DATA -- http://us.php.net/manual/en/wrappers.php.php
         ?>
         <pre><?php print_r(PageRequest::post()); ?></pre>
         <h1>POST data</h1>

@@ -252,7 +252,7 @@ class UnitTestCase extends SimpleTestCase {
     /**
      *    Will trigger a pass if both parameters refer
      *    to the same object. Fail otherwise. This has
-     *    the same semantics at the PHPUnit assertSame.
+     *    the same semantics as the PHPUnit assertSame.
      *    That is, if values are passed in it has roughly
      *    the same affect as assertIdentical.
      *    TODO: Replace with expectation.
@@ -262,7 +262,7 @@ class UnitTestCase extends SimpleTestCase {
      *    @return boolean               True on pass
      *    @access public
      */
-    function assertSame($first, $second, $message = '%s') {
+    function assertSame(&$first, &$second, $message = '%s') {
         $dumper = new SimpleDumper();
         $message = sprintf(
                 $message,
@@ -282,7 +282,7 @@ class UnitTestCase extends SimpleTestCase {
      *    @return boolean               True on pass
      *    @access public
      */
-    function assertClone($first, $second, $message = '%s') {
+    function assertClone(&$first, &$second, $message = '%s') {
         $dumper = new SimpleDumper();
         $message = sprintf(
                 $message,

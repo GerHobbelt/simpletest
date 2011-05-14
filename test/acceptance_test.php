@@ -7,14 +7,21 @@ require_once(dirname(__FILE__) . '/../web_tester.php');
 require_once(dirname(__FILE__) . '/../unit_tester.php');
 
 class SimpleTestAcceptanceTest extends WebTestCase {
-    static function samples() {
-        return 'http://www.lastcraft.com/test/';
+    static function samples($auth_str = null) {
+        if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
+        {
+            $url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+            $url .= '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $_SERVER['HTTP_HOST'];
+            $url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']) . 'site/'; 
+            return $url;
+        }
+        return 'http://' . (!empty($auth_str) ? $auth_str . '@' : '') . 'www.lastcraft.com/test/';
     }
 }
 
 class TestOfLiveBrowser extends UnitTestCase {
-    function samples() {
-        return SimpleTestAcceptanceTest::samples();
+    function samples($auth_str = null) {
+        return SimpleTestAcceptanceTest::samples($auth_str);
     }
 
     function testGet() {
@@ -320,7 +327,7 @@ class TestOfLinkFollowing extends SimpleTestAcceptanceTest {
 
     function testAbsoluteUrlBehavesAbsolutely() {
         $this->get($this->samples() . 'link_confirm.php');
-        $this->get('http://www.lastcraft.com');
+        $this->get($this->samples());
         $this->assertText('No guarantee of quality is given or even intended');
     }
 
@@ -382,7 +389,7 @@ class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
     function testClickBackADirectoryLevel() {
         $this->get($this->samples() . 'front_controller_style/');
         $this->clickLink('Down one');
-        $this->assertPattern('|Index of .*?/test|i');
+        $this->assertText('No guarantee of quality is given or even intended');
     }
 }
 
@@ -434,7 +441,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     function testJumpBackADirectoryLevel() {
         $this->get($this->samples() . 'front_controller_style/');
         $this->clickLink('Down one');
-        $this->assertPattern('|Index of .*?/test|');
+        $this->assertText('No guarantee of quality is given or even intended');
     }
 
     function testSubmitToNamedPage() {
@@ -469,7 +476,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     function testSubmitBackADirectoryLevel() {
         $this->get($this->samples() . 'front_controller_style/');
         $this->clickSubmit('Down one');
-        $this->assertPattern('|Index of .*?/test|');
+        $this->assertText('No guarantee of quality is given or even intended');
     }
 
     function testSubmitToNamedPageWithMixedPostAndGet() {
@@ -508,7 +515,7 @@ class TestOfLiveHeaders extends SimpleTestAcceptanceTest {
     }
 
     function testConfirmingHeaderExistence() {
-        $this->get('http://www.lastcraft.com/');
+        $this->get($this->samples());
         $this->assertHeader('content-type');
         $this->assertHeader('content-type', 'text/html');
         $this->assertHeader('content-type', new PatternExpectation('/HTML/i'));
@@ -1317,12 +1324,12 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testEncodedAuthenticationFetchesPage() {
-        $this->get('http://test:secret@www.lastcraft.com/test/protected/');
+        $this->get($this->samples('test:secret') . 'protected/');
         $this->assertResponse(200);
     }
 
     function testEncodedAuthenticationFetchesPageAfterTrailingSlashRedirect() {
-        $this->get('http://test:secret@www.lastcraft.com/test/protected');
+        $this->get($this->samples('test:secret') . 'protected');
         $this->assertResponse(200);
     }
 
@@ -1342,7 +1349,7 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testRedirectKeepsEncodedAuthentication() {
-        $this->get('http://test:secret@www.lastcraft.com/test/protected/local_redirect.php');
+        $this->get($this->samples('test:secret') . 'protected/local_redirect.php');
         $this->assertResponse(200);
         $this->assertTitle('Simple test target file');
     }
@@ -1529,7 +1536,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     function testJumpBackADirectoryLevelReplacesJustThatFrame() {
         $this->get($this->samples() . 'messy_frameset.html');
         $this->clickLink('Down one');
-        $this->assertPattern('/index of .*\/test/i');
+        $this->assertPattern('/No guarantee of quality is given or even intended/');
         $this->assertPattern('/Count: 1/');
     }
 
@@ -1569,7 +1576,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     function testSubmitBackADirectoryLevelReplacesJustThatFrame() {
         $this->get($this->samples() . 'messy_frameset.html');
         $this->clickSubmit('Down one');
-        $this->assertPattern('/index of .*\/test/i');
+        $this->assertPattern('/No guarantee of quality is given or even intended/');
         $this->assertPattern('/Count: 1/');
     }
 

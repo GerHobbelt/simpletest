@@ -46,14 +46,13 @@ class PageRequest {
         return $this->parsed;
     }
     
-    function get() {
+    static function get() {
         $request = new PageRequest($_SERVER['QUERY_STRING']);
         return $request->getAll();
     }
     
-    function post() {
-        global $HTTP_RAW_POST_DATA;
-        $request = new PageRequest($HTTP_RAW_POST_DATA);
+    static function post() {
+        $request = new PageRequest(file_get_contents("php://input"));	// HTTP_RAW_POST_DATA -- http://us.php.net/manual/en/wrappers.php.php
         return $request->getAll();
     }
 }
