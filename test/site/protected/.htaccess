@@ -1,5 +1,6 @@
-AuthName "Test of basic authentication"
+AuthName "SimpleTest basic authentication"
 AuthType Basic
-AuthUserFile /home/marcus/projects/lastcraft/www/test/protected/.htpasswd
+# http://httpd.apache.org/docs/2.2/mod/mod_authn_file.html
+AuthUserFile ../sites/partikule/bugger/mootools-filemanager/Demos/simpletest/test/site/protected/.htpasswd
 require valid-user
 
