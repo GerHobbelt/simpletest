@@ -293,8 +293,9 @@ class SimpleUserAgent {
      *    @return SimpleHttpRequest              New request object.
      *    @access protected
      */
-    protected function createHttpRequest($url, $encoding) {
-        return new SimpleHttpRequest($this->createRoute($url), $encoding);
+    public function createHttpRequest($url, $encoding) {
+		$route = $this->createRoute($url);
+        return new SimpleHttpRequest($route, $encoding);
     }
 
     /**
