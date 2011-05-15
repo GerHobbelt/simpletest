@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/expectation.php');
  *    @subpackage WebTester
  */
 class FieldExpectation extends SimpleExpectation {
-    private $value;
+    protected $value;
 
     /**
      *    Sets the field value to compare against.
@@ -64,7 +64,7 @@ class FieldExpectation extends SimpleExpectation {
      *    Tests for valid field comparisons with a single option.
      *    @param mixed $value       Value to type check.
      *    @return boolean           True if integer, string or float.
-     *    @access private
+     *    @access protected
      */
     protected function isSingle($value) {
         return is_string($value) || is_integer($value) || is_float($value);
@@ -74,7 +74,7 @@ class FieldExpectation extends SimpleExpectation {
      *    String comparison for simple field with a single option.
      *    @param mixed $compare    String to test against.
      *    @returns boolean         True if matching.
-     *    @access private
+     *    @access protected
      */
     protected function testSingle($compare) {
         if (is_array($compare) && count($compare) == 1) {
@@ -90,7 +90,7 @@ class FieldExpectation extends SimpleExpectation {
      *    List comparison for multivalue field.
      *    @param mixed $compare    List in any order to test against.
      *    @returns boolean         True if matching.
-     *    @access private
+     *    @access protected
      */
     protected function testMultiple($compare) {
         if (is_string($compare)) {
@@ -132,8 +132,8 @@ class FieldExpectation extends SimpleExpectation {
  *    @subpackage WebTester
  */
 class HttpHeaderExpectation extends SimpleExpectation {
-    private $expected_header;
-    private $expected_value;
+    protected $expected_header;
+    protected $expected_value;
 
     /**
      *    Sets the field and value to compare against.
@@ -165,7 +165,7 @@ class HttpHeaderExpectation extends SimpleExpectation {
      *    @param string $header    Name of header.
      *    @param string            Trimmed and lowecased header
      *                             name.
-     *    @access private
+     *    @access protected
      */
     protected function normaliseHeader($header) {
         return strtolower(trim($header));
@@ -203,7 +203,7 @@ class HttpHeaderExpectation extends SimpleExpectation {
      *    Compares a single header line against the expectation.
      *    @param string $line      A single line to compare.
      *    @return boolean          True if matched.
-     *    @access private
+     *    @access protected
      */
     protected function testHeaderLine($line) {
         if (count($parsed = explode(':', $line, 2)) < 2) {
@@ -262,8 +262,8 @@ class HttpHeaderExpectation extends SimpleExpectation {
  *    @subpackage WebTester
  */
 class NoHttpHeaderExpectation extends HttpHeaderExpectation {
-    private $expected_header;
-    private $expected_value;
+    protected $expected_header;
+    protected $expected_value;
 
     /**
      *    Sets the field and value to compare against.
@@ -308,7 +308,7 @@ class NoHttpHeaderExpectation extends HttpHeaderExpectation {
  *    @subpackage UnitTester
  */
 class TextExpectation extends SimpleExpectation {
-    private $substring;
+    protected $substring;
 
     /**
      *    Sets the value to compare against.
@@ -431,8 +431,8 @@ class NoTextExpectation extends TextExpectation {
  *    @subpackage WebTester
  */
 class WebTestCase extends SimpleTestCase {
-    private $browser;
-    private $ignore_errors = false;
+    protected $browser = null;
+    protected $ignore_errors = false;
 
     /**
      *    Creates an empty test case. Should be subclassed
@@ -627,7 +627,7 @@ class WebTestCase extends SimpleTestCase {
      *    reported.
      *    @param string/boolean $result   HTML or failure.
      *    @return string/boolean $result  Passes through result.
-     *    @access private
+     *    @access protected
      */
     protected function failOnError($result) {
         if (! $this->ignore_errors) {

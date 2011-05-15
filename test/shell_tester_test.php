@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../shell_tester.php');
 Mock::generate('SimpleShell');
 
 class TestOfShellTestCase extends ShellTestCase {
-    private $mock_shell = false;
+    protected $mock_shell = false;
     
     function getShell() {
         return $this->mock_shell;

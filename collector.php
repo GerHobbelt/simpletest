@@ -77,7 +77,7 @@ class SimpleCollector {
      *  only tests for Unix hidden files.
      *  @param string $filename        Plain filename.
      *  @return boolean                True if hidden file.
-     *  @access private
+     *  @access protected
      */
     protected function isHidden($filename) {
         return strncmp($filename, '.', 1) == 0;
@@ -93,7 +93,7 @@ class SimpleCollector {
  * @see SimpleCollector
  */
 class SimplePatternCollector extends SimpleCollector {
-    private $pattern;
+    protected $pattern;
 
     /**
      *

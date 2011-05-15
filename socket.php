@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . '/compatibility.php');
  *    @subpackage WebTester
  */
 class SimpleStickyError {
-    private $error = 'Constructor not chained';
+    protected $error = 'Constructor not chained';
 
     /**
      *    Sets the error to empty.
@@ -71,10 +71,10 @@ class SimpleStickyError {
  *    @subpackage WebTester
  */
 class SimpleFileSocket extends SimpleStickyError {
-    private $handle;
-    private $is_open = false;
-    private $sent = '';
-    private $block_size;
+    protected $handle;
+    protected $is_open = false;
+    protected $sent = '';
+    protected $block_size;
 
     /**
      *    Opens a socket for reading and writing.
@@ -168,10 +168,10 @@ class SimpleFileSocket extends SimpleStickyError {
  *    @subpackage WebTester
  */
 class SimpleSocket extends SimpleStickyError {
-    private $handle;
-    private $is_open = false;
-    private $sent = '';
-    private $lock_size;
+    protected $handle;
+    protected $is_open = false;
+    protected $sent = '';
+    protected $lock_size;
 
     /**
      *    Opens a socket for reading and writing.

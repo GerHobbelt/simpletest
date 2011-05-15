@@ -36,10 +36,10 @@ if (! defined('SIMPLE_TEST')) {
  *    @subpackage   UnitTester
  */
 class SimpleTestCase {
-    private $label = false;
+    protected $label = false;
     protected $reporter;
-    private $observers;
-    private $should_skip = false;
+    protected $observers;
+    protected $should_skip = false;
 
     /**
      *    Sets up the test with no display.
@@ -394,7 +394,7 @@ class SimpleFileLoader {
      *    Imports new variables into the global namespace.
      *    @param hash $existing   Variables before the file was loaded.
      *    @param hash $new        Variables after the file was loaded.
-     *    @access private
+     *    @access protected
      */
     protected function makeFileVariablesGlobal($existing, $new) {
         $globals = array_diff(array_keys($new), array_keys($existing));
@@ -411,7 +411,7 @@ class SimpleFileLoader {
      *    never mind the user. A test case should not be included
      *    twice anyway.
      *    @param string $test_file        File name with classes.
-     *    @access private
+     *    @access protected
      */
     protected function scrapeClassesFromFile($test_file) {
         preg_match_all('~^\s*class\s+(\w+)(\s+(extends|implements)\s+\w+)*\s*\{~mi',
@@ -475,8 +475,8 @@ class SimpleFileLoader {
  *    @subpackage   UnitTester
  */
 class TestSuite {
-    private $label;
-    private $test_cases;
+    protected $label;
+    protected $test_cases;
 
     /**
      *    Sets the name of the test suite.
@@ -610,8 +610,8 @@ class TestSuite {
  *    @subpackage   UnitTester
  */
 class BadTestSuite {
-    private $label;
-    private $error;
+    protected $label;
+    protected $error;
 
     /**
      *    Sets the name of the test suite and error message.

@@ -97,7 +97,7 @@ class SimpleTagBuilder {
      *    Make the keys lower case for case insensitive look-ups.
      *    @param hash $map   Hash to convert.
      *    @return hash       Unchanged values, but keys lower case.
-     *    @access private
+     *    @access protected
      */
     protected function keysToLowerCase($map) {
         $lower = array();
@@ -114,9 +114,9 @@ class SimpleTagBuilder {
  *    @subpackage WebTester
  */
 class SimpleTag {
-    private $name;
-    private $attributes;
-    private $content;
+    protected $name;
+    protected $attributes;
+    protected $content;
 
     /**
      *    Starts with a named tag with attributes only.
@@ -335,9 +335,9 @@ class SimpleAnchorTag extends SimpleTag {
  *    @subpackage WebTester
  */
 class SimpleWidget extends SimpleTag {
-    private $value;
-    private $label;
-    private $is_set;
+    protected $value;
+    protected $label;
+    protected $is_set;
 
     /**
      *    Starts with a named tag with attributes only.
@@ -710,9 +710,9 @@ class SimpleTextAreaTag extends SimpleWidget {
     /**
      *    Test to see if text should be wrapped.
      *    @return boolean        True if wrapping on.
-     *    @access private
+     *    @access protected
      */
-    function wrapIsEnabled() {
+    protected function wrapIsEnabled() {
         if ($this->getAttribute('cols')) {
             $wrap = $this->getAttribute('wrap');
             if (($wrap == 'physical') || ($wrap == 'hard')) {
@@ -730,7 +730,7 @@ class SimpleTextAreaTag extends SimpleWidget {
      *    @param string $text    Text to wrap.
      *    @return string         Text wrapped with carriage
      *                           returns and line feeds
-     *    @access private
+     *    @access protected
      */
     protected function wrap($text) {
         $text = str_replace("\r\r\n", "\r\n", str_replace("\n", "\r\n", $text));
@@ -804,8 +804,8 @@ class SimpleUploadTag extends SimpleWidget {
  *    @subpackage WebTester
  */
 class SimpleSelectionTag extends SimpleWidget {
-    private $options;
-    private $choice;
+    protected $options;
+    protected $choice;
 
     /**
      *    Starts with attributes only.
@@ -892,8 +892,8 @@ class SimpleSelectionTag extends SimpleWidget {
  *    @subpackage WebTester
  */
 class MultipleSelectionTag extends SimpleWidget {
-    private $options;
-    private $values;
+    protected $options;
+    protected $values;
 
     /**
      *    Starts with attributes only.
@@ -1170,7 +1170,7 @@ class SimpleCheckboxTag extends SimpleWidget {
  *    @subpackage WebTester
  */
 class SimpleTagGroup {
-    private $widgets = array();
+    protected $widgets = array();
 
     /**
      *    Adds a tag to the group.
@@ -1324,7 +1324,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *                                          hash or false for nothing set.
      *    @return boolean                       False if trying to set a
      *                                          missing value.
-     *    @access private
+     *    @access protected
      */
     protected function valuesArePossible($values) {
         $matches = array();
@@ -1344,7 +1344,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *    value and only two or more are contained in an array.
      *    @param array $values           List of values of widgets.
      *    @return string/array/boolean   Expected format for a tag.
-     *    @access private
+     *    @access protected
      */
     protected function coerceValues($values) {
         if (count($values) == 0) {
@@ -1363,7 +1363,7 @@ class SimpleCheckboxGroup extends SimpleTagGroup {
      *                                        to a one item list. False
      *                                        gives an empty list.
      *    @return array                       List of values, possibly empty.
-     *    @access private
+     *    @access protected
      */
     protected function makeArray($value) {
         if ($value === false) {
@@ -1410,7 +1410,7 @@ class SimpleRadioGroup extends SimpleTagGroup {
      *    Tests to see if a value is allowed.
      *    @param string    Attempted value.
      *    @return boolean  True if a valid value.
-     *    @access private
+     *    @access protected
      */
     protected function valueIsPossible($value) {
         $widgets = $this->getWidgets();

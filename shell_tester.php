@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/test_case.php');
  *    @subpackage UnitTester
  */
 class SimpleShell {
-    private $output;
+    protected $output;
 
     /**
      *    Executes the shell comand and stashes the output.
@@ -69,9 +69,9 @@ class SimpleShell {
  *    @subpackage UnitTester
  */
 class ShellTestCase extends SimpleTestCase {
-    private $current_shell;
-    private $last_status;
-    private $last_command;
+    protected $current_shell;
+    protected $last_status;
+    protected $last_command;
 
     /**
      *    Creates an empty test case. Should be subclassed

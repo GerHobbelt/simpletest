@@ -21,12 +21,12 @@ require_once(dirname(__FILE__) . '/url.php');
  *    @subpackage WebTester
  */
 class SimpleCookie {
-    private $host;
-    private $name;
-    private $value;
-    private $path;
-    private $expiry;
-    private $is_secure;
+    protected $host;
+    protected $name;
+    protected $value;
+    protected $path;
+    protected $expiry;
+    protected $is_secure;
 
     /**
      *    Constructor. Sets the stored values.
@@ -93,7 +93,7 @@ class SimpleCookie {
      *    cookie's host validity.
      *    @param string $host    Host name to truncate.
      *    @return string        Domain or false on a bad host.
-     *    @access private
+     *    @access protected
      */
     protected function truncateHost($host) {
         $tlds = SimpleUrl::getAllTopLevelDomains();
@@ -206,7 +206,7 @@ class SimpleCookie {
      *    Adds a trailing and leading slash to the path
      *    if missing.
      *    @param string $path            Path to fix.
-     *    @access private
+     *    @access protected
      */
     protected function fixPath($path) {
         if (substr($path, 0, 1) != '/') {
@@ -226,7 +226,7 @@ class SimpleCookie {
  *    @subpackage WebTester
  */
 class SimpleCookieJar {
-    private $cookies;
+    protected $cookies;
 
     /**
      *    Constructor. Jar starts empty.
@@ -296,7 +296,7 @@ class SimpleCookieJar {
      *    first empty slot if none.
      *    @param SimpleCookie $cookie    Cookie to write into jar.
      *    @return integer                Available slot.
-     *    @access private
+     *    @access protected
      */
     protected function findFirstMatch($cookie) {
         for ($i = 0; $i < count($this->cookies); $i++) {
@@ -345,7 +345,7 @@ class SimpleCookieJar {
      *                                 this path.
      *    @param string $name          Name must match.
      *    @return boolean              True if matched.
-     *    @access private
+     *    @access protected
      */
     protected function isMatch($cookie, $host, $path, $name) {
         if ($cookie->getName() != $name) {

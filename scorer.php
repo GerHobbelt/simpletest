@@ -19,10 +19,10 @@ require_once(dirname(__FILE__) . '/invoker.php');
  *    @abstract
  */
 class SimpleScorer {
-    private $passes;
-    private $fails;
-    private $exceptions;
-    private $is_dry_run;
+    protected $passes;
+    protected $fails;
+    protected $exceptions;
+    protected $is_dry_run;
 
     /**
      *    Starts the test run with no results.
@@ -239,9 +239,9 @@ class SimpleScorer {
  *    @subpackage UnitTester
  */
 class SimpleReporter extends SimpleScorer {
-    private $test_stack;
-    private $size;
-    private $progress;
+    protected $test_stack;
+    protected $size;
+    protected $progress;
 
     /**
      *    Starts the display with no results in.

@@ -23,18 +23,18 @@ require_once(dirname(__FILE__) . '/encoding.php');
  *    @subpackage WebTester
  */
 class SimpleUrl {
-    private $scheme;
-    private $username;
-    private $password;
-    private $host;
-    private $port;
+    protected $scheme;
+    protected $username;
+    protected $password;
+    protected $host;
+    protected $port;
     public $path;
-    private $request;
-    private $fragment;
-    private $x;
-    private $y;
-    private $target;
-    private $raw = false;
+    protected $request;
+    protected $fragment;
+    protected $x;
+    protected $y;
+    protected $target;
+    protected $raw = false;
 
     /**
      *    Constructor. Parses URL into sections.
@@ -77,7 +77,7 @@ class SimpleUrl {
      *    @param string $url   URL so far. The coordinates will be
      *                         removed.
      *    @return array        X, Y as a pair of integers.
-     *    @access private
+     *    @access protected
      */
     protected function chompCoordinates(&$url) {
         if (preg_match('/(.*)\?(\d+),(\d+)$/', $url, $matches)) {
@@ -92,7 +92,7 @@ class SimpleUrl {
      *    @param string $url   URL so far. The scheme will be
      *                         removed.
      *    @return string       Scheme part or false.
-     *    @access private
+     *    @access protected
      */
     protected function chompScheme(&$url) {
         if (preg_match('#^([^/:]*):(//)(.*)#', $url, $matches)) {
@@ -110,7 +110,7 @@ class SimpleUrl {
      *                          password are removed.
      *    @return array         Two item list of username and
      *                          password. Will urldecode() them.
-     *    @access private
+     *    @access protected
      */
     protected function chompLogin(&$url) {
         $prefix = '';
@@ -138,7 +138,7 @@ class SimpleUrl {
      *    @param string $url    URL so far. The host will be
      *                          removed.
      *    @return string        Host part guess or false.
-     *    @access private
+     *    @access protected
      */
     protected function chompHost(&$url) {
         if (preg_match('!^(//)(.*?)(/.*|\?.*|#.*|$)!', $url, $matches)) {
@@ -164,7 +164,7 @@ class SimpleUrl {
      *    @param string $url     URL so far. The host will be
      *                           removed.
      *    @return string         Path part or '/'.
-     *    @access private
+     *    @access protected
      */
     protected function chompPath(&$url) {
         if (preg_match('/(.*?)(\?|#|$)(.*)/', $url, $matches)) {
@@ -179,7 +179,7 @@ class SimpleUrl {
      *    @param string $url  URL so far. The request will be
      *                        removed.
      *    @return string      Raw request part.
-     *    @access private
+     *    @access protected
      */
     protected function chompRequest(&$url) {
         if (preg_match('/\?(.*?)(#|$)(.*)/', $url, $matches)) {
@@ -193,7 +193,7 @@ class SimpleUrl {
      *    Breaks the request down into an object.
      *    @param string $raw           Raw request.
      *    @return SimpleFormEncoding    Parsed data.
-     *    @access private
+     *    @access protected
      */
     protected function parseRequest($raw) {
         $this->raw = $raw;
@@ -488,7 +488,7 @@ class SimpleUrl {
      *    to return a complete absolute one.
      *    @param string/SimpleUrl $base       Base URL.
      *    @param string                       Absolute path.
-     *    @access private
+     *    @access protected
      */
     protected function extractAbsolutePath($base) {
         if ($this->getHost()) {
@@ -507,7 +507,7 @@ class SimpleUrl {
      *    Simple test to see if a path part is relative.
      *    @param string $path        Path to test.
      *    @return boolean            True if starts with a "/".
-     *    @access private
+     *    @access protected
      */
     protected function isRelativePath($path) {
         return (substr($path, 0, 1) != '/');

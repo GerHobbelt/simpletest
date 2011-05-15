@@ -2,7 +2,7 @@
 // $Id$
 
 class PageRequest {
-    private $parsed;
+    protected $parsed;
     
     function PageRequest($raw) {
         $statements = explode('&', $raw);
@@ -15,7 +15,7 @@ class PageRequest {
         }
     }
     
-    private function parseStatement($statement) {
+    protected function parseStatement($statement) {
         list($key, $value) = explode('=', $statement);
         $key = urldecode($key);
         if (preg_match('/(.*)\[\]$/', $key, $matches)) {
@@ -31,14 +31,14 @@ class PageRequest {
         }
     }
     
-    private function addValue($key, $value) {
+    protected function addValue($key, $value) {
         if (! is_array($this->parsed[$key])) {
             $this->parsed[$key] = array($this->parsed[$key]);
         }
         $this->parsed[$key][] = urldecode($value);
     }
     
-    private function setValue($key, $value) {
+    protected function setValue($key, $value) {
         $this->parsed[$key] = urldecode($value);
     }
     

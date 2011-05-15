@@ -22,21 +22,21 @@ require_once(dirname(__FILE__) . '/selector.php');
  *    @subpackage WebTester
  */
 class SimplePage {
-    private $links = array();
-    private $title = false;
-    private $last_widget;
-    private $label;
-    private $forms = array();
-    private $frames = array();
-    private $transport_error;
-    private $raw;
-    private $text = false;
-    private $sent;
-    private $headers;
-    private $method;
-    private $url;
-    private $base = false;
-    private $request_data;
+    protected $links = array();
+    protected $title = false;
+    protected $last_widget;
+    protected $label;
+    protected $forms = array();
+    protected $frames = array();
+    protected $transport_error;
+    protected $raw;
+    protected $text = false;
+    protected $sent;
+    protected $headers;
+    protected $method;
+    protected $url;
+    protected $base = false;
+    protected $request_data;
 
     /**
      *    Parses a page ready to access it's contents.
@@ -54,7 +54,7 @@ class SimplePage {
     /**
      *    Extracts all of the response information.
      *    @param SimpleHttpResponse $response    Response being parsed.
-     *    @access private
+     *    @access protected
      */
     protected function extractResponse($response) {
         $this->transport_error = $response->getError();
@@ -68,7 +68,7 @@ class SimplePage {
 
     /**
      *    Sets up a missing response.
-     *    @access private
+     *    @access protected
      */
     protected function noResponse() {
         $this->transport_error = 'No page fetched yet';
@@ -381,7 +381,7 @@ class SimplePage {
      *    Converts a link tag into a target URL.
      *    @param SimpleAnchor $link    Parsed link.
      *    @return SimpleUrl            URL with frame target if any.
-     *    @access private
+     *    @access protected
      */
     protected function getUrlFromLink($link) {
         $url = $this->expandUrl($link->getHref());

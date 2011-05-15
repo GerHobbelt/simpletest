@@ -34,13 +34,13 @@ if (! defined('DEFAULT_MAX_NESTED_FRAMES')) {
  *    @subpackage WebTester
  */
 class SimpleBrowserHistory {
-    private $sequence = array();
-    private $position = -1;
+    protected $sequence = array();
+    protected $position = -1;
 
     /**
      *    Test for no entries yet.
      *    @return boolean        True if empty.
-     *    @access private
+     *    @access protected
      */
     protected function isEmpty() {
         return ($this->position == -1);
@@ -49,7 +49,7 @@ class SimpleBrowserHistory {
     /**
      *    Test for being at the beginning.
      *    @return boolean        True if first.
-     *    @access private
+     *    @access protected
      */
     protected function atBeginning() {
         return ($this->position == 0) && ! $this->isEmpty();
@@ -58,7 +58,7 @@ class SimpleBrowserHistory {
     /**
      *    Test for being at the last entry.
      *    @return boolean        True if last.
-     *    @access private
+     *    @access protected
      */
     protected function atEnd() {
         return ($this->position + 1 >= count($this->sequence)) && ! $this->isEmpty();
@@ -135,7 +135,7 @@ class SimpleBrowserHistory {
     /**
      *    Ditches all future entries beyond the current
      *    point.
-     *    @access private
+     *    @access protected
      */
     protected function dropFuture() {
         if ($this->isEmpty()) {
@@ -155,12 +155,12 @@ class SimpleBrowserHistory {
  *    @subpackage WebTester
  */
 class SimpleBrowser {
-    private $user_agent;
-    private $page;
-    private $history;
-    private $ignore_frames;
-    private $maximum_nested_frames;
-    private $parser;
+    protected $user_agent;
+    protected $page;
+    protected $history;
+    protected $ignore_frames;
+    protected $maximum_nested_frames;
+    protected $parser;
 
     /**
      *    Starts with a fresh browser with no
@@ -264,7 +264,7 @@ class SimpleBrowser {
      *    @param SimpleHttpResponse $response    Response from fetch.
      *    @param integer $depth                  Nested frameset depth.
      *    @return SimplePage                     Parsed HTML.
-     *    @access private
+     *    @access protected
      */
     protected function parse($response, $depth = 0) {
         $page = $this->buildPage($response);
@@ -297,7 +297,7 @@ class SimpleBrowser {
      *    @param SimpleEncoding $encoding       GET/POST parameters.
      *    @param integer $depth                 Nested frameset depth protection.
      *    @return SimplePage                    Parsed page.
-     *    @access private
+     *    @access protected
      */
     protected function fetch($url, $encoding, $depth = 0) {
         $response = $this->user_agent->fetchResponse($url, $encoding);
@@ -313,7 +313,7 @@ class SimpleBrowser {
      *    @param SimpleUrl $url                   Target to fetch.
      *    @param SimpleEncoding $parameters       GET/POST parameters.
      *    @return string                          Raw content of page.
-     *    @access private
+     *    @access protected
      */
     protected function load($url, $parameters) {
         $frame = $url->getTarget();
@@ -328,7 +328,7 @@ class SimpleBrowser {
      *    @param string/SimpleUrl $url            Target to fetch as string.
      *    @param SimplePostEncoding $parameters   POST parameters.
      *    @return string                          Raw content of page.
-     *    @access private
+     *    @access protected
      */
     protected function loadPage($url, $parameters) {
         $this->page = $this->fetch($url, $parameters);
@@ -345,7 +345,7 @@ class SimpleBrowser {
      *    @param string/SimpleUrl $url            Target to fetch as string.
      *    @param SimpleFormEncoding $parameters   POST parameters.
      *    @return string                          Raw content of page.
-     *    @access private
+     *    @access protected
      */
     protected function loadFrame($frames, $url, $parameters) {
         $page = $this->fetch($url, $parameters);

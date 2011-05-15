@@ -19,8 +19,8 @@ require_once(dirname(__FILE__) . '/scorer.php');
  *    @subpackage UnitTester
  */
 class XmlReporter extends SimpleReporter {
-    private $indent;
-    private $namespace;
+    protected $indent;
+    protected $namespace;
 
     /**
      *    Sets up indentation and namespace.
@@ -290,8 +290,8 @@ class XmlReporter extends SimpleReporter {
  *    @subpackage UnitTester
  */
 class NestingXmlTag {
-    private $name;
-    private $attributes;
+    protected $name;
+    protected $attributes;
 
     /**
      *    Sets the basic test information except
@@ -472,12 +472,12 @@ class NestingGroupTag extends NestingXmlTag {
  *    @subpackage UnitTester
  */
 class SimpleTestXmlParser {
-    private $listener;
-    private $expat;
-    private $tag_stack;
-    private $in_content_tag;
-    private $content;
-    private $attributes;
+    protected $listener;
+    protected $expat;
+    protected $tag_stack;
+    protected $in_content_tag;
+    protected $content;
+    protected $attributes;
 
     /**
      *    Loads a listener with the SimpleReporter
@@ -528,7 +528,7 @@ class SimpleTestXmlParser {
      *    Opens a new test nesting level.
      *    @return NestedXmlTag     The group, case or method tag
      *                             to start.
-     *    @access private
+     *    @access protected
      */
     protected function pushNestingTag($nested) {
         array_unshift($this->tag_stack, $nested);
@@ -538,7 +538,7 @@ class SimpleTestXmlParser {
      *    Accessor for current test structure tag.
      *    @return NestedXmlTag     The group, case or method tag
      *                             being parsed.
-     *    @access private
+     *    @access protected
      */
     protected function &getCurrentNestingTag() {
         return $this->tag_stack[0];
@@ -548,7 +548,7 @@ class SimpleTestXmlParser {
      *    Ends a nesting tag.
      *    @return NestedXmlTag     The group, case or method tag
      *                             just finished.
-     *    @access private
+     *    @access protected
      */
     protected function popNestingTag() {
         return array_shift($this->tag_stack);
@@ -558,7 +558,7 @@ class SimpleTestXmlParser {
      *    Test if tag is a leaf node with only text content.
      *    @param string $tag        XML tag name.
      *    @return @boolean          True if leaf, false if nesting.
-     *    @private
+     *    @access protected
      */
     protected function isLeaf($tag) {
         return in_array($tag, array(

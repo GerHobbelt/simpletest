@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/url.php');
  *    @subpackage WebTester
  */
 class SimpleRoute {
-    private $url;
+    protected $url;
 
     /**
      *    Sets the target URL.
@@ -114,9 +114,9 @@ class SimpleRoute {
  *    @subpackage WebTester
  */
 class SimpleProxyRoute extends SimpleRoute {
-    private $proxy;
-    private $username;
-    private $password;
+    protected $proxy;
+    protected $username;
+    protected $password;
 
     /**
      *    Stashes the proxy address.
@@ -195,10 +195,10 @@ class SimpleProxyRoute extends SimpleRoute {
  *    @subpackage WebTester
  */
 class SimpleHttpRequest {
-    private $route;
-    private $encoding;
-    private $headers;
-    private $cookies;
+    protected $route;
+    protected $encoding;
+    protected $headers;
+    protected $cookies;
 
     /**
      *    Builds the socket request from the different pieces.
@@ -238,7 +238,7 @@ class SimpleHttpRequest {
      *    @param string $method                 HTTP request method,
      *                                          usually GET.
      *    @param SimpleFormEncoding $encoding   Content to send with request.
-     *    @access private
+     *    @access protected
      */
     protected function dispatchRequest($socket, $encoding) {
         foreach ($this->headers as $header_line) {
@@ -294,14 +294,14 @@ class SimpleHttpRequest {
  *    @subpackage WebTester
  */
 class SimpleHttpHeaders {
-    private $raw_headers;
-    private $response_code;
-    private $http_version;
-    private $mime_type;
-    private $location;
-    private $cookies;
-    private $authentication;
-    private $realm;
+    protected $raw_headers;
+    protected $response_code;
+    protected $http_version;
+    protected $mime_type;
+    protected $location;
+    protected $cookies;
+    protected $authentication;
+    protected $realm;
 
     /**
      *    Parses the incoming header block.
@@ -455,7 +455,7 @@ class SimpleHttpHeaders {
      *    Parse the Set-cookie content.
      *    @param string $cookie_line    Text after "Set-cookie:"
      *    @return SimpleCookie          New cookie object.
-     *    @access private
+     *    @access protected
      */
     protected function parseCookie($cookie_line) {
         $parts = explode(";", $cookie_line);
@@ -480,11 +480,11 @@ class SimpleHttpHeaders {
  *    @subpackage WebTester
  */
 class SimpleHttpResponse extends SimpleStickyError {
-    private $url;
-    private $encoding;
-    private $sent;
-    private $content;
-    private $headers;
+    protected $url;
+    protected $encoding;
+    protected $sent;
+    protected $content;
+    protected $headers;
 
     /**
      *    Constructor. Reads and parses the incoming
@@ -512,7 +512,7 @@ class SimpleHttpResponse extends SimpleStickyError {
     /**
      *    Splits up the headers and the rest of the content.
      *    @param string $raw    Content to parse.
-     *    @access private
+     *    @access protected
      */
     protected function parse($raw) {
         if (! $raw) {
@@ -601,7 +601,7 @@ class SimpleHttpResponse extends SimpleStickyError {
      *    @param SimpleSocket $socket  Unread socket.
      *    @return string               Raw output if successful
      *                                 else false.
-     *    @access private
+     *    @access protected
      */
     protected function readAll($socket) {
         $all = '';
@@ -616,7 +616,7 @@ class SimpleHttpResponse extends SimpleStickyError {
      *    last one.
      *    @param string $packet    Chunk to interpret.
      *    @return boolean          True if empty or EOF.
-     *    @access private
+     *    @access protected
      */
     protected function isLastPacket($packet) {
         if (is_string($packet)) {

@@ -28,7 +28,7 @@ if (! defined('MOCK_ANYTHING')) {
  *    @subpackage MockObjects
  */
 class ParametersExpectation extends SimpleExpectation {
-    private $expected;
+    protected $expected;
 
     /**
      *    Sets the expected parameter list.
@@ -154,8 +154,8 @@ class ParametersExpectation extends SimpleExpectation {
  *  @subpackage MockObjects
  */
 class CallCountExpectation extends SimpleExpectation {
-    private $method;
-    private $count;
+    protected $method;
+    protected $count;
 
     /**
      *    Stashes the method and expected count for later
@@ -197,8 +197,8 @@ class CallCountExpectation extends SimpleExpectation {
  *  @subpackage MockObjects
  */
 class MinimumCallCountExpectation extends SimpleExpectation {
-    private $method;
-    private $count;
+    protected $method;
+    protected $count;
 
     /**
      *    Stashes the method and expected count for later
@@ -240,8 +240,8 @@ class MinimumCallCountExpectation extends SimpleExpectation {
  *    @subpackage   MockObjects
  */
 class MaximumCallCountExpectation extends SimpleExpectation {
-    private $method;
-    private $count;
+    protected $method;
+    protected $count;
 
     /**
      *    Stashes the method and expected count for later
@@ -284,7 +284,7 @@ class MaximumCallCountExpectation extends SimpleExpectation {
  *    @subpackage MockObjects
  */
 class SimpleSignatureMap {
-    private $map;
+    protected $map;
 
     /**
      *    Creates an empty call map.
@@ -371,9 +371,9 @@ class SimpleSignatureMap {
  *    @subpackage MockObjects
  */
 class SimpleCallSchedule {
-    private $wildcard = MOCK_ANYTHING;
-    private $always;
-    private $at;
+    protected $wildcard = MOCK_ANYTHING;
+    protected $always = array();
+    protected $at = array();
 
     /**
      *    Sets up an empty response schedule.
@@ -494,7 +494,7 @@ class SimpleCallSchedule {
  *    @subpackage MockObjects
  */
 class SimpleReturn {
-    private $value;
+    protected $value;
 
     /**
      *    Stashes it for later.
@@ -522,7 +522,7 @@ class SimpleReturn {
  *    @subpackage MockObjects
  */
 class SimpleByReference {
-    private $reference;
+    protected $reference;
 
     /**
      *    Stashes it for later.
@@ -548,7 +548,7 @@ class SimpleByReference {
  *    @subpackage MockObjects
  */
 class SimpleByValue {
-    private $value;
+    protected $value;
 
     /**
      *    Stashes it for later.
@@ -577,7 +577,7 @@ class SimpleByValue {
  *    @subpackage MockObjects
  */
 class SimpleThrower {
-    private $exception;
+    protected $exception;
 
     /**
      *    Stashes it for later.
@@ -602,8 +602,8 @@ class SimpleThrower {
  *    @subpackage MockObjects
  */
 class SimpleErrorThrower {
-    private $error;
-    private $severity;
+    protected $error;
+    protected $severity;
 
     /**
      *    Stashes an error to throw later.
@@ -637,15 +637,15 @@ class SimpleErrorThrower {
  *    @subpackage MockObjects
  */
 class SimpleMock {
-    private $actions;
-    private $expectations;
-    private $wildcard = MOCK_ANYTHING;
-    private $is_strict = true;
-    private $call_counts;
-    private $expected_counts;
-    private $max_counts;
-    private $expected_args;
-    private $expected_args_at;
+    protected $actions;
+    protected $expectations;
+    protected $wildcard = MOCK_ANYTHING;
+    protected $is_strict = true;
+    protected $call_counts;
+    protected $expected_counts;
+    protected $max_counts;
+    protected $expected_args;
+    protected $expected_args_at;
 
     /**
      *    Creates an empty action list and expectation list.
@@ -1168,7 +1168,7 @@ class SimpleMock {
      *   we have to disable the E_STRICT warnings while the
      *   method calls are emulated.
      */
-    private function disableEStrict() {
+    protected function disableEStrict() {
         $was = error_reporting();
         error_reporting($was & ~E_STRICT);
         return $was;
@@ -1178,7 +1178,7 @@ class SimpleMock {
      *  Restores the E_STRICT level if it was previously set.
      *  @param integer $was     Previous error reporting level.
      */
-    private function restoreEStrict($was) {
+    protected function restoreEStrict($was) {
         error_reporting($was);
     }
 }
@@ -1246,10 +1246,10 @@ class Mock {
  *    @subpackage MockObjects
  */
 class MockGenerator {
-    private $class;
-    private $mock_class;
-    private $mock_base;
-    private $reflection;
+    protected $class;
+    protected $mock_class;
+    protected $mock_base;
+    protected $reflection;
 
     /**
      *    Builds initial reflection object.

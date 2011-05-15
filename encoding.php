@@ -18,8 +18,8 @@ require_once(dirname(__FILE__) . '/socket.php');
  *    @subpackage WebTester
  */
 class SimpleEncodedPair {
-    private $key;
-    private $value;
+    protected $key;
+    protected $value;
 
     /**
      *    Stashes the data for rendering later.
@@ -87,9 +87,9 @@ class SimpleEncodedPair {
  *    @subpackage WebTester
  */
 class SimpleAttachment {
-    private $key;
-    private $content;
-    private $filename;
+    protected $key;
+    protected $content;
+    protected $filename;
 
     /**
      *    Stashes the data for rendering later.
@@ -130,7 +130,7 @@ class SimpleAttachment {
      *    Attempts to figure out the MIME type from the
      *    file extension and the content.
      *    @return string        MIME type.
-     *    @access private
+     *    @access protected
      */
     protected function deduceMimeType() {
         if ($this->isOnlyAscii($this->content)) {
@@ -142,7 +142,7 @@ class SimpleAttachment {
     /**
      *    Tests each character is in the range 0-127.
      *    @param string $ascii    String to test.
-     *    @access private
+     *    @access protected
      */
     protected function isOnlyAscii($ascii) {
         for ($i = 0, $length = strlen($ascii); $i < $length; $i++) {
@@ -189,7 +189,7 @@ class SimpleAttachment {
  *    @subpackage WebTester
  */
 class SimpleEncoding {
-    private $request;
+    protected $request;
 
     /**
      *    Starts empty.
@@ -237,7 +237,7 @@ class SimpleEncoding {
      *    Adds a new value into the request.
      *    @param string $key            Key to add value to.
      *    @param string/array $value    New data.
-     *    @access private
+     *    @access protected
      */
     protected function addPair($key, $value) {
         $this->request[] = new SimpleEncodedPair($key, $value);
@@ -439,8 +439,8 @@ class SimpleDeleteEncoding extends SimpleGetEncoding {
  *    @subpackage WebTester
  */
 class SimpleEntityEncoding extends SimpleEncoding {
-    private $content_type;
-    private $body;
+    protected $content_type;
+    protected $body;
 
     function __construct($query = false, $content_type = false) {
         $this->content_type = $content_type;
@@ -597,7 +597,7 @@ class SimplePutEncoding extends SimpleEntityEncoding {
  *    @subpackage WebTester
  */
 class SimpleMultipartEncoding extends SimplePostEncoding {
-    private $boundary;
+    protected $boundary;
 
     /**
      *    Starts empty.

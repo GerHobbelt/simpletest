@@ -50,7 +50,7 @@ class SimpleTestCompatibility {
      *    @param mixed $first    Test subject.
      *    @param mixed $second   Comparison object.
      *    @return boolean        True if same type.
-     *    @access private
+     *    @access protected
      */
     protected static function isIdenticalType($first, $second) {
         if (gettype($first) != gettype($second)) {
@@ -78,7 +78,7 @@ class SimpleTestCompatibility {
      *    @param mixed $first    Test subject.
      *    @param mixed $second   Comparison object.
      *    @return boolean        True if identical.
-     *    @access private
+     *    @access protected
      */
     protected static function isArrayOfIdenticalTypes($first, $second) {
         if (array_keys($first) != array_keys($second)) {

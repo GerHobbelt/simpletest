@@ -101,7 +101,7 @@ class SimpleDumper {
      *    @param mixed $first        First variable.
      *    @param mixed $second       Value to compare with.
      *    @return boolean            True if matches.
-     *    @access private
+     *    @access protected
      */
     protected function isTypeMatch($first, $second) {
         return ($this->getType($first) == $this->getType($second));
@@ -136,7 +136,7 @@ class SimpleDumper {
      *    @param null $first          First value.
      *    @param mixed $second        Value to compare with.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeGenericDifference($first, $second) {
         return "as [" . $this->describeValue($first) .
@@ -151,7 +151,7 @@ class SimpleDumper {
      *    @param mixed $second        Null to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeNullDifference($first, $second, $identical) {
         return $this->describeGenericDifference($first, $second);
@@ -164,7 +164,7 @@ class SimpleDumper {
      *    @param mixed $second        Boolean to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeBooleanDifference($first, $second, $identical) {
         return $this->describeGenericDifference($first, $second);
@@ -177,7 +177,7 @@ class SimpleDumper {
      *    @param mixed $second        String to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeStringDifference($first, $second, $identical) {
         if (is_object($second) || is_array($second)) {
@@ -198,7 +198,7 @@ class SimpleDumper {
      *    @param mixed $second        Number to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeIntegerDifference($first, $second, $identical) {
         if (is_object($second) || is_array($second)) {
@@ -217,7 +217,7 @@ class SimpleDumper {
      *    @param mixed $second        Float to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeFloatDifference($first, $second, $identical) {
         if (is_object($second) || is_array($second)) {
@@ -236,7 +236,7 @@ class SimpleDumper {
      *    @param mixed $second        Array to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeArrayDifference($first, $second, $identical) {
         if (! is_array($second)) {
@@ -270,7 +270,7 @@ class SimpleDumper {
      *    @param array $second        Array to compare with.
      *    @param boolean $identical   If true then type anomolies count.
      *    @return boolean             True if matching.
-     *    @access private
+     *    @access protected
      */
     protected function isMatchingKeys($first, $second, $identical) {
         $first_keys = array_keys($first);
@@ -290,7 +290,7 @@ class SimpleDumper {
      *    @param mixed $second         Resource to compare with.
      *    @param boolean $identical    If true then type anomolies count.
      *    @return string              Human readable description.
-     *    @access private
+     *    @access protected
      */
     protected function describeResourceDifference($first, $second, $identical) {
         return $this->describeGenericDifference($first, $second);
@@ -344,7 +344,7 @@ class SimpleDumper {
      *    @param object $object      Object to read.
      *    @return mixed              Value of property.
      */
-    private function getPrivatePropertyNoMatterWhat($name, $object) {
+    protected function getPrivatePropertyNoMatterWhat($name, $object) {
         foreach ((array)$object as $mangled_name => $value) {
             if ($this->unmangle($mangled_name) == $name) {
                 return $value;
@@ -370,7 +370,7 @@ class SimpleDumper {
      *    @param string $second       String to compare with.
      *    @return integer             Position of first differing
      *                                character.
-     *    @access private
+     *    @access protected
      */
     protected function stringDiffersAt($first, $second) {
         if (! $first || ! $second) {

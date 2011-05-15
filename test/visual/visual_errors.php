@@ -64,8 +64,8 @@ class VisualTestOfExceptions extends UnitTestCase {
 }
 
 class OpaqueContainer {
-    private $stuff;
-    private $value;
+    protected $stuff;
+    protected $value;
 
     public function __construct($value) {
         $this->value = $value;

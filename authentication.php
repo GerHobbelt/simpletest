@@ -16,10 +16,10 @@ require_once(dirname(__FILE__) . '/http.php');
  *    @subpackage WebTester
  */
 class SimpleRealm {
-    private $type;
-    private $root;
-    private $username;
-    private $password;
+    protected $type;
+    protected $root;
+    protected $username;
+    protected $password;
 
     /**
      *    Starts with the initial entry directory.
@@ -50,7 +50,7 @@ class SimpleRealm {
      *    @param string $first        Path to compare.
      *    @param string $second       Path to compare.
      *    @return string              Common directories.
-     *    @access private
+     *    @access protected
      */
     protected function getCommonPath($first, $second) {
         $first = explode('/', $first);
@@ -116,7 +116,7 @@ class SimpleRealm {
      *    @param string $whole       Big bit.
      *    @return boolean            True if the small bit is
      *                               in the big bit.
-     *    @access private
+     *    @access protected
      */
     protected function isIn($part, $whole) {
         return strpos($whole, $part) === 0;
@@ -129,7 +129,7 @@ class SimpleRealm {
  *    @subpackage WebTester
  */
 class SimpleAuthenticator {
-    private $realms;
+    protected $realms;
 
     /**
      *    Clears the realms.
@@ -186,7 +186,7 @@ class SimpleAuthenticator {
      *    Finds the name of the realm by comparing URLs.
      *    @param SimpleUrl $url        URL to test.
      *    @return SimpleRealm          Name of realm.
-     *    @access private
+     *    @access protected
      */
     protected function findRealmFromUrl($url) {
         if (! isset($this->realms[$url->getHost()])) {

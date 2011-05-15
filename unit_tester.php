@@ -397,7 +397,7 @@ class UnitTestCase extends SimpleTestCase {
      *    of expectation.
      *    @param mixed $expected      Expected value.
      *    @return SimpleExpectation   Expectation object.
-     *    @access private
+     *    @access protected
      */
     protected function coerceExpectation($expected) {
         if ($expected == false) {

@@ -19,9 +19,9 @@ require_once(dirname(__FILE__) . '/shell_tester.php');
  *    @subpackage UnitTester
  */
 class DetachedTestCase {
-    private $command;
-    private $dry_command;
-    private $size;
+    protected $command;
+    protected $dry_command;
+    protected $size;
 
     /**
      *    Sets the location of the remote test.

@@ -58,7 +58,7 @@ class TestOfAdditionalHeaders extends UnitTestCase {
 
 class TestOfBrowserCookies extends UnitTestCase {
 
-    private function createStandardResponse() {
+    protected function createStandardResponse() {
         $response = new MockSimpleHttpResponse();
         $response->setReturnValue("isError", false);
         $response->setReturnValue("getContent", "stuff");
@@ -66,7 +66,7 @@ class TestOfBrowserCookies extends UnitTestCase {
         return $response;
     }
     
-    private function createCookieSite($header_lines) {
+    protected function createCookieSite($header_lines) {
         $headers = new SimpleHttpHeaders($header_lines);
         $response = new MockSimpleHttpResponse();
         $response->setReturnValue("isError", false);
@@ -77,7 +77,7 @@ class TestOfBrowserCookies extends UnitTestCase {
         return $request;
     }
     
-    private function createMockedRequestUserAgent(&$request) {
+    protected function createMockedRequestUserAgent(&$request) {
         $agent = new MockRequestUserAgent();
         $agent->setReturnReference('createHttpRequest', $request);
         $agent->__construct();

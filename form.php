@@ -20,16 +20,16 @@ require_once(dirname(__FILE__) . '/selector.php');
  *    @subpackage WebTester
  */
 class SimpleForm {
-    private $method;
-    private $action;
-    private $encoding;
-    private $default_target;
-    private $id;
-    private $buttons;
-    private $images;
-    private $widgets;
-    private $radios;
-    private $checkboxes;
+    protected $method;
+    protected $action;
+    protected $encoding;
+    protected $default_target;
+    protected $id;
+    protected $buttons;
+    protected $images;
+    protected $widgets;
+    protected $radios;
+    protected $checkboxes;
 
     /**
      *    Starts with no held controls/widgets.
@@ -53,7 +53,7 @@ class SimpleForm {
      *    Creates the request packet to be sent by the form.
      *    @param SimpleTag $tag        Form tag to read.
      *    @return string               Packet class.
-     *    @access private
+     *    @access protected
      */
     protected function setEncodingClass($tag) {
         if (strtolower($tag->getAttribute('method')) == 'post') {
@@ -117,7 +117,7 @@ class SimpleForm {
      *    Creates the encoding for the current values in the
      *    form.
      *    @return SimpleFormEncoding    Request to submit.
-     *    @access private
+     *    @access protected
      */
     protected function encode() {
         $class = $this->encoding;
@@ -155,7 +155,7 @@ class SimpleForm {
      *    Sets the widget into the form, grouping radio
      *    buttons if any.
      *    @param SimpleWidget $tag   Incoming form control.
-     *    @access private
+     *    @access protected
      */
     protected function setWidget($tag) {
         if (strtolower($tag->getAttribute('type')) == 'radio') {
@@ -170,7 +170,7 @@ class SimpleForm {
     /**
      *    Adds a radio button, building a group if necessary.
      *    @param SimpleRadioButtonTag $tag   Incoming form control.
-     *    @access private
+     *    @access protected
      */
     protected function addRadioButton($tag) {
         if (! isset($this->radios[$tag->getName()])) {
@@ -183,7 +183,7 @@ class SimpleForm {
     /**
      *    Adds a checkbox, making it a group on a repeated name.
      *    @param SimpleCheckboxTag $tag   Incoming form control.
-     *    @access private
+     *    @access protected
      */
     protected function addCheckbox($tag) {
         if (! isset($this->checkboxes[$tag->getName()])) {

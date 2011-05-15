@@ -22,10 +22,10 @@ require_once(dirname(__FILE__) . '/user_agent.php');
  *    @subpackage WebTester
  */
 class SimpleFrameset {
-    private $frameset;
-    private $frames;
-    private $focus;
-    private $names;
+    protected $frameset;
+    protected $frames;
+    protected $focus;
+    protected $names;
 
     /**
      *    Stashes the frameset page. Will make use of the
@@ -96,7 +96,7 @@ class SimpleFrameset {
      *    index.
      *    @param integer $subject    Internal index.
      *    @return integer/string     Public name.
-     *    @access private
+     *    @access protected
      */
     protected function getPublicNameFromIndex($subject) {
         foreach ($this->names as $name => $index) {
@@ -160,7 +160,7 @@ class SimpleFrameset {
 
     /**
      *    Clears the frame focus for any nested frames.
-     *    @access private
+     *    @access protected
      */
     protected function clearNestedFramesFocus() {
         for ($i = 0; $i < count($this->frames); $i++) {
@@ -452,7 +452,7 @@ class SimpleFrameset {
      *    @param array $urls        List of SimpleUrls.
      *    @param string $frame      Name of frame or index.
      *    @return array             List of tagged URLs.
-     *    @access private
+     *    @access protected
      */
     protected function tagUrlsWithFrame($urls, $frame) {
         $tagged = array();
@@ -511,7 +511,7 @@ class SimpleFrameset {
         *    @param string $method    Method to use to find in a page.
         *    @param string $attribute Label, name or ID.
         *    @return SimpleForm    Form object containing the matching ID.
-        *    @access private
+        *    @access protected
         */
     protected function findForm($method, $attribute) {
         if (is_integer($this->focus)) {
@@ -543,7 +543,7 @@ class SimpleFrameset {
      *    @param string $method    Method to use to find in a page.
      *    @param string $attribute Label, name or ID.
      *    @return SimpleForm       Form object containing the matching ID.
-     *    @access private
+     *    @access protected
      */
     protected function findFormInFrame($page, $index, $method, $attribute) {
         $form = $this->frames[$index]->$method($attribute);

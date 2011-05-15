@@ -47,7 +47,7 @@ class SimpleErrorTrappingInvoker extends SimpleInvokerDecorator {
     /**
      *    Wires up the error queue for a single test.
      *    @return SimpleErrorQueue    Queue connected to the test.
-     *    @access private
+     *    @access protected
      */
     protected function createErrorQueue() {
         $context = SimpleTest::getContext();
@@ -65,10 +65,10 @@ class SimpleErrorTrappingInvoker extends SimpleInvokerDecorator {
  *    @subpackage   UnitTester
  */
 class SimpleErrorQueue {
-    private $queue;
-    private $expectation_queue;
-    private $test;
-    private $using_expect_style = false;
+    protected $queue;
+    protected $expectation_queue;
+    protected $test;
+    protected $using_expect_style = false;
 
     /**
      *    Starts with an empty queue.
@@ -143,7 +143,7 @@ class SimpleErrorQueue {
      *    @param string $content         Text of error.
      *    @param string $filename        File error occoured in.
      *    @param integer $line           Line number of error.
-     *    @access private
+     *    @access protected
      */
     protected function testLatestError($severity, $content, $filename, $line) {
         if ($expectation = $this->extractExpectation()) {
@@ -177,7 +177,7 @@ class SimpleErrorQueue {
     /**
      *    Pulls the earliest expectation from the queue.
      *    @return     SimpleExpectation    False if none.
-     *    @access private
+     *    @access protected
      */
     protected function extractExpectation() {
         if (count($this->expectation_queue)) {

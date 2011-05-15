@@ -239,8 +239,8 @@ class TestOfFrameNavigation extends UnitTestCase {
 }
 
 class TestOfFramesetPageInterface extends UnitTestCase {
-    private $page_interface;
-    private $frameset_interface;
+    protected $page_interface;
+    protected $frameset_interface;
 
     function __construct() {
         parent::__construct();
@@ -254,7 +254,7 @@ class TestOfFramesetPageInterface extends UnitTestCase {
         $this->assertEqual($list, $expected);
     }
 
-    private function getPageMethods() {
+    protected function getPageMethods() {
         $methods = array();
         foreach (get_class_methods('SimplePage') as $method) {
             if (strtolower($method) == strtolower('SimplePage')) {
@@ -274,7 +274,7 @@ class TestOfFramesetPageInterface extends UnitTestCase {
         return $methods;
     }
 
-    private function getFramesetMethods() {
+    protected function getFramesetMethods() {
         $methods = array();
         foreach (get_class_methods('SimpleFrameset') as $method) {
             if (strtolower($method) == strtolower('SimpleFrameset')) {

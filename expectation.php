@@ -22,7 +22,7 @@ require_once(dirname(__FILE__) . '/compatibility.php');
  */
 class SimpleExpectation {
     protected $dumper = false;
-    private $message;
+    protected $message;
 
     /**
      *    Creates a dumper for displaying values and sets
@@ -221,7 +221,7 @@ class FalseExpectation extends SimpleExpectation {
  *    @subpackage UnitTester
  */
 class EqualExpectation extends SimpleExpectation {
-    private $value;
+    protected $value;
 
     /**
      *    Sets the value to compare against.
@@ -325,8 +325,8 @@ class NotEqualExpectation extends EqualExpectation {
  *    @subpackage UnitTester
  */
 class WithinMarginExpectation extends SimpleExpectation {
-    private $upper;
-    private $lower;
+    protected $upper;
+    protected $lower;
 
     /**
      *    Sets the value to compare against and the fuzziness of
@@ -371,7 +371,7 @@ class WithinMarginExpectation extends SimpleExpectation {
     /**
      *    Creates a the message for being within the range.
      *    @param mixed $compare        Value being tested.
-     *    @access private
+     *    @access protected
      */
     protected function withinMessage($compare) {
         return "Within expectation [" . $this->dumper->describeValue($this->lower) . "] and [" .
@@ -381,7 +381,7 @@ class WithinMarginExpectation extends SimpleExpectation {
     /**
      *    Creates a the message for being within the range.
      *    @param mixed $compare        Value being tested.
-     *    @access private
+     *    @access protected
      */
     protected function outsideMessage($compare) {
         if ($compare > $this->upper) {
@@ -446,7 +446,7 @@ class OutsideMarginExpectation extends WithinMarginExpectation {
  *    @subpackage UnitTester
  */
 class ReferenceExpectation {
-    private $value;
+    protected $value;
 
     /**
      *    Sets the reference value to compare against.
@@ -614,7 +614,7 @@ class NotIdenticalExpectation extends IdenticalExpectation {
  *    @subpackage UnitTester
  */
 class PatternExpectation extends SimpleExpectation {
-    private $pattern;
+    protected $pattern;
 
     /**
      *    Sets the value to compare against.
@@ -737,7 +737,7 @@ class NoPatternExpectation extends PatternExpectation {
  *      @subpackage UnitTester
  */
 class IsAExpectation extends SimpleExpectation {
-    private $type;
+    protected $type;
 
     /**
      *    Sets the type to compare with.
@@ -782,7 +782,7 @@ class IsAExpectation extends SimpleExpectation {
      *    Coerces type name into a is_*() match.
      *    @param string $type        User type.
      *    @return string             Simpler type.
-     *    @access private
+     *    @access protected
      */
     protected function canonicalType($type) {
         $type = strtolower($type);
@@ -814,7 +814,7 @@ class IsAExpectation extends SimpleExpectation {
  *      @subpackage UnitTester
  */
 class NotAExpectation extends IsAExpectation {
-    private $type;
+    protected $type;
 
     /**
      *    Sets the type to compare with.
@@ -857,7 +857,7 @@ class NotAExpectation extends IsAExpectation {
  *    @subpackage UnitTester
  */
 class MethodExistsExpectation extends SimpleExpectation {
-    private $method;
+    protected $method;
 
     /**
      *    Sets the value to compare against.
@@ -902,7 +902,7 @@ class MethodExistsExpectation extends SimpleExpectation {
  *    @subpackage UnitTester
  */
 class MemberExpectation extends IdenticalExpectation {
-    private $name;
+    protected $name;
 
     /**
      *    Sets the value to compare against.
@@ -943,7 +943,7 @@ class MemberExpectation extends IdenticalExpectation {
      *    @param object $object      Object to read.
      *    @return mixed              Value of property.
      */
-    private function getProperty($name, $object) {
+    protected function getProperty($name, $object) {
         $reflection = new ReflectionObject($object);
         $property = $reflection->getProperty($name);
         if (method_exists($property, 'setAccessible')) {
@@ -962,7 +962,7 @@ class MemberExpectation extends IdenticalExpectation {
      *    @param object $object      Object to read.
      *    @return mixed              Value of property.
      */
-    private function getPrivatePropertyNoMatterWhat($name, $object) {
+    protected function getPrivatePropertyNoMatterWhat($name, $object) {
         foreach ((array)$object as $mangled_name => $value) {
             if ($this->unmangle($mangled_name) == $name) {
                 return $value;

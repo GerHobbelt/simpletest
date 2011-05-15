@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . '/scorer.php');
  *    @subpackage UnitTester
  */
 class HtmlReporter extends SimpleReporter {
-    private $character_set;
+    protected $character_set;
 
     /**
      *    Does nothing yet. The first output will
@@ -310,9 +310,9 @@ class TextReporter extends SimpleReporter {
  *    @subpackage UnitTester
  */
 class SelectiveReporter extends SimpleReporterDecorator {
-    private $just_this_case = false;
-    private $just_this_test = false;
-    private $on;
+    protected $just_this_case = false;
+    protected $just_this_test = false;
+    protected $on;
 
     /**
      *    Selects the test case or group to be run,
@@ -365,7 +365,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
 
     /**
      *    Switch on testing for the group or subgroup.
-     *    @access private
+     *    @access protected
      */
     protected function on() {
         $this->on = true;
@@ -373,7 +373,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
 
     /**
      *    Switch off testing for the group or subgroup.
-     *    @access private
+     *    @access protected
      */
     protected function off() {
         $this->on = false;
@@ -382,7 +382,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
     /**
      *    Is this group actually being tested?
      *    @return boolean     True if the current test group is active.
-     *    @access private
+     *    @access protected
      */
     protected function isOn() {
         return $this->on;

@@ -12,7 +12,7 @@
  *    @subpackage UnitTester
  */
 class SimpleReflection {
-    private $interface;
+    protected $interface;
 
     /**
      *    Stashes the class/interface.
@@ -74,7 +74,7 @@ class SimpleReflection {
      *    @param string $interface       Class or interface name.
      *    @param boolean $autoload       True totriggerautoload.
      *    @return boolean                True if interface defined.
-     *    @access private
+     *    @access protected
      */
     protected function classOrInterfaceExistsWithAutoload($interface, $autoload) {
         if (function_exists('interface_exists')) {
@@ -129,7 +129,7 @@ class SimpleReflection {
      *    specified.
      *    @param string $method        Method name.
      *    @returns boolean             True if enforced.
-     *    @access private
+     *    @access protected
      */
     protected function isInterfaceMethod($method) {
         return in_array($method, $this->getInterfaceMethods());
@@ -191,7 +191,7 @@ class SimpleReflection {
      *    @param array $interfaces     Reflection API interfaces
      *                                 to reduce.
      *    @returns array               List of parent interface names.
-     *    @access private
+     *    @access protected
      */
     protected function onlyParents($interfaces) {
         $parents = array();
@@ -216,7 +216,7 @@ class SimpleReflection {
      * Checks whether a method is abstract or not.
      * @param   string   $name  Method name.
      * @return  bool            true if method is abstract, else false
-     * @access  private
+     * @access  protected
      */
     protected function isAbstractMethod($name) {
         $interface = new ReflectionClass($this->interface);
@@ -230,7 +230,7 @@ class SimpleReflection {
      * Checks whether a method is the constructor.
      * @param   string   $name  Method name.
      * @return  bool            true if method is the constructor
-     * @access  private
+     * @access  protected
      */
     protected function isConstructor($name) {
         return ($name == '__construct') || ($name == $this->interface);
@@ -240,7 +240,7 @@ class SimpleReflection {
      * Checks whether a method is abstract in all parents or not.
      * @param   string   $name  Method name.
      * @return  bool            true if method is abstract in parent, else false
-     * @access  private
+     * @access  protected
      */
     protected function isAbstractMethodInParents($name) {
         $interface = new ReflectionClass($this->interface);
@@ -261,7 +261,7 @@ class SimpleReflection {
      * Checks whether a method is static or not.
      * @param   string  $name   Method name
      * @return  bool            true if method is static, else false
-     * @access  private
+     * @access  protected
      */
     protected function isStaticMethod($name) {
         $interface = new ReflectionClass($this->interface);
@@ -363,7 +363,7 @@ class SimpleReflection {
      *    get extra characters in parameter names :(.
      *    @param string $name    Parameter name.
      *    @return string         Cleaner name.
-     *    @access private
+     *    @access protected
      */
     protected function suppressSpurious($name) {
         return str_replace(array('[', ']', ' '), '', $name);
@@ -374,7 +374,7 @@ class SimpleReflection {
      *    that works with early versions of PHP5.
      *    @param reflectionParameter $parameter    Is this optional.
      *    @return boolean                          True if optional.
-     *    @access private
+     *    @access protected
      */
     protected function isOptional($parameter) {
         if (method_exists($parameter, 'isOptional')) {

@@ -12,7 +12,7 @@
  *    @subpackage   UnitTester
  */
 class SimpleArguments {
-    private $all = array();
+    protected $all = array();
 
     /**
      * Parses the command line arguments. The usual formats
@@ -59,7 +59,7 @@ class SimpleArguments {
      *                              If no value can be found it will
      *                              have the value true assigned instead.
      */
-    private function parseArgument(&$arguments) {
+    protected function parseArgument(&$arguments) {
         $argument = array_shift($arguments);
         if (preg_match('/^-(\w)=(.+)$/', $argument, $matches)) {
             return array($matches[1], $matches[2]);
@@ -80,7 +80,7 @@ class SimpleArguments {
      *                            is a value to be extracted.
      * @return string/boolean     The next value unless it's a flag.
      */
-    private function nextNonFlagElseTrue(&$arguments) {
+    protected function nextNonFlagElseTrue(&$arguments) {
         return $this->valueIsNext($arguments) ? array_shift($arguments) : true;
     }
 
@@ -136,9 +136,9 @@ class SimpleArguments {
  *    @subpackage   UnitTester
  */
 class SimpleHelp {
-    private $overview;
-    private $flag_sets = array();
-    private $explanations = array();
+    protected $overview;
+    protected $flag_sets = array();
+    protected $explanations = array();
 
     /**
      * Sets up the top level explanation for the program.
@@ -179,7 +179,7 @@ class SimpleHelp {
      * Works out the longest flag for formatting purposes.
      * @param array $flag_sets      The internal flag set list.
      */
-    private function longestFlag($flag_sets) {
+    protected function longestFlag($flag_sets) {
         $longest = 0;
         foreach ($flag_sets as $flags) {
             foreach ($flags as $flag) {
@@ -193,7 +193,7 @@ class SimpleHelp {
      * Generates the text for a single flag and it's alternate flags.
      * @returns string           Help text for that flag group.
      */
-    private function renderFlagSet($flags, $explanation, $tab_stop) {
+    protected function renderFlagSet($flags, $explanation, $tab_stop) {
         $flag = array_shift($flags);
         $text = str_pad($this->renderFlag($flag), $tab_stop, ' ') . $explanation . "\n";
         foreach ($flags as $flag) {
@@ -207,7 +207,7 @@ class SimpleHelp {
      * @param string $flag          Just the name.
      * @returns                     Fag with apropriate dashes.
      */
-    private function renderFlag($flag) {
+    protected function renderFlag($flag) {
         return (strlen($flag) == 1 ? '-' : '--') . $flag;
     }
 
@@ -217,7 +217,7 @@ class SimpleHelp {
      * @param string $text      Text to clean up.
      * @returns string          Text with no blank lines.
      */
-    private function noDuplicateNewLines($text) {
+    protected function noDuplicateNewLines($text) {
         return preg_replace('/(\n+)/', "\n", $text);
     }
 }

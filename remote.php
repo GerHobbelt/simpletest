@@ -20,9 +20,9 @@ require_once(dirname(__FILE__) . '/test_case.php');
  *    @subpackage UnitTester
  */
 class RemoteTestCase {
-    private $url;
-    private $dry_url;
-    private $size;
+    protected $url;
+    protected $dry_url;
+    protected $size;
 
     /**
      *    Sets the location of the remote test.

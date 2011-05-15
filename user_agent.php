@@ -29,15 +29,15 @@ if (! defined('DEFAULT_CONNECTION_TIMEOUT')) {
  *    @subpackage WebTester
  */
 class SimpleUserAgent {
-    private $cookie_jar;
-    private $cookies_enabled = true;
-    private $authenticator;
-    private $max_redirects = DEFAULT_MAX_REDIRECTS;
-    private $proxy = false;
-    private $proxy_username = false;
-    private $proxy_password = false;
-    private $connection_timeout = DEFAULT_CONNECTION_TIMEOUT;
-    private $additional_headers = array();
+    protected $cookie_jar;
+    protected $cookies_enabled = true;
+    protected $authenticator;
+    protected $max_redirects = DEFAULT_MAX_REDIRECTS;
+    protected $proxy = false;
+    protected $proxy_username = false;
+    protected $proxy_password = false;
+    protected $connection_timeout = DEFAULT_CONNECTION_TIMEOUT;
+    protected $additional_headers = array();
 
     /**
      *    Starts with no cookies, realms or proxies.
@@ -185,7 +185,7 @@ class SimpleUserAgent {
      *    Test to see if the redirect limit is passed.
      *    @param integer $redirects        Count so far.
      *    @return boolean                  True if over.
-     *    @access private
+     *    @access protected
      */
     protected function isTooManyRedirects($redirects) {
         return ($redirects > $this->max_redirects);
@@ -234,7 +234,7 @@ class SimpleUserAgent {
      *    @param SimpleUrl $url                  Target to fetch.
      *    @param SimpelFormEncoding $encoding    Additional parameters for request.
      *    @return SimpleHttpResponse             Hopefully the target page.
-     *    @access private
+     *    @access protected
      */
     protected function fetchWhileRedirected($url, $encoding) {
         $redirects = 0;
@@ -274,7 +274,7 @@ class SimpleUserAgent {
      *    @param SimpleUrl $url                 Target to fetch as url object.
      *    @param SimpleFormEncoding $encoding   POST/GET parameters.
      *    @return SimpleHttpRequest             New request.
-     *    @access private
+     *    @access protected
      */
     protected function createRequest($url, $encoding) {
         $request = $this->createHttpRequest($url, $encoding);
@@ -317,7 +317,7 @@ class SimpleUserAgent {
     /**
      *    Adds additional manual headers.
      *    @param SimpleHttpRequest $request    Outgoing request.
-     *    @access private
+     *    @access protected
      */
     protected function addAdditionalHeaders(&$request) {
         foreach ($this->additional_headers as $header) {

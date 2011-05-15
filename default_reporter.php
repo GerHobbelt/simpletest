@@ -23,15 +23,15 @@ require_once(dirname(__FILE__) . '/xml.php');
  *    @subpackage UnitTester
  */
 class SimpleCommandLineParser {
-    private $to_property = array(
+    protected $to_property = array(
             'case' => 'case', 'c' => 'case',
             'test' => 'test', 't' => 'test',
     );
-    private $case = '';
-    private $test = '';
-    private $xml = false;
-    private $help = false;
-    private $no_skips = false;
+    protected $case = '';
+    protected $test = '';
+    protected $xml = false;
+    protected $help = false;
+    protected $no_skips = false;
 
     /**
      *    Parses raw command line arguments into object properties.

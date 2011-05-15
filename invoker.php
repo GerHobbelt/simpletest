@@ -28,7 +28,7 @@ if (! defined('SIMPLE_TEST')) {
  *    @subpackage UnitTester
  */
 class SimpleInvoker {
-    private $test_case;
+    protected $test_case;
 
     /**
      *    Stashes the test case for later.
@@ -87,7 +87,7 @@ class SimpleInvoker {
  *    @subpackage UnitTester
  */
 class SimpleInvokerDecorator {
-    private $invoker;
+    protected $invoker;
 
     /**
      *    Stores the invoker to wrap.
