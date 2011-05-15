@@ -195,7 +195,7 @@ class TestOfCallSchedule extends UnitTestCase {
     }
 }
 
-class Dummy {
+class Dummy4Mock {
     function __construct() {
     }
 
@@ -211,14 +211,14 @@ class Dummy {
         return true;
     }
 }
-Mock::generate('Dummy');
-Mock::generate('Dummy', 'AnotherMockDummy');
-Mock::generate('Dummy', 'MockDummyWithExtraMethods', array('extraMethod'));
+Mock::generate('Dummy4Mock');
+Mock::generate('Dummy4Mock', 'AnotherMockDummy');
+Mock::generate('Dummy4Mock', 'MockDummyWithExtraMethods', array('extraMethod'));
 
 class TestOfMockGeneration extends UnitTestCase {
 
     function testCloning() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $this->assertTrue(method_exists($mock, "aMethod"));
         $this->assertNull($mock->aMethod());
     }
@@ -237,35 +237,35 @@ class TestOfMockGeneration extends UnitTestCase {
 class TestOfMockReturns extends UnitTestCase {
 
     function testDefaultReturn() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValue("aMethod", "aaa");
         $this->assertIdentical($mock->aMethod(), "aaa");
         $this->assertIdentical($mock->aMethod(), "aaa");
     }
 
     function testParameteredReturn() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValue('aMethod', 'aaa', array(1, 2, 3));
         $this->assertNull($mock->aMethod());
         $this->assertIdentical($mock->aMethod(1, 2, 3), 'aaa');
     }
 
     function testSetReturnGivesObjectReference() {
-        $mock = new MockDummy();
-        $object = new Dummy();
+        $mock = new MockDummy4Mock();
+        $object = new Dummy4Mock();
         $mock->returns('aMethod', $object, array(1, 2, 3));
         $this->assertSame($mock->aMethod(1, 2, 3), $object);
     }
 
     function testSetReturnReferenceGivesOriginalReference() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $object = 1;
         $mock->returnsByReference('aReferenceMethod', $object, array(1, 2, 3));
         $this->assertReference($mock->aReferenceMethod(1, 2, 3), $object);
     }
 
     function testReturnValueCanBeChosenJustByPatternMatchingArguments() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValue(
                 "aMethod",
                 "aaa",
@@ -275,7 +275,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testMultipleMethods() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValue("aMethod", 100, array(1));
         $mock->returnsByValue("aMethod", 200, array(2));
         $mock->returnsByValue("anotherMethod", 10, array(1));
@@ -287,7 +287,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testReturnSequence() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValueAt(0, "aMethod", "aaa");
         $mock->returnsByValueAt(1, "aMethod", "bbb");
         $mock->returnsByValueAt(3, "aMethod", "ddd");
@@ -298,7 +298,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testSetReturnReferenceAtGivesOriginal() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $object = 100;
         $mock->returnsByReferenceAt(1, "aReferenceMethod", $object);
         $this->assertNull($mock->aReferenceMethod());
@@ -307,8 +307,8 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testReturnsAtGivesOriginalObjectHandle() {
-        $mock = new MockDummy();
-        $object = new Dummy();
+        $mock = new MockDummy4Mock();
+        $object = new Dummy4Mock();
         $mock->returnsAt(1, "aMethod", $object);
         $this->assertNull($mock->aMethod());
         $this->assertSame($mock->aMethod(), $object);
@@ -316,8 +316,8 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testComplicatedReturnSequence() {
-        $mock = new MockDummy();
-        $object = new Dummy();
+        $mock = new MockDummy4Mock();
+        $object = new Dummy4Mock();
         $mock->returnsAt(1, "aMethod", "aaa", array("a"));
         $mock->returnsAt(1, "aMethod", "bbb");
         $mock->returnsAt(2, "aMethod", $object, array('*', 2));
@@ -331,7 +331,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testMultipleMethodSequences() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValueAt(0, "aMethod", "aaa");
         $mock->returnsByValueAt(1, "aMethod", "bbb");
         $mock->returnsByValueAt(0, "anotherMethod", "ccc");
@@ -343,7 +343,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testSequenceFallback() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValueAt(0, "aMethod", "aaa", array('a'));
         $mock->returnsByValueAt(1, "aMethod", "bbb", array('a'));
         $mock->returnsByValue("aMethod", "AAA");
@@ -352,7 +352,7 @@ class TestOfMockReturns extends UnitTestCase {
     }
 
     function testMethodInterference() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->returnsByValueAt(0, "anotherMethod", "aaa");
         $mock->returnsByValue("aMethod", "AAA");
         $this->assertIdentical($mock->aMethod(), "AAA");
@@ -363,32 +363,32 @@ class TestOfMockReturns extends UnitTestCase {
 class TestOfMockExpectationsThatPass extends UnitTestCase {
 
     function testAnyArgument() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expect('aMethod', array('*'));
         $mock->aMethod(1);
         $mock->aMethod('hello');
     }
 
     function testAnyTwoArguments() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expect('aMethod', array('*', '*'));
         $mock->aMethod(1, 2);
     }
 
     function testSpecificArgument() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expect('aMethod', array(1));
         $mock->aMethod(1);
     }
 
     function testExpectation() {
-        $mock = new MockDummy();
-        $mock->expect('aMethod', array(new IsAExpectation('Dummy')));
-        $mock->aMethod(new Dummy());
+        $mock = new MockDummy4Mock();
+        $mock->expect('aMethod', array(new IsAExpectation('Dummy4Mock')));
+        $mock->aMethod(new Dummy4Mock());
     }
 
     function testArgumentsInSequence() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectAt(0, 'aMethod', array(1, 2));
         $mock->expectAt(1, 'aMethod', array(3, 4));
         $mock->aMethod(1, 2);
@@ -396,32 +396,32 @@ class TestOfMockExpectationsThatPass extends UnitTestCase {
     }
 
     function testAtLeastOnceSatisfiedByOneCall() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectAtLeastOnce('aMethod');
         $mock->aMethod();
     }
 
     function testAtLeastOnceSatisfiedByTwoCalls() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectAtLeastOnce('aMethod');
         $mock->aMethod();
         $mock->aMethod();
     }
 
     function testOnceSatisfiedByOneCall() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectOnce('aMethod');
         $mock->aMethod();
     }
 
     function testMinimumCallsSatisfiedByEnoughCalls() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectMinimumCallCount('aMethod', 1);
         $mock->aMethod();
     }
 
     function testMinimumCallsSatisfiedByTooManyCalls() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectMinimumCallCount('aMethod', 3);
         $mock->aMethod();
         $mock->aMethod();
@@ -430,13 +430,13 @@ class TestOfMockExpectationsThatPass extends UnitTestCase {
     }
 
     function testMaximumCallsSatisfiedByEnoughCalls() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectMaximumCallCount('aMethod', 1);
         $mock->aMethod();
     }
 
     function testMaximumCallsSatisfiedByNoCalls() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->expectMaximumCallCount('aMethod', 1);
     }
 }
@@ -447,7 +447,7 @@ class MockWithInjectedTestCase extends SimpleMock {
     }
 }
 SimpleTest::setMockBaseClass('MockWithInjectedTestCase');
-Mock::generate('Dummy', 'MockDummyWithInjectedTestCase');
+Mock::generate('Dummy4Mock', 'MockDummyWithInjectedTestCase');
 SimpleTest::setMockBaseClass('SimpleMock');
 Mock::generate('SimpleTestCase');
 
@@ -626,13 +626,13 @@ class TestOfMockExpectations extends UnitTestCase {
 class TestOfMockComparisons extends UnitTestCase {
 
     function testEqualComparisonOfMocksDoesNotCrash() {
-        $expectation = new EqualExpectation(new MockDummy());
-        $this->assertTrue($expectation->test(new MockDummy(), true));
+        $expectation = new EqualExpectation(new MockDummy4Mock());
+        $this->assertTrue($expectation->test(new MockDummy4Mock(), true));
     }
 
     function testIdenticalComparisonOfMocksDoesNotCrash() {
-        $expectation = new IdenticalExpectation(new MockDummy());
-        $this->assertTrue($expectation->test(new MockDummy()));
+        $expectation = new IdenticalExpectation(new MockDummy4Mock());
+        $this->assertTrue($expectation->test(new MockDummy4Mock()));
     }
 }
 
@@ -728,21 +728,21 @@ class MockTestException extends Exception { }
 class TestOfThrowingExceptionsFromMocks extends UnitTestCase {
 
     function testCanThrowOnMethodCall() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->throwOn('aMethod');
         $this->expectException();
         $mock->aMethod();
     }
 
     function testCanThrowSpecificExceptionOnMethodCall() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->throwOn('aMethod', new MockTestException());
         $this->expectException();
         $mock->aMethod();
     }
 
     function testThrowsOnlyWhenCallSignatureMatches() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->throwOn('aMethod', new MockTestException(), array(3));
         $mock->aMethod(1);
         $mock->aMethod(2);
@@ -751,7 +751,7 @@ class TestOfThrowingExceptionsFromMocks extends UnitTestCase {
     }
 
     function testCanThrowOnParticularInvocation() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->throwAt(2, 'aMethod', new MockTestException());
         $mock->aMethod();
         $mock->aMethod();
@@ -763,14 +763,14 @@ class TestOfThrowingExceptionsFromMocks extends UnitTestCase {
 class TestOfThrowingErrorsFromMocks extends UnitTestCase {
 
     function testCanGenerateErrorFromMethodCall() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->errorOn('aMethod', 'Ouch!');
         $this->expectError('Ouch!');
         $mock->aMethod();
     }
 
     function testGeneratesErrorOnlyWhenCallSignatureMatches() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->errorOn('aMethod', 'Ouch!', array(3));
         $mock->aMethod(1);
         $mock->aMethod(2);
@@ -779,7 +779,7 @@ class TestOfThrowingErrorsFromMocks extends UnitTestCase {
     }
 
     function testCanGenerateErrorOnParticularInvocation() {
-        $mock = new MockDummy();
+        $mock = new MockDummy4Mock();
         $mock->errorAt(2, 'aMethod', 'Ouch!');
         $mock->aMethod();
         $mock->aMethod();
@@ -788,18 +788,18 @@ class TestOfThrowingErrorsFromMocks extends UnitTestCase {
     }
 }
 
-Mock::generatePartial('Dummy', 'TestDummy', array('anotherMethod', 'aReferenceMethod'));
+Mock::generatePartial('Dummy4Mock', 'TestDummy4Mock', array('anotherMethod', 'aReferenceMethod'));
 
 class TestOfPartialMocks extends UnitTestCase {
 
     function testMethodReplacementWithNoBehaviourReturnsNull() {
-        $mock = new TestDummy();
+        $mock = new TestDummy4Mock();
         $this->assertEqual($mock->aMethod(99), 99);
         $this->assertNull($mock->anotherMethod());
     }
 
     function testSettingReturns() {
-        $mock = new TestDummy();
+        $mock = new TestDummy4Mock();
         $mock->returnsByValue('anotherMethod', 33, array(3));
         $mock->returnsByValue('anotherMethod', 22);
         $mock->returnsByValueAt(2, 'anotherMethod', 44, array(3));
@@ -809,21 +809,21 @@ class TestOfPartialMocks extends UnitTestCase {
     }
 
     function testSetReturnReferenceGivesOriginal() {
-        $mock = new TestDummy();
+        $mock = new TestDummy4Mock();
         $object = 99;
         $mock->returnsByReferenceAt(0, 'aReferenceMethod', $object, array(3));
         $this->assertReference($mock->aReferenceMethod(3), $object);
     }
 
     function testReturnsAtGivesOriginalObjectHandle() {
-        $mock = new TestDummy();
-        $object = new Dummy();
+        $mock = new TestDummy4Mock();
+        $object = new Dummy4Mock();
         $mock->returnsAt(0, 'anotherMethod', $object, array(3));
         $this->assertSame($mock->anotherMethod(3), $object);
     }
 
     function testExpectations() {
-        $mock = new TestDummy();
+        $mock = new TestDummy4Mock();
         $mock->expectCallCount('anotherMethod', 2);
         $mock->expect('anotherMethod', array(77));
         $mock->expectAt(1, 'anotherMethod', array(66));
@@ -832,7 +832,7 @@ class TestOfPartialMocks extends UnitTestCase {
     }
 
     function testSettingExpectationOnMissingMethodThrowsError() {
-        $mock = new TestDummy();
+        $mock = new TestDummy4Mock();
         $this->expectError();
         $mock->expectCallCount('aMissingMethod', 2);
     }
@@ -952,31 +952,31 @@ class TestOfPHP5AbstractMethodMocking extends UnitTestCase {
     }
 }
 
-class DummyWithProtected
+class DummyWithProtected4Mock
 {
     public function aMethodCallsProtected() { return $this->aProtectedMethod(); }
     protected function aProtectedMethod() { return true; }
 }
 
-Mock::generatePartial('DummyWithProtected', 'TestDummyWithProtected', array('aProtectedMethod'));
+Mock::generatePartial('DummyWithProtected4Mock', 'TestDummyWithProtected4Mock', array('aProtectedMethod'));
 class TestOfProtectedMethodPartialMocks extends UnitTestCase
 {
     function testProtectedMethodExists() {
         $this->assertTrue(
             method_exists(
-                new TestDummyWithProtected,
+                new TestDummyWithProtected4Mock,
                 'aProtectedMethod'
             )
         );
     }
 
     function testProtectedMethodIsCalled() {
-        $object = new DummyWithProtected();
+        $object = new DummyWithProtected4Mock();
         $this->assertTrue($object->aMethodCallsProtected(), 'ensure original was called');
     }
 
     function testMockedMethodIsCalled() {
-        $object = new TestDummyWithProtected();
+        $object = new TestDummyWithProtected4Mock();
         $object->returnsByValue('aProtectedMethod', false);
         $this->assertFalse($object->aMethodCallsProtected());
     }

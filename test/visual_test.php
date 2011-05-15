@@ -259,82 +259,82 @@ class FailingUnitTestCaseOutput extends UnitTestCase {
     }
 }
 
-class Dummy {
+class Dummy4VisualTest {
     function __construct() {
     }
 
     function a() {
     }
 }
-Mock::generate('Dummy');
+Mock::generate('Dummy4VisualTest');
 
 class TestOfMockObjectsOutput extends UnitTestCase {
 
     function testCallCounts() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expectCallCount('a', 1, 'My message: %s');
         $dummy->a();
         $dummy->a();
     }
 
     function testMinimumCallCounts() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expectMinimumCallCount('a', 2, 'My message: %s');
         $dummy->a();
         $dummy->a();
     }
 
     function testEmptyMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array());
         $dummy->a();
         $dummy->a(null);        // Fail.
     }
 
     function testEmptyMatchingWithCustomMessage() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(), 'My expectation message: %s');
         $dummy->a();
         $dummy->a(null);        // Fail.
     }
 
     function testNullMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(null));
         $dummy->a(null);
         $dummy->a();        // Fail.
     }
 
     function testBooleanMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(true, false));
         $dummy->a(true, false);
         $dummy->a(true, true);        // Fail.
     }
 
     function testIntegerMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(32, 33));
         $dummy->a(32, 33);
         $dummy->a(32, 34);        // Fail.
     }
 
     function testFloatMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(3.2, 3.3));
         $dummy->a(3.2, 3.3);
         $dummy->a(3.2, 3.4);        // Fail.
     }
 
     function testStringMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array('32', '33'));
         $dummy->a('32', '33');
         $dummy->a('32', '34');        // Fail.
     }
 
     function testEmptyMatchingWithCustomExpectationMessage() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect(
                 'a',
                 array(new EqualExpectation('A', 'My part expectation message: %s')),
@@ -344,25 +344,25 @@ class TestOfMockObjectsOutput extends UnitTestCase {
     }
 
     function testArrayMatching() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(array(32), array(33)));
         $dummy->a(array(32), array(33));
         $dummy->a(array(32), array('33'));        // Fail.
     }
 
     function testObjectMatching() {
-        $a = new Dummy();
+        $a = new Dummy4VisualTest();
         $a->a = 'a';
-        $b = new Dummy();
+        $b = new Dummy4VisualTest();
         $b->b = 'b';
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array($a, $b));
         $dummy->a($a, $b);
         $dummy->a($a, $a);        // Fail.
     }
 
     function testBigList() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array(false, 0, 1, 1.0));
         $dummy->a(false, 0, 1, 1.0);
         $dummy->a(true, false, 2, 2.0);        // Fail.
@@ -377,7 +377,7 @@ class TestOfPastBugs extends UnitTestCase {
     }
 
     function testMockWildcards() {
-        $dummy = new MockDummy();
+        $dummy = new MockDummy4VisualTest();
         $dummy->expect('a', array('*', array(33)));
         $dummy->a(array(32), array(33));
         $dummy->a(array(32), array('33'));        // Fail.

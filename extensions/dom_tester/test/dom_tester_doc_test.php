@@ -6,7 +6,7 @@ require_once dirname(__FILE__) . '/../../dom_tester.php';
 
 SimpleTest :: prefer(new TextReporter());
 
-class TestOfLiveCssSelectors extends DomTestCase {
+class TestOfDocCssSelectors extends DomTestCase {
     function setUp() {
         $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
