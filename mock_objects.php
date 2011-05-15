@@ -659,7 +659,15 @@ class SimpleMock {
         $this->max_counts = array();
         $this->expected_args = array();
         $this->expected_args_at = array();
-        $this->getCurrentTestCase()->tell($this);
+		$test = $this->getCurrentTestCase();
+		if (!empty($test)) {
+			$test->tell($this);
+		}
+		else {
+			// the to-string eqv. of debug_print_backtrace():
+			$e = new Exception();
+			error_log("SimpleMock cannot bind as observer to the testcase as there is no test case registered right now.\n" . $e->getTraceAsString());
+		}
     }
 
     /**
