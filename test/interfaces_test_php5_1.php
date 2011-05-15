@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__) . '/../autorun.php');
 
 interface SampleInterfaceWithHintInSignature {
     function method(array $hinted);
