@@ -1606,7 +1606,7 @@ class WebTestCase extends SimpleTestCase {
      *    @access public
      */
     function getAssertionLine() {
-        $trace = new SimpleStackTrace(array('assert', 'click', 'pass', 'fail'));
+        $trace = new SimpleStackTrace(array('assert', 'expect', 'pass', 'fail', 'skip', 'click'));
         return $trace->traceMethod();
     }
 }
