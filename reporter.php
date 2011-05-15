@@ -28,7 +28,7 @@ class HtmlReporter extends SimpleReporter {
      *    by a web browser.
      *    @access public
      */
-    function __construct($character_set = 'ISO-8859-1') {
+    function __construct($character_set = 'UTF-8') {
         parent::__construct();
         $this->character_set = $character_set;
     }
@@ -41,16 +41,19 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintHeader($test_name) {
         $this->sendNoCacheHeaders();
-        print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
-        print "<html>\n<head>\n<title>$test_name</title>\n";
-        print "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" .
-                $this->character_set . "\">\n";
-        print "<style type=\"text/css\">\n";
-        print $this->getCss() . "\n";
-        print "</style>\n";
-        print "</head>\n<body>\n";
-        print "<h1>$test_name</h1>\n";
-        flush();
+        /* only transmit the HTML blurb when there's hasn't been transmitted other content before us */
+        if (!headers_sent()) {
+            print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
+            print "<html>\n<head>\n<title>$test_name</title>\n";
+            print "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=" .
+                    $this->character_set . "\">\n";
+            print "<style type=\"text/css\">\n";
+            print $this->getCss() . "\n";
+            print "</style>\n";
+            print "</head>\n<body>\n";
+            print "<h1>$test_name</h1>\n";
+            flush();
+        }
     }
 
     /**
