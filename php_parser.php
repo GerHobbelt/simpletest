@@ -577,7 +577,7 @@ class SimpleHtmlSaxParser {
      *    @return SimpleLexer               Lexer suitable for this parser.
      *    @access public
      */
-    static function createLexer(&$parser) {
+    static function createLexer($parser) {
         return new SimpleHtmlLexer($parser);
     }
 
@@ -758,7 +758,7 @@ class SimplePhpPageBuilder {
      *                                         events for the builder.
      *    @access protected
      */
-    protected function createParser(&$listener) {
+    protected function createParser($listener) {
         return new SimpleHtmlSaxParser($listener);
     }
 
@@ -794,7 +794,7 @@ class SimplePhpPageBuilder {
             return true;
         }
         if ($tag->isPrivateContent() && ! isset($this->private_content_tag)) {
-            $this->private_content_tag = &$tag;
+            $this->private_content_tag = $tag;
         }
         if ($tag->expectEndTag()) {
             $this->openTag($tag);
@@ -883,7 +883,7 @@ class SimplePhpPageBuilder {
      *    @param SimpleTag $tag        Option tags only.
      *    @access protected
      */
-    protected function addContentTagToOpenTags(&$tag) {
+    protected function addContentTagToOpenTags($tag) {
         if ($tag->getTagName() != 'option') {
             return;
         }

@@ -87,7 +87,7 @@ class SimpleTestCase {
     }
 
     /**
-     *    Accessor for the private variable $_shoud_skip
+     *    Accessor for the protected variable $shoud_skip
      *    @access public
      */
     function shouldSkip() {
@@ -232,7 +232,7 @@ class SimpleTestCase {
      *    @access public
      */
     function tell($observer) {
-        $this->observers[] = &$observer;
+        $this->observers[] = $observer;
     }
 
     /**

@@ -1085,7 +1085,7 @@ class SimpleMock {
      *    @param string $test_method      Current method name.
      *    @param SimpleTestCase $test     Test to send message to.
      */
-    function atTestEnd($test_method, &$test) {
+    function atTestEnd($test_method, $test) {
         foreach ($this->expected_counts as $method => $expectation) {
             $test->assert($expectation, $this->getCallCount($method));
         }

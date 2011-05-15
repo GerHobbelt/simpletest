@@ -357,7 +357,7 @@ class NestingMethodTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintStart(&$listener) {
+    function paintStart($listener) {
         $listener->paintMethodStart($this->getName());
     }
 
@@ -367,7 +367,7 @@ class NestingMethodTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintEnd(&$listener) {
+    function paintEnd($listener) {
         $listener->paintMethodEnd($this->getName());
     }
 }
@@ -397,7 +397,7 @@ class NestingCaseTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintStart(&$listener) {
+    function paintStart($listener) {
         $listener->paintCaseStart($this->getName());
     }
 
@@ -407,7 +407,7 @@ class NestingCaseTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintEnd(&$listener) {
+    function paintEnd($listener) {
         $listener->paintCaseEnd($this->getName());
     }
 }
@@ -437,7 +437,7 @@ class NestingGroupTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintStart(&$listener) {
+    function paintStart($listener) {
         $listener->paintGroupStart($this->getName(), $this->getSize());
     }
 
@@ -447,7 +447,7 @@ class NestingGroupTag extends NestingXmlTag {
      *    @param SimpleReporter $listener    Target for events.
      *    @access public
      */
-    function paintEnd(&$listener) {
+    function paintEnd($listener) {
         $listener->paintGroupEnd($this->getName());
     }
 
@@ -515,7 +515,7 @@ class SimpleTestXmlParser {
      *    @return resource        Expat handle.
      *    @access protected
      */
-    protected function &createParser() {
+    protected function createParser() {
         $expat = xml_parser_create();
         xml_set_object($expat, $this);
         xml_set_element_handler($expat, 'startElement', 'endElement');
@@ -540,7 +540,7 @@ class SimpleTestXmlParser {
      *                             being parsed.
      *    @access protected
      */
-    protected function &getCurrentNestingTag() {
+    protected function getCurrentNestingTag() {
         return $this->tag_stack[0];
     }
 
@@ -600,7 +600,7 @@ class SimpleTestXmlParser {
             $nesting_tag = $this->popNestingTag();
             $nesting_tag->paintEnd($this->listener);
         } elseif ($tag == 'NAME') {
-            $nesting_tag = &$this->getCurrentNestingTag();
+            $nesting_tag = $this->getCurrentNestingTag();
             $nesting_tag->setName($this->content);
             $nesting_tag->paintStart($this->listener);
         } elseif ($tag == 'PASS') {

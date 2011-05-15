@@ -303,7 +303,7 @@ class TestOfHttpRedirects extends UnitTestCase {
 
 class TestOfBadHosts extends UnitTestCase {
     
-    private function createSimulatedBadHost() {
+    protected function createSimulatedBadHost() {
         $response = new MockSimpleHttpResponse();
         $response->setReturnValue('isError', true);
         $response->setReturnValue('getError', 'Bad socket');

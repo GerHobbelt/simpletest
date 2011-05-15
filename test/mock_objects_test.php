@@ -469,7 +469,7 @@ class LikeExpectation extends IdenticalExpectation {
 }
 
 class TestOfMockExpectations extends UnitTestCase {
-    private $test;
+    protected $test;
 
     function setUp() {
         $this->test = new MockSimpleTestCase();

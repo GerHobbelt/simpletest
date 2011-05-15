@@ -319,7 +319,7 @@ class SimpleUserAgent {
      *    @param SimpleHttpRequest $request    Outgoing request.
      *    @access protected
      */
-    protected function addAdditionalHeaders(&$request) {
+    protected function addAdditionalHeaders($request) {
         foreach ($this->additional_headers as $header) {
             $request->addHeaderLine($header);
         }

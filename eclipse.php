@@ -27,8 +27,8 @@ class EclipseReporter extends SimpleScorer {
      *    @param object $listener   Eclipse listener (?).
      *    @param boolean $cc        Whether to include test coverage.
      */
-    function __construct(&$listener, $cc=false){
-        $this->listener = &$listener;
+    function __construct($listener, $cc=false){
+        $this->listener = $listener;
         $this->SimpleScorer();
         $this->case = "";
         $this->group = "";

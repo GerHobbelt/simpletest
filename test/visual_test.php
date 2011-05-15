@@ -11,11 +11,11 @@
 // I have enough of a tester to procede more formally.
 //
 // The proper tests start in all_tests.php
-require_once('../unit_tester.php');
-require_once('../shell_tester.php');
-require_once('../mock_objects.php');
-require_once('../reporter.php');
-require_once('../xml.php');
+require_once(dirname(__FILE__) . '/../unit_tester.php');
+require_once(dirname(__FILE__) . '/../shell_tester.php');
+require_once(dirname(__FILE__) . '/../mock_objects.php');
+require_once(dirname(__FILE__) . '/../reporter.php');
+require_once(dirname(__FILE__) . '/../xml.php');
 
 class TestDisplayClass {
     private $a;

@@ -438,7 +438,7 @@ class SimpleUrl {
             // URIs to local file paths, but that requires more research.
             $scheme = 'file://';
         }
-        if ($this->getPort() && $this->getPort() != 80 ) {
+        if ($this->getPort() && $this->getPort() != 80) {
             $port = ':'.$this->getPort();
         }
 
