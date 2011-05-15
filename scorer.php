@@ -273,7 +273,7 @@ class SimpleScorer {
 
     /**
      *    Paints a formatted ASCII message such as a
-     *    privateiable dump.
+     *    variable dump.
      *    @param string $message        Text to display.
      *    @access public
      */
@@ -451,7 +451,7 @@ class SimpleReporter extends SimpleScorer {
     /**
      *    Accessor for the number of test cases
      *    completed so far.
-     *    @return integer   Number of ended cases.
+     *    @return integer   Number of completed cases.
      *    @access public
      */
     function getTestCaseProgress() {
@@ -559,7 +559,7 @@ class SimpleReporterDecorator {
     }
 
     /**
-     *    Gets the formatter for privateiables and other small
+     *    Gets the formatter for variables and other small
      *    generic data items.
      *    @return SimpleDumper          Formatter.
      *    @access public
@@ -837,7 +837,7 @@ class MultipleReporter {
     }
 
     /**
-     *    Gets the formatter for privateiables and other small
+     *    Gets the formatter for variables and other small
      *    generic data items.
      *    @return SimpleDumper          Formatter.
      *    @access public

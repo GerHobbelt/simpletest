@@ -358,7 +358,7 @@ class SimpleTestCase {
     }
 
     /**
-     *    Accessor for the number of subtests including myelf.
+     *    Accessor for the number of subtests including myself.
      *    @return integer           Number of test cases.
      *    @access public
      */

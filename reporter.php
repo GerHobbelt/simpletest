@@ -369,7 +369,7 @@ class TextReporter extends SimpleReporter {
     }
 
     /**
-     *    Paints formatted text such as dumped privateiables.
+     *    Paints formatted text such as dumped variables.
      *    @param string $message        Text to show.
      *    @access public
      */
