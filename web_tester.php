@@ -432,6 +432,7 @@ class NoTextExpectation extends TextExpectation {
  */
 class WebTestCase extends SimpleTestCase {
     protected $browser = null;
+    protected $server_url = null;
     protected $ignore_errors = false;
 
     /**
@@ -515,6 +516,86 @@ class WebTestCase extends SimpleTestCase {
         return new SimpleBrowser();
     }
 
+	/**
+	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the currently running script by default, 
+	 *    which can be overriden by specifying a different URL through the setServerUrl() method.
+	 *    
+     *    @param string $auth_str  The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @return string           The URL as currently configured.
+     *    @access public
+     */
+    function getServerUrl($auth_str = null) {
+		if (empty($this->server_url)) {
+			if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
+			{
+				$url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+				$url .= '://' . $_SERVER['HTTP_HOST'];
+				$url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+			}
+			else 
+			{
+				$url = 'http://www.lastcraft.com/test/';
+			}
+		}
+		else {
+			$url = $this->server_url;
+		}
+		$url = parse_url($url);
+		$rv = $url['scheme'] . '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $url['host'] . $url['path'];
+		if (!empty($url['query'])) {
+			$rv .= '?' . $url['query'];
+		}
+		if (!empty($url['fragment'])) {
+			$rv .= '#' . $url['fragment'];
+		}
+		return $rv;
+    }
+
+	/**
+	 *    A support method with sets the 'server URL' default to the specified URL string. You can always fetch the current
+	 *    URL string through calling the getServerUrl() method.
+	 *
+	 *    @note When the specified URL is not complete, we extend it by applying the default value for the missing parts: scheme, host, path
+	 *
+     *    @param string $url       The new server URL. When empty, the server URL will be reset to the default. @see getServerUrl()
+     *    @return string           The URL as currently configured.
+     *    @access public
+     */
+    function setServerUrl($url = null) {
+		$this->server_url = null;
+		$dflt = $this->getServerUrl();
+		$dflt = parse_url($dflt);
+		$url = parse_url($url);
+		
+		if (empty($url['scheme'])) {
+			$url['scheme'] = $dflt['scheme'];
+		}
+		if (empty($url['host'])) {
+			$url['host'] = $dflt['host'];
+		}
+		if (empty($url['path'])) {
+			$url['path'] = $dflt['path'];
+		}
+		$auth_str = '';
+		if (!empty($url['user'])) {
+			$auth_str = $dflt['user'];
+		}
+		if (!empty($url['pass'])) {
+			$auth_str .= ':' . $dflt['pass'];
+		}
+		
+		$rv = $url['scheme'] . '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $url['host'] . $url['path'];
+		if (!empty($url['query'])) {
+			$rv .= '?' . $url['query'];
+		}
+		if (!empty($url['fragment'])) {
+			$rv .= '#' . $url['fragment'];
+		}
+		
+		$this->server_url = $rv;
+		return $rv;
+	}
+	
     /**
      *    Gets the last response error.
      *    @return string    Last low level HTTP error.
