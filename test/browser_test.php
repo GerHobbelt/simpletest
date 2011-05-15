@@ -148,25 +148,38 @@ class TestOfHistory extends UnitTestCase {
 
 class TestOfParsedPageAccess extends UnitTestCase {
 
-    function loadPage(&$page) {
-        $response = new MockSimpleHttpResponse($this);
-        $agent = new MockSimpleUserAgent($this);
+	function ctorInit4loadPage($mocker, $props) {
+        $mocker->returns('createUserAgent', $props['agent']);
+        $mocker->returns('parse', $props['page']);
+		return true;	// allow parent constructor to be executed.
+	}
+	
+    function loadPage($page) {
+        $response = new MockSimpleHttpResponse();
+        $agent = new MockSimpleUserAgent();
         $agent->returns('fetchResponse', $response);
 
-        $browser = new MockParseSimpleBrowser($this);
-        $browser->returns('createUserAgent', $agent);
-        $browser->returns('parse', $page);
-        $browser->__construct();
+		$init_data = array('agent' => $agent, 'page' => $page);
+        $browser = new MockParseSimpleBrowser(array(&$this, 'ctorInit4loadPage'), $init_data);
+        //$browser->returns('createUserAgent', $agent);
+        //$browser->returns('parse', $page);
+        //$browser->__construct();
 
         $browser->get('http://this.com/page.html');
         return $browser;
     }
 
+	function ctorInit4testAccessorsWhenNoPage($mocker, $props) {
+        $mocker->returns('createUserAgent', $props['agent']);
+		return true;	// allow parent constructor to be executed.
+	}
+	
     function testAccessorsWhenNoPage() {
-        $agent = new MockSimpleUserAgent($this);
-        $browser = new MockParseSimpleBrowser($this);
-        $browser->returns('createUserAgent', $agent);
-        $browser->__construct();
+        $agent = new MockSimpleUserAgent();
+		$init_data = array('agent' => $agent);
+        $browser = new MockParseSimpleBrowser(array(&$this, 'ctorInit4testAccessorsWhenNoPage'), $init_data);
+        //$browser->returns('createUserAgent', $agent);
+        //$browser->__construct();
         $this->assertEqual($browser->getContent(), '');
     }
 
@@ -226,7 +239,7 @@ class TestOfBrowserNavigation extends UnitTestCase {
         $browser = new MockParseSimpleBrowser();
         $browser->returns('createUserAgent', $agent);
         $browser->returns('parse', $page);
-        $browser->__construct();
+        //$browser->__construct();
         return $browser;
     }
 
@@ -556,7 +569,7 @@ class TestOfBrowserFrames extends UnitTestCase {
     function createBrowser($agent) {
         $browser = new MockUserAgentSimpleBrowser();
         $browser->returns('createUserAgent', $agent);
-        $browser->__construct();
+        //$browser->__construct();
         return $browser;
     }
 

@@ -1,6 +1,7 @@
 <?php
 // $Id$
 require_once(dirname(__FILE__) . '/../autorun.php');
+require_once(dirname(__FILE__) . '/../errors.php');
 require_once(dirname(__FILE__) . '/../reflection_php5.php');
 
 class AnyOldLeafClass {
@@ -259,5 +260,366 @@ class TestOfAbstractsWithAbstractMethods extends UnitTestCase {
         );
     }
 }
+
+class AnyOldClassInvokingMethodsWithArgumentsInConstructor {
+	function __construct($arg1 = 1, $arg2 = 2) { }
+	function callMe($arg1, $arg2, $arg3 = 3, $arg4 = 4, $arg5 = 5, $arg6 = 6, $arg7 = 7) { }
+	function callMeNil() { }
+	function __isset($key) { }
+	function __unset($key) { }
+	static function aStatic() { }
+	static function aStaticWithParameters($arg1, $arg2) { }
+}
+		
+class TestOfMethodsReflectionGenerationModes extends UnitTestCase {
+
+    private $old;
+
+    function setUp() {
+        $this->old = error_reporting(E_ALL);
+        set_error_handler('SimpleTestErrorHandler');
+    }
+
+    function tearDown() {
+        restore_error_handler();
+        error_reporting($this->old);
+    }
+
+    function testCanProperlyGenerateSignatureModes() {
+        $reflection = new SimpleReflection('AnyOldClassInvokingMethodsWithArgumentsInConstructor');
+        $this->assertEqual(
+            'function __construct($arg1 = null, $arg2 = null)',
+            $reflection->getSignature('__construct')
+        );
+        $this->assertEqual(
+            'function __construct($arg1 = null, $arg2 = null)',
+            $reflection->getSignature('__construct', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::__construct($arg1, $arg2)',
+            $reflection->getSignature('__construct', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->assertEqual(
+            '$arg1 = null, $arg2 = null',
+            $reflection->getSignature('__construct', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '$arg1, $arg2',
+            $reflection->getSignature('__construct', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            "\$arg1 = null;\n        \$arg2 = null;\n",
+            $reflection->getSignature('__construct', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+		
+        $this->assertEqual(
+            'function callMe($arg1, $arg2, $arg3 = null, $arg4 = null, $arg5 = null, $arg6 = null, $arg7 = null)',
+            $reflection->getSignature('callMe')
+        );
+        $this->assertEqual(
+            'function callMe($arg1, $arg2, $arg3 = null, $arg4 = null, $arg5 = null, $arg6 = null, $arg7 = null)',
+            $reflection->getSignature('callMe', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::callMe($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7)',
+            $reflection->getSignature('callMe', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->assertEqual(
+            '$arg1, $arg2, $arg3 = null, $arg4 = null, $arg5 = null, $arg6 = null, $arg7 = null',
+            $reflection->getSignature('callMe', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '$arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7',
+            $reflection->getSignature('callMe', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            "\$arg3 = null;\n        \$arg4 = null;\n        \$arg5 = null;\n        \$arg6 = null;\n        \$arg7 = null;\n",
+            $reflection->getSignature('callMe', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+		
+        $this->assertEqual(
+            'function callMeNil()',
+            $reflection->getSignature('callMeNil')
+        );
+        $this->assertEqual(
+            'function callMeNil()',
+            $reflection->getSignature('callMeNil', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::callMeNil()',
+            $reflection->getSignature('callMeNil', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('callMeNil', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('callMeNil', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            "",
+            $reflection->getSignature('callMeNil', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+    }
+
+    function testCanProperlyGenerateSignatureModesWithExtras() {
+        $reflection = new SimpleReflection('AnyOldClassInvokingMethodsWithArgumentsInConstructor');
+        $this->assertEqual(
+            "function __construct(\$arg1 = 'A10', \$arg2 = 'B20')",
+            $reflection->getSignature('__construct', SIG_GEN_DECLARE, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            "parent::__construct(\$arg1, \$arg2)",
+            $reflection->getSignature('__construct', SIG_GEN_INVOKE_AS_PARENT, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            "\$arg1 = 'A10';\n        \$arg2 = 'B20';\n",
+            $reflection->getSignature('__construct', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'PREFIX::$arg1 = null, $arg2 = null::POSTFIX',
+            $reflection->getSignature('__construct', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$arg1, $arg2::POSTFIX',
+            $reflection->getSignature('__construct', SIG_GEN_INVOKE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            "\$arg1 = null;\n        \$arg2 = null;\n",
+            $reflection->getSignature('__construct', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+
+        $this->assertEqual(
+            "\$arg1 = 'A10';\n        \$arg2 = 'B20';\n",
+            $reflection->getSignature('__construct', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$arg1 = \'A10\', $arg2 = null::POSTFIX',
+            $reflection->getSignature('__construct', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+    }
+	
+    function testCopingWithSpecialMethodCall() {
+        $reflection = new SimpleReflection('AnyOldClassInvokingMethodsWithArgumentsInConstructor');
+        $this->assertEqual(
+            'function __call($method, $arguments)',
+            $reflection->getSignature('__call')
+        );
+        $this->assertEqual(
+            'function __call($method, $arguments)',
+            $reflection->getSignature('__call', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::__call($method, $arguments)',
+            $reflection->getSignature('__call', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __call/'));
+        $this->assertEqual(
+            '$method, $arguments',
+            $reflection->getSignature('__call', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '$method, $arguments',
+            $reflection->getSignature('__call', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__call', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+		
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __call/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __call/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __call/'));
+        $this->assertEqual(
+            'function __call($method, $arguments)',
+            $reflection->getSignature('__call', SIG_GEN_DECLARE, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'parent::__call($method, $arguments)',
+            $reflection->getSignature('__call', SIG_GEN_INVOKE_AS_PARENT, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__call', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'PREFIX::$method, $arguments::POSTFIX',
+            $reflection->getSignature('__call', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$method, $arguments::POSTFIX',
+            $reflection->getSignature('__call', SIG_GEN_INVOKE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__call', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__call', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$method, $arguments::POSTFIX',
+            $reflection->getSignature('__call', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+    }
+	
+    function testCopingWithSpecialMethodtoString() {
+        $reflection = new SimpleReflection('AnyOldClassInvokingMethodsWithArgumentsInConstructor');
+        $this->assertEqual(
+            'function __toString()',
+            $reflection->getSignature('__toString')
+        );
+        $this->assertEqual(
+            'function __toString()',
+            $reflection->getSignature('__toString', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::__toString()',
+            $reflection->getSignature('__toString', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __toString/'));
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+		
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __toString/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __toString/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __toString/'));
+        $this->assertEqual(
+            'function __toString()',
+            $reflection->getSignature('__toString', SIG_GEN_DECLARE, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'parent::__toString()',
+            $reflection->getSignature('__toString', SIG_GEN_INVOKE_AS_PARENT, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_INVOKE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__toString', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+    }
+}	
+
+		
+class TestOfMethodsReflectionForPHP51andAbove extends UnitTestCase {
+
+    private $old;
+
+    function setUp() {
+        $this->old = error_reporting(E_ALL);
+        set_error_handler('SimpleTestErrorHandler');
+    }
+
+    function tearDown() {
+        restore_error_handler();
+        error_reporting($this->old);
+    }
+
+    function skip() {
+        $this->skipIf(
+                version_compare(phpversion(), '5.1', '<'),
+                '__unset does not exist as a special function for PHP version up to PHP 5.1');
+    }
+
+    function testCopingWithSpecialMethodunsetPHP51() {
+        $reflection = new SimpleReflection('AnyOldClassInvokingMethodsWithArgumentsInConstructor');
+        $this->assertEqual(
+            'function __unset($key)',
+            $reflection->getSignature('__unset')
+        );
+        $this->assertEqual(
+            'function __unset($key)',
+            $reflection->getSignature('__unset', SIG_GEN_DECLARE)
+        );
+        $this->assertEqual(
+            'parent::__unset($key)',
+            $reflection->getSignature('__unset', SIG_GEN_INVOKE_AS_PARENT)
+        );
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __unset/'));
+        $this->assertEqual(
+            '$key',
+            $reflection->getSignature('__unset', SIG_GEN_DECLARE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '$key',
+            $reflection->getSignature('__unset', SIG_GEN_INVOKE_ONLY_THE_ARGS)
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__unset', SIG_GEN_ASSIGN_ONLY_THE_ARGS)
+        );
+		
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __unset/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __unset/'));
+        $this->expectError(new PatternExpectation('/Reflection does not \(yet\) support mode ' . SIG_GEN_ASSIGN_ONLY_THE_ARGS . ' for __unset/'));
+        $this->assertEqual(
+            'function __unset($key)',
+            $reflection->getSignature('__unset', SIG_GEN_DECLARE, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'parent::__unset($key)',
+            $reflection->getSignature('__unset', SIG_GEN_INVOKE_AS_PARENT, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__unset', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20')))
+        );
+        $this->assertEqual(
+            'PREFIX::$key::POSTFIX',
+            $reflection->getSignature('__unset', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$key::POSTFIX',
+            $reflection->getSignature('__unset', SIG_GEN_INVOKE_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__unset', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+
+        $this->assertEqual(
+            '',
+            $reflection->getSignature('__unset', SIG_GEN_ASSIGN_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10', 'arg2' => 'B20'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+        $this->assertEqual(
+            'PREFIX::$key::POSTFIX',
+            $reflection->getSignature('__unset', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('assign' => array('arg1' => 'A10'), 'prefix' => 'PREFIX::', 'postfix' => '::POSTFIX'))
+        );
+    }
+}	
+		
 
 ?>

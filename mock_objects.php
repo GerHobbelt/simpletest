@@ -1338,16 +1338,17 @@ class MockGenerator {
             $implements = 'implements ' . implode(', ', $interfaces);
         }
         $code = "class " . $this->mock_class . " extends " . $this->mock_base . " $implements {\n";
-        $code .= "    function " . $this->mock_class . "() {\n";
-        $code .= "        \$this->" . $this->mock_base . "();\n";
+        $code .= "    function __construct() {\n"; // function " . $this->mock_class . "() {\n";
+        $code .= "        parent::__construct();\n"; // \$this->" . $this->mock_base . "();\n";
         $code .= "    }\n";
         if (in_array('__construct', $this->reflection->getMethods())) {
-            $code .= "    function __construct() {\n";
-            $code .= "        \$this->" . $this->mock_base . "();\n";
+            $code .= "    function " . str_replace('__construct', '__construct_parent', $this->reflection->getSignature('__construct')) . " {\n";
+			$code .= "        " . $this->reflection->getSignature('__construct', SIG_GEN_INVOKE_AS_PARENT) . ";\n"; 
             $code .= "    }\n";
         }
         $code .= $this->createHandlerCode($methods);
         $code .= "}\n";
+		//echo "<pre>CLASS CODE = \n$code\n";
         return $code;
     }
 
@@ -1362,7 +1363,7 @@ class MockGenerator {
         $code .= "    public \$mock;\n";
         $code .= $this->addMethodList(array_merge($methods, $this->reflection->getMethods()));
         $code .= "\n";
-        $code .= "    function " . $this->mock_class . "() {\n";
+        $code .= "    function __construct() {\n"; // function " . $this->mock_class . "() {\n";
         $code .= "        \$this->mock = new " . $this->mock_base . "();\n";
         $code .= "        \$this->mock->disableExpectationNameChecks();\n";
         $code .= "    }\n";
@@ -1372,6 +1373,7 @@ class MockGenerator {
         $code .= $this->overrideMethods($this->reflection->getMethods());
         $code .= $this->createNewMethodCode($methods);
         $code .= "}\n";
+		//echo "<pre>SUBCLASS CODE = \n$code\n";
         return $code;
     }
 
@@ -1387,15 +1389,67 @@ class MockGenerator {
         $code .= "    protected \$mock;\n";
         $code .= $this->addMethodList($methods);
         $code .= "\n";
-        $code .= "    function " . $this->mock_class . "() {\n";
-        $code .= "        \$this->mock = new " . $this->mock_base . "();\n";
-        $code .= "        \$this->mock->disableExpectationNameChecks();\n";
-        $code .= "    }\n";
+		$has_ctor = in_array('__construct', $this->reflection->getMethods());
+		if (0) {
+			$code .= "    function __construct() {\n"; // " . $this->mock_class . "() {\n";
+			$code .= "        \$this->mock = new " . $this->mock_base . "();\n";
+			$code .= "        \$this->mock->disableExpectationNameChecks();\n";
+			$code .= "    }\n";
+			/*
+			 * The mock constructor MUST NOT invoke the parent constructor as that one MAY invoke (inherited, i.e. mocked!) methods.
+			 * 
+			 * The way out of this conundrum is to postpone the parent constructor invocation until a later time and through a special
+			 * function. Since we already have __construct() as something we need ourselves, and including a call to the parent
+			 * constructor in there turned out to be a pretty bad (though quite close to working) idea, we pick the name __construct_parent.
+			 * 
+			 * BTW: the Bad Idea involved the lack of having a chance to set up the desired ->returns() and all that for the mock object
+			 *      before the parent constructor could call those (mocked) methods. :-(
+			 *
+			 * The alternative approach would be to provide some sort of callback as part of the mock constructor, which would
+			 * then be called before the parent constructor is invoked and where we can set up the desired returns(), etc.
+			 */
+			if ($has_ctor) {
+				$code .= "    function " . str_replace('__construct', '__construct_parent', $this->reflection->getSignature('__construct')) . " {\n";
+				$code .= "        " . $this->reflection->getSignature('__construct', SIG_GEN_INVOKE_AS_PARENT) . ";\n"; 
+				$code .= "    }\n";
+			}
+		}
+		else {
+			$code .= "    function __construct(" . ($has_ctor ? $this->reflection->getSignature('__construct', SIG_GEN_DECLARE_ONLY_THE_ARGS, array('postfix' => ', ')) : '') . "\$rig_setup_callback = null, \$propagate = null) {\n";
+			$code .= "        \$this->mock = new " . $this->mock_base . "();\n";
+			$code .= "        \$this->mock->disableExpectationNameChecks();\n";
+			/*
+			 * The mock constructor MUST NOT invoke the parent constructor as that one MAY invoke (inherited, i.e. mocked!) methods.
+			 * 
+			 * The way out of this conundrum is to postpone the parent constructor invocation until we're *completely* ready setting up
+			 * the mock.
+			 * 
+			 * BTW: Bad Things Happen To Those Who Mock involves, among other things, the lack of having a chance to set up the desired 
+			 *      ->returns() and all that for the mock object before the parent constructor could call those (mocked) methods.
+			 *
+			 * Therefore we provide a callback as part of the mock constructor, which would
+			 * then be called before the parent constructor is invoked and where we can set up the desired returns(), etc.
+			 */
+			if ($has_ctor) {
+				// http://stackoverflow.com/questions/48947/how-do-i-implement-a-callback-in-php
+				$code .= "        if (!empty(\$rig_setup_callback) && is_callable(\$rig_setup_callback)) {\n";
+				$code .= "        	\$ret = call_user_func(\$rig_setup_callback, \$this, \$propagate" . $this->reflection->getSignature('__construct', SIG_GEN_INVOKE_ONLY_THE_ARGS, array('prefix' => ', ')) . ");\n";
+				$code .= "        }\n";
+				$code .= "        else {\n";
+				$code .= "        	\$ret = true;\n";
+				$code .= "        }\n";
+				$code .= "        if (\$ret !== false) {\n";
+				$code .= "            " . $this->reflection->getSignature('__construct', SIG_GEN_INVOKE_AS_PARENT) . ";\n"; 
+				$code .= "        }\n";
+			}
+			$code .= "    }\n";
+		}
         $code .= $this->chainMockReturns();
         $code .= $this->chainMockExpectations();
         $code .= $this->chainThrowMethods();
         $code .= $this->overrideMethods($methods);
         $code .= "}\n";
+		//echo "<pre>EXTEND CODE = \n$code\n";
         return $code;
     }
 
@@ -1419,6 +1473,7 @@ class MockGenerator {
             }
             $code .= "    " . $this->reflection->getSignature($method) . " {\n";
             $code .= "        \$args = func_get_args();\n";
+            //$code .= "        echo \"<pre>TRACE:\\n\"; print_r(\$this); debug_print_backtrace();\n";
             $code .= "        \$result = &\$this->invoke(\"$method\", \$args);\n";
             $code .= "        return \$result;\n";
             $code .= "    }\n";
@@ -1445,6 +1500,7 @@ class MockGenerator {
             }
             $code .= "    " . $this->reflection->getSignature($method) . " {\n";
             $code .= "        \$args = func_get_args();\n";
+            //$code .= "        echo \"<pre>TRACE:\\n\"; print_r(\$this); debug_print_backtrace();\n";
             $code .= "        \$result = &\$this->mock->invoke(\"$method\", \$args);\n";
             $code .= "        return \$result;\n";
             $code .= "    }\n";
@@ -1618,6 +1674,7 @@ class MockGenerator {
             }
             $code .= "    " . $this->reflection->getSignature($method) . " {\n";
             $code .= "        \$args = func_get_args();\n";
+            //$code .= "        echo \"<pre>TRACE:\\n\"; print_r(\$this); debug_print_backtrace();\n";
             $code .= "        \$result = &\$this->mock->invoke(\"$method\", \$args);\n";
             $code .= "        return \$result;\n";
             $code .= "    }\n";

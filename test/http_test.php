@@ -25,9 +25,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(1, 'write', array("Host: a.valid.host\r\n"));
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
 		$this->assertSame($route->createConnection('GET', 15), $socket);
 	}
 
@@ -37,9 +37,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(1, 'write', array("Host: a.valid.host\r\n"));
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
 
 		$route->createConnection('POST', 15);
 	}
@@ -50,9 +50,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(1, 'write', array("Host: a.valid.host\r\n"));
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
 		$this->assertSame($route->createConnection('DELETE', 15), $socket);
 	}
 	
@@ -62,9 +62,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(1, 'write', array("Host: a.valid.host\r\n"));
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host/here.html'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host/here.html'));
 		$this->assertSame($route->createConnection('HEAD', 15), $socket);
 	}
 
@@ -75,9 +75,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host:81/here.html'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host:81/here.html'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host:81/here.html'));
 
 		$route->createConnection('GET', 15);
 	}
@@ -89,9 +89,9 @@ class TestOfDirectRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleRoute();
+		$route = new PartialSimpleRoute(new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'));
+		//$route->__construct(new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'));
 
 		$route->createConnection('GET', 15);
 	}
@@ -106,11 +106,13 @@ class TestOfProxyRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleProxyRoute();
+		$route = new PartialSimpleProxyRoute(
+			new SimpleUrl('http://a.valid.host/here.html'),
+			new SimpleUrl('http://my-proxy'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(
-		new SimpleUrl('http://a.valid.host/here.html'),
-		new SimpleUrl('http://my-proxy'));
+		//$route->__construct(
+		//new SimpleUrl('http://a.valid.host/here.html'),
+		//new SimpleUrl('http://my-proxy'));
 		$route->createConnection('GET', 15);
 	}
 
@@ -121,11 +123,13 @@ class TestOfProxyRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleProxyRoute();
+		$route = new PartialSimpleProxyRoute(
+			new SimpleUrl('http://a.valid.host/here.html'),
+			new SimpleUrl('http://my-proxy'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(
-		new SimpleUrl('http://a.valid.host/here.html'),
-		new SimpleUrl('http://my-proxy'));
+		//$route->__construct(
+		//new SimpleUrl('http://a.valid.host/here.html'),
+		//new SimpleUrl('http://my-proxy'));
 		$route->createConnection('POST', 15);
 	}
 
@@ -136,11 +140,13 @@ class TestOfProxyRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleProxyRoute();
+		$route = new PartialSimpleProxyRoute(
+			new SimpleUrl('http://a.valid.host:81/here.html'),
+			new SimpleUrl('http://my-proxy:8081'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(
-		new SimpleUrl('http://a.valid.host:81/here.html'),
-		new SimpleUrl('http://my-proxy:8081'));
+		//$route->__construct(
+		//new SimpleUrl('http://a.valid.host:81/here.html'),
+		//new SimpleUrl('http://my-proxy:8081'));
 		$route->createConnection('GET', 15);
 	}
 
@@ -151,11 +157,13 @@ class TestOfProxyRoute extends UnitTestCase {
 		$socket->expectAt(2, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 3);
 
-		$route = new PartialSimpleProxyRoute();
+		$route = new PartialSimpleProxyRoute(
+			new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'),
+			new SimpleUrl('http://my-proxy'));
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(
-		new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'),
-		new SimpleUrl('http://my-proxy'));
+		//$route->__construct(
+		//new SimpleUrl('http://a.valid.host/here.html?a=1&b=2'),
+		//new SimpleUrl('http://my-proxy'));
 		$route->createConnection('GET', 15);
 	}
 
@@ -169,13 +177,17 @@ class TestOfProxyRoute extends UnitTestCase {
 		$socket->expectAt(3, 'write', array("Connection: close\r\n"));
 		$socket->expectCallCount('write', 4);
 
-		$route = new PartialSimpleProxyRoute();
+		$route = new PartialSimpleProxyRoute(
+			new SimpleUrl('http://a.valid.host/here.html'),
+			new SimpleUrl('http://my-proxy'),
+			'Me',
+			'Secret');
 		$route->setReturnReference('createSocket', $socket);
-		$route->__construct(
-		new SimpleUrl('http://a.valid.host/here.html'),
-		new SimpleUrl('http://my-proxy'),
-                'Me',
-                'Secret');
+		//$route->__construct(
+		//new SimpleUrl('http://a.valid.host/here.html'),
+		//new SimpleUrl('http://my-proxy'),
+        //        'Me',
+        //        'Secret');
 		$route->createConnection('GET', 15);
 	}
 }
