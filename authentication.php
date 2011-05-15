@@ -149,7 +149,7 @@ class SimpleAuthenticator {
 
     /**
      *    Adds a new realm centered the current URL.
-     *    Browsers privatey wildly on their behaviour in this
+     *    Browsers vary wildly on their behaviour in this
      *    regard. Mozilla ignores the realm and presents
      *    only when challenged, wasting bandwidth. IE
      *    just carries on presenting until a new challenge

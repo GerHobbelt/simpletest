@@ -225,7 +225,7 @@ class XmlReporter extends SimpleReporter {
 
     /**
      *    Paints a formatted ASCII message such as a
-     *    privateiable dump.
+     *    variable dump.
      *    @param string $message        Text to display.
      *    @access public
      */

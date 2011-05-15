@@ -379,7 +379,7 @@ class SimpleStackTrace {
 
     /**
      *    Grabs a current stack trace.
-     *    @return array        Fulle trace.
+     *    @return array        Full trace.
      */
     protected function captureTrace() {
         if (function_exists('debug_backtrace')) {

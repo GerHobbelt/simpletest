@@ -354,7 +354,7 @@ class SimpleWidget extends SimpleTag {
 
     /**
      *    Accessor for name submitted as the key in
-     *    GET/POST privateiables hash.
+     *    GET/POST variables hash.
      *    @return string        Parsed value.
      *    @access public
      */

@@ -1209,7 +1209,7 @@ class Mock {
      *                                 those in the cloned class. Use this
      *                                 to emulate the dynamic addition of
      *                                 methods in the cloned class or when
-     *                                 the class hasn't been written yet.sta
+     *                                 the class hasn't been written yet.
      */
     static function generate($class, $mock_class = false, $methods = false) {
         $generator = new MockGenerator($class, $mock_class);
