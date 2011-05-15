@@ -5,6 +5,7 @@ require_once(dirname(__FILE__) . '/../collector.php');
 
 class ExtensionsTests extends TestSuite {
 	function skip() {
+		// TODO: this is a useless skip test right now as we only support PHP5; however, we may need to skip 5.0 / 5.1 versions: check how far we can go back there.
 		$this->skipIf(version_compare(phpversion(), '5', '<'),
                       'Many extensions only work with PHP5 and above');
 	}
