@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__) . '/../autorun.php');
+require_once(dirname(__FILE__) . '/../shell_tester.php');
 require_once(dirname(__FILE__) . '/support/test1.php');
 
 class TestOfAutorun extends UnitTestCase {
@@ -10,12 +11,14 @@ class TestOfAutorun extends UnitTestCase {
     }
 
     function testExitStatusOneIfTestsFail() {
-        exec('php ' . dirname(__FILE__) . '/support/failing_test.php', $output, $exit_status);
+        $sh = new SimpleShell();
+        $exit_status = $sh->execute('php ' . dirname(__FILE__) . '/support/failing_test.php');
         $this->assertEqual($exit_status, 1);
     }
 
     function testExitStatusZeroIfTestsPass() {
-        exec('php ' . dirname(__FILE__) . '/support/passing_test.php', $output, $exit_status);
+        $sh = new SimpleShell();
+        $exit_status = $sh->execute('php ' . dirname(__FILE__) . '/support/passing_test.php');
         $this->assertEqual($exit_status, 0);
     }
 }

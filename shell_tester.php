@@ -38,7 +38,7 @@ class SimpleShell {
      */
     function execute($command) {
         $this->output = false;
-        exec($command, $this->output, $ret);
+        exec($this->fixPHPpathInCommand($command), $this->output, $ret);
         return $ret;
     }
 
@@ -59,6 +59,92 @@ class SimpleShell {
     function getOutputAsList() {
         return $this->output;
     }
+
+    /**
+     *
+     *    Delivers the path to a usable PHP executable.
+     *    This is useful for many installations which don't have 'php' (or 'php.exe')
+     *    not readily available in the PATH.
+     *
+     *    @return the path to the PHP executable
+     *    @access public
+     */
+    function getPHPexePath() {
+        global $_SERVER;
+        static $exe_path;
+
+        if (empty($exe_path))
+        {
+            for ($state = 0; ; $state++)
+            {
+                switch($state)
+                {
+                case 0:
+                    $dir = '';
+                    break;
+                    
+                case 1:
+                    if (defined('PHP_BINDIR') && PHP_BINDIR !== '.')
+                    {
+                        $dir = PHP_BINDIR;
+                        break;
+                    }
+                    continue 2;
+                    
+                case 2:
+                    if (!empty($_SERVER['PHPRC']))
+                    {
+                        $dir = $_SERVER['PHPRC'];
+                        break;
+                    }
+                    continue 2;
+                    
+                default:
+                    break 2;
+                }
+
+                $dir = (empty($dir) ? $dir : str_replace('//', '/', strtr($dir . '/', '\\', '/')));
+                
+                $exe = $dir . 'php';
+                exec($exe . ' -v', $output, $exit_status);
+                if ($exit_status === 0) {
+                    $exe_path = $exe;
+                    return $exe;
+                }
+
+                $exe = $dir . 'php.exe';
+                exec($exe . ' -v', $output, $exit_status);
+                if ($exit_status === 0) {
+                    $exe_path = $exe;
+                    return $exe;
+                }
+            }
+            
+            // this will fail, but we pass it on anyhow...
+            $exe_path = 'php';
+            return 'php';
+        }
+        
+        return $exe_path;
+    }
+
+
+    /**
+     *    Process the command line so users can always write 'php yada yada ...' and not have to
+     *    worry about where their PHP executable resides exactly.
+     *
+     *    @return processed command line
+     *    @access public
+     */
+     function fixPHPpathInCommand($command)
+     {
+        $command = explode(' ', $command, 2);
+        if ($command[0] === 'php')
+        {
+            $command[0] = $this->getPHPexePath();
+        }
+        return implode(' ', $command);
+     }
 }
 
 /**
