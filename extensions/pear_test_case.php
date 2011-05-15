@@ -22,7 +22,7 @@
      *    @subpackage   Extensions
      */
     class PHPUnit_TestCase extends SimpleTestCase {
-        private $_loosely_typed;
+        protected $loosely_typed;
         
         /**
          *    Constructor. Sets the test name.
@@ -31,7 +31,7 @@
          */
         function __construct($label = false) {
             parent::__construct($label);
-            $this->_loosely_typed = false;
+            $this->loosely_typed = false;
         }
         
         /**
@@ -43,7 +43,7 @@
          *    @public
          */
         function assertEquals($first, $second, $message = "%s", $delta = 0) {
-            if ($this->_loosely_typed) {
+            if ($this->loosely_typed) {
                 $expectation = new EqualExpectation($first);
             } else {
                 $expectation = new IdenticalExpectation($first);
@@ -163,7 +163,7 @@
          *    @public
          */
         function setLooselyTyped($loosely_typed) {
-            $this->_loosely_typed = $loosely_typed;
+            $this->loosely_typed = $loosely_typed;
         }
 
         /**

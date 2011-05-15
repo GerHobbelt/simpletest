@@ -99,13 +99,13 @@ class DomTestCase extends WebTestCase {
 	function loadDom() {
 		$this->dom = new DomDocument('1.0', 'utf-8');
 		$this->dom->validateOnParse = true;
-		$this->dom->loadHTML($this->_browser->getContent());
+		$this->dom->loadHTML($this->browser->getContent());
 	}
 
     function getElementsBySelector($selector) {
 		$this->loadDom();    	
 		$css_selector = new CssSelectorExpectation($this->dom, $selector);
-    	return $css_selector->_value;
+    	return $css_selector->value;
     }
     
 	function assertElementsBySelector($selector, $elements, $message = '%s') {

@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . '/../treemap_reporter.php';
  */
 class JqueryTreemapReporter extends TreemapReporter {
 
-	function _getCss() {
+	protected function getCss() {
 		$css = ".treemapView { color:white; }
 				.treemapCell {background-color:green;font-size:10px;font-family:Arial;}
   				.treemapHead {cursor:pointer;background-color:#B34700}
@@ -34,7 +34,7 @@ class JqueryTreemapReporter extends TreemapReporter {
 		$title = $this->_reporter->getTitle();
 		echo "<html><head>";
 		echo "<title>{$title}</title>";
-		echo "<style type=\"text/css\">" . $this->_getCss() . "</style>";
+		echo "<style type=\"text/css\">" . $this->getCss() . "</style>";
 		echo "<script type=\"text/javascript\" src=\"http://code.jquery.com/jquery-latest.js\"></script>";
 		echo "<script type=\"text/javascript\" src=\"http://www.fbtools.com/jquery/treemap/treemap.js\"></script>";
 		echo "<script type=\"text/javascript\">\n";

@@ -30,12 +30,12 @@ require_once dirname(__FILE__).'/selenium/remote-control.php';
  * 
  */
 class SeleneseTestCase extends UnitTestCase {
-	var $selenium;
-	var $html;
-	var $testFile;
-	var $parsed_table;
-	var $logMessages;
-	var $_commandMap = array("verify",
+	public $selenium;
+	public $html;
+	public $testFile;
+	public $parsed_table;
+	public $logMessages;
+	protected $commandMap = array("verify",
 							"verifyErrorOnNext",
 							"verifyNotErrorOnNext",
 							"verifyFailureOnNext",
@@ -347,7 +347,7 @@ class SeleneseTestCase extends UnitTestCase {
 		
 		$this->selenium->start();
 		foreach ($this->parsed_table as $test) {	
-			if (in_array($test[0], $this->_commandMap)) {
+			if (in_array($test[0], $this->commandMap)) {
 				$this->assertFunction($test[0], $test[1], $test[2]);
 			} else {		
 				$this->selenium->__call($test[0], array($test[1], $test[2]));

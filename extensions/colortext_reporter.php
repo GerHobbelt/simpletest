@@ -25,8 +25,8 @@ require_once(dirname(__FILE__) . '/../reporter.php');
  * @subpackage Extensions
  */
 class ColorTextReporter extends TextReporter { 
-    var $_failColor = 41;
-    var $_passColor = 42;
+    protected const $failColor = 41;
+    protected const $passColor = 42;
     
     /**
      * Handle initialization
@@ -51,14 +51,14 @@ class ColorTextReporter extends TextReporter {
         $output = trim(ob_get_clean());
         if ($output) {
             if (($this->getFailCount() + $this->getExceptionCount()) == 0) {
-                $color = $this->_passColor;
+                $color = $this->passColor;
             } else {
-                $color = $this->_failColor;
+                $color = $this->failColor;
             }
             
-            $this->_setColor($color);
+            $this->setColor($color);
             echo $output;
-            $this->_resetColor();
+            $this->resetColor();
         }
     }
     
@@ -80,7 +80,7 @@ class ColorTextReporter extends TextReporter {
      * @access protected
      */
     function _resetColor() {
-        $this->_setColor(0);
+        $this->setColor(0);
     }
 }
 

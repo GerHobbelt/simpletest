@@ -81,7 +81,7 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
     	 *    Needs to be a relative path from where the test scripts are run 
     	 *    (and obviously, visible in the document root).
     	 */
-    	var $path;
+    	protected $path;
         
         /**
          *    Does nothing yet. The first output will
@@ -108,7 +108,7 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
             	,$this->path.'js/'
             	,$this->path.'js/'
             	,$this->path.'css/'
-            	,$this->_getCss()
+            	,$this->getCss()
             	,$test_name
             	,$this->path.'img/'
             	);
@@ -134,7 +134,7 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
          *    @return string            CSS code as text.
          *    @access protected
          */
-        function _getCss() {
+        protected function getCss() {
             return SIMPLETEST_WEBUNIT_CSS;
         }
         

@@ -28,7 +28,7 @@ class TreemapReporter extends SimpleReporterDecorator {
 	 * basic CSS for floating nested divs
 	 * @todo checkout some weird border bugs
 	 */
-	function _getCss() {
+	protected function getCss() {
 		$css = ".pass{background-color:green;}.fail{background-color:red;}";
 		$css .= "body {background-color:white;margin:0;padding:1em;}";
 		$css .= "div{float:right;margin:0;color:black;}";
@@ -45,7 +45,7 @@ class TreemapReporter extends SimpleReporterDecorator {
 		$title = $this->_reporter->getTitle();
 		echo "<html><head>";
 		echo "<title>{$title}</title>";
-		echo "<style type=\"text/css\">" . $this->_getCss() . "</style>";
+		echo "<style type=\"text/css\">" . $this->getCss() . "</style>";
 		echo "</head><body>";
 		echo "<h1>{$title}</h1>";
 	}	
@@ -93,9 +93,9 @@ class TreemapReporter extends SimpleReporterDecorator {
 	 *
 	 * @param TreemapNode $map sorted 
 	 * @param boolean $aspect flips the aspect between horizontal and vertical
-	 * @private
+	 * @access protected
 	 */
-	function divideMapNodes($map, $aspect) {
+	protected function divideMapNodes($map, $aspect) {
 		$aspect = !$aspect;
 		$divisions = $map->getSize();
 		$total = $map->getTotalSize();
