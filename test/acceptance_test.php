@@ -132,52 +132,52 @@ class TestOfRequestMethods extends UnitTestCase {
         return SimpleTestAcceptanceTest::samples();
     }
 
-	function testHeadRequest() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->head($this->samples() . 'request_methods.php'));
-		$this->assertEqual($browser->getResponseCode(), 202);
-	}
+    function testHeadRequest() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->head($this->samples() . 'request_methods.php'));
+        $this->assertEqual($browser->getResponseCode(), 202);
+    }
 
-	function testGetRequest() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->get($this->samples() . 'request_methods.php'));
-		$this->assertEqual($browser->getResponseCode(), 405);
-	}
+    function testGetRequest() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->get($this->samples() . 'request_methods.php'));
+        $this->assertEqual($browser->getResponseCode(), 405);
+    }
 
-	function testPostWithPlainEncoding() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', 'A content message'));
-		$this->assertEqual($browser->getResponseCode(), 406);
-		$this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
-	}
+    function testPostWithPlainEncoding() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->post($this->samples() . 'request_methods.php', 'A content message'));
+        $this->assertEqual($browser->getResponseCode(), 406);
+        $this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
+    }
 
-	function testPostWithXmlEncoding() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->post($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'text/xml'));
-		$this->assertEqual($browser->getResponseCode(), 201);
-		$this->assertPattern('/c/', $browser->getContent());
-	}
+    function testPostWithXmlEncoding() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->post($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'text/xml'));
+        $this->assertEqual($browser->getResponseCode(), 201);
+        $this->assertPattern('/c/', $browser->getContent());
+    }
 
-	function testPutWithPlainEncoding() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', 'A content message'));
-		$this->assertEqual($browser->getResponseCode(), 406);
-		$this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
-	}
+    function testPutWithPlainEncoding() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->put($this->samples() . 'request_methods.php', 'A content message'));
+        $this->assertEqual($browser->getResponseCode(), 406);
+        $this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
+    }
 
-	function testPutWithXmlEncoding() {
-		$browser = new SimpleBrowser();
-		$this->assertTrue($browser->put($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'application/xml'));
-		$this->assertEqual($browser->getResponseCode(), 201);
-		$this->assertPattern('/c/', $browser->getContent());
-	}
+    function testPutWithXmlEncoding() {
+        $browser = new SimpleBrowser();
+        $this->assertTrue($browser->put($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'application/xml'));
+        $this->assertEqual($browser->getResponseCode(), 201);
+        $this->assertPattern('/c/', $browser->getContent());
+    }
 
-	function testDeleteRequest() {
-		$browser = new SimpleBrowser();
-		$browser->delete($this->samples() . 'request_methods.php');
-		$this->assertEqual($browser->getResponseCode(), 202);
-		$this->assertPattern('/Your delete request was accepted/', $browser->getContent());
-	}
+    function testDeleteRequest() {
+        $browser = new SimpleBrowser();
+        $browser->delete($this->samples() . 'request_methods.php');
+        $this->assertEqual($browser->getResponseCode(), 202);
+        $this->assertPattern('/Your delete request was accepted/', $browser->getContent());
+    }
 
 }
 
