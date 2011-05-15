@@ -4,6 +4,7 @@ require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../exceptions.php');
 require_once(dirname(__FILE__) . '/../expectation.php');
 require_once(dirname(__FILE__) . '/../test_case.php');
+
 Mock::generate('SimpleTestCase');
 Mock::generate('SimpleExpectation');
 

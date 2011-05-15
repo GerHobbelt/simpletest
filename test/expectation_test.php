@@ -180,7 +180,7 @@ class TestOfMemberComparison extends UnitTestCase {
 
 }
 
-class DummyReferencedObject{}
+//class DummyReferencedObject{}
 
 class TestOfReference extends UnitTestCase {
 
