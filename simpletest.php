@@ -256,6 +256,12 @@ class SimpleTestContext {
     protected $reporter;
     protected $resources;
 
+    function __construct() {
+		$this->test = null;
+		$this->reporter = null;
+		$this->resources = array();
+    }
+
     /**
      *    Clears down the current context.
      *    @access public
@@ -334,7 +340,7 @@ class SimpleStackTrace {
 
     /**
      *    Extracts the last method name that was not within
-     *    Simpletest itself. Captures a stack trace if none given.
+     *    SimpleTest itself. Captures a stack trace if none given.
      *    @param array $stack      List of stack frames.
      *    @return string           Snippet of test report with line
      *                             number and file.

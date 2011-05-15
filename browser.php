@@ -18,6 +18,9 @@ require_once(dirname(__FILE__) . '/tidy_parser.php');
 require_once(dirname(__FILE__) . '/selector.php');
 require_once(dirname(__FILE__) . '/frames.php');
 require_once(dirname(__FILE__) . '/user_agent.php');
+require_once(dirname(__FILE__) . '/internal_tester.php');
+
+
 if (! SimpleTest::getParsers()) {
     SimpleTest::setParsers(array(new SimpleTidyPageBuilder(), new SimplePHPPageBuilder()));
     //SimpleTest::setParsers(array(new SimplePHPPageBuilder()));
@@ -171,6 +174,7 @@ class SimpleBrowser {
      */
     function __construct() {
         $this->user_agent = $this->createUserAgent();
+		InternalValidator()->assertIsA($this->user_agent, 'SimpleUserAgent');
         $this->user_agent->useProxy(
                 SimpleTest::getDefaultProxy(),
                 SimpleTest::getDefaultProxyUsername(),
