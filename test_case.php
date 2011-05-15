@@ -19,6 +19,7 @@ require_once(dirname(__FILE__) . '/dumper.php');
 require_once(dirname(__FILE__) . '/simpletest.php');
 require_once(dirname(__FILE__) . '/exceptions.php');
 require_once(dirname(__FILE__) . '/reflection_php5.php');
+require_once(dirname(__FILE__) . '/shell_tester.php');
 /**#@-*/
 if (! defined('SIMPLE_TEST')) {
     /**
@@ -384,7 +385,42 @@ class SimpleFileLoader {
     function load($test_file) {
         $existing_classes = get_declared_classes();
         $existing_globals = get_defined_vars();
-        include_once($test_file);
+		// as the included file can contain errors, we don't want to crash, but report those instead!
+		//
+		// See also: http://us3.php.net/manual/en/function.php-check-syntax.php
+		//
+		// NOTE: you can also load the file content and then pull it through eval(): that one though will 
+		//       NOT report the parse error, only return FALSE  ( http://nl.php.net/manual/en/function.eval.php )
+		$parse_err = -1;
+		if (is_readable($test_file)) {
+			$shell = new SimpleShell();
+			$parse_err = $shell->execute('php -l "' . realpath($test_file) . '"');
+			if ($parse_err) {
+				// either we're not being to run a php cli, or we got an actual parse error: find out which it is
+				$out = $shell->getOutput();
+				if (strpos($out, 'syntax error') !== false) {
+					return new BadTestSuite($test_file, "There is a SYNTAX ERROR in the file:\n" . trim($out));
+				}
+				/*
+				 * ELSE: seems we weren't able to run the php cli; fall back to the eval() way of checking the code.
+				 * Unfortunately this downgrades our error reporting to the 1960's when the tape would code 'syntax error'.
+				 */
+				$code = @file_get_contents($test_file);
+				if ($code === false) {
+					return new BadTestSuite($test_file, "Could not load the contents of the file");
+				}
+				$ret = eval($code);
+				if ($ret === false) {
+					return new BadTestSuite($test_file, "There is a SYNTAX ERROR in the file. Besides, you should adjust your setup so we can invoke 'php -l' as that gives you much more info about this error than a mere 'syntax error'.");
+				}
+			}
+			else {
+				include_once($test_file);		// or should this really be 'include' instead of 'include_once'?
+			}
+		}
+		else {
+            return new BadTestSuite($test_file, "You don't have read access to the file");
+		}
         $new_globals = get_defined_vars();
         $this->makeFileVariablesGlobal($existing_globals, $new_globals);
         $new_classes = array_diff(get_declared_classes(), $existing_classes);
