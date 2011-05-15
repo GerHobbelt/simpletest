@@ -1276,27 +1276,6 @@ class MockGenerator {
     }
 
     /**
-     *    Clones a class' interface and creates a mock version
-     *    that can have return values and expectations set.
-     *    @param array $methods        Additional methods to add beyond
-     *                                 those in th cloned class. Use this
-     *                                 to emulate the dynamic addition of
-     *                                 methods in the cloned class or when
-     *                                 the class hasn't been written yet.
-     */
-    function generate($methods) {
-        if (! $this->reflection->classOrInterfaceExists()) {
-            return false;
-        }
-        $mock_reflection = new SimpleReflection($this->mock_class);
-        if ($mock_reflection->classExistsSansAutoload()) {
-            return false;
-        }
-        $code = $this->createClassCode($methods ? $methods : array());
-        return eval("$code return \$code;");
-    }
-
-    /**
      *    Subclasses a class and overrides every method with a mock one
      *    that can have return values and expectations set. Chains
      *    to an aggregated SimpleMock.
