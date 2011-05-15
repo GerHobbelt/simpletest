@@ -58,7 +58,7 @@ class TreemapRecorder extends SimpleReporter {
 		$this->title = $title;
 	}
 	
-	function paintFormattedMessage() {
+	function paintFormattedMessage($message) {
 	}
 	
 	/**
