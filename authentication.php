@@ -206,7 +206,7 @@ class SimpleAuthenticator {
      *    @param SimpleUrl $url              Base of realm.
      *    @access public
      */
-    function addHeaders(&$request, $url) {
+    function addHeaders($request, $url) {
         if ($url->getUsername() && $url->getPassword()) {
             $username = $url->getUsername();
             $password = $url->getPassword();
@@ -227,7 +227,7 @@ class SimpleAuthenticator {
      *    @param string $password            Password for realm.
      *    @access public
      */
-    static function addBasicHeaders(&$request, $username, $password) {
+    static function addBasicHeaders($request, $username, $password) {
         if ($username && $password) {
             $request->addHeaderLine(
                 'Authorization: Basic ' . base64_encode("$username:$password"));

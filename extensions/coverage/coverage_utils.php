@@ -88,7 +88,7 @@ class CoverageUtils {
      * @param unknown_type $array
      * @param unknown_type $item
      */
-    static function addItemAsArray(&$array, $key, $item) {
+    static function addItemAsArray($array, $key, $item) {
         $array_key = $key .'[]';
         if (array_key_exists($array_key, $array)) {
             $array[$array_key][] = $item;

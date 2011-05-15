@@ -74,7 +74,7 @@ class CoverageDataHandler {
         return $aggregate;
     }
 
-    function aggregateCoverage(&$total, $next) {
+    function aggregateCoverage($total, $next) {
         foreach ($next as $lineno => $code) {
             if (!isset($total[$lineno])) {
                 $total[$lineno] = $code;

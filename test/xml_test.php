@@ -102,7 +102,7 @@ class AnyOldSignal {
 
 class TestOfXmlResultsParsing extends UnitTestCase {
 
-    function sendValidStart(&$parser) {
+    function sendValidStart($parser) {
         $parser->parse("<?xml version=\"1.0\"?>\n");
         $parser->parse("<run>\n");
         $parser->parse("<case>\n");
@@ -111,7 +111,7 @@ class TestOfXmlResultsParsing extends UnitTestCase {
         $parser->parse("<name>a_method</name>\n");
     }
 
-    function sendValidEnd(&$parser) {
+    function sendValidEnd($parser) {
         $parser->parse("</test>\n");
         $parser->parse("</case>\n");
         $parser->parse("</run>\n");

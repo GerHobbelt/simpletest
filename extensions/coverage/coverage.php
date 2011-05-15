@@ -48,7 +48,7 @@ class CodeCoverage  {
         }
     }
 
-    function getUntouchedFiles(&$untouched, $touched, $parentPath, $rootPath, $directoryDepth = 1) {
+    function getUntouchedFiles($untouched, $touched, $parentPath, $rootPath, $directoryDepth = 1) {
         $parent = opendir($parentPath);
         while ($file = readdir($parent)) {
             $path = "$parentPath/$file";
@@ -131,7 +131,7 @@ class CodeCoverage  {
         $this->excludes = $data['excludes'];
     }
 
-    function filter(&$coverage) {
+    function filter($coverage) {
         foreach ($coverage as $file => $line) {
             if (!$this->isFileIncluded($file)) {
                 unset($coverage[$file]);
