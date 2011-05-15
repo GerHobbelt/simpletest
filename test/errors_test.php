@@ -167,7 +167,7 @@ class TestOfPHP52RecoverableErrors extends UnitTestCase {
 
 class TestOfErrorsExcludingPHP52AndAbove extends UnitTestCase {
     function skip() {
-        $this->skipIf(
+        $this->skipIf(0 &&
                 version_compare(phpversion(), '5.2', '>='),
                 'E_USER_ERROR not tested for PHP 5.2 and above');
     }
