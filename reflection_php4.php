@@ -13,15 +13,15 @@
  *  @ignore duplicate with reflection_php5.php
  */
 class SimpleReflection {
-    var $_interface;
+    var $interface4refl;
 
     /**
      *    Stashes the class/interface.
-     *    @param string $interface    Class or interface
+     *    @param string $interface4refl    Class or interface
      *                                to inspect.
      */
-    function SimpleReflection($interface) {
-        $this->_interface = $interface;
+    function SimpleReflection($interface4refl) {
+        $this->interface4refl = $interface4refl;
     }
 
     /**
@@ -30,7 +30,7 @@ class SimpleReflection {
      *    @access public
      */
     function classExists() {
-        return class_exists($this->_interface);
+        return class_exists($this->interface4refl);
     }
 
     /**
@@ -40,7 +40,7 @@ class SimpleReflection {
      *    @access public
      */
     function classExistsSansAutoload() {
-        return class_exists($this->_interface);
+        return class_exists($this->interface4refl);
     }
 
     /**
@@ -50,7 +50,7 @@ class SimpleReflection {
      *    @access public
      */
     function classOrInterfaceExists() {
-        return class_exists($this->_interface);
+        return class_exists($this->interface4refl);
     }
 
     /**
@@ -60,7 +60,7 @@ class SimpleReflection {
      *    @access public
      */
     function classOrInterfaceExistsSansAutoload() {
-        return class_exists($this->_interface);
+        return class_exists($this->interface4refl);
     }
 
     /**
@@ -70,7 +70,7 @@ class SimpleReflection {
      *    @access public
      */
     function getMethods() {
-        return get_class_methods($this->_interface);
+        return get_class_methods($this->interface4refl);
     }
 
     /**
@@ -90,7 +90,7 @@ class SimpleReflection {
      *    @access public
      */
     function getParent() {
-        return strtolower(get_parent_class($this->_interface));
+        return strtolower(get_parent_class($this->interface4refl));
     }
 
     /**
