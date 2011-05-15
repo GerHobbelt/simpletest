@@ -282,7 +282,7 @@ class UnitTestCase extends SimpleTestCase {
      *    @return boolean               True on pass
      *    @access public
      */
-    function assertClone($first, $second, $message = '%s') {
+    function assertClone(&$first, &$second, $message = '%s') {
         $dumper = new SimpleDumper();
         $message = sprintf(
                 $message,

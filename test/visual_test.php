@@ -16,6 +16,8 @@ require_once(dirname(__FILE__) . '/../shell_tester.php');
 require_once(dirname(__FILE__) . '/../mock_objects.php');
 require_once(dirname(__FILE__) . '/../reporter.php');
 require_once(dirname(__FILE__) . '/../xml.php');
+require_once(dirname(__FILE__) . '/../autorun.php');
+
 
 class TestDisplayClass {
     private $a;
@@ -121,10 +123,70 @@ class PassingUnitTestCaseOutput extends UnitTestCase {
         $this->assertReference($a, $b, "%s -> Pass");
     }
 
-    function testCloneOnDifferentObjects() {
+    function testReferenceFail1() {
         $a = "fred";
         $b = $a;
+        $this->assertReference($a, $b, "%s -> Fail");
+    }
+
+    function testReferenceFail2() {
+        $a = "fred";
+        $b = "fred";
+        $this->assertReference($a, $b, "%s -> Fail");
+    }
+
+    function testReferenceFail3() {
+        $a = "fred";
+        $b = $a . '';
+        $this->assertReference($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnSameObjects() {
+        $a = "fred";
+        $b = $a;
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnSameObjects2() {
+        $a = "fred";
+        $b = "fred";
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnSameObjects3() {
+        $a = "fred";
+        $b = $a . '';
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnSameObjects4() {
+        $a = "fred";
+        $b = &$a;
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnDifferentObjects() {
+        $a = "fred";
+        $b = substr(' ' . $a, 1);
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnClonedUserObjects() {
+        $a = new TestDisplayClass("fred");
+        $b = clone $a;
         $this->assertClone($a, $b, "%s -> Pass");
+    }
+
+    function testCloneOnAssignedUserObjects() {
+        $a = new TestDisplayClass("fred");
+        $b = $a;
+        $this->assertClone($a, $b, "%s -> Fail");
+    }
+
+    function testCloneOnReferencedUserObjects() {
+        $a = new TestDisplayClass("fred");
+        $b = &$a;
+        $this->assertClone($a, $b, "%s -> Fail");
     }
 
     function testPatterns() {
@@ -447,34 +509,20 @@ class TestThatShouldNotBeSkipped extends UnitTestCase {
 
 
 
-try
-{
-	$test = new TestSuite('Visual test with 46 passes, 47 fails and 0 exceptions');
-	$test->add(new PassingUnitTestCaseOutput());
-	$test->add(new FailingUnitTestCaseOutput());
-	$test->add(new TestOfMockObjectsOutput());
-	$test->add(new TestOfPastBugs());
-	$test->add(new TestOfVisualShell());
-	$test->add(new TestOfSkippingNoMatterWhat());
-	$test->add(new TestOfSkippingOrElse());
-	$test->add(new TestOfSkippingTwiceOver());
-	$test->add(new TestThatShouldNotBeSkipped());
 
-	if (isset($_GET['xml']) || in_array('xml', (isset($argv) ? $argv : array()))) {
-		$reporter = new XmlReporter();
-	} elseif (TextReporter::inCli()) {
-		$reporter = new NoPassesReporter(new TextReporter());
-	} else {
-		$reporter = new NoPassesReporter(new HtmlReporter());
+class AllVisualTests extends TestSuite {
+    function __construct() {
+		parent::__construct('Visual test with 46 passes, 47 fails and 0 exceptions');
+		$this->add(new PassingUnitTestCaseOutput());
+		$this->add(new FailingUnitTestCaseOutput());
+		$this->add(new TestOfMockObjectsOutput());
+		$this->add(new TestOfPastBugs());
+		$this->add(new TestOfVisualShell());
+		$this->add(new TestOfSkippingNoMatterWhat());
+		$this->add(new TestOfSkippingOrElse());
+		$this->add(new TestOfSkippingTwiceOver());
+		$this->add(new TestThatShouldNotBeSkipped());
 	}
-	if (isset($_GET['dry']) || in_array('dry', (isset($argv) ? $argv : array()))) {
-		$reporter->makeDry();
-	}
-	$rv = $test->run($reporter);
 }
-catch (Exception $ex) {
-	print "Exception: " . $ex; 
-	$rv = false;
-}
-exit($rv ? 0 : 1);
+
 ?>
