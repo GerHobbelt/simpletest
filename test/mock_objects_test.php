@@ -196,7 +196,7 @@ class TestOfCallSchedule extends UnitTestCase {
 }
 
 class Dummy {
-    function Dummy() {
+    function __construct() {
     }
 
     function aMethod() {

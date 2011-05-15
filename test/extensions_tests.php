@@ -9,8 +9,8 @@ class ExtensionsTests extends TestSuite {
                       'Many extensions only work with PHP5 and above');
 	}
 
-    function ExtensionsTests() {
-        $this->TestSuite('Extension tests for SimpleTest ' . SimpleTest::getVersion());
+    function __construct() {
+        parent::__construct('Extension tests for SimpleTest ' . SimpleTest::getVersion());
 
 		$nodes = new RecursiveDirectoryIterator(dirname(__FILE__).'/../extensions/');
 		foreach(new RecursiveIteratorIterator($nodes) as $node) {
