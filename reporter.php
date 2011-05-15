@@ -75,9 +75,14 @@ class HtmlReporter extends SimpleReporter {
      *    @access protected
      */
     protected function getCss() {
-        return ".fail { background-color: inherit; color: red; }" .
-                ".pass { background-color: inherit; color: green; }" .
-                " pre { background-color: lightgray; color: inherit; }";
+        return "\n" .
+               "span.fail { background-color: inherit; color: red; }\n" .
+               "span.pass { background-color: inherit; color: darkgreen; }\n" .
+               "span.skip { background-color: inherit; color: darkgreen; }\n" .
+               "span.error { background-color: inherit; color: red; }\n" .
+               "span.exception { background-color: inherit; color: red; }\n" .
+               "span.signal { background-color: inherit; color: orange; }\n" .
+               "pre { background-color: lightgray; color: inherit; }\n";
     }
 
     /**
@@ -101,6 +106,27 @@ class HtmlReporter extends SimpleReporter {
     }
 
     /**
+     *    Paints the test success (pass) with a breadcrumbs
+     *    trail of the nesting test suites below the
+     *    top level test.
+     *   
+     *    @note Will only render a message when the SIMPLETEST_PAINT_PASS flag
+     *          has been set.
+     *
+     *    @param string $message    Pass message displayed in
+     *                              the context of the other tests.
+     */
+    function paintPass($message) 
+    {
+        parent::paintPass($message);
+        print "<p class=\"st-paint pass\"><span class=\"pass\">Pass</span>: ";
+        $breadcrumb = $this->getTestList();
+        array_shift($breadcrumb);
+        print implode(" -&gt; ", $breadcrumb);
+        print " -&gt; " . htmlentities($message) . "</p>\n";
+    }
+
+    /**
      *    Paints the test failure with a breadcrumbs
      *    trail of the nesting test suites below the
      *    top level test.
@@ -109,11 +135,14 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintFail($message) {
         parent::paintFail($message);
-        print "<span class=\"fail\">Fail</span>: ";
+        print "<p class=\"st-paint fail\"><span class=\"fail\">Fail</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "<br />\n";
+        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
+        print "<pre>\n";
+		debug_print_backtrace();
+        print "</pre>\n";
     }
 
     /**
@@ -123,11 +152,11 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintError($message) {
         parent::paintError($message);
-        print "<span class=\"fail\">Exception</span>: ";
+        print "<p class=\"st-paint error\"><span class=\"error\">Exception</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong><br />\n";
+        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -137,7 +166,7 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintException($exception) {
         parent::paintException($exception);
-        print "<span class=\"fail\">Exception</span>: ";
+        print "<p class=\"st-paint exception\"><span class=\"exception\">Exception</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
@@ -145,7 +174,7 @@ class HtmlReporter extends SimpleReporter {
                 '] with message ['. $exception->getMessage() .
                 '] in ['. $exception->getFile() .
                 ' line ' . $exception->getLine() . ']';
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong><br />\n";
+        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -155,15 +184,29 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintSkip($message) {
         parent::paintSkip($message);
-        print "<span class=\"pass\">Skipped</span>: ";
+        print "<p class=\"st-paint skip\"><span class=\"skip\">Skipped</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "<br />\n";
+        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
     }
 
     /**
-     *    Paints formatted text such as dumped privateiables.
+     *    Prints the message for user generated events (SimpleTestCase::signal()).
+     *    @param string $type        Event type as text.
+     *    @param mixed $payload      Message or object.
+     *    @access public
+     */
+    function paintSignal($type, $payload) {
+        print "<p class=\"st-paint signal\"><span class=\"signal\">$type</span>: ";
+        $breadcrumb = $this->getTestList();
+        array_shift($breadcrumb);
+        print implode(" -&gt; ", $breadcrumb);
+        print " -&gt; " . htmlentities(serialize($payload)) . "</p>\n";
+    }
+    
+    /**
+     *    Paints formatted text such as dumped variables.
      *    @param string $message        Text to show.
      *    @access public
      */
@@ -234,6 +277,21 @@ class TextReporter extends SimpleReporter {
     }
 
     /**
+     *    Paints the test success as a stack trace.
+     *    @param string $message    Success message displayed in
+     *                              the context of the other tests.
+     *    @access public
+     */
+    function paintPass($message) {
+        parent::paintPass($message);
+        print $this->getPassCount() . ") $message\n";
+        $breadcrumb = $this->getTestList();
+        array_shift($breadcrumb);
+        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+        print "\n";
+    }
+
+    /**
      *    Paints the test failure as a stack trace.
      *    @param string $message    Failure message displayed in
      *                              the context of the other tests.
@@ -276,6 +334,21 @@ class TextReporter extends SimpleReporter {
                 '] in ['. $exception->getFile() .
                 ' line ' . $exception->getLine() . ']';
         print "Exception " . $this->getExceptionCount() . "!\n$message\n";
+        $breadcrumb = $this->getTestList();
+        array_shift($breadcrumb);
+        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+        print "\n";
+    }
+
+    /**
+     *    Prints the message for user generated events (SimpleTestCase::signal()).
+     *    @param string $type        Event type as text.
+     *    @param mixed $payload      Message or object.
+     *    @access public
+     */
+    function paintSignal($type, $payload) {
+        parent::paintSignal($type, $payload);
+        print $type . ': ' . serialize($payload) . "\n";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
@@ -441,5 +514,20 @@ class NoSkipsReporter extends SimpleReporterDecorator {
      *    @access public
      */
     function paintSkip($message) { }
+}
+
+/**
+ *    Suppresses pass messages.
+ *    @package SimpleTest
+ *    @subpackage UnitTester
+ */
+class NoPassesReporter extends SimpleReporterDecorator {
+
+    /**
+     *    Does nothing.
+     *    @param string $message    Text of pass condition.
+     *    @access public
+     */
+    function paintPass($message) { }
 }
 ?>

@@ -21,6 +21,7 @@ require_once(dirname(__FILE__) . '/invoker.php');
 class SimpleScorer {
     protected $passes;
     protected $fails;
+    protected $errors;
     protected $exceptions;
     protected $is_dry_run;
 
@@ -31,6 +32,7 @@ class SimpleScorer {
     function __construct() {
         $this->passes = 0;
         $this->fails = 0;
+        $this->errors = 0;
         $this->exceptions = 0;
         $this->is_dry_run = false;
     }
@@ -40,10 +42,12 @@ class SimpleScorer {
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
      *    @param boolean $is_dry        Dry run if true.
+     *    @return SimpleScorer          This instance.
      *    @access public
      */
     function makeDry($is_dry = true) {
         $this->is_dry_run = $is_dry;
+        return $this;
     }
 
     /**
@@ -75,7 +79,7 @@ class SimpleScorer {
      *    @access public
      */
     function getStatus() {
-        if ($this->exceptions + $this->fails > 0) {
+        if ($this->errors + $this->exceptions + $this->fails > 0) {
             return false;
         }
         return true;
@@ -131,21 +135,77 @@ class SimpleScorer {
     }
 
     /**
-     *    Increments the pass count.
-     *    @param string $message        Message is ignored.
+     *    Increments the pass count. 
+     *
+     *    @note Derive from or invoke this method directly when you are 
+     *          only interested in the test run bookkeeping. Use the paint
+     *          methods when you are interested in the visula feedback
+     *          of a test run.
+     *
      *    @access public
      */
-    function paintPass($message) {
+    function incrementPassCount() {
         $this->passes++;
     }
 
     /**
-     *    Increments the fail count.
+     *    Increments the fail count. 
+     *
+     *    @note Derive from or invoke this method directly when you are 
+     *          only interested in the test run bookkeeping. Use the paint
+     *          methods when you are interested in the visula feedback
+     *          of a test run.
+     *
+     *    @access public
+     */
+    function incrementFailCount() {
+        $this->fails++;
+    }
+
+    /**
+     *    Increments the error count. 
+     *
+     *    @note Derive from or invoke this method directly when you are 
+     *          only interested in the test run bookkeeping. Use the paint
+     *          methods when you are interested in the visula feedback
+     *          of a test run.
+     *
+     *    @access public
+     */
+    function incrementErrorCount() {
+        $this->errors++;
+    }
+
+    /**
+     *    Increments the exception count. 
+     *
+     *    @note Derive from or invoke this method directly when you are 
+     *          only interested in the test run bookkeeping. Use the paint
+     *          methods when you are interested in the visula feedback
+     *          of a test run.
+     *
+     *    @access public
+     */
+    function incrementExceptionCount() {
+        $this->exceptions++;
+    }
+
+    /**
+     *    Potentially show the pass message.
+     *    @param string $message        Message is ignored.
+     *    @access public
+     */
+    function paintPass($message) {
+        //$this->incrementPassCount();
+    }
+
+    /**
+     *    Potentially show the fail message.
      *    @param string $message        Message is ignored.
      *    @access public
      */
     function paintFail($message) {
-        $this->fails++;
+        //$this->incrementFailCount();
     }
 
     /**
@@ -155,7 +215,7 @@ class SimpleScorer {
      *    @access public
      */
     function paintError($message) {
-        $this->exceptions++;
+        //$this->incrementExceptionCounts();
     }
 
     /**
@@ -164,7 +224,7 @@ class SimpleScorer {
      *    @access public
      */
     function paintException($exception) {
-        $this->exceptions++;
+        //$this->incrementExceptionCounts();
     }
 
     /**
@@ -200,7 +260,7 @@ class SimpleScorer {
      *    @access public
      */
     function getExceptionCount() {
-        return $this->exceptions;
+        return $this->errors + $this->exceptions;
     }
 
     /**
@@ -447,17 +507,33 @@ class SimpleReporterDecorator {
     }
 
     /**
-     *    The nesting of the test cases so far. Not
-     *    all reporters have this facility.
+     *    The nesting of the test cases so far.
      *    @return array        Test list if accessible.
      *    @access public
      */
     function getTestList() {
-        if (method_exists($this->reporter, 'getTestList')) {
-            return $this->reporter->getTestList();
-        } else {
-            return array();
-        }
+        return $this->reporter->getTestList();
+    }
+
+    /**
+     *    Accessor for total test size in number
+     *    of test cases. Null until the first
+     *    test is started.
+     *    @return integer   Total number of cases at start.
+     *    @access public
+     */
+    function getTestCaseCount() {
+        return $this->reporter->getTestCaseCount();
+    }
+
+    /**
+     *    Accessor for the number of test cases
+     *    completed so far.
+     *    @return integer   Number of completed cases.
+     *    @access public
+     */
+    function getTestCaseProgress() {
+        return $this->reporter->getTestCaseProgress();
     }
 
     /**
@@ -549,6 +625,38 @@ class SimpleReporterDecorator {
 
     /**
      *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementPassCount() {
+        $this->reporter->incrementPassCount();
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementFailCount() {
+        $this->reporter->incrementFailCount();
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementErrorCount() {
+        $this->reporter->incrementErrorCount();
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementExceptionCount() {
+        $this->reporter->incrementExceptionCount();
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
      *    @param string $message        Message is ignored.
      *    @access public
      */
@@ -632,7 +740,18 @@ class SimpleReporterDecorator {
  *    @subpackage UnitTester
  */
 class MultipleReporter {
-    private $reporters = array();
+    protected $reporters;
+
+    /**
+     *    Set up an MultipleReporter instance which allows you to send 
+     *    (paint) messages to multiple reporters in parallel.
+     *
+     *    @param Array $reporters       An array of instances of class SimpleReporter or 
+     *                                  SimpleReporterDecorator or their derivates.
+     */
+    function __construct($reporters = array()) {
+        $this->reporters = $reporters;
+    }
 
     /**
      *    Adds a reporter to the subscriber list.
@@ -671,6 +790,21 @@ class MultipleReporter {
             }
         }
         return true;
+    }
+
+    /**
+     *    Accessor for internal test stack. For
+     *    subclasses that need to see the whole test
+     *    history for display purposes.
+     *    @return array     List of methods in nesting order.
+     *    @access public
+     */
+    function getTestList() {
+		$ret = array();
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $ret = array_merge($ret, $this->reporters[$i]->getTestList());
+        }
+        return $ret;
     }
 
     /**
@@ -781,6 +915,46 @@ class MultipleReporter {
 
     /**
      *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementPassCount() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->incrementPassCount();
+        }
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementFailCount() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->incrementFailCount();
+        }
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementErrorCount() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->incrementErrorCount();
+        }
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
+     *    @access public
+     */
+    function incrementExceptionCount() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->incrementExceptionCount();
+        }
+    }
+
+    /**
+     *    Chains to the wrapped reporter.
      *    @param string $message        Message is ignored.
      *    @access public
      */
@@ -869,6 +1043,47 @@ class MultipleReporter {
     function paintSignal($type, $payload) {
         for ($i = 0; $i < count($this->reporters); $i++) {
             $this->reporters[$i]->paintSignal($type, $payload);
+        }
+    }
+
+    /**
+     *    Accessor for total test size in number
+     *    of test cases. Null until the first
+     *    test is started.
+	 *
+	 *    @note This is not an ideal implementation (and no ideal exists)
+	 *          as multiple reporters MAY count the same test cases.
+	 *          Despite this cause for 'overcounting', you may expect
+	 *          @a getTestCaseProgress() to suffer from the same, so
+	 *          the progress to total count ratio should still range between
+	 *          0% and 100%.
+	 *
+     *    @return integer   Total number of cases at start.
+     *    @access public
+     */
+    function getTestCaseCount() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->getTestCaseCount();
+        }
+    }
+
+    /**
+     *    Accessor for the number of test cases
+     *    completed so far.
+	 *
+	 *    @note This is not an ideal implementation (and no ideal exists)
+	 *          as multiple reporters MAY count the same test cases.
+	 *          Despite this cause for 'overcounting', you may expect
+	 *          @a getTestCaseCount() to suffer from the same, so
+	 *          the progress to total count ratio should still range between
+	 *          0% and 100%.
+	 *
+     *    @return integer   Number of completed cases.
+     *    @access public
+     */
+    function getTestCaseProgress() {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->getTestCaseProgress();
         }
     }
 }

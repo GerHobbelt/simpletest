@@ -71,11 +71,19 @@ class SimpleTest {
      *   which can be retrieved with SimpleTest :: preferred() method.
      *   Instances of the same class are overwritten.
      *   @param object $object      Preferred object
+     *   @param string $tag         Optional name for the object being stored. When empty, the object class name will be used as a tag as a default.
      *   @see preferred()
      */
-    static function prefer($object) {
-        $registry = &SimpleTest::getRegistry();
-        $registry['Preferred'][] = $object;
+    static function prefer($object, $tag = null) {
+		if (empty($tag)) {
+			$tag = get_class($object);
+		}
+		if (!empty($tag)) {
+			$registry = &SimpleTest::getRegistry();
+			$registry['Preferred'][$tag] = $object;
+			return true;
+		}
+		return false;
     }
 
     /**
@@ -83,7 +91,7 @@ class SimpleTest {
      *   can be applied in order to retrieve the object of the specific
      *   class
      *   @param array|string $classes       Allowed classes or interfaces.
-     *   @return array|object|null
+     *   @return array|object|null          associative array
      *   @see prefer()
      */
     static function preferred($classes) {
@@ -91,12 +99,10 @@ class SimpleTest {
             $classes = array($classes);
         }
         $registry = &SimpleTest::getRegistry();
-        for ($i = count($registry['Preferred']) - 1; $i >= 0; $i--) {
-            foreach ($classes as $class) {
-                if (SimpleTestCompatibility::isA($registry['Preferred'][$i], $class)) {
-                    return $registry['Preferred'][$i];
-                }
-            }
+        foreach ($registry['Preferred'] as $tag => $obj) {
+            if (in_array($tag, $classes, true)) {
+				return $obj;
+			}
         }
         return null;
     }
@@ -217,7 +223,7 @@ class SimpleTest {
                 'DefaultProxy' => false,
                 'DefaultProxyUsername' => false,
                 'DefaultProxyPassword' => false,
-                'Preferred' => array(new HtmlReporter(), new TextReporter(), new XmlReporter()));
+                'Preferred' => array('HtmlReporter' => new NoPassesReporter(new HtmlReporter()), 'TextReporter' => new NoPassesReporter(new TextReporter()), 'XmlReporter' => new XmlReporter()));
     }
 
     /**

@@ -4,7 +4,7 @@
 require_once dirname(__FILE__) . '/../../../autorun.php';
 require_once dirname(__FILE__) . '/../../dom_tester.php';
 
-SimpleTest :: prefer(new TextReporter());
+SimpleTest::prefer(new NoPassesReporter(new TextReporter()));
 
 class TestOfDocCssSelectors extends DomTestCase {
     function setUp() {

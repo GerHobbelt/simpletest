@@ -799,4 +799,3 @@ class TestOfBrowserFrames extends UnitTestCase {
         $this->assertEqual($browser->getContent(), 'Page onePage two');
     }
 }
-?>

@@ -51,6 +51,7 @@ class SimpleTestCase {
         if ($label) {
             $this->label = $label;
         }
+		$this->observers = array();
     }
 
     /**
@@ -242,6 +243,7 @@ class SimpleTestCase {
         if (! isset($this->reporter)) {
             trigger_error('Can only make assertions within test methods');
         }
+        $this->reporter->incrementPassCount();
         $this->reporter->paintPass(
                 $message . $this->getAssertionLine());
         return true;
@@ -256,6 +258,7 @@ class SimpleTestCase {
         if (! isset($this->reporter)) {
             trigger_error('Can only make assertions within test methods');
         }
+        $this->reporter->incrementFailCount();
         $this->reporter->paintFail(
                 $message . $this->getAssertionLine());
         return false;
@@ -274,6 +277,7 @@ class SimpleTestCase {
         if (! isset($this->reporter)) {
             trigger_error('Can only make assertions within test methods');
         }
+        $this->reporter->incrementErrorCount();
         $this->reporter->paintError(
                 "Unexpected PHP error [$message] severity [$severity] in [$file line $line]");
     }
@@ -285,6 +289,7 @@ class SimpleTestCase {
      *    @access public
      */
     function exception($exception) {
+        $this->reporter->incrementExceptionCount();
         $this->reporter->paintException($exception);
     }
 
@@ -640,6 +645,7 @@ class BadTestSuite {
      */
     function run($reporter) {
         $reporter->paintGroupStart($this->getLabel(), $this->getSize());
+        $reporter->incrementFailCount();
         $reporter->paintFail('Bad TestSuite [' . $this->getLabel() .
                 '] with error [' . $this->error . ']');
         $reporter->paintGroupEnd($this->getLabel());
@@ -655,4 +661,3 @@ class BadTestSuite {
         return 0;
     }
 }
-?>

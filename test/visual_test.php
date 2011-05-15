@@ -399,30 +399,6 @@ class TestOfVisualShell extends ShellTestCase {
     }
 }
 
-class PassesAsWellReporter extends HtmlReporter {
-
-    protected function getCss() {
-        return parent::getCss() . ' .pass { color: darkgreen; }';
-    }
-
-    function paintPass($message) {
-        parent::paintPass($message);
-        print "<span class=\"pass\">Pass</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . htmlentities($message) . "<br />\n";
-    }
-
-    function paintSignal($type, &$payload) {
-        print "<span class=\"fail\">$type</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . htmlentities(serialize($payload)) . "<br />\n";
-    }
-}
-
 class TestOfSkippingNoMatterWhat extends UnitTestCase {
     function skip() {
         $this->skipIf(true, 'Always skipped -> %s');
@@ -471,26 +447,34 @@ class TestThatShouldNotBeSkipped extends UnitTestCase {
 
 
 
-$test = new TestSuite('Visual test with 46 passes, 47 fails and 0 exceptions');
-$test->add(new PassingUnitTestCaseOutput());
-$test->add(new FailingUnitTestCaseOutput());
-$test->add(new TestOfMockObjectsOutput());
-$test->add(new TestOfPastBugs());
-$test->add(new TestOfVisualShell());
-$test->add(new TestOfSkippingNoMatterWhat());
-$test->add(new TestOfSkippingOrElse());
-$test->add(new TestOfSkippingTwiceOver());
-$test->add(new TestThatShouldNotBeSkipped());
+try
+{
+	$test = new TestSuite('Visual test with 46 passes, 47 fails and 0 exceptions');
+	$test->add(new PassingUnitTestCaseOutput());
+	$test->add(new FailingUnitTestCaseOutput());
+	$test->add(new TestOfMockObjectsOutput());
+	$test->add(new TestOfPastBugs());
+	$test->add(new TestOfVisualShell());
+	$test->add(new TestOfSkippingNoMatterWhat());
+	$test->add(new TestOfSkippingOrElse());
+	$test->add(new TestOfSkippingTwiceOver());
+	$test->add(new TestThatShouldNotBeSkipped());
 
-if (isset($_GET['xml']) || in_array('xml', (isset($argv) ? $argv : array()))) {
-    $reporter = new XmlReporter();
-} elseif (TextReporter::inCli()) {
-    $reporter = new TextReporter();
-} else {
-    $reporter = new PassesAsWellReporter();
+	if (isset($_GET['xml']) || in_array('xml', (isset($argv) ? $argv : array()))) {
+		$reporter = new XmlReporter();
+	} elseif (TextReporter::inCli()) {
+		$reporter = new NoPassesReporter(new TextReporter());
+	} else {
+		$reporter = new NoPassesReporter(new HtmlReporter());
+	}
+	if (isset($_GET['dry']) || in_array('dry', (isset($argv) ? $argv : array()))) {
+		$reporter->makeDry();
+	}
+	$rv = $test->run($reporter);
 }
-if (isset($_GET['dry']) || in_array('dry', (isset($argv) ? $argv : array()))) {
-    $reporter->makeDry();
+catch (Exception $ex) {
+	print "Exception: " . $ex; 
+	$rv = false;
 }
-exit ($test->run($reporter) ? 0 : 1);
+exit($rv ? 0 : 1);
 ?>
