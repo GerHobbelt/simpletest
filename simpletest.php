@@ -223,7 +223,7 @@ class SimpleTest {
                 'DefaultProxy' => false,
                 'DefaultProxyUsername' => false,
                 'DefaultProxyPassword' => false,
-                'Preferred' => array('HtmlReporter' => new NoPassesReporter(new HtmlReporter()), 'TextReporter' => new NoPassesReporter(new TextReporter()), 'XmlReporter' => new XmlReporter()));
+                'Preferred' => array('HtmlReporter' => new HtmlReporter(), 'TextReporter' => new TextReporter(), 'XmlReporter' => new XmlReporter()));
     }
 
     /**
