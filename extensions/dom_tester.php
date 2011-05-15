@@ -80,6 +80,15 @@ class CssSelectorExpectation extends SimpleExpectation {
                     $dumper->describeDifference($this->value, $compare);
         }
     }
+    
+    /**
+     *    Returns the selected value.
+     *    @return string              The selected value.
+     *    @access public
+     */
+    function getValue() {
+        return $this->value;
+    }
 }
 
 /**
@@ -105,7 +114,7 @@ class DomTestCase extends WebTestCase {
     function getElementsBySelector($selector) {
 		$this->loadDom();    	
 		$css_selector = new CssSelectorExpectation($this->dom, $selector);
-    	return $css_selector->value;
+    	return $css_selector->getValue();
     }
     
 	function assertElementsBySelector($selector, $elements, $message = '%s') {
