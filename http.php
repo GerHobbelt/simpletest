@@ -22,6 +22,7 @@ require_once(dirname(__FILE__) . '/url.php');
  */
 class SimpleRoute {
     private $url;
+    private $useragent = '';
 
     /**
      *    Sets the target URL.
@@ -66,6 +67,23 @@ class SimpleRoute {
     }
 
     /**
+     *    Creates the user agent part of the request.
+     *    @return string          Host line content.
+     *    @access protected
+     */
+    protected function getAgentLine() {
+        return 'User-Agent: ' . empty($this->useragent) ? 'SimpleTest ' . SimpleTest::getVersion() : $this->useragent;
+    }
+
+    /**
+     *    Set an alternative user-agent to use for requests.
+     *    @param string $agent UserAgent to use.
+     */
+    public function setUserAgent($agent) {
+        $this->useragent = $agent;
+    }
+
+    /**
      *    Opens a socket to the route.
      *    @param string $method      HTTP request method, usually GET.
      *    @param integer $timeout    Connection timeout.
@@ -82,6 +100,7 @@ class SimpleRoute {
         if (! $socket->isError()) {
             $socket->write($this->getRequestLine($method) . "\r\n");
             $socket->write($this->getHostLine() . "\r\n");
+            $socket->write($this->getAgentLine() . "\r\n");
             $socket->write("Connection: close\r\n");
         }
         return $socket;

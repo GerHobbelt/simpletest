@@ -200,6 +200,14 @@ class SimpleBrowser {
     }
 
     /**
+     *    Set an alternative user-agent to use for requests.
+     *    @param string $agent UserAgent to use.
+     */
+    public function setUserAgent($agent) {
+        $this->user_agent->setUserAgent($agent);
+    }
+
+    /**
      *    Get the HTML parser to use. Can be overridden by
      *    setParser. Otherwise scans through the available parsers and
      *    uses the first one which is available.
