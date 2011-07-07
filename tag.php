@@ -468,14 +468,14 @@ class SimpleTextTag extends SimpleWidget {
     }
 
     /**
-     *    Sets the current form element value. Cannot
-     *    change the value of a hidden field.
+     *    Sets the current form element value.
      *    @param string $value       New value.
+     *    @param boolean $force      Force setting even if field is hidden?
      *    @return boolean            True if allowed.
      *    @access public
      */
-    function setValue($value) {
-        if ($this->getAttribute('type') == 'hidden') {
+    function setValue($value, $force = false) {
+        if (!$force && $this->getAttribute('type') == 'hidden') {
             return false;
         }
         return parent::setValue($value);
