@@ -38,6 +38,7 @@ class SimpleUserAgent {
     private $proxy_password = false;
     private $connection_timeout = DEFAULT_CONNECTION_TIMEOUT;
     private $additional_headers = array();
+    private $http_referer;
 
     /**
      *    Starts with no cookies, realms or proxies.
@@ -60,6 +61,7 @@ class SimpleUserAgent {
     function restart($date = false) {
         $this->cookie_jar->restartSession($date);
         $this->authenticator->restartSession();
+        $this->http_referer = null;
     }
 
     /**
@@ -70,6 +72,17 @@ class SimpleUserAgent {
      */
     function addHeader($header) {
         $this->additional_headers[] = $header;
+    }
+
+    /**
+     *    Sets the referrer to send with the request, as long as
+     *    it is not set explicitely via {@link addHeader()}.
+     *    @param string $referer      Referer URI to add to every
+     *                                request until cleared.
+     *    @access public
+     */
+    public function setReferer($referer) {
+        $this->http_referer = $referer;
     }
 
     /**
@@ -283,6 +296,20 @@ class SimpleUserAgent {
             $request->readCookiesFromJar($this->cookie_jar, $url);
         }
         $this->authenticator->addHeaders($request, $url);
+
+        // Add Referer header, if not set explicitely
+        if( $this->http_referer && is_array($headers = $request->getHeaders()) ) {
+            $custom_referer = false;
+            foreach ($headers as $header) {
+                if (preg_match('~^referer:~i', $header)) {
+                    $custom_referer = true;
+                    break;
+                }
+            }
+            if (! $custom_referer) {
+                $request->addHeaderLine('Referer: '.$this->http_referer);
+            }
+        }
         return $request;
     }
 
