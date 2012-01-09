@@ -13,7 +13,7 @@ require_once(dirname(__FILE__).'/package.php');
 $source_path = dirname(__FILE__).'/../../docs/source/';
 $destination_path = dirname(__FILE__).'/../../docs/simpletest.org/';
 
-$languages = array("en/", "fr/", "../../");
+$languages = array("en/", "fr/", "it/", "../../");
 
 foreach ($languages as $language) {
     $dir = opendir($source_path.$language);
@@ -38,6 +38,7 @@ foreach ($languages as $language) {
 				}
 				
 				$destination_dir = dirname($destination_path.$destination);
+var_dump($source_path.$language.$file, $destination_path.$destination);
 				if (!is_dir($destination_dir)) {
 					mkdir($destination_dir);
 				}
@@ -54,7 +55,7 @@ foreach ($languages as $language) {
 				$synchronisation = new PackagingSynchronisation($source_path.$language.$file);
 				$result .= " ".$synchronisation->result();
 
-				echo $destination." : ".$result."\n";
+//				echo $destination." : ".$result."\n";
 			}
 	    }
 	}
