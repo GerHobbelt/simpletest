@@ -60,8 +60,135 @@ class SimpleShell {
         return $this->output;
     }
 
+	/**
+	 *    Test whether the given 'php' binary path actually points to a valid and accessible php binary.
+	 *
+	 *    @return $exe path when the binary is valid, FALSE otherwise.
+	 *    @access private
+	 */
+	private function checkPHPexePath($exe) 
+	{
+		echo "<pre>testing PHP binary: " . $exe . "\n";
+		if (is_executable($exe))
+		{
+            exec($exe . ' -v', $output, $exit_status);
+			if ($exit_status === 0) 
+			{
+				if (0)
+				{
+					// but a lot of binaries on UNIX (and Windows) do work for the above command, so we make double sure:
+					exec($exe . ' -i', $output, $exit_status);
+					// ... and ascertain that the phpinfo() actually ran by looking for something which should always show up in there:
+					if ($exit_status === 0 && strpos(implode('', $output), 'extension_dir') !== false) 
+					{
+						return $exe;
+					}
+				}
+				else
+				{
+					// it's enough when '-v' produces a 'PHP n.n.n' response to ensure that the binary addressed is indeed a valid PHP engine:
+					if (preg_match('/PHP\s*[4-9]\.[0-9]+\.[0-9]+/', implode('', $output)) == 1) 
+					{
+						return $exe;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 *    Test whether the given directory path actually contains a valid and accessible php binary.
+	 *
+	 *    @return the complete path to the PHP binary when a valid binary has been located, FALSE otherwise.
+	 *    @access private
+	 */
+	private function expandPHPexePath($dir) 
+	{
+		echo "<pre>expand PHP path: " . $dir . "\n";
+		$dir = (empty($dir) ? $dir : str_replace('//', '/', strtr($dir . '/', '\\', '/')));
+		
+		$version = explode('.', phpversion());
+		$phpcli = array('php', 'php' . $version[0], 'php.exe', 'php' . $version[0] . '.exe');
+		
+		$fileset = array();
+		foreach($phpcli as $binname)
+		{
+			$fileset[] = $dir . $binname;
+		}
+		
+		// also accomodate environments where php binary names are augmented, e.g. 'php-5.2.8.exe', but
+		// don't use glob() when we expect the platform shell to resolve our path issue for us at the same time:
+		if (!empty($dir))
+		{
+			$scanarr = array('php*.exe');
+			if (!isset($_SERVER['WINDIR']))
+			{
+				$scanarr[] = 'php*';	// only add this one on UNIX as it can produce a lot of clutter on Windows when scanning the 'extensions_dir' path train...
+			}
+			foreach($scanarr as $wildcard)
+			{
+				$rv = glob($dir . $wildcard);
+				if (is_array($rv))
+				{
+					// strip out any .dll, .so, etc. as they're useless and should not be 'executed' anyhow:
+					foreach($rv as $idx => $file)
+					{
+						if (preg_match('/\.(dll|so|a|o|com|lib|sh)$/', $file) == 1)
+						{
+							unset($rv[$idx]);
+						}
+					}
+					$fileset = array_merge($fileset, $rv);
+				}
+			}
+		}
+			
+		print_r($fileset);
+		foreach($fileset as $file)
+		{
+			$rv = $this->checkPHPexePath($file);
+			if ($rv !== false) return $rv;
+		}
+		return false;
+	}
+	
+	/**
+	 *    Test whether the given directory path OR any of its parent directories actually contains a valid and accessible php binary.
+	 *
+	 *    Note: This scan also looks in places where you might expect PHP to reside when you're running a LAMP/WAMP/XAMPP rig.
+	 *
+	 *    @return the complete path to the PHP binary when a valid binary has been located, FALSE otherwise.
+	 *    @access private
+	 */
+	private function ascendedScan4PHPexePath($dir) 
+	{
+		echo "<pre>ascended scan PHP path: " . $dir . "\n";
+		if (!empty($dir))
+		{
+			$olddir = $dir . '/xxx'; // fake, done to suit the precondition for the next loop
+			for (;;)
+			{
+				$dir = str_replace('//', '/', strtr($dir . '/', '\\', '/'));
+				echo "$olddir vs. $dir\n";
+				if (strlen($olddir) - strlen($dir) < 2) break;
+			
+				// LAMP/WAMP/XAMPP: also scan the ./php/ and ./php/bin/ branches:
+				foreach(array('', '/php/', '/php/bin/') as $branch)
+				{
+					$exe = $this->expandPHPexePath($dir . $branch);
+					if ($exe !== false) return $exe;
+				}
+
+				// fix for Windows path ascend: the shortest path on Windows is either 'C:/' i.e. 3 or '//?/c/' (UNC) or '/c/' (Cygwin/MingW)
+				$olddir = $dir;
+				$dir = dirname(substr($dir, 0, strlen($dir) - 1));
+			}
+		}
+		return false;
+	}
+	
     /**
-     *
      *    Delivers the path to a usable PHP executable.
      *    This is useful for many installations which don't have 'php' (or 'php.exe')
      *    not readily available in the PATH.
@@ -73,6 +200,7 @@ class SimpleShell {
         global $_SERVER;
         static $exe_path;
 
+		echo "<pre>get PHP binary path: " . $exe_path . "\n";
         if (empty($exe_path))
         {
             for ($state = 0; ; $state++)
@@ -80,13 +208,13 @@ class SimpleShell {
                 switch($state)
                 {
                 case 0:
-                    $dir = '';
+                    $exe = $this->expandPHPexePath('');
                     break;
                     
                 case 1:
                     if (defined('PHP_BINDIR') && PHP_BINDIR !== '.')
                     {
-                        $dir = PHP_BINDIR;
+                        $exe = $this->expandPHPexePath(PHP_BINDIR);
                         break;
                     }
                     continue 2;
@@ -94,27 +222,140 @@ class SimpleShell {
                 case 2:
                     if (!empty($_SERVER['PHPRC']))
                     {
-                        $dir = $_SERVER['PHPRC'];
+                        $exe = $this->expandPHPexePath($_SERVER['PHPRC']);
                         break;
                     }
                     continue 2;
-                    
+                
+				case 3:
+					// http://stackoverflow.com/questions/2372624/get-current-php-executable-from-within-script
+                    if (!empty($_SERVER['_']))
+                    {
+                        $exe = $this->checkPHPexePath($_SERVER['_']);
+                        break;
+                    }
+                    continue 2;
+				
+				case 4:
+					// once more inpired by http://stackoverflow.com/questions/2372624/get-current-php-executable-from-within-script
+					//
+					// This time around we expect either the path to PHP itself or to the PHP_CGI version or in case of apache running
+					// with PHP as a module, the path to Apache.
+					// Hence we do NOT assume that the binary path delivered via the pid lookup(s) below are necessarily PHP binaries
+					// themselves; we perform a path-ascend-scan to check for other viable PHP locations as well:
+					if (function_exists('posix_getpid'))
+					{
+						// Gets the PID of the current executable
+						$pid = posix_getpid();
+
+						// Returns the exact path to the PHP executable.
+						$path = exec("readlink -f /proc/$pid/exe");
+						if (!empty($path))
+						{
+							// don't test httpd server binaries themselves: pretty useless effort anyway:
+							if (strpos($path, 'php') !== false)
+							{
+								$exe = $this->checkPHPexePath($path);
+								if ($exe !== false) break;
+							}
+							$exe = $this->ascendedScan4PHPexePath(dirname($path));
+							if ($exe !== false) break;
+						}
+					}
+					else if (function_exists('getmypid'))
+					{
+						$pid = getmypid();
+						$path = exec("readlink -f /proc/$pid/exe");
+						if (!empty($path))
+						{
+							// don't test httpd server binaries themselves: pretty useless effort anyway:
+							if (strpos($path, 'php') !== false)
+							{
+								$exe = $this->checkPHPexePath($path);
+								if ($exe !== false) break;
+							}
+							$exe = $this->ascendedScan4PHPexePath(dirname($path));
+							if ($exe !== false) break;
+						}
+					}
+					// The above is kept as not everyone will have /proc/self/exe:
+					$path = exec("readlink -f /proc/self/exe");
+					if (!empty($path))
+					{
+						// don't test httpd server binaries themselves: pretty useless effort anyway:
+						if (strpos($path, 'php') !== false)
+						{
+							$exe = $this->checkPHPexePath($path);
+							if ($exe !== false) break;
+						}
+						$exe = $this->ascendedScan4PHPexePath(dirname($path));
+						if ($exe !== false) break;
+					}
+                    continue 2;
+					
+				case 5:
+					// on Windows you might need to look in a few other places, e.g. when you have a XAMPP or WAMP install:
+					// using code from  http://www.apachehaus.com/forum/index.php?topic=38.0
+					if (class_exists('COM'))
+					{
+						$wmi = new COM('winmgmts://');
+						foreach(array('httpd', 'apache', 'php', 'php%') as $exename)
+						{
+							$processes = $wmi->ExecQuery("SELECT * FROM Win32_Process WHERE Name LIKE '$exename.exe'");
+							foreach($processes as $process)
+							{
+								echo 'cmd line: '. $process->CommandLine . ' --> pid: '. $process->ProcessId . " ~ " . property_exists($process, 'CommandLine') . "\r\n";
+								if (property_exists($process, 'CommandLine'))
+								{
+									if ($process->CommandLine{0} == '"')
+									{
+										$cmd = substr($process->CommandLine, 1);
+										$cmd = substr($cmd, 0, strcspn($cmd, '"'));
+									}
+									else
+									{
+										$cmd = substr($process->CommandLine, 0, strcspn($cmd, " \t"));
+									}
+									// don't test the apache binaries themselves: pretty useless effort anyway:
+									if (strpos($exename, 'php') !== false)
+									{
+										$exe = $this->checkPHPexePath($cmd);
+										if ($exe !== false) break 3;
+									}
+									$exe = $this->ascendedScan4PHPexePath(dirname($cmd));
+									if ($exe !== false) break 3;
+								}
+							}
+						}
+					}
+					continue 2;
+					
+				case 6:
+					// on Windows (and probably on some other platforms as well), we MAY expect to find the extensions quite near the php binary itself:
+					$dir = ini_get('extension_dir');
+                    if (!empty($dir))
+                    {
+						$exe = $this->ascendedScan4PHPexePath($dir);
+						if ($exe !== false) break;
+                    }
+                    continue 2;
+					
+				case 7:
+					// inspired by http://stackoverflow.com/questions/3889486/how-to-get-the-path-of-the-php-bin-from-php/3889630#3889630
+					$paths = explode(PATH_SEPARATOR, getenv('PATH'));
+					foreach ($paths as $path) 
+					{
+						$exe = $this->expandPHPexePath($path);
+						if ($exe !== false) break 2;
+					}
+					continue 2;
+					
                 default:
                     break 2;
                 }
 
-                $dir = (empty($dir) ? $dir : str_replace('//', '/', strtr($dir . '/', '\\', '/')));
-                
-                $exe = $dir . 'php';
-                exec($exe . ' -v', $output, $exit_status);
-                if ($exit_status === 0) {
-                    $exe_path = $exe;
-                    return $exe;
-                }
-
-                $exe = $dir . 'php.exe';
-                exec($exe . ' -v', $output, $exit_status);
-                if ($exit_status === 0) {
+				if (!empty($exe))
+				{
                     $exe_path = $exe;
                     return $exe;
                 }
@@ -138,6 +379,7 @@ class SimpleShell {
      */
      function fixPHPpathInCommand($command)
      {
+		echo "<pre>fixPHPpathInCommand($command)\n";
         $command = explode(' ', $command, 2);
         if ($command[0] === 'php')
         {
