@@ -68,7 +68,6 @@ class SimpleShell {
 	 */
 	private function checkPHPexePath($exe) 
 	{
-		echo "<pre>testing PHP binary: " . $exe . "\n";
 		if (is_executable($exe))
 		{
             exec($exe . ' -v', $output, $exit_status);
@@ -105,7 +104,6 @@ class SimpleShell {
 	 */
 	private function expandPHPexePath($dir) 
 	{
-		echo "<pre>expand PHP path: " . $dir . "\n";
 		$dir = (empty($dir) ? $dir : str_replace('//', '/', strtr($dir . '/', '\\', '/')));
 		
 		$version = explode('.', phpversion());
@@ -144,7 +142,6 @@ class SimpleShell {
 			}
 		}
 			
-		print_r($fileset);
 		foreach($fileset as $file)
 		{
 			$rv = $this->checkPHPexePath($file);
@@ -163,14 +160,12 @@ class SimpleShell {
 	 */
 	private function ascendedScan4PHPexePath($dir) 
 	{
-		echo "<pre>ascended scan PHP path: " . $dir . "\n";
 		if (!empty($dir))
 		{
 			$olddir = $dir . '/xxx'; // fake, done to suit the precondition for the next loop
 			for (;;)
 			{
 				$dir = str_replace('//', '/', strtr($dir . '/', '\\', '/'));
-				echo "$olddir vs. $dir\n";
 				if (strlen($olddir) - strlen($dir) < 2) break;
 			
 				// LAMP/WAMP/XAMPP: also scan the ./php/ and ./php/bin/ branches:
@@ -200,7 +195,6 @@ class SimpleShell {
         global $_SERVER;
         static $exe_path;
 
-		echo "<pre>get PHP binary path: " . $exe_path . "\n";
         if (empty($exe_path))
         {
             for ($state = 0; ; $state++)
@@ -304,7 +298,6 @@ class SimpleShell {
 							$processes = $wmi->ExecQuery("SELECT * FROM Win32_Process WHERE Name LIKE '$exename.exe'");
 							foreach($processes as $process)
 							{
-								echo 'cmd line: '. $process->CommandLine . ' --> pid: '. $process->ProcessId . " ~ " . property_exists($process, 'CommandLine') . "\r\n";
 								if (property_exists($process, 'CommandLine'))
 								{
 									if ($process->CommandLine{0} == '"')
@@ -379,7 +372,6 @@ class SimpleShell {
      */
      function fixPHPpathInCommand($command)
      {
-		echo "<pre>fixPHPpathInCommand($command)\n";
         $command = explode(' ', $command, 2);
         if ($command[0] === 'php')
         {
