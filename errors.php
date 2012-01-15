@@ -98,7 +98,7 @@ class SimpleErrorQueue {
     /**
      *    Sets up an expectation of an error. If this is
      *    not fulfilled at the end of the test, a failure
-     *    will occour. If the error does happen, then this
+     *    will occur. If the error does happen, then this
      *    will cancel it out and send a pass message.
      *    @param SimpleExpectation $expected    Expected error match.
      *    @param string $message                Message to display.
