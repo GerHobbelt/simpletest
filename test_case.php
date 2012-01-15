@@ -52,6 +52,7 @@ class SimpleTestCase {
         if ($label) {
             $this->label = $label;
         }
+		unset($this->reporter);   // explicitly indicate that this member var is expected to be set/unset.
 		$this->observers = array();
     }
 
@@ -290,6 +291,9 @@ class SimpleTestCase {
      *    @access public
      */
     function exception($exception) {
+        if (! isset($this->reporter)) {
+            trigger_error('Can only make assertions within test methods');
+        }
         $this->reporter->incrementExceptionCount();
         $this->reporter->paintException($exception);
     }
