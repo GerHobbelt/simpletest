@@ -217,11 +217,27 @@ class TestRunnerForLeftOverAndNotEnoughErrors extends UnitTestCase {
     function testRunLeftOverErrorsTestCase() {
         $test = new TestOfLeftOverErrors();
         $this->assertFalse($test->run(new SimpleReporter()));
+		// also make sure that the test run did produce exactly 1 failure, nothing else:
+        $context = SimpleTest::getContext();
+        $reporter = $context->getReporter();
+		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+		$this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
+		$this->assertEqual($reporter->getExceptionCount(), 1, "%s -> Fail getExceptionCount");
     }
 
     function testRunNotEnoughErrors() {
         $test = new TestOfNotEnoughErrors();
         $this->assertFalse($test->run(new SimpleReporter()));
+		// also make sure that the test run did produce exactly 1 failure, nothing else:
+        $context = SimpleTest::getContext();
+        $reporter = $context->getReporter();
+		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+		$this->assertEqual($reporter->getFailCount(), 1, "%s -> Fail getFailCount");
+		$this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
     }
 }
 
