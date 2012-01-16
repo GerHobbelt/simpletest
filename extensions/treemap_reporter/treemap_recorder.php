@@ -116,7 +116,7 @@ class TreemapRecorder extends SimpleReporter {
 	 * acceptor for end of method node
 	 */
 	function paintMethodEnd($message) {
-		parent::paintCaseEnd($message);
+		parent::paintMethodEnd($message);
 		$node = $this->stack->pop();
 		$current = $this->stack->peek();
 		if ($node->isFailed()) $current->fail();
