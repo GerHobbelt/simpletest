@@ -13,4 +13,3 @@ interface CoverageWriter {
 
     function writeByFile($out, $variables);
 }
-?>

@@ -525,4 +525,3 @@ class AllVisualTests extends TestSuite {
 	}
 }
 
-?>

@@ -62,4 +62,3 @@ class TestOfUnitTester extends UnitTestCase {
         $this->expectFail()->assertTrue(false, "%s -> Expected to fail");
     }
 }
-?>

@@ -11,4 +11,3 @@ class CoverageUnitTests extends TestSuite {
         }
     }
 }
-?>

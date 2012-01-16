@@ -622,4 +622,3 @@ class TestOfMethodsReflectionForPHP51andAbove extends UnitTestCase {
 }	
 		
 
-?>

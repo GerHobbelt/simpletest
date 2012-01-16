@@ -66,4 +66,3 @@ class TestOfTreemapDataTypes extends UnitTestCase {
 	
 }
 
-?>

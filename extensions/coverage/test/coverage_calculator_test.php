@@ -62,4 +62,3 @@ class CoverageCalculatorTest extends UnitTestCase {
     }
 }
 
-?>

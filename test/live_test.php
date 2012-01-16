@@ -44,4 +44,3 @@ class LiveHttpTestCase extends UnitTestCase {
                 "Connection: close\r\n\r\n");
     }
 }
-?>

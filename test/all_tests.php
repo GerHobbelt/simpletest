@@ -16,4 +16,3 @@ class AllTests extends TestSuite {
         $this->addFile(dirname(__FILE__) . '/acceptance_test.php');
     }
 }
-?>

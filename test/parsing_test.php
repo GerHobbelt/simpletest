@@ -639,4 +639,3 @@ class TestOfParsingUsingTidyParser extends TestOfParsing {
         return $builder->parse($response);
     }
 }
-?>

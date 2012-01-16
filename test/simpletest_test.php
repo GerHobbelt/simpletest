@@ -55,4 +55,3 @@ class TestOfContext extends UnitTestCase {
         $this->assertClone($resource, $context->get('DummyResource'));
     }
 }
-?>

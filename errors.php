@@ -264,4 +264,3 @@ function IsNotCausedBySimpleTest($message) {
 function IsNotTimeZoneNag($message) {
     return ! preg_match('/not safe to rely .* timezone settings/', $message);
 }
-?>

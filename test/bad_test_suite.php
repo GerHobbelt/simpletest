@@ -7,4 +7,3 @@ class BadTestCases extends TestSuite {
         $this->addFile(dirname(__FILE__) . '/support/empty_test_file.php');
     }
 }
-?>

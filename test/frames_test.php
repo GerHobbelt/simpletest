@@ -546,4 +546,3 @@ class TestOfFramesetPageInterface extends UnitTestCase {
         $this->assertIdentical($frameset->getField(new SimpleByName('a')), 'f');
     }
 }
-?>

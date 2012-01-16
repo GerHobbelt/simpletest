@@ -6,4 +6,3 @@ class PassingTest extends UnitTestCase {
         $this->assertEqual(2,2);
     }
 }
-?>

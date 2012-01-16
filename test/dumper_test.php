@@ -85,4 +85,3 @@ class TestOfTextFormatting extends UnitTestCase {
                 $dumper->describeValue(new DumperDummy()));
     }
 }
-?>

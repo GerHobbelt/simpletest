@@ -224,4 +224,3 @@ class TestOfCookieJar extends UnitTestCase {
         $this->assertEqual($jar->selectAsPairs(new SimpleUrl('/')), array());
     }
 }
-?>

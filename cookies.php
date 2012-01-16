@@ -377,4 +377,3 @@ class SimpleCookieJar {
         return $pairs;
     }
 }
-?>

@@ -106,4 +106,3 @@ class CodeCoverageTest extends UnitTestCase {
         $this->assertEqual('/banana/boat', $actual->log);
     }
 }
-?>

@@ -539,4 +539,3 @@ class SimplePage {
         return trim(trim($text), "\xA0");        // TODO: The \xAO is a &nbsp;. Add a test for this.
     }
 }
-?>

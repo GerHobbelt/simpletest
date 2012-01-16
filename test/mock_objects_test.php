@@ -1090,4 +1090,4 @@ class TestOfMockGenerationWithCtorInvokingMethods extends UnitTestCase {
 }
 
 
-?>
+

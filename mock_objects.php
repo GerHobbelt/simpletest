@@ -1682,4 +1682,3 @@ class MockGenerator {
         return $code;
     }
 }
-?>

@@ -75,4 +75,3 @@ class TestOfUrlithDifferentCharset extends UnitTestCase {
     }
 }
 
-?>

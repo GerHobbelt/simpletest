@@ -12,4 +12,3 @@ if (SimpleReporter::inCli()) {
     exit ($test->run(new NoPassesReporter(new TextReporter())) ? 0 : 1);
 }
 $test->run(new NoPassesReporter(new HtmlReporter()));
-?>

@@ -410,4 +410,3 @@ class UnitTestCase extends SimpleTestCase {
                 is_string($expected) ? str_replace('%', '%%', $expected) : $expected);
     }
 }
-?>

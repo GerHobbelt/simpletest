@@ -79,4 +79,3 @@ class TestOfHelpOutput extends UnitTestCase {
         $this->assertEqual($help->render(), "Cool program\n-a      Enables A\n  --aa\n");
     }
 }
-?>

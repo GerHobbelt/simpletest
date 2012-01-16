@@ -142,4 +142,3 @@ class TestOfAuthenticator extends UnitTestCase {
                 new SimpleUrl('http://here.com/path/hello.html'));
     }
 }
-?>

@@ -29,4 +29,3 @@ while (($file = readdir($dir)) !== false) {
 	xslt_free($xsltProcessor);
 }
 closedir($dir);
-?>

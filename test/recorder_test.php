@@ -20,4 +20,3 @@ class TestOfRecorder extends UnitTestCase {
                              $recorder->results[1]->message);
     }
 }
-?>

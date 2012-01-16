@@ -152,4 +152,3 @@ class TestOfGenericAssertionsInWebTester extends WebTestCase {
         $this->assertNotEqual('a', 'A');
     }
 }
-?>

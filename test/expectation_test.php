@@ -314,4 +314,3 @@ class TestOfNotA extends UnitTestCase {
         $this->assertTrue($expectation->test(5));
     }
 }
-?>

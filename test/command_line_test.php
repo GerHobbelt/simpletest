@@ -37,4 +37,3 @@ class TestOfCommandLineParsing extends UnitTestCase {
         $this->assertTrue($parser->isXml());
     }
 }
-?>

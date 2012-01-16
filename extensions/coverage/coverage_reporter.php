@@ -65,4 +65,3 @@ class CoverageReporter {
         return preg_replace('|[/\\\\]|', '_', $filename) . '.html';
     }
 }
-?>

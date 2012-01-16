@@ -47,4 +47,3 @@ class TestOfPatternCollector extends UnitTestCase {
         $collector->collect($suite, dirname(__FILE__) . '/support/collector/');
     }
 }
-?>

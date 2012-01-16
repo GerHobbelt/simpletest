@@ -646,4 +646,3 @@ class SimpleMultipartEncoding extends SimplePostEncoding {
         return $stream;
     }
 }
-?>

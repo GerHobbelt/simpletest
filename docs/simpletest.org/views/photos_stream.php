@@ -34,4 +34,3 @@ class SimpleFlickrStreamXMLElement extends SimpleXMLElement {
         return 	"<a href=\"".$entry->link[0]['href']."\">".$image."</a>";
     }
 }
-?>

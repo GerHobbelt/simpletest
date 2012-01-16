@@ -400,4 +400,3 @@ class SimpleStackTrace {
         return array();
     }
 }
-?>

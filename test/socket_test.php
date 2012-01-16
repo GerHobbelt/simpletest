@@ -22,4 +22,3 @@ class TestOfSimpleStickyError extends UnitTestCase {
         $this->assertFalse($error->isError());
     }
 }
-?>

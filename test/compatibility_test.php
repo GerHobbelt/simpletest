@@ -84,4 +84,3 @@ class TestOfCompatibility extends UnitTestCase {
                 'ComparisonInterface'));
     }
 }
-?>

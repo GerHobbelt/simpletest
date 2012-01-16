@@ -80,4 +80,3 @@ class CoverageDataHandlerTest extends UnitTestCase {
         return tempnam(NULL, 'coverage.test.db');
     }
 }
-?>

@@ -181,4 +181,3 @@ class TestOfThrowingExceptionsInTearDown extends UnitTestCase {
         $this->expectException();
     }
 }
-?>

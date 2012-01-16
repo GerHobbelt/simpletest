@@ -153,4 +153,3 @@ class TestOfContentTransformationFromXMLToHTML extends UnitTestCase {
 	}
 }
 
-?>

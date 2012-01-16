@@ -6,4 +6,3 @@ class FailingTest extends UnitTestCase {
         $this->assertEqual(1,2);
     }
 }
-?>

@@ -4,4 +4,4 @@ class test1 extends UnitTestCase {
 		$this->assertEqual(3,1+2, "pass1");
 	}
 }
-?>
+

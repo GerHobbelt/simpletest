@@ -20,4 +20,3 @@ class TestOfDocCssSelectors extends DomTestCase {
     }
 }
 
-?>

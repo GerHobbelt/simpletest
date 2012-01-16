@@ -21,4 +21,3 @@ class ExtensionsTests extends TestSuite {
         }
     }
 }
-?>

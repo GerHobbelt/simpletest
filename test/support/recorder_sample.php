@@ -11,4 +11,3 @@ class SampleTestForRecorder extends UnitTestCase {
         $this->assertFalse(true);
     }
 }
-?>

@@ -119,4 +119,3 @@ class SimplePatternCollector extends SimpleCollector {
         }
     }
 }
-?>

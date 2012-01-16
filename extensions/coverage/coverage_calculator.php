@@ -95,4 +95,3 @@ class CoverageCalculator {
         return $var;
     }
 }
-?>

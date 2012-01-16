@@ -98,4 +98,3 @@ class Recorder extends SimpleReporterDecorator {
         $this->results[] = new SimpleResultOfException(parent::getTestList(), $message);
 	}
 }
-?>

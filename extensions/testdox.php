@@ -50,4 +50,4 @@ class TestDoxReporter extends SimpleReporter
         echo " [FAILED]";
     }
 }
-?>
+

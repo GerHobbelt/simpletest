@@ -58,4 +58,3 @@ class TestOfReflection extends UnitTestCase {
         return $this->assertEqual(strtolower($a), strtolower($b));
     }
 }
-?>

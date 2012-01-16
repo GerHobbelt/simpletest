@@ -310,4 +310,3 @@ class DefaultReporter extends SimpleReporterDecorator {
         parent::__construct($reporter);
     }
 }
-?>

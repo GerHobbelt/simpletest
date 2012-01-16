@@ -39,4 +39,3 @@ class TestOfShellTestCase extends ShellTestCase {
         $this->assertNoOutputPattern('/line 2/');
     }
 }
-?>

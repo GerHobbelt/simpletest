@@ -67,4 +67,3 @@ class CoverageUtilsTest extends UnitTestCase {
         $this->assertEqual('gull', CoverageUtils::issetOr($data['bird'], 'sparrow'));
     }
 }
-?>

@@ -551,4 +551,3 @@ class TestOfLabelTag extends UnitTestCase {
         $this->assertEqual($label->getText(), 'Here are words');
     }
 }
-?>

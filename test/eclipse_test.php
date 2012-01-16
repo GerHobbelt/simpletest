@@ -29,4 +29,3 @@ class TestOfEclipse extends UnitTestCase {
 		$this->assertEqual($expected,$listener->output);
 	}
 }
-?>

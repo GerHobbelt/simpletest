@@ -111,4 +111,3 @@ class CoverageUtils {
         return isset($val) ? $val : $default;
     }
 }
-?>

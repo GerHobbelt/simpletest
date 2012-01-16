@@ -47,4 +47,3 @@ class TestOfPearAdapter extends PHPUnit_TestCase {
         $this->assertRegExp('/hello/', "A big hello from me", "PEAR regex");
     }
 }
-?>

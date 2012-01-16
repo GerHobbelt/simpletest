@@ -223,4 +223,3 @@ class SimpleExceptionTrap {
         $this->ignored = array();
     }
 }
-?>

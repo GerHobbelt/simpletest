@@ -136,4 +136,3 @@ class SimpleInvokerDecorator {
         $this->invoker->after($method);
     }
 }
-?>

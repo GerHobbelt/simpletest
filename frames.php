@@ -589,4 +589,3 @@ class SimpleFrameset {
         return null;
     }
 }
-?>

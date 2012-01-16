@@ -494,4 +494,3 @@ class SimpleReflection {
         return false;
     }
 }
-?>

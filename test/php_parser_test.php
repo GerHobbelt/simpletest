@@ -486,4 +486,3 @@ class TestOfHtmlSaxParser extends UnitTestCase {
                 '<frameset><frame src="frame.html"><noframes>Hello</noframes></frameset>'));
     }
 }
-?>

@@ -36,4 +36,3 @@ class SimpleCoverageWriter implements CoverageWriter {
         ob_end_clean();
     }
 }
-?>

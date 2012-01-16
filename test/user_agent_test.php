@@ -346,4 +346,3 @@ class TestOfAuthorisation extends UnitTestCase {
                 new SimpleGetEncoding());
     }
 }
-?>

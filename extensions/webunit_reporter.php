@@ -282,4 +282,3 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
 		}
     }
     
-?>

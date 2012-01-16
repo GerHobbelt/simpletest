@@ -184,4 +184,3 @@ class TestOfXmlResultsParsing extends UnitTestCase {
         $this->sendValidEnd($parser);
     }
 }
-?>

@@ -404,4 +404,3 @@ class SimpleDumper {
         return $formatted;
     }
 }
-?>

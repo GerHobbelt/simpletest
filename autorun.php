@@ -98,4 +98,3 @@ function capture_new_classes() {
                             $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES ?
                             $SIMPLETEST_AUTORUNNER_INITIAL_CLASSES : array()));
 }
-?>

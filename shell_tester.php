@@ -647,4 +647,3 @@ class ShellTestCase extends SimpleTestCase {
         return new SimpleShell();
     }
 }
-?>

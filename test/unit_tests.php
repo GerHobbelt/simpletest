@@ -46,4 +46,3 @@ class UnitTests extends TestSuite {
         $this->addFile($path . '/../extensions/testdox/test.php');
     }
 }
-?>

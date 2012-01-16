@@ -23,4 +23,3 @@ class TestOfAutorun extends UnitTestCase {
     }
 }
 
-?>

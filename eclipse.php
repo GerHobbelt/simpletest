@@ -317,4 +317,3 @@ class EclipseInvoker extends SimpleInvokerDecorator {
         }
     }
 }
-?>

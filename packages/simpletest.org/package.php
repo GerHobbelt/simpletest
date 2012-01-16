@@ -455,4 +455,3 @@ class PackagingSynchronisation {
         return $matches[1];    
     }
 }
-?>

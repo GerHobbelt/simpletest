@@ -94,4 +94,3 @@ class ListTestInvoker extends SimpleInvokerDecorator {
 		$reporter->paintSignal("Test", sprintf("Case: %s | Method: %s", $case, $method));
     }
 }
-?>

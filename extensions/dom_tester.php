@@ -125,4 +125,3 @@ class DomTestCase extends WebTestCase {
                 $message);
     }
 }
-?>

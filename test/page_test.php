@@ -163,4 +163,3 @@ class TestOfHtmlStrippingAndNormalisation extends UnitTestCase {
                 '<>"&\'');
     }
 }
-?>

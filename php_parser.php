@@ -1051,4 +1051,3 @@ class SimplePhpPageBuilder {
         $this->page->setFrames($this->loading_frames);
     }
 }
-?>

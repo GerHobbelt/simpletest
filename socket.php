@@ -309,4 +309,3 @@ class SimpleSecureSocket extends SimpleSocket {
         return parent::openSocket("tls://$host", $port, $error_number, $error, $timeout);
     }
 }
-?>

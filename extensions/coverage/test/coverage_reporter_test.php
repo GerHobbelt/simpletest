@@ -19,4 +19,3 @@ class CoverageReporterTest extends UnitTestCase {
         $this->assertEqual("warbler_parula.php.html", CoverageReporter::reportFilename("warbler\\parula.php"));
     }
 }
-?>

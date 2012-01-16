@@ -535,4 +535,3 @@ class NoPassesReporter extends SimpleReporterDecorator {
      */
     function paintPass($message) { }
 }
-?>

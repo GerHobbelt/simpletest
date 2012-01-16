@@ -26,4 +26,3 @@ function stop_coverage() {
         exit($result ? 0 : 1);
     }
 }
-?>

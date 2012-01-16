@@ -193,4 +193,4 @@ class CodeCoverage  {
         return self::$instance;
     }
 }
-?>
+

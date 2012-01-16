@@ -122,4 +122,3 @@ class CoverageDataHandler {
         return $untouched;
     }
 }
-?>

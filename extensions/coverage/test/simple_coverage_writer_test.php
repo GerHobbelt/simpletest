@@ -66,4 +66,3 @@ class SimpleCoverageWriterTest extends UnitTestCase {
         return simplexml_import_dom($html);
     }
 }
-?>

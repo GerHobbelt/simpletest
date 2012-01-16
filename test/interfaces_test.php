@@ -134,4 +134,3 @@ class TestOfSampleInterfaceWithClone extends UnitTestCase {
         Mock::generate('SampleInterfaceWithClone');
     }
 }
-?>

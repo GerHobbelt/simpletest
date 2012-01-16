@@ -221,4 +221,3 @@ class SimpleHelp {
         return preg_replace('/(\n+)/', "\n", $text);
     }
 }
-?>

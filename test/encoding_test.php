@@ -237,4 +237,3 @@ class TestOfEncodingHeaders extends UnitTestCase {
     }
     
 }
-?>

@@ -112,4 +112,3 @@ class RemoteTestCase {
         return $this->size;
     }
 }
-?>

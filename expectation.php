@@ -981,4 +981,3 @@ class MemberExpectation extends IdenticalExpectation {
         return array_pop($parts);
     }
 }
-?>

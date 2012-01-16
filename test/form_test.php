@@ -341,4 +341,3 @@ class TestOfForm extends UnitTestCase {
         $this->assertEqual($form->getAction()->asString(), 'htp://host/?test=1');
     }
 }
-?>

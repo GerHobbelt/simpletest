@@ -93,4 +93,3 @@ class DetachedTestCase {
         return new SimpleTestXmlParser($reporter);
     }
 }
-?>
