@@ -14,7 +14,7 @@ require_once(dirname(__FILE__) . '/shell_tester.php');
 /**#@-*/
 
 /**
- *    Runs an XML formated test in a separate process.
+ *    Runs an XML formatted test in a separate process.
  *    @package SimpleTest
  *    @subpackage UnitTester
  */
