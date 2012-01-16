@@ -13,6 +13,7 @@ require_once(dirname(__FILE__) . '/simpletest.php');
 require_once(dirname(__FILE__) . '/scorer.php');
 require_once(dirname(__FILE__) . '/reporter.php');
 require_once(dirname(__FILE__) . '/xml.php');
+require_once(dirname(__FILE__) . '/test_list.php');
 /**#@-*/
 
 /**
@@ -303,6 +304,7 @@ class DefaultReporter extends SimpleReporterDecorator {
 		if (!$parser->showPasses()) {
 			$reporter = new NoPassesReporter($reporter);
 		}
+		$reporter = new ListTestReporter($reporter);
 		$reporter->makeDry($parser->isDryRun())->makeList($parser->isListRun());
         parent::__construct($reporter);
     }
