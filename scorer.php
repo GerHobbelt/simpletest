@@ -1145,7 +1145,7 @@ class MultipleReporter {
     function getTestCaseProgress() {
 		$rv = 0;
         for ($i = 0; $i < count($this->reporters); $i++) {
-            $rv = $this->reporters[$i]->getTestCaseProgress();
+            $rv += $this->reporters[$i]->getTestCaseProgress();
         }
 		return $rv;
     }
