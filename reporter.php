@@ -209,6 +209,16 @@ class HtmlReporter extends SimpleReporter {
     }
     
     /**
+     *    Paints message text such as user messages.
+     *    @param string $message        Text to show.
+     *    @access public
+     */
+    function paintMessage($message) {
+        parent::paintMessage($message);
+        print '<p class="st-message">' . $this->htmlEntities($message) . '</p>';
+    }
+    
+    /**
      *    Paints formatted text such as dumped variables.
      *    @param string $message        Text to show.
      *    @access public
@@ -367,6 +377,16 @@ class TextReporter extends SimpleReporter {
     function paintSkip($message) {
         parent::paintSkip($message);
         print "Skip: $message\n";
+    }
+    
+    /**
+     *    Paints message text such as user messages.
+     *    @param string $message        Text to show.
+     *    @access public
+     */
+    function paintMessage($message) {
+        parent::paintMessage($message);
+        print "$message\n";
     }
 
     /**
