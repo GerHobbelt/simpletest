@@ -62,6 +62,10 @@ class SimpleCommandLineParser {
                 $this->dry = true;
             } elseif (preg_match('/^--?(list|l)$/', $argument)) {
                 $this->make_list = true;
+            } elseif (preg_match('/^--?(no-breadcrumb|nb)$/', $argument)) {
+                $this->breadcrumb = false;
+            } elseif (preg_match('/^--?(no-stacktrace|nt)$/', $argument)) {
+                $this->stacktrace = false;
             } elseif (preg_match('/^--?(show-pass|pass|p)$/', $argument)) {
                 $this->pass = true;
             } elseif (preg_match('/^--?(no-skip|no-skips|s)$/', $argument)) {
@@ -181,7 +185,13 @@ Usage: php <test_file> [args...]
 	
 	--show-pass
 	-p              Show pass messages too
-	
+
+	--no-breadcrumb
+	-nb             Do not show breadcrumbs in the test results
+
+	--no-stacktrace
+	-nt             Do not show stack traces in the (failed) test results
+
 	--help
     -h              Display this help message
 
@@ -209,6 +219,10 @@ class WebCommandLineParser extends SimpleCommandLineParser {
                 $this->dry = $this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(list|l)$/', $i)) {
                 $this->make_list = $this->convertValueToBoolean($argument);
+            } elseif (preg_match('/^(no-breadcrumb|nb)$/', $i)) {
+                $this->breadcrumb = !$this->convertValueToBoolean($argument);
+            } elseif (preg_match('/^(no-stacktrace|nt)$/', $i)) {
+                $this->stacktrace = !$this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(show-pass|pass|p)$/', $i)) {
                 $this->pass = $this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(no-skip|no-skips|s)$/', $i)) {
@@ -269,6 +283,14 @@ class WebCommandLineParser extends SimpleCommandLineParser {
 		<dt>p</dt>
 		<dd>Show pass messages too</dd>
 
+		<dt>no-breadcrumb</dt>
+		<dt>nb</dt>
+		<dd>Do not show breadcrumbs in the test results</dd>
+
+		<dt>no-stacktrace</dt>
+		<dt>nt</dt>
+		<dd>Do not show stack traces in the (failed) test results</dd>
+		
 		<dt>help</dt>
 		<dt>h</dt>
 		<dd>Display this help message</dd>
