@@ -24,6 +24,7 @@ class SimpleScorer {
     protected $errors;
     protected $exceptions;
     protected $is_dry_run;
+    protected $list_tests;
 
     /**
      *    Starts the test run with no results.
@@ -35,6 +36,7 @@ class SimpleScorer {
         $this->errors = 0;
         $this->exceptions = 0;
         $this->is_dry_run = false;
+		$this->list_tests = false;
     }
 
     /**
@@ -50,6 +52,17 @@ class SimpleScorer {
         return $this;
     }
 
+	/**
+	 *    Signals that the next run will list the tests.
+     *    @param boolean $do_list       run will show Tests' names if true.
+     *    @return SimpleScorer          This instance.
+     *    @access public
+	 */
+	function makeList($do_list = true) {
+		$this->list_tests = $do_list;
+		return $this;
+	}
+	
     /**
      *    The reporter has a veto on what should be run.
      *    @param string $test_case_name  name of test case.
@@ -497,6 +510,17 @@ class SimpleReporterDecorator {
 		return $this;
     }
 
+	/**
+	 *    Signals that the next run will list the tests.
+     *    @param boolean $do_list             run will show Tests' names if true.
+     *    @return SimpleReporterDecorator     This instance.
+     *    @access public
+	 */
+	function makeList($do_list = true) {
+        $this->reporter->makeList($do_list);
+		return $this;
+	}
+
     /**
      *    Accessor for current status. Will be false
      *    if there have been any failures or exceptions.
@@ -778,6 +802,19 @@ class MultipleReporter {
         }
 		return $this;
     }
+
+    /**
+	 *    Signals that the next run will list the tests.
+     *    @param boolean $do_list       run will show Tests' names if true.
+     *    @return MultipleReporter      This instance.
+     *    @access public
+	 */
+	function makeList($do_list = true) {
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $this->reporters[$i]->makeList($do_list);
+        }
+		return $this;
+	}
 
     /**
      *    Accessor for current status. Will be false

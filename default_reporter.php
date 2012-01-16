@@ -31,6 +31,7 @@ class SimpleCommandLineParser {
     protected $test = '';
     protected $xml = false;
     protected $dry = false;
+    protected $make_list = false;
     protected $pass = false;
     protected $help = false;
     protected $no_skips = false;
@@ -56,6 +57,8 @@ class SimpleCommandLineParser {
                 $this->xml = true;
             } elseif (preg_match('/^--?(dry|n)$/', $argument)) {
                 $this->dry = true;
+            } elseif (preg_match('/^--?(list|l)$/', $argument)) {
+                $this->make_list = true;
             } elseif (preg_match('/^--?(show-pass|pass|p)$/', $argument)) {
                 $this->pass = true;
             } elseif (preg_match('/^--?(no-skip|no-skips|s)$/', $argument)) {
@@ -96,6 +99,14 @@ class SimpleCommandLineParser {
      */
     function isDryRun() {
         return $this->dry;
+    }
+
+    /**
+     *    Tests should be listed rather than run.
+     *    @return boolean        True if a 'list run' is desired.
+     */
+    function isListRun() {
+        return $this->make_list;
     }
 
     /**
@@ -146,6 +157,9 @@ Usage: php <test_file> [args...]
 	--dry
 	-n              Request a dry run
 	
+	--list
+	-l              Request a list of the tests (cases / methods)
+	
 	--show-pass
 	-p              Show pass messages too
 	
@@ -174,6 +188,8 @@ class WebCommandLineParser extends SimpleCommandLineParser {
                 $this->xml = $this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(dry|n)$/', $i)) {
                 $this->dry = $this->convertValueToBoolean($argument);
+            } elseif (preg_match('/^(list|l)$/', $i)) {
+                $this->make_list = $this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(show-pass|pass|p)$/', $i)) {
                 $this->pass = $this->convertValueToBoolean($argument);
             } elseif (preg_match('/^(no-skip|no-skips|s)$/', $i)) {
@@ -224,6 +240,10 @@ class WebCommandLineParser extends SimpleCommandLineParser {
 		<dt>dry</dt>
 		<dt>n</dt>
 		<dd>Request a dry run</dd>
+
+		<dt>list</dt>
+		<dt>l</dt>
+		<dd>Request a list of the tests (cases / methods)</dd>
 
 		<dt>show-pass</dt>
 		<dt>pass</dt>
@@ -283,7 +303,7 @@ class DefaultReporter extends SimpleReporterDecorator {
 		if (!$parser->showPasses()) {
 			$reporter = new NoPassesReporter($reporter);
 		}
-		$reporter->makeDry($parser->isDryRun());
+		$reporter->makeDry($parser->isDryRun())->makeList($parser->isListRun());
         parent::__construct($reporter);
     }
 }
