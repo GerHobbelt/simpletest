@@ -205,7 +205,7 @@ class HtmlReporter extends SimpleReporter {
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities(serialize($payload)) . "</p>\n";
+        print " -&gt; " . $this->htmlEntities($this->serializePayload($payload)) . "</p>\n";
     }
     
     /**
@@ -351,7 +351,7 @@ class TextReporter extends SimpleReporter {
      */
     function paintSignal($type, $payload) {
         parent::paintSignal($type, $payload);
-        print $type . ': ' . serialize($payload) . "\n";
+        print $type . ': ' . $this->serializePayload($payload) . "\n";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));

@@ -472,6 +472,22 @@ class SimpleReporter extends SimpleScorer {
     }
 
     /**
+     *    Serialize/stringify any object to string through serialization. 
+	 *    Keep strings intact, i.e. do not serialize these.
+     *    @param mixed $object      The item to stringify/serialize.
+     *    @return string            The readable form of the object.
+     *    @access protected
+     */
+    protected function serializePayload($object) {
+		if (is_string($object)) {
+			return $object;
+		}
+		else {
+			return serialize($object);
+		}
+    }
+
+    /**
      *    Static check for running in the comand line.
      *    @return boolean        True if CLI.
      *    @access public
