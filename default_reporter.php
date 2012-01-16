@@ -305,7 +305,8 @@ class DefaultReporter extends SimpleReporterDecorator {
 			$reporter = new NoPassesReporter($reporter);
 		}
 		$reporter = new ListTestReporter($reporter);
-		$reporter->makeDry($parser->isDryRun())->makeList($parser->isListRun());
+		$reporter->makeDry($parser->isDryRun());
+		$reporter->makeList($parser->isListRun());
         parent::__construct($reporter);
     }
 }

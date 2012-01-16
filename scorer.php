@@ -44,23 +44,25 @@ class SimpleScorer {
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
      *    @param boolean $is_dry        Dry run if true.
-     *    @return SimpleScorer          This instance.
+     *    @return boolean               The previous state.
      *    @access public
      */
     function makeDry($is_dry = true) {
+		$rv = $this->is_dry_run;
         $this->is_dry_run = $is_dry;
-        return $this;
+        return $rv;
     }
 
 	/**
 	 *    Signals that the next run will list the tests.
-     *    @param boolean $do_list       run will show Tests' names if true.
-     *    @return SimpleScorer          This instance.
+     *    @param boolean $do_list       The next run will show Tests' names if true.
+     *    @return boolean               The previous state.
      *    @access public
 	 */
 	function makeList($do_list = true) {
+		$rv = $this->list_tests;
 		$this->list_tests = $do_list;
-		return $this;
+		return $rv;
 	}
 	
     /**
@@ -518,23 +520,21 @@ class SimpleReporterDecorator {
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
      *    @param boolean $is_dry              Dry run if true.
-     *    @return SimpleReporterDecorator     This instance.
+     *    @return boolean                     The previous state.
      *    @access public
      */
     function makeDry($is_dry = true) {
-        $this->reporter->makeDry($is_dry);
-		return $this;
+        return $this->reporter->makeDry($is_dry);
     }
 
 	/**
 	 *    Signals that the next run will list the tests.
-     *    @param boolean $do_list             run will show Tests' names if true.
-     *    @return SimpleReporterDecorator     This instance.
+     *    @param boolean $do_list             The next run will show Tests' names if true.
+     *    @return boolean                     The previous state.
      *    @access public
 	 */
 	function makeList($do_list = true) {
-        $this->reporter->makeList($do_list);
-		return $this;
+        return $this->reporter->makeList($do_list);
 	}
 
     /**
@@ -809,27 +809,29 @@ class MultipleReporter {
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
      *    @param boolean $is_dry        Dry run if true.
-     *    @return MultipleReporter      This instance.
+     *    @return boolean               The previous state.
      *    @access public
      */
     function makeDry($is_dry = true) {
+		$rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
-            $this->reporters[$i]->makeDry($is_dry);
+            $rv |= $this->reporters[$i]->makeDry($is_dry);
         }
-		return $this;
+		return $rv;
     }
 
     /**
 	 *    Signals that the next run will list the tests.
-     *    @param boolean $do_list       run will show Tests' names if true.
-     *    @return MultipleReporter      This instance.
+     *    @param boolean $do_list       The next run will show Tests' names if true.
+     *    @return boolean               The previous state.
      *    @access public
 	 */
 	function makeList($do_list = true) {
+		$rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
-            $this->reporters[$i]->makeList($do_list);
+            $rv |= $this->reporters[$i]->makeList($do_list);
         }
-		return $this;
+		return $rv;
 	}
 
     /**
