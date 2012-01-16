@@ -488,11 +488,13 @@ class SimpleReporterDecorator {
      *    Signals that the next evaluation will be a dry
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
-     *    @param boolean $is_dry        Dry run if true.
+     *    @param boolean $is_dry              Dry run if true.
+     *    @return SimpleReporterDecorator     This instance.
      *    @access public
      */
     function makeDry($is_dry = true) {
         $this->reporter->makeDry($is_dry);
+		return $this;
     }
 
     /**
@@ -767,12 +769,14 @@ class MultipleReporter {
      *    run. That is, the structure events will be
      *    recorded, but no tests will be run.
      *    @param boolean $is_dry        Dry run if true.
+     *    @return MultipleReporter      This instance.
      *    @access public
      */
     function makeDry($is_dry = true) {
         for ($i = 0; $i < count($this->reporters); $i++) {
             $this->reporters[$i]->makeDry($is_dry);
         }
+		return $this;
     }
 
     /**
@@ -1062,9 +1066,11 @@ class MultipleReporter {
      *    @access public
      */
     function getTestCaseCount() {
+		$rv = 0;
         for ($i = 0; $i < count($this->reporters); $i++) {
-            $this->reporters[$i]->getTestCaseCount();
+            $rv += $this->reporters[$i]->getTestCaseCount();
         }
+		return $rv;
     }
 
     /**
@@ -1082,9 +1088,11 @@ class MultipleReporter {
      *    @access public
      */
     function getTestCaseProgress() {
+		$rv = 0;
         for ($i = 0; $i < count($this->reporters); $i++) {
-            $this->reporters[$i]->getTestCaseProgress();
+            $rv = $this->reporters[$i]->getTestCaseProgress();
         }
+		return $rv;
     }
 }
 ?>
