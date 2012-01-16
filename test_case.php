@@ -178,16 +178,13 @@ class SimpleTestCase {
     /**
      *    Tests to see if the method is a test that should
      *    be run. Currently any method that starts with 'test'
-     *    is a candidate unless it is the constructor.
+     *    is a candidate.
      *    @param string $method        Method name to try.
      *    @return boolean              True if test method.
-     *    @access protected
+     *    @access public
      */
-    protected function isTest($method) {
-        if (strtolower(substr($method, 0, 4)) == 'test') {
-            return ! SimpleTestCompatibility::isA($this, strtolower($method));
-        }
-        return false;
+    static function isTest($method) {
+        return (strtolower(substr($method, 0, 4)) == 'test');
     }
 
     /**
@@ -612,7 +609,15 @@ class SimpleFileLoader {
                 if ($reflection->isAbstract()) {
                     SimpleTest::ignore($class);
                 } else {
-                    $classes[] = $class;
+					// only pick classes which do have test methods we can run:
+					$methods = $reflection->getMethods();
+					foreach($methods as $method) {
+						if (SimpleTestCase::isTest($method))
+						{
+							$classes[] = $class;
+							break;
+						}
+					}
                 }
             }
         }
