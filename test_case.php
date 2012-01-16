@@ -398,12 +398,14 @@ class SimpleTestCase {
      *    @access public
      */
     function dump($variable, $message = false) {
+		if ($this->reporter) {
         $dumper = $this->reporter->getDumper();
         $formatted = $dumper->dump($variable);
         if ($message) {
             $formatted = $message . "\n" . $formatted;
         }
         $this->reporter->paintFormattedMessage($formatted);
+		}
         return $variable;
     }
 
