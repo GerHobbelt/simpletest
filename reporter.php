@@ -119,8 +119,7 @@ class HtmlReporter extends SimpleReporter {
      *    @param string $message    Pass message displayed in
      *                              the context of the other tests.
      */
-    function paintPass($message) 
-    {
+    function paintPass($message) {
         parent::paintPass($message);
         print "<p class=\"st-paint pass\"><span class=\"pass\">Pass</span>: ";
         $breadcrumb = $this->getTestList();
@@ -201,6 +200,7 @@ class HtmlReporter extends SimpleReporter {
      *    @access public
      */
     function paintSignal($type, $payload) {
+        parent::paintSignal($type, $payload);
         print "<p class=\"st-paint signal\"><span class=\"signal\">$type</span>: ";
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
@@ -214,6 +214,7 @@ class HtmlReporter extends SimpleReporter {
      *    @access public
      */
     function paintFormattedMessage($message) {
+        parent::paintFormattedMessage($message);
         print '<pre>' . $this->htmlEntities($message) . '</pre>';
     }
 
@@ -374,6 +375,7 @@ class TextReporter extends SimpleReporter {
      *    @access public
      */
     function paintFormattedMessage($message) {
+        parent::paintFormattedMessage($message);
         print "$message\n";
         flush();
     }
