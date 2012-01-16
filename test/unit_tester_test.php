@@ -57,5 +57,9 @@ class TestOfUnitTester extends UnitTestCase {
         $b = 25;
         $this->assertCopy($a, $b);
     }
+
+    function testAssertExpectedToFail() {
+        $this->expectFail()->assertTrue(false, "%s -> Expected to fail");
+    }
 }
 ?>

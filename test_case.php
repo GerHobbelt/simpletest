@@ -41,6 +41,7 @@ class SimpleTestCase {
     protected $reporter;
     protected $observers;
     protected $should_skip = false;
+	protected $expect_fail = false;
 
     /**
      *    Sets up the test with no display.
@@ -222,10 +223,15 @@ class SimpleTestCase {
      *    @access public
      */
     function after($method) {
+		if (is_array($this->expect_fail) && !$this->expect_fail['handled']) {
+			// uncaught 'expected fail'
+            trigger_error("Uncaught 'expected fail': you invoked expectFail() without following it up with an assertion/test.");
+		}
         for ($i = 0; $i < count($this->observers); $i++) {
             $this->observers[$i]->atTestEnd($method, $this);
         }
         $this->reporter->paintMethodEnd($method);
+		$this->expect_fail = false;
     }
 
     /**
@@ -310,21 +316,85 @@ class SimpleTestCase {
         $this->reporter->paintSignal($type, $payload);
     }
 
+	protected function getURLregex() {
+		static $uri_re;
+		if (empty($uri_re)) {
+			$uri_re = '=^(((([a-z][a-z0-9.+-]+:)?//)';               // mandatory scheme + authority start ('//') -- iff authority is specified
+			$uri_re .=  '([%!$&\'\(\)*+,;=:a-z0-9_~.-]+@)?';         // optional userinfo
+			$uri_re .=  '([%!$&\'\(\)*+,;=:\[\]a-z0-9_~.-]+)';       // authority
+			$uri_re .=  '/)|/)?';                                    // making scheme + hier-part optional -- no requirement for FQDNs here
+																	 // (Note that we also consume the optional leading / of the path here.)
+			$uri_re .=  '((\.+/)*[%!$&\'\(\)*+,;=:@a-z0-9_~-]+[./]+';
+			$uri_re .=   '[%!$&\'\(\)*+,;=:@/a-z0-9_~.-]*[%!$&\'\(\)*+,;=:@/a-z0-9_~-])';	
+																	 // mandatory path, must be obvious, so must contain at least a dot ...
+																	 // ... before the end or a '/' slash beyond the start ...
+																	 // ... and definitely no period at the very end
+			$uri_re .=  '(\?[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?'; // optional query, we accept '[' and ']' in there as well (not in RFC)
+			$uri_re .=  '(#[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?';	 // optional fragment, we accept '[' and ']' in there as well (not in RFC)
+			$uri_re .=  '$=i';
+		}
+		return $uri_re;
+	}
+	
 	/**
-	 *    Construct 'pass' message.
+     * The next assert is expected to fail.
+     *
+     * Use $this->expectedFail()->assert... to mark the assert as an
+     * expected fail. 
+	 *
+	 * You may want to use expectFail() in two different scenarios:
+	 *
+	 * 1) If your test reveals a bug then use this function with the
+     *    relevant parameter to link/refer to your bugtracker. This is 
+	 *    necessary because it is much easier to write a test than 
+	 *    fix a bug. It's also self-documenting -- before a release, 
+	 *    all these expectFail() calls should be removed.
+	 *
+	 * 2) You want to test the behaviour of SimpleTest itself, including
+	 *    how it renders failed tests. This is a special case which 
+	 *    applies to all expectFail() calls in the SimpleTest:./test/
+	 *    directory.
+     *
+     * @param $issue
+     *   A message describing the known bug or an absolute URL pointing 
+	 *   to the issue in any bugtracker.
+	 */
+    function expectFail($issue = null) {
+
+		if (!empty($issue)) {
+			// test if $issue is a URI as per RFC3986; if it is, embed it in an 'expected to fail' message:
+			if (preg_match($this->getURLregex(), $issue) == 1) {
+				$issue = "%s -> This is expected to fail due to a <a href=\"$issue\">known bug</a>.";
+			}
+			$this->expect_fail = array('message' => $issue, 'handled' => false);
+		}
+		else {
+			$this->expect_fail = array('message' => '%s -> This is expected to fail.', 'handled' => false);
+		}
+		return $this;
+	}
+   
+	/**
+	 *    Construct 'pass' message. Takes expected fails into account.
 	 */
 	protected function constructPassMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
+		if (is_array($this->expect_fail)) {
+			$rv = sprintf($this->expect_fail['message'], $rv);
+		}
 		return $rv;
 	}	
    
 	/**
-	 *    Construct 'fail' message.
+	 *    Construct 'fail' message. Takes expected fails into account.
 	 */
 	protected function constructFailMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
+		if (is_array($this->expect_fail)) {
+			$rv = sprintf('Unexpected Pass: ' . $this->expect_fail['message'], $rv);
+		}
 		return $rv;
 	}	
 	
@@ -352,11 +422,15 @@ class SimpleTestCase {
 	 *    into account by turning the tables then.
      *    @param SimpleExpectation $expectation  Expectation subclass.
      *    @param mixed $compare                  Value to compare.
-     *    @return boolean                        True on pass, false on fail
+     *    @return boolean                        True on pass / expected fail, false on fail / unexpected pass.
      *    @access protected
      */
     protected function checkExpectation($expectation, $compare) {
         $rv = $expectation->test($compare);
+		if (is_array($this->expect_fail)) {
+			$rv = !$rv;
+			$this->expect_fail['handled'] = true;
+		}
 		return $rv;
 	}
 		

@@ -126,49 +126,49 @@ class PassingUnitTestCaseOutput extends UnitTestCase {
     function testReferenceFail1() {
         $a = "fred";
         $b = $a;
-        $this->assertReference($a, $b, "%s -> Fail");
+        $this->expectFail()->assertReference($a, $b, "%s -> Fail");
     }
 
     function testReferenceFail2() {
         $a = "fred";
         $b = "fred";
-        $this->assertReference($a, $b, "%s -> Fail");
+        $this->expectFail()->assertReference($a, $b, "%s -> Fail");
     }
 
     function testReferenceFail3() {
         $a = "fred";
         $b = $a . '';
-        $this->assertReference($a, $b, "%s -> Fail");
+        $this->expectFail()->assertReference($a, $b, "%s -> Fail");
     }
 
     function testCloneOnSameObjects() {
         $a = "fred";
         $b = $a;
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnSameObjects2() {
         $a = "fred";
         $b = "fred";
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnSameObjects3() {
         $a = "fred";
         $b = $a . '';
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnSameObjects4() {
         $a = "fred";
         $b = &$a;
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnDifferentObjects() {
         $a = "fred";
         $b = substr(' ' . $a, 1);
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnClonedUserObjects() {
@@ -180,13 +180,13 @@ class PassingUnitTestCaseOutput extends UnitTestCase {
     function testCloneOnAssignedUserObjects() {
         $a = new TestDisplayClass("fred");
         $b = $a;
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testCloneOnReferencedUserObjects() {
         $a = new TestDisplayClass("fred");
         $b = &$a;
-        $this->assertClone($a, $b, "%s -> Fail");
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");
     }
 
     function testPatterns() {
@@ -210,106 +210,106 @@ class FailingUnitTestCaseOutput extends UnitTestCase {
     }
 
     function testTrue() {
-        $this->assertTrue(false);        // Fail.
+        $this->expectFail()->assertTrue(false);        // Fail.
     }
 
     function testFalse() {
-        $this->assertFalse(true);        // Fail.
+        $this->expectFail()->assertFalse(true);        // Fail.
     }
 
     function testExpectation() {
         $expectation = new EqualExpectation(25, 'My expectation message: %s');
-        $this->assert($expectation, 24, 'My assert message : %s');        // Fail.
+        $this->expectFail()->assert($expectation, 24, 'My assert message : %s');        // Fail.
     }
 
     function testNull() {
-        $this->assertNull(false, "%s -> Fail");        
-        $this->assertNotNull(null, "%s -> Fail");        
+        $this->expectFail()->assertNull(false, "%s -> Fail");        
+        $this->expectFail()->assertNotNull(null, "%s -> Fail");        
     }
 
     function testType() {
-        $this->assertIsA(14, "string", "%s -> Fail");        
-        $this->assertIsA(14, "TestOfUnitTestCaseOutput", "%s -> Fail");        
-        $this->assertIsA($this, "TestReporter", "%s -> Fail");        
+        $this->expectFail()->assertIsA(14, "string", "%s -> Fail");        
+        $this->expectFail()->assertIsA(14, "TestOfUnitTestCaseOutput", "%s -> Fail");        
+        $this->expectFail()->assertIsA($this, "TestReporter", "%s -> Fail");        
     }
 
     function testTypeEquality() {
-        $this->assertNotEqual("0", 0, "%s -> Fail");        
+        $this->expectFail()->assertNotEqual("0", 0, "%s -> Fail");        
     }
 
     function testNullEquality() {
-        $this->assertEqual(null, 1, "%s -> Fail");        
-        $this->assertEqual(1, null, "%s -> Fail");        
+        $this->expectFail()->assertEqual(null, 1, "%s -> Fail");        
+        $this->expectFail()->assertEqual(1, null, "%s -> Fail");        
     }
 
     function testIntegerEquality() {
-        $this->assertEqual(1, 2, "%s -> Fail");        
+        $this->expectFail()->assertEqual(1, 2, "%s -> Fail");        
     }
 
     function testStringEquality() {
-        $this->assertNotEqual("a", "a", "%s -> Fail");    
-        $this->assertEqual("aa", "ab", "%s -> Fail");        
+        $this->expectFail()->assertNotEqual("a", "a", "%s -> Fail");    
+        $this->expectFail()->assertEqual("aa", "ab", "%s -> Fail");        
     }
 
     function testHashEquality() {
-        $this->assertEqual(array("a" => "A", "b" => "B"), array("b" => "B", "a" => "Z"), "%s -> Fail");
+        $this->expectFail()->assertEqual(array("a" => "A", "b" => "B"), array("b" => "B", "a" => "Z"), "%s -> Fail");
     }
 
     function testWithin() {
-        $this->assertWithinMargin(5, 5.6, 0.5, "%s -> Fail");   
+        $this->expectFail()->assertWithinMargin(5, 5.6, 0.5, "%s -> Fail");   
     }
 
     function testOutside() {
-        $this->assertOutsideMargin(5, 5.4, 0.5, "%s -> Fail");   
+        $this->expectFail()->assertOutsideMargin(5, 5.4, 0.5, "%s -> Fail");   
     }
 
     function testStringIdentity() {
         $a = "fred";
         $b = $a;
-        $this->assertNotIdentical($a, $b, "%s -> Fail");       
+        $this->expectFail()->assertNotIdentical($a, $b, "%s -> Fail");       
     }
 
     function testTypeIdentity() {
         $a = "0";
         $b = 0;
-        $this->assertIdentical($a, $b, "%s -> Fail");        
+        $this->expectFail()->assertIdentical($a, $b, "%s -> Fail");        
     }
 
     function testNullIdentity() {
-        $this->assertIdentical(null, 1, "%s -> Fail");        
-        $this->assertIdentical(1, null, "%s -> Fail");        
+        $this->expectFail()->assertIdentical(null, 1, "%s -> Fail");        
+        $this->expectFail()->assertIdentical(1, null, "%s -> Fail");        
     }
 
     function testHashIdentity() {
-        $this->assertIdentical(array("a" => "A", "b" => "B"), array("b" => "B", "a" => "A"), "%s -> fail");        
+        $this->expectFail()->assertIdentical(array("a" => "A", "b" => "B"), array("b" => "B", "a" => "A"), "%s -> Fail");        
     }
 
     function testObjectEquality() {
-        $this->assertNotEqual(new TestDisplayClass(4), new TestDisplayClass(4), "%s -> Fail");    
-        $this->assertEqual(new TestDisplayClass(4), new TestDisplayClass(5), "%s -> Fail");        
+        $this->expectFail()->assertNotEqual(new TestDisplayClass(4), new TestDisplayClass(4), "%s -> Fail");    
+        $this->expectFail()->assertEqual(new TestDisplayClass(4), new TestDisplayClass(5), "%s -> Fail");        
     }
 
     function testObjectIndentity() {
-        $this->assertNotIdentical(new TestDisplayClass(false), new TestDisplayClass(false), "%s -> Fail");    
-        $this->assertIdentical(new TestDisplayClass(false), new TestDisplayClass(0), "%s -> Fail");        
+        $this->expectFail()->assertNotIdentical(new TestDisplayClass(false), new TestDisplayClass(false), "%s -> Fail");    
+        $this->expectFail()->assertIdentical(new TestDisplayClass(false), new TestDisplayClass(0), "%s -> Fail");        
     }
 
     function testReference() {
         $a = "fred";
         $b = &$a;
-        $this->assertClone($a, $b, "%s -> Fail");        
+        $this->expectFail()->assertClone($a, $b, "%s -> Fail");        
     }
 
     function testCloneOnDifferentObjects() {
         $a = "fred";
         $b = $a;
         $c = "Hello";
-        $this->assertClone($a, $c, "%s -> Fail");        
+        $this->expectFail()->assertClone($a, $c, "%s -> Fail");        
     }
 
     function testPatterns() {
-        $this->assertPattern('/hello/', "Hello there", "%s -> Fail");            
-        $this->assertNoPattern('/hello/i', "Hello there", "%s -> Fail");      
+        $this->expectFail()->assertPattern('/hello/', "Hello there", "%s -> Fail");            
+        $this->expectFail()->assertNoPattern('/hello/i', "Hello there", "%s -> Fail");      
     }
 
     function testLongStrings() {
@@ -317,7 +317,7 @@ class FailingUnitTestCaseOutput extends UnitTestCase {
         for ($i = 0; $i < 10; $i++) {
             $text .= "0123456789";
         }
-        $this->assertEqual($text . $text, $text . "a" . $text);        // Fail.
+        $this->expectFail()->assertEqual($text . $text, $text . "a" . $text);        // Fail.
     }
 }
 
@@ -435,7 +435,7 @@ class TestOfPastBugs extends UnitTestCase {
 
     function testMixedTypes() {
         $this->assertEqual(array(), null, "%s -> Pass");
-        $this->assertIdentical(array(), null, "%s -> Fail");    
+        $this->expectFail()->assertIdentical(array(), null, "%s -> Fail");    
     }
 
     function testMockWildcards() {
