@@ -283,6 +283,7 @@ class DefaultReporter extends SimpleReporterDecorator {
 		if (!$parser->showPasses()) {
 			$reporter = new NoPassesReporter($reporter);
 		}
+		$reporter->makeDry($parser->isDryRun());
         parent::__construct($reporter);
     }
 }

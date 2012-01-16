@@ -7,7 +7,7 @@ require_once('../reporter.php');
 $command = 'php ' . dirname(__FILE__) . '/visual_test.php --xml';
 
 $test = new TestSuite('Remote tests');
-$test->add(new DetachedTestCase($command));
+$test->add(new DetachedTestCase($command, $command . ' --dry'));
 if (SimpleReporter::inCli()) {
     exit ($test->run(new NoPassesReporter(new TextReporter())) ? 0 : 1);
 }
