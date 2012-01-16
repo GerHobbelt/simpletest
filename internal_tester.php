@@ -33,17 +33,8 @@ final class SimpleInternalValidator extends UnitTestCase {
      *    @access public
      */
     function assert($expectation, $compare, $message = '%s') {
-        if (!$expectation->test($compare)) {
-			$dumper = null;
-			if ($context = SimpleTest::getContext()) {
-				if ($reporter = $context->getReporter()) {
-					$dumper = $reporter->getDumper();
-				}
-			} 
-			if (!$dumper) {
-				$dumper = $expectation->getDumper();
-			}
-			$failmsg = sprintf($message, $expectation->overlayMessage($compare, $dumper));
+        if (!$this->checkExpectation($expectation, $compare)) {
+			$failmsg = $this->constructFailMessage($expectation, $compare, $message);
 			$stack = array();
 	        if (function_exists('debug_backtrace')) {
 				$stack = array_reverse(debug_backtrace());

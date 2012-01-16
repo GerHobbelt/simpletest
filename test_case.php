@@ -310,6 +310,56 @@ class SimpleTestCase {
         $this->reporter->paintSignal($type, $payload);
     }
 
+	/**
+	 *    Construct 'pass' message.
+	 */
+	protected function constructPassMessage($expectation, $compare, $message = "%s") {
+		$rv = sprintf($message,
+                      $expectation->overlayMessage($compare, $this->getDumper()));
+		return $rv;
+	}	
+   
+	/**
+	 *    Construct 'fail' message.
+	 */
+	protected function constructFailMessage($expectation, $compare, $message = "%s") {
+		$rv = sprintf($message,
+                      $expectation->overlayMessage($compare, $this->getDumper()));
+		return $rv;
+	}	
+	
+	/**
+	 * Obtain the dumper instance related to this test.
+	 */
+	public function getDumper() {
+		$dumper = null;
+		if ($this->reporter) {
+			$dumper = $this->reporter->getDumper();
+		}
+		else if ($context = SimpleTest::getContext()) {
+			if ($reporter = $context->getReporter()) {
+				$dumper = $reporter->getDumper();
+			}
+		} 
+		if (!$dumper) {
+			$dumper = $expectation->getDumper();
+		}
+		return $dumper;
+	}
+	
+    /**
+     *    Runs an expectation directly, taking a possibly expected fail 
+	 *    into account by turning the tables then.
+     *    @param SimpleExpectation $expectation  Expectation subclass.
+     *    @param mixed $compare                  Value to compare.
+     *    @return boolean                        True on pass, false on fail
+     *    @access protected
+     */
+    protected function checkExpectation($expectation, $compare) {
+        $rv = $expectation->test($compare);
+		return $rv;
+	}
+		
     /**
      *    Runs an expectation directly, for extending the
      *    tests with new expectation classes.
@@ -320,14 +370,10 @@ class SimpleTestCase {
      *    @access public
      */
     function assert($expectation, $compare, $message = '%s') {
-        if ($expectation->test($compare)) {
-            return $this->pass(sprintf(
-                    $message,
-                    $expectation->overlayMessage($compare, $this->reporter->getDumper())));
+        if ($this->checkExpectation($expectation, $compare)) {
+            return $this->pass($this->constructPassMessage($expectation, $compare, $message));
         } else {
-            return $this->fail(sprintf(
-                    $message,
-                    $expectation->overlayMessage($compare, $this->reporter->getDumper())));
+            return $this->fail($this->constructFailMessage($expectation, $compare, $message));
         }
     }
 
