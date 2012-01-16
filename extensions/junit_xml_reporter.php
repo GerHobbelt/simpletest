@@ -111,7 +111,7 @@ class JUnitXMLReporter extends SimpleReporter {
         $ch->setAttribute('message', $breadcrumb[count($breadcrumb)-1]);
         $ch->setAttribute('type', $breadcrumb[count($breadcrumb)-1]);
         
-        $message = implode(' -> ', $breadcrumb) . "\n\n\n" . $message;
+        $message = ($this->includeBreadCrumb() ? implode(' -> ', $breadcrumb) . "\n\n\n" : '') . $message;
         $content = $this->doc->createTextNode($message);
         $ch->appendChild($content);
         

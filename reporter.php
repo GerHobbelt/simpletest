@@ -122,10 +122,13 @@ class HtmlReporter extends SimpleReporter {
     function paintPass($message) {
         parent::paintPass($message);
         print "<p class=\"st-paint pass\"><span class=\"pass\">Pass</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
+		print $this->htmlEntities($message) . "</p>\n";
     }
 
     /**
@@ -138,13 +141,18 @@ class HtmlReporter extends SimpleReporter {
     function paintFail($message) {
         parent::paintFail($message);
         print "<p class=\"st-paint fail\"><span class=\"fail\">Fail</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
-        print "<pre>\n";
-		debug_print_backtrace();
-        print "</pre>\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
+		print $this->htmlEntities($message) . "</p>\n";
+		if ($this->includeStackTrace()) {
+			print "<pre>\n";
+			debug_print_backtrace();
+			print "</pre>\n";
+		}
     }
 
     /**
@@ -155,10 +163,13 @@ class HtmlReporter extends SimpleReporter {
     function paintError($message) {
         parent::paintError($message);
         print "<p class=\"st-paint error\"><span class=\"error\">Exception</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
+		print "<strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -169,14 +180,17 @@ class HtmlReporter extends SimpleReporter {
     function paintException($exception) {
         parent::paintException($exception);
         print "<p class=\"st-paint exception\"><span class=\"exception\">Exception</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
         $message = 'Unexpected exception of type [' . get_class($exception) .
                 '] with message ['. $exception->getMessage() .
                 '] in ['. $exception->getFile() .
                 ' line ' . $exception->getLine() . ']';
-        print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong></p>\n";
+        print "<strong>" . $this->htmlEntities($message) . "</strong></p>\n";
     }
 
     /**
@@ -187,10 +201,13 @@ class HtmlReporter extends SimpleReporter {
     function paintSkip($message) {
         parent::paintSkip($message);
         print "<p class=\"st-paint skip\"><span class=\"skip\">Skipped</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
+		print $this->htmlEntities($message) . "</p>\n";
     }
 
     /**
@@ -202,10 +219,13 @@ class HtmlReporter extends SimpleReporter {
     function paintSignal($type, $payload) {
         parent::paintSignal($type, $payload);
         print "<p class=\"st-paint signal\"><span class=\"signal\">$type</span>: ";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . $this->htmlEntities($this->serializePayload($payload)) . "</p>\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print implode(" -&gt; ", $breadcrumb);
+			print " -&gt; ";
+		}
+		print $this->htmlEntities($this->serializePayload($payload)) . "</p>\n";
     }
     
     /**
@@ -299,10 +319,12 @@ class TextReporter extends SimpleReporter {
     function paintPass($message) {
         parent::paintPass($message);
         print $this->getPassCount() . ") $message\n";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-        print "\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+			print "\n";
+		}
     }
 
     /**
@@ -314,10 +336,12 @@ class TextReporter extends SimpleReporter {
     function paintFail($message) {
         parent::paintFail($message);
         print $this->getFailCount() . ") $message\n";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-        print "\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+			print "\n";
+		}
     }
 
     /**
@@ -329,10 +353,12 @@ class TextReporter extends SimpleReporter {
     function paintError($message) {
         parent::paintError($message);
         print "Exception " . $this->getExceptionCount() . "!\n$message\n";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-        print "\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+			print "\n";
+		}
     }
 
     /**
@@ -348,10 +374,12 @@ class TextReporter extends SimpleReporter {
                 '] in ['. $exception->getFile() .
                 ' line ' . $exception->getLine() . ']';
         print "Exception " . $this->getExceptionCount() . "!\n$message\n";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-        print "\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+			print "\n";
+		}
     }
 
     /**
@@ -363,10 +391,12 @@ class TextReporter extends SimpleReporter {
     function paintSignal($type, $payload) {
         parent::paintSignal($type, $payload);
         print $type . ': ' . $this->serializePayload($payload) . "\n";
-        $breadcrumb = $this->getTestList();
-        array_shift($breadcrumb);
-        print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
-        print "\n";
+		if ($this->includeBreadCrumb()) {
+			$breadcrumb = $this->getTestList();
+			array_shift($breadcrumb);
+			print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
+			print "\n";
+		}
     }
 
     /**

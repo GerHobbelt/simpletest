@@ -91,6 +91,8 @@ class ListTestInvoker extends SimpleInvokerDecorator {
 		if ($case != $test->getLabel()) {
 			$case = sprintf("%s [%s]", $case, $test->getLabel());
 		}
+		$show_breadcrumb = $reporter->includeBreadCrumb(false);
 		$reporter->paintSignal("Test", sprintf("Case: %s | Method: %s", $case, $method));
+		$reporter->includeBreadCrumb($show_breadcrumb);
     }
 }

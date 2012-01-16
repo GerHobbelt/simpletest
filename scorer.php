@@ -25,6 +25,8 @@ class SimpleScorer {
     protected $exceptions;
     protected $is_dry_run;
     protected $list_tests;
+    protected $show_breadcrumb;
+    protected $show_stacktrace;
 
     /**
      *    Starts the test run with no results.
@@ -37,6 +39,8 @@ class SimpleScorer {
         $this->exceptions = 0;
         $this->is_dry_run = false;
 		$this->list_tests = false;
+    	$this->show_breadcrumb = true;
+    	$this->show_stacktrace = true;
     }
 
     /**
@@ -64,6 +68,34 @@ class SimpleScorer {
 		$this->list_tests = $do_list;
 		return $rv;
 	}
+
+    /**
+     *    Output of the next run should include 'breadcrumb' invocation chains when available.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeBreadCrumb($state = null) {
+		$rv = $this->show_breadcrumb;
+		if (isset($state)) {
+			$this->show_breadcrumb = (boolean)$state;
+		}
+        return $rv;
+    }
+
+    /**
+     *    Output of the next run should include stack traces when available.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeStackTrace($state = null) {
+		$rv = $this->show_stacktrace;
+		if (isset($state)) {
+			$this->show_stacktrace = (boolean)$state;
+		}
+        return $rv;
+    }
 	
     /**
      *    The reporter has a veto on what should be run.
@@ -538,6 +570,26 @@ class SimpleReporterDecorator {
 	}
 
     /**
+     *    Output of the next run should include 'breadcrumb' invocation chains when available.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeBreadCrumb($state = null) {
+        return $this->reporter->includeBreadCrumb($state);
+    }
+
+    /**
+     *    Output of the next run should include stack traces when available.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeStackTrace($state = null) {
+        return $this->reporter->includeStackTrace($state);
+    }
+
+    /**
      *    Accessor for current status. Will be false
      *    if there have been any failures or exceptions.
      *    Used for command line tools.
@@ -833,6 +885,34 @@ class MultipleReporter {
         }
 		return $rv;
 	}
+
+    /**
+     *    Output of the next run should include 'breadcrumb' invocation chains when available.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeBreadCrumb($state = null) {
+		$rv = false;
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $rv |= $this->reporters[$i]->includeBreadCrumb($state);
+        }
+		return $rv;
+    }
+
+    /**
+     *    Output of the next run should include stack traces when available.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
+	 *                                and null if you only want to retrieve the current state.
+     *    @return boolean             The previous state.
+     */
+    function includeStackTrace($state = null) {
+		$rv = false;
+        for ($i = 0; $i < count($this->reporters); $i++) {
+            $rv |= $this->reporters[$i]->includeStackTrace($state);
+        }
+		return $rv;
+    }
 
     /**
      *    Accessor for current status. Will be false

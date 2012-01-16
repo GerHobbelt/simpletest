@@ -230,10 +230,13 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
          function paintFail($message) {
              parent::paintFail($message);
              $msg = "<span class=\"fail\">Fail</span>: ";
-             $breadcrumb = $this->getTestList();
-             array_shift($breadcrumb);
-             $msg .= implode("-&gt;", $breadcrumb);
-             $msg .= "-&gt;" . htmlentities($message) . "<br />";
+			 if ($this->includeBreadCrumb()) {
+				 $breadcrumb = $this->getTestList();
+				 array_shift($breadcrumb);
+				 $msg .= implode("-&gt;", $breadcrumb);
+				 $msg .= "-&gt;";
+			 }
+			 $msg .= htmlentities($message) . "<br />";
              echo "add_fail('$msg');\n";
          }
 
@@ -246,10 +249,13 @@ define('SIMPLETEST_WEBUNIT_CSS', '/* this space reseved for future use */');
         function paintException($message) {
             parent::paintException($message);
             $msg = "<span class=\"fail\">Exception</span>: ";
-            $breadcrumb = $this->getTestList();
-            array_shift($breadcrumb);
-            $msg .= implode("-&gt;", $breadcrumb);
-            $msg .= "-&gt;<strong>" . htmlentities($message) . "</strong><br />";
+			if ($this->includeBreadCrumb()) {
+				$breadcrumb = $this->getTestList();
+				array_shift($breadcrumb);
+				$msg .= implode("-&gt;", $breadcrumb);
+				$msg .= "-&gt;";
+			}
+			$msg .= "<strong>" . htmlentities($message) . "</strong><br />";
             echo "add_fail('$msg');\n";
         }
  

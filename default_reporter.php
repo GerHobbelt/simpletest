@@ -36,6 +36,8 @@ class SimpleCommandLineParser {
     protected $pass = false;
     protected $help = false;
     protected $no_skips = false;
+	protected $breadcrumb = true;
+	protected $stacktrace = true;
 
     /**
      *    Parses raw command line arguments into object properties.
@@ -116,6 +118,22 @@ class SimpleCommandLineParser {
      */
     function showPasses() {
         return $this->pass;
+    }
+
+    /**
+     *    Output should include 'breadcrumb' invocation chains when available.
+     *    @return boolean        True for breadcrumb inclusion.
+     */
+    function showBreadCrumb() {
+        return $this->breadcrumb;
+    }
+
+    /**
+     *    Output should include stack traces when available.
+     *    @return boolean        True for stack trace inclusion.
+     */
+    function showStackTrace() {
+        return $this->stacktrace;
     }
 
     /**
@@ -305,8 +323,10 @@ class DefaultReporter extends SimpleReporterDecorator {
 			$reporter = new NoPassesReporter($reporter);
 		}
 		$reporter = new ListTestReporter($reporter);
-		$reporter->makeDry($parser->isDryRun());
-		$reporter->makeList($parser->isListRun());
         parent::__construct($reporter);
+		$this->makeDry($parser->isDryRun());
+		$this->makeList($parser->isListRun());
+		$this->includeBreadCrumb($parser->showBreadCrumb());
+		$this->includeStackTrace($parser->showStackTrace());
     }
 }
