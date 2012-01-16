@@ -126,7 +126,7 @@ class HtmlReporter extends SimpleReporter {
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . htmlentities($message) . "</p>\n";
+        print " -&gt; " . $this->htmlEntities($message) . "</p>\n";
     }
 
     /**
@@ -205,7 +205,7 @@ class HtmlReporter extends SimpleReporter {
         $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
         print implode(" -&gt; ", $breadcrumb);
-        print " -&gt; " . htmlentities(serialize($payload)) . "</p>\n";
+        print " -&gt; " . $this->htmlEntities(serialize($payload)) . "</p>\n";
     }
     
     /**
