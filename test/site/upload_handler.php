@@ -1,6 +1,7 @@
 <?php
     function show($name) {
         @unlink(dirname(__FILE__) . "/temp/$name");
+        @mkdir(dirname(__FILE__) . "/temp", 0777, true);
         @move_uploaded_file($_FILES[$name]['tmp_name'], dirname(__FILE__) . "/temp/$name");
         $unsafe = @file_get_contents(dirname(__FILE__) . "/temp/$name");
         $safe = htmlentities($unsafe);
