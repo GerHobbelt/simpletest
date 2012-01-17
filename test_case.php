@@ -168,7 +168,7 @@ class SimpleTestCase {
     function getTests() {
         $methods = array();
         foreach (get_class_methods(get_class($this)) as $method) {
-            if ($this->isTest($method)) {
+            if ($this->isTest(get_class($this), $method)) {
                 $methods[] = $method;
             }
         }
@@ -179,12 +179,14 @@ class SimpleTestCase {
      *    Tests to see if the method is a test that should
      *    be run. Currently any method that starts with 'test'
      *    is a candidate.
+     *    @param string $class         Class name of the method to try.
      *    @param string $method        Method name to try.
      *    @return boolean              True if test method.
      *    @access public
      */
-    static function isTest($method) {
-        return (strtolower(substr($method, 0, 4)) == 'test');
+    static function isTest($class, $method) {
+        return (strtolower(substr($method, 0, 4)) == 'test'
+			&& strtolower($method) != strtolower($class));
     }
 
     /**
@@ -612,7 +614,7 @@ class SimpleFileLoader {
 					// only pick classes which do have test methods we can run:
 					$methods = $reflection->getMethods();
 					foreach($methods as $method) {
-						if (SimpleTestCase::isTest($method))
+						if (SimpleTestCase::isTest($class, $method))
 						{
 							$classes[] = $class;
 							break;
