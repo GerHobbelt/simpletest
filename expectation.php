@@ -441,6 +441,49 @@ class OutsideMarginExpectation extends WithinMarginExpectation {
 }
 
 /**
+ *    Test for being within a range.
+ *    @package SimpleTest
+ *    @subpackage UnitTester
+ */
+class WithinRangeExpectation extends WithinMarginExpectation {
+    /**
+     *    Sets the range of values to compare against. 
+	 *    Used for comparing floating point and integer values.
+     *    @param mixed $minimum      Lowest permissable value.
+     *    @param mixed $maximum      Highest permissable value.
+     *    @param string $message     Customised message on failure.
+     *    @access public
+     */
+    function __construct($minimum, $maximum, $message = '%s') {
+        parent::__construct($value, $margin, $message);
+        $this->upper = $maximum;
+        $this->lower = $minimum;
+    }
+}
+
+/**
+ *    Test for being outside of a range.
+ *    @package SimpleTest
+ *    @subpackage UnitTester
+ */
+class OutsideRangeExpectation extends OutsideMarginExpectation {
+
+    /**
+     *    Sets the range of (inclusive) values to compare against. 
+	 *    Used for comparing floating point and integer values.
+     *    @param mixed $minimum      Lowest within-range value.
+     *    @param mixed $maximum      Highest within-range value.
+     *    @param string $message     Customised message on failure.
+     *    @access public
+     */
+    function __construct($minimum, $maximum, $message = '%s') {
+        parent::__construct($value, $margin, $message);
+        $this->upper = $maximum;
+        $this->lower = $minimum;
+    }
+}
+
+/**
  *    Test for reference.
  *    @package SimpleTest
  *    @subpackage UnitTester
