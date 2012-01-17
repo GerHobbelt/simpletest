@@ -455,7 +455,7 @@ class WithinRangeExpectation extends WithinMarginExpectation {
      *    @access public
      */
     function __construct($minimum, $maximum, $message = '%s') {
-        parent::__construct($value, $margin, $message);
+        parent::__construct($minimum, $maximum, $message);
         $this->upper = $maximum;
         $this->lower = $minimum;
     }
@@ -477,7 +477,7 @@ class OutsideRangeExpectation extends OutsideMarginExpectation {
      *    @access public
      */
     function __construct($minimum, $maximum, $message = '%s') {
-        parent::__construct($value, $margin, $message);
+        parent::__construct($minimum, $maximum, $message);
         $this->upper = $maximum;
         $this->lower = $minimum;
     }
