@@ -1609,4 +1609,46 @@ class WebTestCase extends SimpleTestCase {
         $trace = new SimpleStackTrace(array('assert', 'expect', 'pass', 'fail', 'skip', 'click'));
         return $trace->traceMethod();
     }
+
+    /**
+     *    Sends a fail event with a message.
+     *    @param string $message        Message to send.
+     *    @access public
+     */
+    function fail($message = "Fail") {
+		$failure_url = $this->getUrl();
+		if (strpos($message, $failure_url) === false) {
+			// make sure URL is reported in the message:
+			$message = sprintf("%s (URL: %s)", $message, $failure_url);
+		}
+		return parent::fail($message);
+    }
+
+    /**
+     *    Formats a PHP error and dispatches it to the
+     *    reporter.
+     *    @param integer $severity  PHP error code.
+     *    @param string $message    Text of error.
+     *    @param string $file       File error occoured in.
+     *    @param integer $line      Line number of error.
+     *    @access public
+     */
+    function error($severity, $message, $file, $line) {
+		$failure_url = $this->getUrl();
+		if (strpos($message, $failure_url) === false) {
+			// make sure URL is reported in the message:
+			$message = sprintf("%s (URL: %s)", $message, $failure_url);
+		}
+		parent::error($severity, $message, $file, $line);
+    }
+
+    /**
+     *    Formats an exception and dispatches it to the
+     *    reporter.
+     *    @param Exception $exception    Object thrown.
+     *    @access public
+     */
+    function exception($exception) {
+		return parent::exception($exception);
+    }
 }
