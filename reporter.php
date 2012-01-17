@@ -41,7 +41,7 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintHeader($test_name) {
         $this->sendNoCacheHeaders();
-        /* only transmit the HTML blurb when there's hasn't been transmitted other content before us */
+        /* only transmit the HTML blurb when there hasn't been transmitted other content before us */
         if (!headers_sent()) {
             print "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">";
             print "<html>\n<head>\n<title>$test_name</title>\n";
