@@ -170,7 +170,7 @@ class SimpleStateStack {
 
 /**
  *    Accepts text and breaks it into tokens.
- *    Some optimisation to make the sure the
+ *    Some optimisation to make sure the
  *    content is only scanned by the PHP regex
  *    parser once. Lexer modes must not start
  *    with leading underscores.
