@@ -8,6 +8,12 @@ require_once(dirname(__FILE__) . '/../unit_tester.php');
 
 class SimpleTestAcceptanceTest extends WebTestCase {
     static function samples($auth_str = null) {
+        /*
+        And a little hack to make sure PHP does not timeout
+        */
+        //   http://www.php.net/manual/en/info.configuration.php#ini.max-execution-time
+        set_time_limit(max(5 * 60, ini_get('max_execution_time')));
+        
         if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
         {
             $url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
@@ -16,6 +22,124 @@ class SimpleTestAcceptanceTest extends WebTestCase {
             return $url;
         }
         return 'http://' . (!empty($auth_str) ? $auth_str . '@' : '') . 'www.lastcraft.com/test/';
+    }
+
+    /**
+	 *    When the requested URL is pointing at a 
+	 *    resource inside the './site/protected/' part of
+	 *    the test site, than we will request the
+	 *    appropriate .htaccess fixup page first and 
+	 *    make sure that it made all the right noises
+	 *    on return. This is done to prevent you from
+	 *    stumbling into a rain of 500-Internal Server
+	 *    Errors due to a site-specific part of 
+	 *    .htaccess not having been setup yet.
+	 *
+	 *    For more info, read ./site/fix_protected_access.php
+	 *
+     *    @param string $url          URL to fetch.
+     *    @return boolean		      True on success.
+     *    @access public
+     */
+    function fix_protected_zone($url) 
+	{
+		static $fix_success = false;
+		
+		if (!$fix_success && preg_match('=protected/?[^/]*$=', $url) === 1)
+		{
+			parent::get($this->samples() . 'fix_protected_htaccess.php');
+			$this->assertResponse(200);
+			$this->assertFieldByName('edit_code', new WithinRangeExpectation(200, 201));
+			$fix_success = true;
+		}
+        return $fix_success;
+    }
+	
+    /**
+     *    Fetches a page into the page buffer. If
+     *    there is no base for the URL then the
+     *    current base URL is used. After the fetch
+     *    the base URL reflects the new location.
+	 *
+	 *    When the requested URL is pointing at a 
+	 *    resource inside the './site/protected/' part of
+	 *    the test site, than we will request the
+	 *    appropriate .htaccess fixup page first and 
+	 *    make sure that it made all the right noises
+	 *    on return. This is done to prevent you from
+	 *    stumbling into a rain of 500-Internal Server
+	 *    Errors due to a site-specific part of 
+	 *    .htaccess not having been setup yet.
+	 *
+	 *    For more info, read ./site/fix_protected_access.php
+	 *
+     *    @param string $url          URL to fetch.
+     *    @param hash $parameters     Optional additional GET data.
+     *    @return boolean/string      Raw page on success.
+     *    @access public
+     */
+    function get($url, $parameters = false) 
+	{
+		$this->fix_protected_zone($url); 
+        return parent::get($url, $parameters);
+    }
+	
+    /**
+     *    Fetches a page by POST into the page buffer.
+     *    If there is no base for the URL then the
+     *    current base URL is used. After the fetch
+     *    the base URL reflects the new location.
+     *    @param string $url          URL to fetch.
+     *    @param mixed $parameters    Optional POST parameters or content body to send
+     *    @param string $content_type Content type of provided body
+     *    @return boolean/string      Raw page on success.
+     *    @access public
+     */
+    function post($url, $parameters = false, $content_type = false) {
+		$this->fix_protected_zone($url); 
+        return parent::post($url, $parameters, $content_type);
+    }
+
+    /**
+     *    Fetches a page by PUT into the page buffer.
+     *    If there is no base for the URL then the
+     *    current base URL is used. After the fetch
+     *    the base URL reflects the new location.
+     *    @param string $url          URL to fetch.
+     *    @param mixed $body          Optional content body to send
+     *    @param string $content_type Content type of provided body
+     *    @return boolean/string      Raw page on success.
+     *    @access public
+     */
+    function put($url, $body = false, $content_type = false) {
+		$this->fix_protected_zone($url); 
+        return parent::put($url, $body, $content_type);
+    }
+
+    /**
+     *    Fetches a page by a DELETE request
+     *    @param string $url          URL to fetch.
+     *    @param hash $parameters     Optional additional parameters.
+     *    @return boolean/string      Raw page on success.
+     *    @access public
+     */
+    function delete($url, $parameters = false) {
+		$this->fix_protected_zone($url); 
+        return parent::delete($url, $parameters);
+    }
+
+
+    /**
+     *    Does a HTTP HEAD fetch, fetching only the page
+     *    headers. The current base URL is unchanged by this.
+     *    @param string $url          URL to fetch.
+     *    @param hash $parameters     Optional additional GET data.
+     *    @return boolean             True on success.
+     *    @access public
+     */
+    function head($url, $parameters = false) {
+		$this->fix_protected_zone($url); 
+        return parent::head($url, $parameters);
     }
 }
 
