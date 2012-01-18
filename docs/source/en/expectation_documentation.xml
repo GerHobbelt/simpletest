@@ -113,8 +113,10 @@ class TestOfNewsService extends UnitTestCase {
                     <tr><td><code>NotEqualExpectation</code></td><td>An inequality comparison</td></tr>
                     <tr><td><code>IndenticalExpectation</code></td><td>The default mock object check which must match exactly</td></tr>
                     <tr><td><code>NotIndenticalExpectation</code></td><td>Inverts the mock object logic</td></tr>
-                    <tr><td><code>WithinMarginExpectation</code></td><td>Compares a value to within a margin</td></tr>
-                    <tr><td><code>OutsideMarginExpectation</code></td><td>Checks that a value is out side the margin</td></tr>
+                    <tr><td><code>WithinMarginExpectation</code></td><td>Compares a value to within a margin, i.e. test = expected_value &#177; margin</td></tr>
+                    <tr><td><code>OutsideMarginExpectation</code></td><td>Checks that a value is out side the margin, i.e. test < expected_value &#8722; margin &#8743; test > expected_value + margin</td></tr>
+                    <tr><td><code>WithinRangeExpectation</code></td><td>Checks that a value is inside the specified (<a href="http://mathforum.org/library/drmath/view/63762.html">inclusive</a> a.k.a. <a href="http://en.wikipedia.org/wiki/Interval_(mathematics)">closed</a>) range, i.e. test &#8712; [min, max]</td></tr>
+                    <tr><td><code>OutsideRangeExpectation</code></td><td>Checks that a value is outside the specified (inclusive) range, i.e. test &#8713; [min, max]</td></tr>
                     <tr><td><code>PatternExpectation</code></td><td>Uses a Perl Regex to match a string</td></tr>
                     <tr><td><code>NoPatternExpectation</code></td><td>Passes only if failing a Perl Regex</td></tr>
                     <tr><td><code>IsAExpectation</code></td><td>Checks the type or class name only</td></tr>
@@ -159,6 +161,19 @@ new NotIdenticalExpectation(14)
 new WithinMarginExpectation(14.0, 0.001)
 ]]></php>
                 This will accept any value from 13.999 to 14.001 inclusive.
+<php><![CDATA[
+new WithinRangeExpectation(200, 300 - 1)
+]]></php>
+				Sometimes, however, you know the allowable range of values and 
+				expressing them as a range rather than a (contrived) mean and margin 
+				makes for a more easily readable test when, for instance, you are
+				fine with any 2xx HTTP response code but not, say, any 4xx or 5xx code.
+				The only drawback, maybe, is the fact that both minimum and maximum 
+				values of the range are considered <a href="http://mathforum.org/library/drmath/view/63762.html">inclusive</a>,
+				though in the case of <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP response codes</a>, this can be rewritten as:
+<php><![CDATA[
+new WithinRangeExpectation(200, 299)
+]]></php>
             </p>
         </section>
         <section name="behaviour" title="Using expectations to control stubs">
