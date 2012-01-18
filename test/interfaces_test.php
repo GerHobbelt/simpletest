@@ -31,7 +31,7 @@ class TestOfMockInterfaces extends UnitTestCase {
     function testMockedInterfaceExpectsParameters() {
         $mock = new MockDummyInterface();
         $this->expectError();
-        $mock->anotherMethod();
+        $mock->anotherMethod();  // E_WARNING: Missing argument 1 for MockDummyInterface::anotherMethod()
     }
 
     function testCannotPartiallyMockAnInterface() {
