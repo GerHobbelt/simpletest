@@ -68,7 +68,6 @@ class SimpleErrorQueue {
     protected $queue;
     protected $expectation_queue;
     protected $test;
-    protected $using_expect_style = false;
 
     /**
      *    Starts with an empty queue.
