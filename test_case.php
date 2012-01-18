@@ -12,6 +12,7 @@
  */
 require_once(dirname(__FILE__) . '/invoker.php');
 require_once(dirname(__FILE__) . '/errors.php');
+require_once(dirname(__FILE__) . '/fails.php');
 require_once(dirname(__FILE__) . '/compatibility.php');
 require_once(dirname(__FILE__) . '/scorer.php');
 require_once(dirname(__FILE__) . '/expectation.php');
@@ -41,7 +42,6 @@ class SimpleTestCase {
     protected $reporter;
     protected $observers;
     protected $should_skip = false;
-	protected $expect_fail = false;
 
     /**
      *    Sets up the test with no display.
@@ -115,8 +115,9 @@ class SimpleTestCase {
      *    @access public
      */
     function createInvoker() {
-        return new SimpleErrorTrappingInvoker(
-                new SimpleExceptionTrappingInvoker(new SimpleInvoker($this)));
+        return new SimpleFailTrappingInvoker(
+                new SimpleErrorTrappingInvoker(
+                 new SimpleExceptionTrappingInvoker(new SimpleInvoker($this))));
     }
 
     /**
@@ -222,15 +223,10 @@ class SimpleTestCase {
      *    @access public
      */
     function after($method) {
-		if (is_array($this->expect_fail) && !$this->expect_fail['handled']) {
-			// uncaught 'expected fail'
-            trigger_error("Uncaught 'expected fail': you invoked expectFail() without following it up with an assertion/test.");
-		}
         for ($i = 0; $i < count($this->observers); $i++) {
             $this->observers[$i]->atTestEnd($method, $this);
         }
         $this->reporter->paintMethodEnd($method);
-		$this->expect_fail = false;
     }
 
     /**
@@ -243,17 +239,41 @@ class SimpleTestCase {
         $this->observers[] = $observer;
     }
 
+	/**
+	 * Determines whether to print a pass/fail/unexpected pass/expected fail
+	 * message, depending on the mode parameter and the fail-queue.
+	 *
+	 * @param string $message      The pass/fail message.
+	 * @param integer $mode        The pass(1)/fail(-1) mode.
+	 * @returns integer            True if this one was counted as a pass after all, otherwise false.
+	 */
+	private function pass_or_fail($message, $mode)
+	{
+        if (! isset($this->reporter)) {
+            trigger_error('Can only make assertions within test methods');
+        }
+		$queue = SimpleTest::getContext()->get('SimpleFailQueue');
+		if ($queue->add($message, $this->getAssertionLine(), $mode) > 0)
+		{
+			$this->reporter->incrementPassCount();
+			$this->reporter->paintPass(
+					$message . $this->getAssertionLine());
+			return 1;
+		}
+		else
+		{
+			$this->reporter->incrementFailCount();
+			$this->reporter->paintFail(
+					$message . $this->getAssertionLine());
+			return -1;
+		}
+	}
+	
     /**
      *    @deprecated
      */
     function pass($message = "Pass") {
-        if (! isset($this->reporter)) {
-            trigger_error('Can only make assertions within test methods');
-        }
-        $this->reporter->incrementPassCount();
-        $this->reporter->paintPass(
-                $message . $this->getAssertionLine());
-        return true;
+		return $this->pass_or_fail($message, 1);
     }
 
     /**
@@ -262,13 +282,7 @@ class SimpleTestCase {
      *    @access public
      */
     function fail($message = "Fail") {
-        if (! isset($this->reporter)) {
-            trigger_error('Can only make assertions within test methods');
-        }
-        $this->reporter->incrementFailCount();
-        $this->reporter->paintFail(
-                $message . $this->getAssertionLine());
-        return false;
+		return $this->pass_or_fail($message, -1);
     }
 
     /**
@@ -336,9 +350,12 @@ class SimpleTestCase {
 	}
 	
 	/**
-     * The next assert is expected to fail.
+     * Prepares for an failure. If the failure mismatches it
+     * passes through, otherwise it is swallowed. Any
+     * left over expected failures are reported before the end 
+	 * of the test.
      *
-     * Use $this->expectedFail()->assert... to mark the assert as an
+     * For example, use $this->expectedFail()->assert... to mark the assert as an
      * expected fail. 
 	 *
 	 * You may want to use expectFail() in two different scenarios:
@@ -354,34 +371,95 @@ class SimpleTestCase {
 	 *    applies to all expectFail() calls in the SimpleTest:./test/
 	 *    directory.
      *
-     * @param $issue
-     *   A message describing the known bug or an absolute URL pointing 
-	 *   to the issue in any bugtracker.
+     * @param SimpleExpectation/string $expected   The error to match.
+     * @param string $message                      A message describing the known bug or an absolute URL pointing 
+	 *                                             to the issue in any bugtracker.
+     * @return UnitTestCase                        This test object.
+     * @access public
 	 */
-    function expectFail($issue = null) {
-
-		if (!empty($issue)) {
-			// test if $issue is a URI as per RFC3986; if it is, embed it in an 'expected to fail' message:
-			if (preg_match($this->getURLregex(), $issue) == 1) {
-				$issue = "%s -> This is expected to fail due to a <a href=\"$issue\">known bug</a>.";
+    function expectFail($expected = false, $message = null) {
+        $queue = SimpleTest::getContext()->get('SimpleFailQueue');
+		if (!empty($message)) {
+			// test if $message is a URI as per RFC3986; if it is, embed it in an 'expected to fail' message:
+			if (preg_match($this->getURLregex(), $message) == 1) {
+				$message = str_replace('%', '%%', $message);
+				$message = "%s -> This is expected to fail due to a <a href=\"$message\">known bug</a>.";
 			}
-			$this->expect_fail = array('message' => $issue, 'handled' => false);
 		}
 		else {
-			$this->expect_fail = array('message' => '%s -> This is expected to fail.', 'handled' => false);
+			$message = "%s -> This is expected to fail.";
 		}
+        $queue->expectFail($this->coerceExpectation($expected), $message);
 		return $this;
-	}
-   
+    }
+
+    /**
+     *    Prepares for an error. If the error mismatches it
+     *    passes through, otherwise it is swallowed. Any
+     *    left over errors trigger failures.
+     *    @param SimpleExpectation/string $expected   The error to match.
+     *    @param string $message                      Message on failure.
+     *    @return UnitTestCase                        This test object.
+     *    @access public
+     */
+    function expectError($expected = false, $message = '%s') {
+        $queue = SimpleTest::getContext()->get('SimpleErrorQueue');
+        $queue->expectError($this->coerceExpectation($expected), $message);
+		return $this;
+    }
+
+    /**
+     *    Prepares for an exception. If the error mismatches it
+     *    passes through, otherwise it is swallowed. Any
+     *    left over errors trigger failures.
+     *    @param SimpleExpectation/Exception $expected  The error to match.
+     *    @param string $message                        Message on failure.
+     *    @return UnitTestCase                          This test object.
+     *    @access public
+     */
+    function expectException($expected = false, $message = '%s') {
+        $queue = SimpleTest::getContext()->get('SimpleExceptionTrap');
+        $line = $this->getAssertionLine();
+        $queue->expectException($expected, $message . $line);
+		return $this;
+    }
+
+    /**
+     *    Tells SimpleTest to ignore an upcoming exception as not relevant
+     *    to the current test. It doesn't affect the test, whether thrown or
+     *    not.
+     *    @param SimpleExpectation/Exception $ignored  The error to ignore.
+     *    @access public
+     */
+    function ignoreException($ignored = false) {
+        SimpleTest::getContext()->get('SimpleExceptionTrap')->ignoreException($ignored);
+    }
+
+    /**
+     *    Creates an equality expectation if the
+     *    object/value is not already some type
+     *    of expectation.
+     *    @param mixed $expected      Expected value.
+     *    @return SimpleExpectation   Expectation object.
+     *    @access protected
+     */
+    protected function coerceExpectation($expected) {
+        if ($expected == false) {
+            return new TrueExpectation();
+        }
+        if (SimpleTestCompatibility::isA($expected, 'SimpleExpectation')) {
+            return $expected;
+        }
+        return new EqualExpectation(
+                is_string($expected) ? str_replace('%', '%%', $expected) : $expected);
+    }
+
 	/**
 	 *    Construct 'pass' message. Takes expected fails into account.
 	 */
 	protected function constructPassMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
-		if (is_array($this->expect_fail)) {
-			$rv = sprintf($this->expect_fail['message'], $rv);
-		}
 		return $rv;
 	}	
    
@@ -391,9 +469,6 @@ class SimpleTestCase {
 	protected function constructFailMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
-		if (is_array($this->expect_fail)) {
-			$rv = sprintf('Unexpected Pass: ' . $this->expect_fail['message'], $rv);
-		}
 		return $rv;
 	}	
 	
@@ -426,10 +501,6 @@ class SimpleTestCase {
      */
     protected function checkExpectation($expectation, $compare) {
         $rv = $expectation->test($compare);
-		if (is_array($this->expect_fail)) {
-			$rv = !$rv;
-			$this->expect_fail['handled'] = true;
-		}
 		return $rv;
 	}
 		
@@ -472,12 +543,12 @@ class SimpleTestCase {
      */
     function dump($variable, $message = false) {
 		if ($this->reporter) {
-        $dumper = $this->reporter->getDumper();
-        $formatted = $dumper->dump($variable);
-        if ($message) {
-            $formatted = $message . "\n" . $formatted;
-        }
-        $this->reporter->paintFormattedMessage($formatted);
+			$dumper = $this->reporter->getDumper();
+			$formatted = $dumper->dump($variable);
+			if ($message) {
+				$formatted = $message . "\n" . $formatted;
+			}
+			$this->reporter->paintFormattedMessage($formatted);
 		}
         return $variable;
     }
