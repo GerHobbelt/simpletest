@@ -334,14 +334,28 @@ class TestOfMockObjectsOutput extends UnitTestCase {
 
     function testCallCounts() {
         $dummy = new MockDummy4VisualTest();
-        $dummy->expectCallCount('a', 1, 'My message: %s');
+        $dummy->expectCallCount('a', 2, 'My message: %s');
         $dummy->a();
         $dummy->a();
     }
 
     function testMinimumCallCounts() {
         $dummy = new MockDummy4VisualTest();
-        $dummy->expectMinimumCallCount('a', 2, 'My message: %s');
+        $dummy->expectMinimumCallCount('a', 1, 'My message: %s');
+        $dummy->a();
+        $dummy->a();
+    }
+
+    function testMaximumCallCounts() {
+        $dummy = new MockDummy4VisualTest();
+        $dummy->expectMaximumCallCount('a', 2, 'My message: %s');
+        $dummy->a();
+        $dummy->a();
+    }
+
+    function testMaximumCallCounts2() {
+        $dummy = new MockDummy4VisualTest();
+        $dummy->expectMaximumCallCount('a', 3, 'My message: %s');
         $dummy->a();
         $dummy->a();
     }
