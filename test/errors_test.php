@@ -52,7 +52,7 @@ class TestOfErrorTrap extends UnitTestCase {
     function testQueueStartsEmpty() {
         $context = SimpleTest::getContext();
         $queue = $context->get('SimpleErrorQueue');
-        $this->assertFalse($queue->extract());
+        $this->assertFalse($queue->extractExpectation());
     }
 
     function testErrorsAreSwallowedByMatchingExpectation() {

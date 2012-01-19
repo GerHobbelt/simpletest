@@ -63,7 +63,6 @@ class SimpleFailTrappingInvoker extends SimpleInvokerDecorator {
  *    @subpackage   UnitTester
  */
 class SimpleFailQueue {
-    protected $queue;
     protected $expectation_queue;
     protected $test;
 
@@ -79,7 +78,6 @@ class SimpleFailQueue {
      *    @access public
      */
     function clear() {
-        $this->queue = array();
         $this->expectation_queue = array();
     }
 
@@ -123,9 +121,6 @@ class SimpleFailQueue {
      *    @access public
      */
     function tally() {
-        while (list($message, $file_and_line) = $this->extract()) {
-            $this->test->fail($message);
-        }
         while (list($expected, $message) = $this->extractExpectation()) {
             $this->test->assert($expected, false, "%s -> Expected fail not caught");
         }
@@ -148,21 +143,6 @@ class SimpleFailQueue {
 			return -1 * $mode;
         }
 		return $mode;
-    }
-
-    /**
-     *    Pulls the earliest assertion failure from the queue.
-     *    @return  mixed    False if none, or a list of failure
-     *                      information. Elements are: the fail message,
-     *                      the file where the failure occurred, the line number
-     *                      and a list of PHP super global arrays.
-     *    @access public
-     */
-    function extract() {
-        if (count($this->queue)) {
-            return array_shift($this->queue);
-        }
-        return false;
     }
 
     /**

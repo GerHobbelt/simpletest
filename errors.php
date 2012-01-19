@@ -65,7 +65,6 @@ class SimpleErrorTrappingInvoker extends SimpleInvokerDecorator {
  *    @subpackage   UnitTester
  */
 class SimpleErrorQueue {
-    protected $queue;
     protected $expectation_queue;
     protected $test;
 
@@ -81,7 +80,6 @@ class SimpleErrorQueue {
      *    @access public
      */
     function clear() {
-        $this->queue = array();
         $this->expectation_queue = array();
     }
 
@@ -126,10 +124,6 @@ class SimpleErrorQueue {
      *    @access public
      */
     function tally() {
-        while (list($severity, $message, $file, $line) = $this->extract()) {
-            $severity = $this->getSeverityAsString($severity);
-            $this->test->error($severity, $message, $file, $line);
-        }
         while (list($expected, $message) = $this->extractExpectation()) {
             $this->test->assert($expected, false, "%s -> Expected error not caught");
         }
@@ -158,27 +152,11 @@ class SimpleErrorQueue {
     }
 
     /**
-     *    Pulls the earliest error from the queue.
-     *    @return  mixed    False if none, or a list of error
-     *                      information. Elements are: severity
-     *                      as the PHP error code, the error message,
-     *                      the file with the error, the line number
-     *                      and a list of PHP super global arrays.
-     *    @access public
-     */
-    function extract() {
-        if (count($this->queue)) {
-            return array_shift($this->queue);
-        }
-        return false;
-    }
-
-    /**
      *    Pulls the earliest expectation from the queue.
      *    @return     SimpleExpectation    False if none.
-     *    @access protected
+     *    @access public
      */
-    protected function extractExpectation() {
+    function extractExpectation() {
         if (count($this->expectation_queue)) {
             return array_shift($this->expectation_queue);
         }
