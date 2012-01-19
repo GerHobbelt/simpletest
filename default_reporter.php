@@ -38,6 +38,7 @@ class SimpleCommandLineParser {
     protected $no_skips = false;
 	protected $breadcrumb = true;
 	protected $stacktrace = true;
+    protected $error = array();
 
     /**
      *    Parses raw command line arguments into object properties.
@@ -90,6 +91,7 @@ class SimpleCommandLineParser {
 		// TODO: print error message about unrecognized commandline arguments:
         foreach ($arguments as $i => $argument) {
             $this->help = true;
+            $this->error[] = $argument;
 		}
     }
 
@@ -178,7 +180,18 @@ class SimpleCommandLineParser {
      *    @return string         String help message
      */
     function getHelpText() {
-        return <<<HELP
+		$err = '';
+		if (count($this->error))
+		{
+			$errlist = implode(',', $this->error);
+			$err = <<<ERR
+These command line arguments were unrecognized:
+  $errlist
+
+ERR;
+		}
+		return <<<HELP
+$err		
 SimpleTest command line default reporter (autorun)
 Usage: php <test_file> [args...]
 
@@ -264,6 +277,7 @@ class WebCommandLineParser extends SimpleCommandLineParser {
 		// TODO: print error message about unrecognized request arguments:
         foreach ($arguments as $i => $argument) {
             $this->help = true;
+            $this->error[] = '' . htmlentities($i) . (!empty($argument) ? '=' . htmlentities($argument) : '');
 		}
     }
 
@@ -283,9 +297,23 @@ class WebCommandLineParser extends SimpleCommandLineParser {
      *    @return string         String help message
      */
     function getHelpText() {
+		$err = '';
+		if (count($this->error))
+		{
+			$errlist = implode('</li><li>', $this->error);
+			$err = <<<ERR
+	<h1>Error:</h1>
+	<p>These command line arguments were unrecognized:</p>
+	<ul>
+		<li>$errlist</li>
+	</ul>
+	<hr />
+ERR;
+		}
         return <<<HELP
 		
 <div class="help-message">
+	$err
 	<h1>Request parameters recognized by SimpleTest (autorun)</h1>
 	<dl>
 		<dt>case=<var>class</var></dt>
