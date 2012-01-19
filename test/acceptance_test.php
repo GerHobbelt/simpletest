@@ -8,6 +8,8 @@ require_once(dirname(__FILE__) . '/../unit_tester.php');
 
 class SimpleTestAcceptanceTest extends WebTestCase {
     function __construct() {
+		parent::__construct();
+		
 		/*
         And a little hack to make sure PHP does not timeout
         */
@@ -227,7 +229,9 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
 class TestOfLocalFileBrowser extends SimpleTestAcceptanceTest {
     function __construct() {
-        $this->setServerUrl(strtr('file://'.dirname(__FILE__).'/site/', '\\', '/'));
+		parent::__construct();
+		
+        $this->setServerUrl(null, strtr('file://'.dirname(__FILE__).'/site/', '\\', '/'));
     }
 
     function testGet() {

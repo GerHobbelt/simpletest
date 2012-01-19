@@ -432,6 +432,7 @@ class NoTextExpectation extends TextExpectation {
  */
 class WebTestCase extends UnitTestCase {
     protected $browser = null;
+    protected static $default_server_url = null;
     protected $server_url = null;
     protected $ignore_errors = false;
 
@@ -517,67 +518,110 @@ class WebTestCase extends UnitTestCase {
     }
 
 	/**
-	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the currently running script by default, 
-	 *    which can be overriden by specifying a different URL through the setServerUrl() method.
+	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the sample test site, which' location is by default based on the currently running script.
 	 *    
      *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
-     *    @param string $path_to_site  The (relative to the starting script) path to the test sample site root directory. Default: './site/'
      *    @return string               The URL as currently configured.
      *    @access public
      */
-    function getServerUrl($auth_str = null, $path_to_site = 'site/') {
-		if (empty($this->server_url)) {
+    static function getDefaultServerUrl($auth_str = null) 
+	{
+		global $_SERVER;
+		
+		if (empty(self::$default_server_url)) 
+		{
+			self::setDefaultServerUrl($auth_str);
+		}
+		$url = self::$default_server_url;
+		
+		if (!is_null($auth_str))
+		{
+			$url = self::completeURL($url, null, $auth_str);
+		}
+		return $url;
+	}
+
+	/**
+	 *    A support method which sets the URL (with scheme and authority as per RFC3986) to the sample test site, which' location is by default based on the currently running script.
+	 *    
+     *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @param string $path          Either the optional complete URL to the test site or the (relative to the starting script) path to the test sample site root directory. Default: './site/'
+     *    @return string               The URL as currently configured.
+     *    @access public
+     */
+    static function setDefaultServerUrl($auth_str = null, $path = 'site/') 
+	{
+		global $_SERVER;
+		
+		if (empty(self::$default_server_url)) 
+		{
+			$url = parse_url(strtr($path, '\\', '/'));
+
+			// keep path? when it's a relative path and assumed relative to the running script.
+			$path_is_relative = (!empty($url['path']) && empty($url['host']) && $url['path']{0} != '/' && substr($path, 0, strlen($url['path'])) == $url['path']);
+			// else: path is assumed to have specified a (more or less) fully qualified URL; do NOT append it to the default location as well!
+			
 			if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
 			{
-				$url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-				$url .= '://' . $_SERVER['HTTP_HOST'];
-				$url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']) . $path_to_site;
+				$dflt = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+				$dflt .= '://' . $_SERVER['HTTP_HOST'];
+				$dflt .= strtr(str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']), '\\', '/') . ($path_is_relative ? $path : '');
 			}
 			else 
 			{
-				$url = 'http://www.lastcraft.com/test/';
+				$dflt = 'http://www.lastcraft.com/test/';
 			}
-			$this->server_url = $url;
+			$url = self::completeURL(($path_is_relative ? $dflt : $path), $dflt, $auth_str);
+			
+			self::$default_server_url = $url;
 		}
 		else {
-			$url = $this->server_url;
+			$url = self::$default_server_url;
 		}
-		$url = parse_url($url);
-		// fix parse_url() hickup for file:// scheme on Windows:
-		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR']))
-		{
-			$url['host'] .= ':';
-		}
-		$rv = $url['scheme'] . '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $url['host'] . $url['path'];
-		if (!empty($url['query'])) {
-			$rv .= '?' . $url['query'];
-		}
-		if (!empty($url['fragment'])) {
-			$rv .= '#' . $url['fragment'];
-		}
-		return $rv;
+		return $url;
     }
 
 	/**
-	 *    A support method with sets the 'server URL' default to the specified URL string. You can always fetch the current
-	 *    URL string through calling the getServerUrl() method.
-	 *
-	 *    @note When the specified URL is not complete, we extend it by applying the default value for the missing parts: scheme, host, path
-	 *
-     *    @param string $url           The new server URL. When empty, the server URL will be reset to the default. @see getServerUrl()
+	 *    A support method which delivers the fully qualified URL (with 
+	 *    scheme and authority as per RFC3986) given a path and an optional 
+	 *    authentication string; the base is assumed to be the 'default 
+	 *    server URL' as obtained through @ref WebTestCase::getDefaultServerURL().
+	 *    
+     *    @param string $path          A more or less complete URL  or an absolute or relative path.
+     *    @param string $dflt_url      A fully qualified URL which is to be used as a basis for completing the given path.
      *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
-     *    @param string $path_to_site  The (relative to the starting script) path to the test sample site root directory. Default: './site/'
-     *    @return string               The URL as currently configured.
+     *    @return string               The completed URL.
      *    @access public
      */
-    function setServerUrl($url = null, $auth_str = null, $path_to_site = 'site/') {
+    static function completeURL($path, $dflt_url = null, $auth_str = null) {
 		global $_SERVER;
 		
-		$this->server_url = null;
-		$dflt = $this->getServerUrl($auth_str, $path_to_site);
-		$dflt = parse_url($dflt);
-		$url = parse_url($url);
+		if (empty($dflt_url))
+		{
+			if (empty(self::$default_server_url)) 
+			{
+				$dflt_url = 'http://www.lastcraft.com/test/';
+			}
+			else
+			{
+				$dflt_url = self::$default_server_url;
+			}
+		}
 		
+		if (!empty($path))
+		{
+			$url = parse_url(strtr($path, '\\', '/'));
+		}
+		else
+		{
+			$url = array();
+		}
+
+		// keep path? when it's a relative path and assumed relative to the running script.
+		$path_is_relative = (!empty($url['path']) && empty($url['host']) && $url['path']{0} != '/' && substr($path, 0, strlen($url['path'])) == $url['path']);
+		
+		$dflt = parse_url($dflt_url);
+			
 		if (empty($url['scheme'])) {
 			$url['scheme'] = $dflt['scheme'];
 		}
@@ -585,22 +629,57 @@ class WebTestCase extends UnitTestCase {
 			$url['host'] = $dflt['host'];
 		}
 		// fix parse_url() hickup for file:// scheme on Windows:
-		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR']))
-		{
+		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR'])) {
 			$url['host'] .= ':';
 		}
-		if (empty($url['path'])) {
-			$url['path'] = $dflt['path'];
+		if (empty($url['path']) || $path_is_relative) {
+			$url['path'] = $dflt['path'] . ($path_is_relative ? $url['path'] : '');
 		}
-		$auth_str = '';
-		if (!empty($url['user'])) {
-			$auth_str = $dflt['user'];
+		$has_user_cred = false;
+		if (empty($url['user']) && !empty($dflt['user'])) {
+			$url['user'] = $dflt['user'];
+			$has_user_cred = true;
 		}
-		if (!empty($url['pass'])) {
-			$auth_str .= ':' . $dflt['pass'];
+		else if (!empty($url['user'])) {
+			$has_user_cred = true;
+		}
+		if (empty($url['pass']) && !empty($dflt['pass'])) {
+			$url['pass'] = $dflt['pass'];
+			$has_user_cred = true;
+		}
+		else if (!empty($url['pass'])) {
+			$has_user_cred = true;
+		}
+		// when auth_str is specifically specified as empty, the caller doesn't want to see any credentials in the result:
+		if (!is_null($auth_str) && empty($auth_str))
+		{
+			$has_user_cred = false;
+		}
+		else if (!empty($auth_str))
+		{
+			// override the user/auth values:
+			$auth = explode(':', $auth_str, 2);
+			$url['user'] = $auth[0];
+			$url['pass'] = $auth[1];
+			$has_user_cred = true;
 		}
 		
-		$rv = $url['scheme'] . '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $url['host'] . $url['path'];
+		$auth_str = '';
+		if ($has_user_cred)
+		{
+			if (!empty($url['user'])) {
+				$auth_str = $url['user'];
+			}
+			if (!empty($url['pass'])) {
+				$auth_str .= ':' . $url['pass'];
+			}
+			if (!empty($auth_str))
+			{
+				$auth_str .= '@';
+			}
+		}
+		
+		$rv = $url['scheme'] . '://' . $auth_str . $url['host'] . $url['path'];
 		if (!empty($url['query'])) {
 			$rv .= '?' . $url['query'];
 		}
@@ -608,8 +687,48 @@ class WebTestCase extends UnitTestCase {
 			$rv .= '#' . $url['fragment'];
 		}
 		
-		$this->server_url = $rv;
 		return $rv;
+    }
+
+	/**
+	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the targeted test site,
+	 *    where the default test site is assumed to be the URL as provided by @ref WebUnitTest::getDefaultServerUrl(),
+	 *    which can be overridden by specifying a different URL through the setServerUrl() method.
+	 *    
+     *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @param string $path          The optional relative path to the previously configured 'server URL'.
+     *    @return string               The URL as currently configured.
+     *    @access public
+     */
+    function getServerUrl($auth_str = null, $path = null) {
+		if (empty($this->server_url)) {
+			$url = self::getDefaultServerUrl($auth_str); 
+			$this->server_url = $url;
+		}
+		else {
+			$url = $this->server_url;
+		}
+		return self::completeURL($path, $url, $auth_str);
+    }
+
+	/**
+	 *    A support method with sets the 'server URL' default to the specified URL string. You can always fetch the current
+	 *    URL string through calling the getServerUrl() method.
+	 *
+	 *    @note When the specified URL is not complete, we extend it by applying the default value for the missing parts (scheme, host, path, ...) as provided by @ref WebUnitTest::getDefaultServerUrl()
+	 *
+     *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @param string $path          Either the optional complete URL to the test site or the (relative to the starting script) path to the test sample site root directory. Default: './'
+     *    @return string               The URL as currently configured.
+     *    @access public
+     */
+    function setServerUrl($auth_str = null, $path = null) {
+		global $_SERVER;
+		
+		// reset the server URL so that getServerUrl() goes and fetches the default URL and mixes & mashes them together.
+		$this->server_url = null;
+		$this->server_url = $this->getServerUrl($auth_str, $path);
+		return $this->server_url;
 	}
 	
     /**
