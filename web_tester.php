@@ -564,7 +564,7 @@ class WebTestCase extends UnitTestCase {
 			if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
 			{
 				$dflt = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-				$dflt .= '://' . $_SERVER['HTTP_HOST'];
+				$dflt .= '://' . $_SERVER['HTTP_HOST'] . (!empty($_SERVER['SERVER_PORT']) ? ':' . $_SERVER['SERVER_PORT'] : '');
 				$dflt .= strtr(str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']), '\\', '/') . ($path_is_relative ? $path : '');
 			}
 			else 
@@ -632,6 +632,12 @@ class WebTestCase extends UnitTestCase {
 		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR'])) {
 			$url['host'] .= ':';
 		}
+		if (empty($url['port']) && !empty($dflt['port'])) {
+			$url['port'] = $dflt['port'];
+		}
+		if (empty($url['custom_port']) && !empty($dflt['custom_port'])) {
+			$url['custom_port'] = $dflt['custom_port'];
+		}
 		if (empty($url['path']) || $path_is_relative) {
 			$url['path'] = $dflt['path'] . ($path_is_relative ? $url['path'] : '');
 		}
@@ -679,7 +685,7 @@ class WebTestCase extends UnitTestCase {
 			}
 		}
 		
-		$rv = $url['scheme'] . '://' . $auth_str . $url['host'] . $url['path'];
+		$rv = $url['scheme'] . '://' . $auth_str . $url['host'] . (!empty($url['custom_port']) ? ':' . $url['custom_port'] : '') . $url['path'];
 		if (!empty($url['query'])) {
 			$rv .= '?' . $url['query'];
 		}
