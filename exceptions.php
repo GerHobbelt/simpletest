@@ -198,7 +198,7 @@ class SimpleExceptionTrap {
      */
     protected function coerceToExpectation($exception) {
         if ($exception === false) {
-            return new AnythingExpectation();
+            return new TrueExpectation();
         }
         if (! SimpleExpectation::isExpectation($exception)) {
             return new ExceptionExpectation($exception);

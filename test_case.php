@@ -471,7 +471,7 @@ class SimpleTestCase {
      */
     protected function coerceExpectation($expected) {
         if ($expected == false) {
-            return new AnythingExpectation();
+            return new TrueExpectation();
         }
         if (SimpleTestCompatibility::isA($expected, 'SimpleExpectation')) {
             return $expected;
