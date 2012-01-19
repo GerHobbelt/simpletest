@@ -49,6 +49,11 @@ class SimpleCommandLineParser {
             return;
         }
 		$arguments = array_merge(array(), $arguments); // clone array, so we can edit it locally at no risk.
+		// skip the argv[0] when it's not an option:
+		if (count($arguments) > 0 && substr($arguments[0], 0, 1) != '-')
+		{
+			array_shift($arguments);
+		}
         foreach ($arguments as $i => $argument) {
             if (preg_match('/^--?(test|case|class|method|t|c)=(.+)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
