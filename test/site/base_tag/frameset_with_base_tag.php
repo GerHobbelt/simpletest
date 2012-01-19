@@ -1,7 +1,9 @@
-<html>
+<?php
+    require_once('../self.php');
+?><html>
     <head>
         <title>Frameset for testing of SimpleTest</title>
-        <base href='http://www.lastcraft.com/test/'>
+        <base href='<?php echo my_path() . '../'; ?>'>
     </head>
     <frameset rows="100%, *">
         <frame name="base" src="base_tag/page_1.html" />

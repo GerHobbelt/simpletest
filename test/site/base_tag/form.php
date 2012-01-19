@@ -1,7 +1,9 @@
-<html>
+<?php
+    require_once('../self.php');
+?><html>
     <head>
         <title>Test of form submission</title>
-        <base href='http://www.lastcraft.com/test/'>
+        <base href='<?php echo my_path() . '../'; ?>'>
     </head>
     <body>
         <form id=200 action="network_confirm.php" method="post">
