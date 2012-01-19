@@ -94,7 +94,7 @@ class SimpleFileSocket extends SimpleStickyError {
     }
 
     /**
-     *    Writes some data to the socket and saves alocal copy.
+     *    Writes some data to the socket and saves a local copy.
      *    @param string $message       String to send to socket.
      *    @return boolean              True if successful.
      *    @access public
@@ -252,7 +252,10 @@ class SimpleSocket extends SimpleStickyError {
      */
     function close() {
         $this->is_open = false;
-        return fclose($this->handle);
+        if ($this->handle) 
+			return fclose($this->handle);
+		else
+			return false;
     }
 
     /**
