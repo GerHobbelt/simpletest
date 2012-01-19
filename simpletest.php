@@ -21,6 +21,7 @@ require_once(dirname(__FILE__) . '/compatibility.php');
  *    @subpackage   UnitTester
  */
 class SimpleTest {
+    protected static $context = false;
 
     /**
      *    Reads the SimpleTest version from the release file.
@@ -204,11 +205,56 @@ class SimpleTest {
      *    @return SimpleTestContext    Current test run.
      */
     static function getContext() {
-        static $context = false;
-        if (! $context) {
-            $context = new SimpleTestContext();
+        if (! self::$context) {
+            self::$context = new SimpleTestContext();
         }
-        return $context;
+        return self::$context;
+    }
+
+	/**
+	 *    Request a new (child) context and use it from now on, i.e. this is an
+	 *    implicit @ref SimpleTest::getContext().
+	 *
+     *    @return SimpleTestContext    Current test run.
+     */
+    static function pushContext() {
+        self::$context = new SimpleTestContext(self::$context);
+        return self::$context;
+    }
+
+	/**
+	 *    Removes ('pops') all child contexts chained to the given context and itself,
+	 *    then makes the parent of the given context the new active context, so this 
+	 *    comes with an implicit @ref SimpleTest::getContext().
+	 *
+     *    @param SimpleTestContext $context    The context to pop. It must have been 
+	 *                                         produced before by either
+	 *                                         @ref SimpleTest::getContext() or 
+	 *                                         @ref SimpleTest::pushContext().
+     *    @return SimpleTestContext            The now activate @a $context.
+     */
+    static function popContext($ctx) {
+		// see if $ctx is indeed a parent of ours ...
+		$child = self::$context;
+		while ($child && $child !== $ctx)
+		{
+			$child = $child->getParent();
+		}
+		if (!$child) return self::getContext();
+		// ... only when it is do we 'pop' the chain of children:
+		self::$context = $ctx;
+		// ... and see whether there's a valid parent to be had:
+		if ($ctx = $ctx->getParent())
+		{
+			self::$context = $ctx;
+		}
+		/*
+		  The GC should now recognize the child contexts as 'discarded'
+		  as the parent contexts don't reference the children, it's
+		  the other way around, so our 'self::$context' reference should
+		  have been the only thing that kept them alive till now.
+		 */
+        return self::$context;
     }
 
     /**
@@ -255,11 +301,21 @@ class SimpleTestContext {
     protected $test;
     protected $reporter;
     protected $resources;
+	protected $parent_ctx;
+	public $level;
 
-    function __construct() {
+    function __construct($parent = null) {
+		$this->clear();
+		$this->parent_ctx = $parent;
 		$this->test = null;
 		$this->reporter = null;
-		$this->resources = array();
+		$this->level = 1;
+		if (!empty($parent))
+		{
+			$this->test = $parent->test;
+			$this->reporter = $parent->reporter;
+			$this->level = $parent->level + 1;
+		}
     }
 
     /**
@@ -279,6 +335,14 @@ class SimpleTestContext {
     function setTest($test) {
         $this->clear();
         $this->test = $test;
+    }
+
+    /**
+     *    Accessor for the parent of this context. 
+     *    @return SimpleReporter    The parent context; FALSE when there's none.
+     */
+    function getParent() {
+        return $this->parent_ctx;
     }
 
     /**

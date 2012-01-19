@@ -39,9 +39,10 @@ if (! defined('SIMPLE_TEST')) {
  */
 class SimpleTestCase {
     protected $label = false;
-    protected $reporter;
+    protected $reporter = false;
     protected $observers;
     protected $should_skip = false;
+	protected $running = false;
 
     /**
      *    Sets up the test with no display.
@@ -53,7 +54,6 @@ class SimpleTestCase {
         if ($label) {
             $this->label = $label;
         }
-		unset($this->reporter);   // explicitly indicate that this member var is expected to be set/unset.
 		$this->observers = array();
     }
 
@@ -64,6 +64,15 @@ class SimpleTestCase {
      */
     function getLabel() {
         return $this->label ? $this->label : get_class($this);
+    }
+
+    /**
+     *    Accessor for the registered reporter.
+     *    @return SimpleReporter     The registered reporter or FALSE if none is known at the time of this call.
+     *    @access public
+     */
+    function getReporter() {
+        return $this->reporter;
     }
 
     /**
@@ -129,7 +138,22 @@ class SimpleTestCase {
      *    @access public
      */
     function run($reporter) {
-        $context = SimpleTest::getContext();
+		/*
+		Make sure that each (possibly nested!) test has its own fail/error/... queues, etc.
+		so that the expectXXX() functions work like you'ld expect, even when a test invokes
+		another test instance's run() method.
+		
+		BREAKING CHANGE: We do know that tests might want to access the context which was used
+		to invoke the inner run(), but we MUST pop the context once the run() itself is
+		done to ensure that all expectXXX queues are aligned with the correct (nested)
+		tests. Hence, when a user wants access to the inner context's reporter, they should
+		ask the test instance, not the global scope. (See test/errors_test.php ~ line )testswe do NOT pop context at the end of this call. Instead,
+		we use a heuristic to keep the chain/number of contexts to a minimum by popping
+		all /sub/contexts before we return, as those won't be accessible by grandparent
+		tests anyhow.
+		*/
+		$this->running = true;
+        $context = SimpleTest::pushContext();
         $context->setTest($this);
         $context->setReporter($reporter);
         $this->reporter = $reporter;
@@ -153,8 +177,10 @@ class SimpleTestCase {
         if ($started) {
             $reporter->paintCaseEnd($this->getLabel());
         }
-        unset($this->reporter);
+        //unset($this->reporter);
         //$context->setTest(null);
+        SimpleTest::popContext($context);
+		$this->running = false;
         return $reporter->getStatus();
     }
 
@@ -249,7 +275,7 @@ class SimpleTestCase {
 	 */
 	private function pass_or_fail($message, $mode)
 	{
-        if (! isset($this->reporter)) {
+        if (!$this->running) {
             trigger_error('Can only make assertions within test methods');
         }
 		$queue = SimpleTest::getContext()->get('SimpleFailQueue');
@@ -295,7 +321,7 @@ class SimpleTestCase {
      *    @access public
      */
     function error($severity, $message, $file, $line) {
-        if (! isset($this->reporter)) {
+        if (!$this->running) {
             trigger_error('Can only make assertions within test methods');
         }
         $this->reporter->incrementErrorCount();
@@ -310,7 +336,7 @@ class SimpleTestCase {
      *    @access public
      */
     function exception($exception) {
-        if (! isset($this->reporter)) {
+        if (!$this->running) {
             trigger_error('Can only make assertions within test methods');
         }
         $this->reporter->incrementExceptionCount();
@@ -323,7 +349,7 @@ class SimpleTestCase {
      *    @param mixed $payload     Extra user specific information.
      */
     function signal($type, $payload) {
-        if (! isset($this->reporter)) {
+        if (!$this->running) {
             trigger_error('Can only make assertions within test methods');
         }
         $this->reporter->paintSignal($type, $payload);
@@ -441,11 +467,11 @@ class SimpleTestCase {
      *    of expectation.
      *    @param mixed $expected      Expected value.
      *    @return SimpleExpectation   Expectation object.
-     *    @access protected
+     *    @access protected	
      */
     protected function coerceExpectation($expected) {
         if ($expected == false) {
-            return new TrueExpectation();
+            return new AnythingExpectation();
         }
         if (SimpleTestCompatibility::isA($expected, 'SimpleExpectation')) {
             return $expected;
@@ -456,8 +482,9 @@ class SimpleTestCase {
 
 	/**
 	 *    Construct 'pass' message. Takes expected fails into account.
+     *    @access public
 	 */
-	protected function constructPassMessage($expectation, $compare, $message = "%s") {
+	function constructPassMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
 		return $rv;
@@ -465,8 +492,9 @@ class SimpleTestCase {
    
 	/**
 	 *    Construct 'fail' message. Takes expected fails into account.
+     *    @access public
 	 */
-	protected function constructFailMessage($expectation, $compare, $message = "%s") {
+	function constructFailMessage($expectation, $compare, $message = "%s") {
 		$rv = sprintf($message,
                       $expectation->overlayMessage($compare, $this->getDumper()));
 		return $rv;
@@ -497,9 +525,9 @@ class SimpleTestCase {
      *    @param SimpleExpectation $expectation  Expectation subclass.
      *    @param mixed $compare                  Value to compare.
      *    @return boolean                        True on pass / expected fail, false on fail / unexpected pass.
-     *    @access protected
+     *    @access public
      */
-    protected function checkExpectation($expectation, $compare) {
+    function checkExpectation($expectation, $compare) {
         $rv = $expectation->test($compare);
 		return $rv;
 	}

@@ -60,5 +60,6 @@ class TestOfUnitTester extends UnitTestCase {
 
     function testAssertExpectedToFail() {
         $this->expectFail()->assertTrue(false, "%s -> Expected to fail");
+        $this->expectFail(new AnythingExpectation())->assertTrue(false, "%s -> Expected to fail");
     }
 }
