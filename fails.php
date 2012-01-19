@@ -100,6 +100,8 @@ class SimpleFailQueue {
      *    @access public
      */
     function expectFail($expected, $message) {
+		//$level = SimpleTest::getContext()->level;
+		//echo "<pre>expect a fail: $message @ level = $level</pre>";
         array_push($this->expectation_queue, array($expected, $message));
     }
 
@@ -111,6 +113,8 @@ class SimpleFailQueue {
      *    @access public
      */
     function add($content, $file_and_line, $mode) {
+		//$level = SimpleTest::getContext()->level;
+		//echo "<pre>add latest fail: $mode @ level = $level, $file_and_line</pre>";
         $content = str_replace('%', '%%', $content);
         return $this->testLatestFail($content, $file_and_line, $mode);
     }
@@ -122,9 +126,10 @@ class SimpleFailQueue {
      */
     function tally() {
         while (list($expected, $message) = $this->extractExpectation()) {
-            $this->test->assert($expected, false, "%s -> Expected fail not caught");
+            //$this->test->assert($expected, false, "%s -> Expected fail not caught");
+			// ALWAYS list the expected item, no matter if it asserts false or true:
+			$this->test->fail($this->test->constructFailMessage($expected, 'tally dangling', "%s -> Expected fail not caught"));
         }
-        //trigger_error("Uncaught 'expected fail': you invoked expectFail() without following it up with an assertion/test.");
     }
 
     /**
