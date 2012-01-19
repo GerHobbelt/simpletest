@@ -25,8 +25,8 @@ require_once(dirname(__FILE__) . '/test_list.php');
  */
 class SimpleCommandLineParser {
     protected $to_property = array(
-            'case' => 'case', 'c' => 'case',
-            'test' => 'test', 't' => 'test',
+            'case' => 'case', 'c' => 'case', 'class' => 'case',
+            'test' => 'test', 't' => 'test', 'method' => 'test',
     );
     protected $case = '';
     protected $test = '';
@@ -47,33 +47,50 @@ class SimpleCommandLineParser {
         if (! is_array($arguments)) {
             return;
         }
+		$arguments = array_merge(array(), $arguments); // clone array, so we can edit it locally at no risk.
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^--?(test|case|t|c)=(.+)$/', $argument, $matches)) {
+            if (preg_match('/^--?(test|case|class|method|t|c)=(.+)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 $this->$property = $matches[2];
-            } elseif (preg_match('/^--?(test|case|t|c)$/', $argument, $matches)) {
+				unset($arguments[$i]);
+            } elseif (preg_match('/^--?(test|case|class|method|t|c)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 if (isset($arguments[$i + 1])) {
                     $this->$property = $arguments[$i + 1];
+					unset($arguments[$i + 1]);
                 }
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(xml|x)$/', $argument)) {
                 $this->xml = true;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(dry|n)$/', $argument)) {
                 $this->dry = true;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(list|l)$/', $argument)) {
                 $this->make_list = true;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(no-breadcrumb|nb)$/', $argument)) {
                 $this->breadcrumb = false;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(no-stacktrace|nt)$/', $argument)) {
                 $this->stacktrace = false;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(show-pass|pass|p)$/', $argument)) {
                 $this->pass = true;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(no-skip|no-skips|s)$/', $argument)) {
                 $this->no_skips = true;
+				unset($arguments[$i]);
             } elseif (preg_match('/^--?(help|h)$/', $argument)) {
                 $this->help = true;
+				unset($arguments[$i]);
             }
         }
+	
+		// TODO: print error message about unrecognized commandline arguments:
+        foreach ($arguments as $i => $argument) {
+            $this->help = true;
+		}
     }
 
     /**
@@ -166,9 +183,11 @@ SimpleTest command line default reporter (autorun)
 Usage: php <test_file> [args...]
 
     --case=<class>
+    --class=<class>
     -c <class>      Run only the test-case <class>
 	
 	--test=<method>
+	--method=<method>
     -t <method>     Run only the test method <method>
 	
 	--no-skip
@@ -209,28 +228,43 @@ class WebCommandLineParser extends SimpleCommandLineParser {
         if (! is_array($arguments)) {
             return;
         }
+		$arguments = array_merge(array(), $arguments); // clone array, so we can edit it locally at no risk.
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^(test|case|t|c)$/', $i)) {
+            if (preg_match('/^(test|case|class|method|t|c)$/', $i)) {
                 $property = $this->to_property[$i];
                 $this->$property = $argument;
+				unset($arguments[$i]);
             } elseif (preg_match('/^(xml|x)$/', $i)) {
                 $this->xml = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(dry|n)$/', $i)) {
                 $this->dry = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(list|l)$/', $i)) {
                 $this->make_list = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(no-breadcrumb|nb)$/', $i)) {
                 $this->breadcrumb = !$this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(no-stacktrace|nt)$/', $i)) {
                 $this->stacktrace = !$this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(show-pass|pass|p)$/', $i)) {
                 $this->pass = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(no-skip|no-skips|s)$/', $i)) {
                 $this->no_skips = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             } elseif (preg_match('/^(help|h)$/', $i)) {
                 $this->help = $this->convertValueToBoolean($argument);
+				unset($arguments[$i]);
             }
         }
+	
+		// TODO: print error message about unrecognized request arguments:
+        foreach ($arguments as $i => $argument) {
+            $this->help = true;
+		}
     }
 
 	protected function convertValueToBoolean($arg) {
@@ -255,10 +289,12 @@ class WebCommandLineParser extends SimpleCommandLineParser {
 	<h1>Request parameters recognized by SimpleTest (autorun)</h1>
 	<dl>
 		<dt>case=<var>class</var></dt>
+		<dt>class=<var>class</var></dt>
 		<dt>c=<var>class</var></dt>
 		<dd>Run only the test-case <var>class</var></dd>
 
 		<dt>test=<var>method</var></dt>
+		<dt>method=<var>method</var></dt>
 		<dt>t=<var>method</var></dt>
 		<dd>Run only the test method <var>method</var></dd>
 			
