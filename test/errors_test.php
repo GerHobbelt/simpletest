@@ -294,8 +294,6 @@ class TestRunnerForLeftOverAndNotEnoughErrors extends UnitTestCase {
         $this->assertFalse($test->run(new SimpleReporter()));
 		// also make sure that the test run did produce exactly 1 failure, nothing else:
 		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		//$context = SimpleTest::getContext();
-        //$reporter = $context->getReporter();
 		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
 		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
 		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");

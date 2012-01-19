@@ -177,7 +177,6 @@ class SimpleTestCase {
         if ($started) {
             $reporter->paintCaseEnd($this->getLabel());
         }
-        //unset($this->reporter);
         //$context->setTest(null);
         SimpleTest::popContext($context);
 		$this->running = false;
