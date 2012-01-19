@@ -430,7 +430,7 @@ class NoTextExpectation extends TextExpectation {
  *    @package SimpleTest
  *    @subpackage WebTester
  */
-class WebTestCase extends SimpleTestCase {
+class WebTestCase extends UnitTestCase {
     protected $browser = null;
     protected $server_url = null;
     protected $ignore_errors = false;
@@ -520,27 +520,34 @@ class WebTestCase extends SimpleTestCase {
 	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the currently running script by default, 
 	 *    which can be overriden by specifying a different URL through the setServerUrl() method.
 	 *    
-     *    @param string $auth_str  The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
-     *    @return string           The URL as currently configured.
+     *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @param string $path_to_site  The (relative to the starting script) path to the test sample site root directory. Default: './site/'
+     *    @return string               The URL as currently configured.
      *    @access public
      */
-    function getServerUrl($auth_str = null) {
+    function getServerUrl($auth_str = null, $path_to_site = 'site/') {
 		if (empty($this->server_url)) {
 			if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
 			{
 				$url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
 				$url .= '://' . $_SERVER['HTTP_HOST'];
-				$url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
+				$url .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']) . $path_to_site;
 			}
 			else 
 			{
 				$url = 'http://www.lastcraft.com/test/';
 			}
+			$this->server_url = $url;
 		}
 		else {
 			$url = $this->server_url;
 		}
 		$url = parse_url($url);
+		// fix parse_url() hickup for file:// scheme on Windows:
+		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR']))
+		{
+			$url['host'] .= ':';
+		}
 		$rv = $url['scheme'] . '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $url['host'] . $url['path'];
 		if (!empty($url['query'])) {
 			$rv .= '?' . $url['query'];
@@ -557,13 +564,17 @@ class WebTestCase extends SimpleTestCase {
 	 *
 	 *    @note When the specified URL is not complete, we extend it by applying the default value for the missing parts: scheme, host, path
 	 *
-     *    @param string $url       The new server URL. When empty, the server URL will be reset to the default. @see getServerUrl()
-     *    @return string           The URL as currently configured.
+     *    @param string $url           The new server URL. When empty, the server URL will be reset to the default. @see getServerUrl()
+     *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
+     *    @param string $path_to_site  The (relative to the starting script) path to the test sample site root directory. Default: './site/'
+     *    @return string               The URL as currently configured.
      *    @access public
      */
-    function setServerUrl($url = null) {
+    function setServerUrl($url = null, $auth_str = null, $path_to_site = 'site/') {
+		global $_SERVER;
+		
 		$this->server_url = null;
-		$dflt = $this->getServerUrl();
+		$dflt = $this->getServerUrl($auth_str, $path_to_site);
 		$dflt = parse_url($dflt);
 		$url = parse_url($url);
 		
@@ -572,6 +583,11 @@ class WebTestCase extends SimpleTestCase {
 		}
 		if (empty($url['host'])) {
 			$url['host'] = $dflt['host'];
+		}
+		// fix parse_url() hickup for file:// scheme on Windows:
+		if ($url['scheme'] == 'file' && isset($_SERVER['WINDIR']))
+		{
+			$url['host'] .= ':';
 		}
 		if (empty($url['path'])) {
 			$url['path'] = $dflt['path'];
@@ -1536,67 +1552,6 @@ class WebTestCase extends SimpleTestCase {
         return $this->assertTrue(
                 $this->getCookie($name) === null or $this->getCookie($name) === false,
                 sprintf($message, "Not expecting cookie [$name]"));
-    }
-
-    /**
-     *    Called from within the test methods to register
-     *    passes and failures.
-     *    @param boolean $result    Pass on true.
-     *    @param string $message    Message to display describing
-     *                              the test state.
-     *    @return boolean           True on pass
-     *    @access public
-     */
-    function assertTrue($result, $message = '%s') {
-        return $this->assert(new TrueExpectation(), $result, $message);
-    }
-
-    /**
-     *    Will be true on false and vice versa. False
-     *    is the PHP definition of false, so that null,
-     *    empty strings, zero and an empty array all count
-     *    as false.
-     *    @param boolean $result    Pass on false.
-     *    @param string $message    Message to display.
-     *    @return boolean           True on pass
-     *    @access public
-     */
-    function assertFalse($result, $message = '%s') {
-        return $this->assert(new FalseExpectation(), $result, $message);
-    }
-
-    /**
-     *    Will trigger a pass if the two parameters have
-     *    the same value only. Otherwise a fail. This
-     *    is for testing hand extracted text, etc.
-     *    @param mixed $first          Value to compare.
-     *    @param mixed $second         Value to compare.
-     *    @param string $message       Message to display.
-     *    @return boolean              True on pass
-     *    @access public
-     */
-    function assertEqual($first, $second, $message = '%s') {
-        return $this->assert(
-                new EqualExpectation($first),
-                $second,
-                $message);
-    }
-
-    /**
-     *    Will trigger a pass if the two parameters have
-     *    a different value. Otherwise a fail. This
-     *    is for testing hand extracted text, etc.
-     *    @param mixed $first           Value to compare.
-     *    @param mixed $second          Value to compare.
-     *    @param string $message        Message to display.
-     *    @return boolean               True on pass
-     *    @access public
-     */
-    function assertNotEqual($first, $second, $message = '%s') {
-        return $this->assert(
-                new NotEqualExpectation($first),
-                $second,
-                $message);
     }
 
     /**

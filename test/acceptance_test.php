@@ -7,21 +7,14 @@ require_once(dirname(__FILE__) . '/../web_tester.php');
 require_once(dirname(__FILE__) . '/../unit_tester.php');
 
 class SimpleTestAcceptanceTest extends WebTestCase {
-    static function samples($auth_str = null) {
-        /*
+    function __construct() {
+		/*
         And a little hack to make sure PHP does not timeout
         */
         //   http://www.php.net/manual/en/info.configuration.php#ini.max-execution-time
         set_time_limit(max(5 * 60, ini_get('max_execution_time')));
         
-        if (!empty($_SERVER['HTTP_HOST']) && !empty($_SERVER['SCRIPT_NAME']))
-        {
-            $url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-            $url .= '://' . (!empty($auth_str) ? $auth_str . '@' : '') . $_SERVER['HTTP_HOST'];
-            $url .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']) . 'site/'; 
-            return $url;
-        }
-        return 'http://' . (!empty($auth_str) ? $auth_str . '@' : '') . 'www.lastcraft.com/test/';
+        $this->setServerUrl();
     }
 
     /**
@@ -47,7 +40,7 @@ class SimpleTestAcceptanceTest extends WebTestCase {
 		
 		if (!$fix_success && preg_match('=protected/?[^/]*$=', $url) === 1)
 		{
-			parent::get($this->samples() . 'fix_protected_htaccess.php');
+			parent::get($this->getServerUrl() . 'fix_protected_htaccess.php');
 			$this->assertResponse(200);
 			$this->assertFieldByName('edit_code', new WithinRangeExpectation(200, 201));
 			$fix_success = true;
@@ -143,181 +136,175 @@ class SimpleTestAcceptanceTest extends WebTestCase {
     }
 }
 
-class TestOfLiveBrowser extends UnitTestCase {
-    function samples($auth_str = null) {
-        return SimpleTestAcceptanceTest::samples($auth_str);
-    }
-
-    function testGet() {
-        $browser = new SimpleBrowser();
+class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
+	
+	function testGet() {
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $this->assertTrue($browser->get($this->samples() . 'network_confirm.php'));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
-        $this->assertPattern('/Request method.*?<dd>GET<\/dd>/', $browser->getContent());
+        $this->assertTrue($browser->get($this->getServerUrl() . 'network_confirm.php'));
+        $this->assertPattern('/target for the SimpleTest/');
+        $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertEqual($browser->getTitle(), 'Simple test target file');
         $this->assertEqual($browser->getResponseCode(), 200);
         $this->assertEqual($browser->getMimeType(), 'text/html');
     }
 
     function testPost() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $this->assertTrue($browser->post($this->samples() . 'network_confirm.php'));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
-        $this->assertPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
+        $this->assertTrue($browser->post($this->getServerUrl() . 'network_confirm.php'));
+        $this->assertPattern('/target for the SimpleTest/');
+        $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
     }
 
     function testAbsoluteLinkFollowing() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'link_confirm.php');
+        $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLink('Absolute'));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+        $this->assertPattern('/target for the SimpleTest/');
     }
 
     function testRelativeEncodedLinkFollowing() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'link_confirm.php');
+        $browser->get($this->getServerUrl() . 'link_confirm.php');
         // Warning: the below data is ISO 8859-1 encoded
         $this->assertTrue($browser->clickLink("m\xE4rc\xEAl kiek'eboe"));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+        $this->assertPattern('/target for the SimpleTest/');
     }
 
     function testRelativeLinkFollowing() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'link_confirm.php');
+        $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLink('Relative'));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+        $this->assertPattern('/target for the SimpleTest/');
     }
 
     function testUnifiedClickLinkClicking() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'link_confirm.php');
+        $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->click('Relative'));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+        $this->assertPattern('/target for the SimpleTest/');
     }
 
     function testIdLinkFollowing() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'link_confirm.php');
+        $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLinkById(1));
-        $this->assertPattern('/target for the SimpleTest/', $browser->getContent());
+        $this->assertPattern('/target for the SimpleTest/');
     }
 
     function testCookieReading() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'set_cookies.php');
+        $browser->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertEqual($browser->getCurrentCookieValue('session_cookie'), 'A');
         $this->assertEqual($browser->getCurrentCookieValue('short_cookie'), 'B');
         $this->assertEqual($browser->getCurrentCookieValue('day_cookie'), 'C');
     }
 
     function testSimpleSubmit() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'form.html');
+        $browser->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($browser->clickSubmit('Go!'));
-        $this->assertPattern('/Request method.*?<dd>POST<\/dd>/', $browser->getContent());
-        $this->assertPattern('/go=\[Go!\]/', $browser->getContent());
+        $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
+        $this->assertPattern('/go=\[Go!\]/');
     }
 
     function testUnifiedClickCanSubmit() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $browser->get($this->samples() . 'form.html');
+        $browser->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($browser->click('Go!'));
-        $this->assertPattern('/go=\[Go!\]/', $browser->getContent());
+        $this->assertPattern('/go=\[Go!\]/');
     }
 }
 
-class TestOfLocalFileBrowser extends UnitTestCase {
-    function samples() {
-        return 'file://'.dirname(__FILE__).'/site/';
+class TestOfLocalFileBrowser extends SimpleTestAcceptanceTest {
+    function __construct() {
+        $this->setServerUrl(strtr('file://'.dirname(__FILE__).'/site/', '\\', '/'));
     }
 
     function testGet() {
-        $browser = new SimpleBrowser();
+        $browser = $this->getBrowser();
         $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
-        $this->assertTrue($browser->get($this->samples() . 'file.html'));
-        $this->assertPattern('/Link to SimpleTest/', $browser->getContent());
+        $this->assertTrue($browser->get($this->getServerUrl() . 'file.html'));
+        $this->assertPattern('/Link to SimpleTest/');
         $this->assertEqual($browser->getTitle(), 'Link to SimpleTest');
         $this->assertFalse($browser->getResponseCode());
         $this->assertEqual($browser->getMimeType(), '');
     }
 }
 
-class TestOfRequestMethods extends UnitTestCase {
-    function samples() {
-        return SimpleTestAcceptanceTest::samples();
-    }
+class TestOfRequestMethods extends SimpleTestAcceptanceTest {
 
     function testHeadRequest() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->head($this->samples() . 'request_methods.php'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->head($this->getServerUrl() . 'request_methods.php'));
         $this->assertEqual($browser->getResponseCode(), 202);
     }
 
     function testGetRequest() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->get($this->samples() . 'request_methods.php'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->get($this->getServerUrl() . 'request_methods.php'));
         $this->assertEqual($browser->getResponseCode(), 405);
     }
 
     function testPostWithPlainEncoding() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->post($this->samples() . 'request_methods.php', 'A content message'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->post($this->getServerUrl() . 'request_methods.php', 'A content message'));
         $this->assertEqual($browser->getResponseCode(), 406);
-        $this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
+        $this->assertPattern('/Please ensure content type is an XML format/');
     }
 
     function testPostWithXmlEncoding() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->post($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'text/xml'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->post($this->getServerUrl() . 'request_methods.php', '<a><b>c</b></a>', 'text/xml'));
         $this->assertEqual($browser->getResponseCode(), 201);
-        $this->assertPattern('/c/', $browser->getContent());
+        $this->assertPattern('/c/');
     }
 
     function testPutWithPlainEncoding() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->put($this->samples() . 'request_methods.php', 'A content message'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->put($this->getServerUrl() . 'request_methods.php', 'A content message'));
         $this->assertEqual($browser->getResponseCode(), 406);
-        $this->assertPattern('/Please ensure content type is an XML format/', $browser->getContent());
+        $this->assertPattern('/Please ensure content type is an XML format/');
     }
 
     function testPutWithXmlEncoding() {
-        $browser = new SimpleBrowser();
-        $this->assertTrue($browser->put($this->samples() . 'request_methods.php', '<a><b>c</b></a>', 'application/xml'));
+        $browser = $this->getBrowser();
+        $this->assertTrue($browser->put($this->getServerUrl() . 'request_methods.php', '<a><b>c</b></a>', 'application/xml'));
         $this->assertEqual($browser->getResponseCode(), 201);
-        $this->assertPattern('/c/', $browser->getContent());
+        $this->assertPattern('/c/');
     }
 
     function testDeleteRequest() {
-        $browser = new SimpleBrowser();
-        $browser->delete($this->samples() . 'request_methods.php');
+        $browser = $this->getBrowser();
+        $browser->delete($this->getServerUrl() . 'request_methods.php');
         $this->assertEqual($browser->getResponseCode(), 202);
-        $this->assertPattern('/Your delete request was accepted/', $browser->getContent());
+        $this->assertPattern('/Your delete request was accepted/');
     }
 
 }
 
 class TestRadioFields extends SimpleTestAcceptanceTest {
     function testSetFieldAsInteger() {
-        $this->get($this->samples() . 'form_with_radio_buttons.html');
+        $this->get($this->getServerUrl() . 'form_with_radio_buttons.html');
         $this->assertTrue($this->setField('tested_field', 2));
         $this->clickSubmitByName('send');
-        $this->assertEqual($this->getUrl(), $this->samples() . 'form_with_radio_buttons.html?tested_field=2&send=click+me');
+        $this->assertEqual($this->getUrl(), $this->getServerUrl() . 'form_with_radio_buttons.html?tested_field=2&send=click+me');
     }
 
     function testSetFieldAsString() {
-        $this->get($this->samples() . 'form_with_radio_buttons.html');
+        $this->get($this->getServerUrl() . 'form_with_radio_buttons.html');
         $this->assertTrue($this->setField('tested_field', '2'));
         $this->clickSubmitByName('send');
-        $this->assertEqual($this->getUrl(), $this->samples() . 'form_with_radio_buttons.html?tested_field=2&send=click+me');
+        $this->assertEqual($this->getUrl(), $this->getServerUrl() . 'form_with_radio_buttons.html?tested_field=2&send=click+me');
     }
 }
 
@@ -327,7 +314,7 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     }
 
     function testFormWithArrayBasedInputs() {
-        $this->get($this->samples() . 'form_with_array_based_inputs.php');
+        $this->get($this->getServerUrl() . 'form_with_array_based_inputs.php');
         $this->setField('value[]', '3', '1');
         $this->setField('value[]', '4', '2');
         $this->clickSubmit('Go');
@@ -335,7 +322,7 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     }
 
     function testFormWithQuotedValues() {
-        $this->get($this->samples() . 'form_with_quoted_values.php');
+        $this->get($this->getServerUrl() . 'form_with_quoted_values.php');
         $this->assertField('a', 'default');
         $this->assertFieldById('text_field', 'default');
         $this->clickSubmit('Go');
@@ -343,8 +330,8 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     }
 
     function testGet() {
-        $this->assertTrue($this->get($this->samples() . 'network_confirm.php'));
-        $this->assertEqual($this->getUrl(), $this->samples() . 'network_confirm.php');
+        $this->assertTrue($this->get($this->getServerUrl() . 'network_confirm.php'));
+        $this->assertEqual($this->getUrl(), $this->getServerUrl() . 'network_confirm.php');
         $this->assertText('target for the SimpleTest');
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertTitle('Simple test target file');
@@ -356,63 +343,63 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     }
 
     function testSlowGet() {
-        $this->assertTrue($this->get($this->samples() . 'slow_page.php'));
+        $this->assertTrue($this->get($this->getServerUrl() . 'slow_page.php'));
     }
 
     function testTimedOutGet() {
         $this->setConnectionTimeout(1);
         $this->ignoreErrors();
-        $this->assertFalse($this->get($this->samples() . 'slow_page.php'));
+        $this->assertFalse($this->get($this->getServerUrl() . 'slow_page.php'));
     }
 
     function testPost() {
-        $this->assertTrue($this->post($this->samples() . 'network_confirm.php'));
+        $this->assertTrue($this->post($this->getServerUrl() . 'network_confirm.php'));
         $this->assertText('target for the SimpleTest');
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
     }
 
     function testGetWithData() {
-        $this->get($this->samples() . 'network_confirm.php', array("a" => "aaa"));
+        $this->get($this->getServerUrl() . 'network_confirm.php', array("a" => "aaa"));
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertText('a=[aaa]');
     }
 
     function testPostWithData() {
-        $this->post($this->samples() . 'network_confirm.php', array("a" => "aaa"));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a" => "aaa"));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aaa]');
     }
 
     function testPostWithRecursiveData() {
-        $this->post($this->samples() . 'network_confirm.php', array("a" => "aaa"));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a" => "aaa"));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aaa]');
 
-        $this->post($this->samples() . 'network_confirm.php', array("a[aa]" => "aaa"));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a[aa]" => "aaa"));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aa=[aaa]]');
 
-        $this->post($this->samples() . 'network_confirm.php', array("a[aa][aaa]" => "aaaa"));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a[aa][aaa]" => "aaaa"));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aa=[aaa=[aaaa]]]');
 
-        $this->post($this->samples() . 'network_confirm.php', array("a" => array("aa" => "aaa")));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a" => array("aa" => "aaa")));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aa=[aaa]]');
 
-        $this->post($this->samples() . 'network_confirm.php', array("a" => array("aa" => array("aaa" => "aaaa"))));
+        $this->post($this->getServerUrl() . 'network_confirm.php', array("a" => array("aa" => array("aaa" => "aaaa"))));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aa=[aaa=[aaaa]]]');
     }
 
     function testRelativeGet() {
-        $this->get($this->samples() . 'link_confirm.php');
+        $this->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($this->get('network_confirm.php'));
         $this->assertText('target for the SimpleTest');
     }
 
     function testRelativePost() {
-        $this->post($this->samples() . 'link_confirm.php', array('a' => '123'));
+        $this->post($this->getServerUrl() . 'link_confirm.php', array('a' => '123'));
         $this->assertTrue($this->post('network_confirm.php'));
         $this->assertText('target for the SimpleTest');
     }
@@ -424,39 +411,39 @@ class TestOfLinkFollowing extends SimpleTestAcceptanceTest {
     }
 
     function testLinkAssertions() {
-        $this->get($this->samples() . 'link_confirm.php');
-        $this->assertLink('Absolute', $this->samples() . 'network_confirm.php');
+        $this->get($this->getServerUrl() . 'link_confirm.php');
+        $this->assertLink('Absolute', $this->getServerUrl() . 'network_confirm.php');
         $this->assertLink('Absolute', new PatternExpectation('/confirm/'));
         $this->assertClickable('Absolute');
     }
 
     function testAbsoluteLinkFollowing() {
-        $this->get($this->samples() . 'link_confirm.php');
+        $this->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($this->clickLink('Absolute'));
         $this->assertText('target for the SimpleTest');
     }
 
     function testRelativeLinkFollowing() {
-        $this->get($this->samples() . 'link_confirm.php');
+        $this->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($this->clickLink('Relative'));
         $this->assertText('target for the SimpleTest');
     }
 
     function testLinkIdFollowing() {
-        $this->get($this->samples() . 'link_confirm.php');
+        $this->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertLinkById(1);
         $this->assertTrue($this->clickLinkById(1));
         $this->assertText('target for the SimpleTest');
     }
 
     function testAbsoluteUrlBehavesAbsolutely() {
-        $this->get($this->samples() . 'link_confirm.php');
-        $this->get($this->samples());
+        $this->get($this->getServerUrl() . 'link_confirm.php');
+        $this->get($this->getServerUrl());
         $this->assertText('No guarantee of quality is given or even intended');
     }
 
     function testRelativeUrlRespectsBaseTag() {
-        $this->get($this->samples() . 'base_tag/base_link.php');
+        $this->get($this->getServerUrl() . 'base_tag/base_link.php');
         $this->click('Back to test pages');
         $this->assertTitle('Simple test target file');
     }
@@ -468,8 +455,8 @@ class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
     }
 
     function testClickToExplicitelyNamedSelfReturns() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
-        $this->assertEqual($this->getUrl(), $this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
+        $this->assertEqual($this->getUrl(), $this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->assertTitle('Simple test page with links');
         $this->assertLink('Self');
         $this->clickLink('Self');
@@ -477,33 +464,33 @@ class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
     }
 
     function testClickToMissingPageReturnsToSamePage() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->clickLink('No page');
         $this->assertTitle('Simple test page with links');
         $this->assertText('[action=no_page]');
     }
 
     function testClickToBareActionReturnsToSamePage() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->clickLink('Bare action');
         $this->assertTitle('Simple test page with links');
         $this->assertText('[action=]');
     }
 
     function testClickToSingleQuestionMarkReturnsToSamePage() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->clickLink('Empty query');
         $this->assertTitle('Simple test page with links');
     }
 
     function testClickToEmptyStringReturnsToSamePage() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->clickLink('Empty link');
         $this->assertTitle('Simple test page with links');
     }
 
     function testClickToSingleDotGoesToCurrentDirectory() {
-        $this->get($this->samples() . 'front_controller_style/a_page.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/a_page.php');
         $this->clickLink('Current directory');
         $this->assertTitle(
                 'Simple test front controller',
@@ -511,7 +498,7 @@ class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
     }
 
     function testClickBackADirectoryLevel() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('Down one');
         $this->assertText('No guarantee of quality is given or even intended');
     }
@@ -523,7 +510,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToNamedPage() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->assertText('Simple test front controller');
         $this->clickLink('Index');
         $this->assertResponse(200);
@@ -531,7 +518,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPage() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('No page');
         $this->assertResponse(200);
         $this->assertText('Simple test front controller');
@@ -539,7 +526,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithBareParameter() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('Bare action');
         $this->assertResponse(200);
         $this->assertText('Simple test front controller');
@@ -547,7 +534,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithEmptyQuery() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('Empty query');
         $this->assertResponse(200);
         $this->assertPattern('/Simple test front controller/');
@@ -555,7 +542,7 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithEmptyLink() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('Empty link');
         $this->assertResponse(200);
         $this->assertPattern('/Simple test front controller/');
@@ -563,13 +550,13 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testJumpBackADirectoryLevel() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickLink('Down one');
         $this->assertText('No guarantee of quality is given or even intended');
     }
 
     function testSubmitToNamedPage() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->assertText('Simple test front controller');
         $this->clickSubmit('Index');
         $this->assertResponse(200);
@@ -577,34 +564,34 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitToSameDirectory() {
-        $this->get($this->samples() . 'front_controller_style/index.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php');
         $this->clickSubmit('Same directory');
         $this->assertResponse(200);
         $this->assertText('[action=Same+directory]');
     }
 
     function testSubmitToEmptyAction() {
-        $this->get($this->samples() . 'front_controller_style/index.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php');
         $this->clickSubmit('Empty action');
         $this->assertResponse(200);
         $this->assertText('[action=Empty+action]');
     }
 
     function testSubmitToNoAction() {
-        $this->get($this->samples() . 'front_controller_style/index.php');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php');
         $this->clickSubmit('No action');
         $this->assertResponse(200);
         $this->assertText('[action=No+action]');
     }
 
     function testSubmitBackADirectoryLevel() {
-        $this->get($this->samples() . 'front_controller_style/');
+        $this->get($this->getServerUrl() . 'front_controller_style/');
         $this->clickSubmit('Down one');
         $this->assertText('No guarantee of quality is given or even intended');
     }
 
     function testSubmitToNamedPageWithMixedPostAndGet() {
-        $this->get($this->samples() . 'front_controller_style/?a=A');
+        $this->get($this->getServerUrl() . 'front_controller_style/?a=A');
         $this->assertText('Simple test front controller');
         $this->clickSubmit('Index post');
         $this->assertText('action=[Index post]');
@@ -612,21 +599,21 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitToSameDirectoryMixedPostAndGet() {
-        $this->get($this->samples() . 'front_controller_style/index.php?a=A');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php?a=A');
         $this->clickSubmit('Same directory post');
         $this->assertText('action=[Same directory post]');
         $this->assertNoText('[a=A]');
     }
 
     function testSubmitToEmptyActionMixedPostAndGet() {
-        $this->get($this->samples() . 'front_controller_style/index.php?a=A');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php?a=A');
         $this->clickSubmit('Empty action post');
         $this->assertText('action=[Empty action post]');
         $this->assertText('[a=A]');
     }
 
     function testSubmitToNoActionMixedPostAndGet() {
-        $this->get($this->samples() . 'front_controller_style/index.php?a=A');
+        $this->get($this->getServerUrl() . 'front_controller_style/index.php?a=A');
         $this->clickSubmit('No action post');
         $this->assertText('action=[No action post]');
         $this->assertText('[a=A]');
@@ -639,7 +626,7 @@ class TestOfLiveHeaders extends SimpleTestAcceptanceTest {
     }
 
     function testConfirmingHeaderExistence() {
-        $this->get($this->samples());
+        $this->get($this->getServerUrl());
         $this->assertHeader('content-type');
         $this->assertHeader('content-type', 'text/html');
         $this->assertHeader('content-type', new PatternExpectation('/HTML/i'));
@@ -654,41 +641,41 @@ class TestOfLiveRedirects extends SimpleTestAcceptanceTest {
 
     function testNoRedirects() {
         $this->setMaximumRedirects(0);
-        $this->get($this->samples() . 'redirect.php');
+        $this->get($this->getServerUrl() . 'redirect.php');
         $this->assertTitle('Redirection test');
     }
 
     function testRedirects() {
         $this->setMaximumRedirects(1);
-        $this->get($this->samples() . 'redirect.php');
+        $this->get($this->getServerUrl() . 'redirect.php');
         $this->assertTitle('Simple test target file');
     }
 
     function testRedirectLosesGetData() {
-        $this->get($this->samples() . 'redirect.php', array('a' => 'aaa'));
+        $this->get($this->getServerUrl() . 'redirect.php', array('a' => 'aaa'));
         $this->assertNoText('a=[aaa]');
     }
 
     function testRedirectKeepsExtraRequestDataOfItsOwn() {
-        $this->get($this->samples() . 'redirect.php');
+        $this->get($this->getServerUrl() . 'redirect.php');
         $this->assertText('r=[rrr]');
     }
 
     function testRedirectLosesPostData() {
-        $this->post($this->samples() . 'redirect.php', array('a' => 'aaa'));
+        $this->post($this->getServerUrl() . 'redirect.php', array('a' => 'aaa'));
         $this->assertTitle('Simple test target file');
         $this->assertNoText('a=[aaa]');
     }
 
     function testRedirectWithBaseUrlChange() {
-        $this->get($this->samples() . 'base_change_redirect.php');
+        $this->get($this->getServerUrl() . 'base_change_redirect.php');
         $this->assertTitle('Simple test target file in folder');
-        $this->get($this->samples() . 'path/base_change_redirect.php');
+        $this->get($this->getServerUrl() . 'path/base_change_redirect.php');
         $this->assertTitle('Simple test target file');
     }
 
     function testRedirectWithDoubleBaseUrlChange() {
-        $this->get($this->samples() . 'double_base_change_redirect.php');
+        $this->get($this->getServerUrl() . 'double_base_change_redirect.php');
         $this->assertTitle('Simple test target file');
     }
 }
@@ -699,7 +686,7 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     }
 
     function here() {
-        return new SimpleUrl($this->samples());
+        return new SimpleUrl($this->getServerUrl());
     }
 
     function thisHost() {
@@ -716,7 +703,7 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
         $this->setCookie('a', 'Test cookie a');
         $this->setCookie('b', 'Test cookie b', $this->thisHost());
         $this->setCookie('c', 'Test cookie c', $this->thisHost(), $this->thisPath());
-        $this->get($this->samples() . 'network_confirm.php');
+        $this->get($this->getServerUrl() . 'network_confirm.php');
         $this->assertText('Test cookie a');
         $this->assertText('Test cookie b');
         $this->assertText('Test cookie c');
@@ -728,12 +715,12 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     function testNoCookieSetWhenCookiesDisabled() {
         $this->setCookie('a', 'Test cookie a');
         $this->ignoreCookies();
-        $this->get($this->samples() . 'network_confirm.php');
+        $this->get($this->getServerUrl() . 'network_confirm.php');
         $this->assertNoText('Test cookie a');
     }
 
     function testCookieReading() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertCookie('session_cookie', 'A');
         $this->assertCookie('short_cookie', 'B');
         $this->assertCookie('day_cookie', 'C');
@@ -745,26 +732,26 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
 
     function testNoCookieReadingWhenCookiesDisabled() {
         $this->ignoreCookies();
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertNoCookie('session_cookie');
         $this->assertNoCookie('short_cookie');
         $this->assertNoCookie('day_cookie');
     }
 
     function testCookiePatternAssertions() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertCookie('session_cookie', new PatternExpectation('/a/i'));
     }
 
     function testTemporaryCookieExpiry() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->restart();
         $this->assertNoCookie('session_cookie');
         $this->assertCookie('day_cookie', 'C');
     }
 
     function testTimedCookieExpiryWith100SecondMargin() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->ageCookies(3600);
         $this->restart(time() + 100);
         $this->assertNoCookie('session_cookie');
@@ -773,7 +760,7 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     }
 
     function testNoClockOverDriftBy100Seconds() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->restart(time() + 200);
         $this->assertNoCookie(
                 'short_cookie',
@@ -781,7 +768,7 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     }
 
     function testNoClockUnderDriftBy100Seconds() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->restart(time() + 0);
         $this->assertCookie(
                 'short_cookie',
@@ -790,7 +777,7 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     }
 
     function testCookiePath() {
-        $this->get($this->samples() . 'set_cookies.php');
+        $this->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertNoCookie('path_cookie', 'D');
         $this->get('./path/show_cookies.php');
         $this->assertPattern('/path_cookie/');
@@ -804,14 +791,14 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSimpleSubmit() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmit('Go!'));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('go=[Go!]');
     }
 
     function testDefaultFormValues() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertFieldByName('a', '');
         $this->assertFieldByName('b', 'Default text');
         $this->assertFieldByName('c', '');
@@ -835,7 +822,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormSubmissionByButtonLabel() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->setFieldByName('a', 'aaa');
         $this->setFieldByName('b', 'bbb');
         $this->setFieldByName('c', 'ccc');
@@ -855,34 +842,34 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testAdditionalFormValues() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmit('Go!', array('add' => 'A')));
         $this->assertText('go=[Go!]');
         $this->assertText('add=[A]');
     }
 
     function testFormSubmissionByName() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->setFieldByName('a', 'A');
         $this->assertTrue($this->clickSubmitByName('go'));
         $this->assertText('a=[A]');
     }
 
     function testFormSubmissionByNameAndAdditionalParameters() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmitByName('go', array('add' => 'A')));
         $this->assertText('go=[Go!]');
         $this->assertText('add=[A]');
     }
 
     function testFormSubmissionBySubmitButtonLabeledSubmit() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmitByName('test'));
         $this->assertText('test=[Submit]');
     }
 
     function testFormSubmissionWithIds() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertFieldById(1, '');
         $this->assertFieldById(2, 'Default text');
         $this->assertFieldById(3, '');
@@ -912,13 +899,13 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormSubmissionWithIdsAndAdditionnalData() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmitById(99, array('additionnal' => "data")));
         $this->assertText('additionnal=[data]');
     }
 
     function testFormSubmissionWithLabels() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertField('Text A', '');
         $this->assertField('Text B', 'Default text');
         $this->assertField('Text area C', '');
@@ -948,7 +935,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSettingCheckboxWithBooleanTrueSetsUnderlyingValue() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->setField('Checkbox E', true);
         $this->assertField('Checkbox E', 'on');
         $this->clickSubmit('Go!');
@@ -956,7 +943,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormSubmissionWithMixedPostAndGet() {
-        $this->get($this->samples() . 'form_with_mixed_post_and_get.html');
+        $this->get($this->getServerUrl() . 'form_with_mixed_post_and_get.html');
         $this->setField('Text A', 'Hello');
         $this->assertTrue($this->clickSubmit('Go!'));
         $this->assertText('a=[Hello]');
@@ -965,7 +952,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormSubmissionWithMixedPostAndEncodedGet() {
-        $this->get($this->samples() . 'form_with_mixed_post_and_get.html');
+        $this->get($this->getServerUrl() . 'form_with_mixed_post_and_get.html');
         $this->setField('Text B', 'Hello');
         $this->assertTrue($this->clickSubmit('Go encoded!'));
         $this->assertText('b=[Hello]');
@@ -974,7 +961,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormSubmissionWithoutAction() {
-        $this->get($this->samples() . 'form_without_action.php?test=test');
+        $this->get($this->getServerUrl() . 'form_without_action.php?test=test');
         $this->assertText('_GET : [test]');
         $this->assertTrue($this->clickSubmit('Submit Post With Empty Action'));
         $this->assertText('_GET : [test]');
@@ -982,7 +969,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testImageSubmissionByLabel() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertImage('Image go!');
         $this->assertTrue($this->clickImage('Image go!', 10, 12));
         $this->assertText('go_x=[10]');
@@ -990,40 +977,40 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testImageSubmissionByLabelWithAdditionalParameters() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickImage('Image go!', 10, 12, array('add' => 'A')));
         $this->assertText('add=[A]');
     }
 
     function testImageSubmissionByName() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickImageByName('go', 10, 12));
         $this->assertText('go_x=[10]');
         $this->assertText('go_y=[12]');
     }
 
     function testImageSubmissionById() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickImageById(97, 10, 12));
         $this->assertText('go_x=[10]');
         $this->assertText('go_y=[12]');
     }
 
     function testButtonSubmissionByLabel() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->clickSubmit('Button go!', 10, 12));
         $this->assertPattern('/go=\[ButtonGo\]/s');
     }
 
     function testNamelessSubmitSendsNoValue() {
-        $this->get($this->samples() . 'form_with_unnamed_submit.html');
+        $this->get($this->getServerUrl() . 'form_with_unnamed_submit.html');
         $this->click('Go!');
         $this->assertNoText('Go!');
         $this->assertNoText('submit');
     }
 
     function testNamelessImageSendsXAndYValues() {
-        $this->get($this->samples() . 'form_with_unnamed_submit.html');
+        $this->get($this->getServerUrl() . 'form_with_unnamed_submit.html');
         $this->clickImage('Image go!', 4, 5);
         $this->assertNoText('ImageGo');
         $this->assertText('x=[4]');
@@ -1031,13 +1018,13 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testNamelessButtonSendsNoValue() {
-        $this->get($this->samples() . 'form_with_unnamed_submit.html');
+        $this->get($this->getServerUrl() . 'form_with_unnamed_submit.html');
         $this->click('Button Go!');
         $this->assertNoText('ButtonGo');
     }
 
     function testSelfSubmit() {
-        $this->get($this->samples() . 'self_form.php');
+        $this->get($this->getServerUrl() . 'self_form.php');
         $this->assertNoText('[Submitted]');
         $this->assertNoText('[Wrong form]');
         $this->assertTrue($this->clickSubmit());
@@ -1047,27 +1034,27 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSelfSubmitWithParameters() {
-        $this->get($this->samples() . 'self_form.php');
+        $this->get($this->getServerUrl() . 'self_form.php');
         $this->setFieldByName('visible', 'Resent');
         $this->assertTrue($this->clickSubmit());
         $this->assertText('[Resent]');
     }
 
     function testSettingOfBlankOption() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($this->setFieldByName('d', ''));
         $this->clickSubmit('Go!');
         $this->assertText('d=[]');
     }
 
     function testAssertingFieldValueWithPattern() {
-        $this->get($this->samples() . 'form.html');
+        $this->get($this->getServerUrl() . 'form.html');
         $this->setField('c', 'A very long string');
         $this->assertField('c', new PatternExpectation('/very long/'));
     }
 
     function testSendingMultipartFormDataEncodedForm() {
-        $this->get($this->samples() . 'form_data_encoded_form.html');
+        $this->get($this->getServerUrl() . 'form_data_encoded_form.html');
         $this->assertField('Text A', '');
         $this->assertField('Text B', 'Default text');
         $this->assertField('Text area C', '');
@@ -1097,7 +1084,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSettingVariousBlanksInFields() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->assertField('Text A', '');
         $this->setField('Text A', '0');
         $this->assertField('Text A', '0');
@@ -1125,7 +1112,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testDefaultValueOfTextareaHasNewlinesAndWhitespacePreserved() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->assertField('Text area C', '                ');
     }
 
@@ -1136,7 +1123,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSubmissionOfBlankFields() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->setField('Text A', '');
         $this->setField('Text area B', '');
         $this->setFieldByName('i', '');
@@ -1149,13 +1136,13 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testDefaultValueOfTextareaHasNewlinesAndWhitespacePreservedOnSubmission() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->click('Go!');
         $this->assertPattern('/c=\[                \]/');
     }
 
     function testSubmissionOfEmptyValues() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->setField('Selection D', 'D2');
         $this->click('Go!');
         $this->assertText('a=[]');
@@ -1166,7 +1153,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSubmissionOfZeroes() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->setField('Text A', '0');
         $this->setField('Text area B', '0');
         $this->setField('Selection D', 'D3');
@@ -1180,7 +1167,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSubmissionOfQuestionMarks() {
-        $this->get($this->samples() . 'form_with_false_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_false_defaults.html');
         $this->setField('Text A', '?');
         $this->setField('Text area B', '?');
         $this->setField('Selection D', 'D4');
@@ -1194,7 +1181,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testSubmissionOfHtmlEncodedValues() {
-        $this->get($this->samples() . 'form_with_tricky_defaults.html');
+        $this->get($this->getServerUrl() . 'form_with_tricky_defaults.html');
         $this->assertField('Text A', '&\'"<>');
         $this->assertField('Text B', '"');
         $this->assertField('Text area C', '&\'"<>');
@@ -1211,7 +1198,7 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
     }
 
     function testFormActionRespectsBaseTag() {
-        $this->get($this->samples() . 'base_tag/form.php');
+        $this->get($this->getServerUrl() . 'base_tag/form.php');
         $this->assertTrue($this->clickSubmit('Go!'));
         $this->assertText('go=[Go!]');
         $this->assertText('a=[]');
@@ -1224,7 +1211,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testDefaultFormValueSubmission() {
-        $this->get($this->samples() . 'multiple_widget_form.html');
+        $this->get($this->getServerUrl() . 'multiple_widget_form.html');
         $this->assertFieldByName('a', array('a2', 'a3'));
         $this->assertFieldByName('b', array('b2', 'b3'));
         $this->assertFieldByName('c[]', array('c2', 'c3'));
@@ -1239,7 +1226,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSubmittingMultipleValues() {
-        $this->get($this->samples() . 'multiple_widget_form.html');
+        $this->get($this->getServerUrl() . 'multiple_widget_form.html');
         $this->setFieldByName('a', array('a1', 'a4'));
         $this->assertFieldByName('a', array('a1', 'a4'));
         $this->assertFieldByName('a', array('a4', 'a1'));
@@ -1260,7 +1247,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSettingByOptionValue() {
-        $this->get($this->samples() . 'multiple_widget_form.html');
+        $this->get($this->getServerUrl() . 'multiple_widget_form.html');
         $this->setFieldByName('d', array('1', '4'));
         $this->assertField('d', array('1', '4'));
         $this->assertTrue($this->clickSubmit('Go!'));
@@ -1268,7 +1255,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSubmittingMultipleValuesByLabel() {
-        $this->get($this->samples() . 'multiple_widget_form.html');
+        $this->get($this->getServerUrl() . 'multiple_widget_form.html');
         $this->setField('Multiple selection A', array('a1', 'a4'));
         $this->assertField('Multiple selection A', array('a1', 'a4'));
         $this->assertField('Multiple selection A', array('a4', 'a1'));
@@ -1280,7 +1267,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSavantStyleHiddenFieldDefaults() {
-        $this->get($this->samples() . 'savant_style_form.html');
+        $this->get($this->getServerUrl() . 'savant_style_form.html');
         $this->assertFieldByName('a', array('a0'));
         $this->assertFieldByName('b', array('b0'));
         $this->assertTrue($this->clickSubmit('Go!'));
@@ -1289,7 +1276,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSavantStyleHiddenDefaultsAreOverridden() {
-        $this->get($this->samples() . 'savant_style_form.html');
+        $this->get($this->getServerUrl() . 'savant_style_form.html');
         $this->assertTrue($this->setFieldByName('a', array('a1')));
         $this->assertTrue($this->setFieldByName('b', 'b1'));
         $this->assertTrue($this->clickSubmit('Go!'));
@@ -1298,7 +1285,7 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     }
 
     function testSavantStyleFormSettingById() {
-        $this->get($this->samples() . 'savant_style_form.html');
+        $this->get($this->getServerUrl() . 'savant_style_form.html');
         $this->assertFieldById(1, array('a0'));
         $this->assertFieldById(4, array('b0'));
         $this->assertTrue($this->setFieldById(2, 'a1'));
@@ -1315,7 +1302,7 @@ class TestOfFileUploads extends SimpleTestAcceptanceTest {
     }
 
     function testSingleFileUpload() {
-        $this->get($this->samples() . 'upload_form.html');
+        $this->get($this->getServerUrl() . 'upload_form.html');
         $this->assertTrue($this->setField('Content:',
                 dirname(__FILE__) . '/support/upload_sample.txt'));
         $this->assertField('Content:', dirname(__FILE__) . '/support/upload_sample.txt');
@@ -1324,7 +1311,7 @@ class TestOfFileUploads extends SimpleTestAcceptanceTest {
     }
 
     function testMultipleFileUpload() {
-        $this->get($this->samples() . 'upload_form.html');
+        $this->get($this->getServerUrl() . 'upload_form.html');
         $this->assertTrue($this->setField('Content:',
                 dirname(__FILE__) . '/support/upload_sample.txt'));
         $this->assertTrue($this->setField('Supplemental:',
@@ -1337,7 +1324,7 @@ class TestOfFileUploads extends SimpleTestAcceptanceTest {
     }
 
     function testBinaryFileUpload() {
-        $this->get($this->samples() . 'upload_form.html');
+        $this->get($this->getServerUrl() . 'upload_form.html');
         $this->assertTrue($this->setField('Content:',
                 dirname(__FILE__) . '/support/latin1_sample'));
         $this->click('Go!');
@@ -1352,7 +1339,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
     }
 
     function testRetry() {
-        $this->get($this->samples() . 'cookie_based_counter.php');
+        $this->get($this->getServerUrl() . 'cookie_based_counter.php');
         $this->assertPattern('/count: 1/i');
         $this->retry();
         $this->assertPattern('/count: 2/i');
@@ -1361,7 +1348,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
     }
 
     function testOfBackButton() {
-        $this->get($this->samples() . '1.html');
+        $this->get($this->getServerUrl() . '1.html');
         $this->clickLink('2');
         $this->assertTitle('2');
         $this->assertTrue($this->back());
@@ -1373,7 +1360,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
 
     function testGetRetryResubmitsData() {
         $this->assertTrue($this->get(
-                $this->samples() . 'network_confirm.php?a=aaa'));
+                $this->getServerUrl() . 'network_confirm.php?a=aaa'));
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertText('a=[aaa]');
         $this->retry();
@@ -1383,7 +1370,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
 
     function testGetRetryResubmitsExtraData() {
         $this->assertTrue($this->get(
-                $this->samples() . 'network_confirm.php',
+                $this->getServerUrl() . 'network_confirm.php',
                 array('a' => 'aaa')));
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertText('a=[aaa]');
@@ -1394,7 +1381,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
 
     function testPostRetryResubmitsData() {
         $this->assertTrue($this->post(
-                $this->samples() . 'network_confirm.php',
+                $this->getServerUrl() . 'network_confirm.php',
                 array('a' => 'aaa')));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
         $this->assertText('a=[aaa]');
@@ -1405,7 +1392,7 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
 
     function testGetRetryResubmitsRepeatedData() {
         $this->assertTrue($this->get(
-                $this->samples() . 'network_confirm.php?a=1&a=2'));
+                $this->getServerUrl() . 'network_confirm.php?a=1&a=2'));
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
         $this->assertText('a=[1, 2]');
         $this->retry();
@@ -1420,7 +1407,7 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testChallengeFromProtectedPage() {
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->assertResponse(401);
         $this->assertAuthentication('Basic');
         $this->assertRealm('SimpleTest basic authentication');
@@ -1432,33 +1419,33 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testTrailingSlashImpliedWithinRealm() {
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->authenticate('test', 'secret');
         $this->assertResponse(200);
-        $this->get($this->samples() . 'protected');
+        $this->get($this->getServerUrl() . 'protected');
         $this->assertResponse(200);
     }
 
     function testTrailingSlashImpliedSettingRealm() {
-        $this->get($this->samples() . 'protected');
+        $this->get($this->getServerUrl() . 'protected');
         $this->authenticate('test', 'secret');
         $this->assertResponse(200);
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->assertResponse(200);
     }
 
     function testEncodedAuthenticationFetchesPage() {
-        $this->get($this->samples('test:secret') . 'protected/');
+        $this->get($this->getServerUrl('test:secret') . 'protected/');
         $this->assertResponse(200);
     }
 
     function testEncodedAuthenticationFetchesPageAfterTrailingSlashRedirect() {
-        $this->get($this->samples('test:secret') . 'protected');
+        $this->get($this->getServerUrl('test:secret') . 'protected');
         $this->assertResponse(200);
     }
 
     function testRealmExtendsToWholeDirectory() {
-        $this->get($this->samples() . 'protected/1.html');
+        $this->get($this->getServerUrl() . 'protected/1.html');
         $this->authenticate('test', 'secret');
         $this->clickLink('2');
         $this->assertResponse(200);
@@ -1467,23 +1454,23 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testRedirectKeepsAuthentication() {
-        $this->get($this->samples() . 'protected/local_redirect.php');
+        $this->get($this->getServerUrl() . 'protected/local_redirect.php');
         $this->authenticate('test', 'secret');
         $this->assertTitle('Simple test target file');
     }
 
     function testRedirectKeepsEncodedAuthentication() {
-        $this->get($this->samples('test:secret') . 'protected/local_redirect.php');
+        $this->get($this->getServerUrl('test:secret') . 'protected/local_redirect.php');
         $this->assertResponse(200);
         $this->assertTitle('Simple test target file');
     }
 
     function testSessionRestartLosesAuthentication() {
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->authenticate('test', 'secret');
         $this->assertResponse(200);
         $this->restart();
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->assertResponse(401);
     }
 }
@@ -1495,20 +1482,20 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
 
     function testNoFramesContentWhenFramesDisabled() {
         $this->ignoreFrames();
-        $this->get($this->samples() . 'one_page_frameset.html');
+        $this->get($this->getServerUrl() . 'one_page_frameset.html');
         $this->assertTitle('Frameset for testing of SimpleTest');
         $this->assertText('This content is for no frames only');
     }
 
     function testPatternMatchCanReadTheOnlyFrame() {
-        $this->get($this->samples() . 'one_page_frameset.html');
+        $this->get($this->getServerUrl() . 'one_page_frameset.html');
         $this->assertText('A target for the SimpleTest test suite');
         $this->assertNoText('This content is for no frames only');
     }
 
     function testMessyFramesetResponsesByName() {
         $this->assertTrue($this->get(
-                $this->samples() . 'messy_frameset.html'));
+                $this->getServerUrl() . 'messy_frameset.html'));
         $this->assertTitle('Frameset for testing of SimpleTest');
 
         $this->assertTrue($this->setFrameFocus('Front controller'));
@@ -1564,7 +1551,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testReloadingFramesetPage() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->assertText('Count: 1');
         $this->retry();
         $this->assertText('Count: 2');
@@ -1573,7 +1560,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testReloadingSingleFrameWithCookieCounter() {
-        $this->get($this->samples() . 'counting_frameset.html');
+        $this->get($this->getServerUrl() . 'counting_frameset.html');
         $this->setFrameFocus('a');
         $this->assertText('Count: 1');
         $this->setFrameFocus('b');
@@ -1589,7 +1576,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testReloadingFrameWhenUnfocusedReloadsWholeFrameset() {
-        $this->get($this->samples() . 'counting_frameset.html');
+        $this->get($this->getServerUrl() . 'counting_frameset.html');
         $this->setFrameFocus('a');
         $this->assertText('Count: 1');
         $this->setFrameFocus('b');
@@ -1606,14 +1593,14 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testClickingNormalLinkReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('2');
         $this->assertLink('3');
         $this->assertText('Simple test front controller');
     }
 
     function testJumpToNamedPageReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->assertPattern('/Simple test front controller/');
         $this->clickLink('Index');
         $this->assertResponse(200);
@@ -1622,7 +1609,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('No page');
         $this->assertResponse(200);
         $this->assertText('Simple test front controller');
@@ -1631,7 +1618,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithBareParameterReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('Bare action');
         $this->assertResponse(200);
         $this->assertText('Simple test front controller');
@@ -1640,7 +1627,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithEmptyQueryReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('Empty query');
         $this->assertResponse(200);
         $this->assertPattern('/Simple test front controller/');
@@ -1649,7 +1636,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testJumpToUnnamedPageWithEmptyLinkReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('Empty link');
         $this->assertResponse(200);
         $this->assertPattern('/Simple test front controller/');
@@ -1658,14 +1645,14 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testJumpBackADirectoryLevelReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('Down one');
         $this->assertPattern('/No guarantee of quality is given or even intended/');
         $this->assertPattern('/Count: 1/');
     }
 
     function testSubmitToNamedPageReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->assertPattern('/Simple test front controller/');
         $this->clickSubmit('Index');
         $this->assertResponse(200);
@@ -1674,7 +1661,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitToSameDirectoryReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickSubmit('Same directory');
         $this->assertResponse(200);
         $this->assertText('[action=Same+directory]');
@@ -1682,7 +1669,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitToEmptyActionReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickSubmit('Empty action');
         $this->assertResponse(200);
         $this->assertText('[action=Empty+action]');
@@ -1690,7 +1677,7 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitToNoActionReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickSubmit('No action');
         $this->assertResponse(200);
         $this->assertText('[action=No+action]');
@@ -1698,20 +1685,20 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testSubmitBackADirectoryLevelReplacesJustThatFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickSubmit('Down one');
         $this->assertPattern('/No guarantee of quality is given or even intended/');
         $this->assertPattern('/Count: 1/');
     }
 
     function testTopLinkExitsFrameset() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->clickLink('Exit the frameset');
         $this->assertTitle('Simple test target file');
     }
 
     function testLinkInOnePageCanLoadAnother() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->assertNoLink('3');
         $this->clickLink('Set one to 2');
         $this->assertLink('3');
@@ -1720,14 +1707,14 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     }
 
     function testFrameWithRelativeLinksRespectsBaseTagForThatPage() {
-        $this->get($this->samples() . 'base_tag/frameset.html');
+        $this->get($this->getServerUrl() . 'base_tag/frameset.html');
         $this->click('Back to test pages');
         $this->assertTitle('Frameset for testing of SimpleTest');
         $this->assertText('A target for the SimpleTest test suite');
     }
 
     function testRelativeLinkInFrameIsNotAffectedByFramesetBaseTag() {
-        $this->get($this->samples() . 'base_tag/frameset_with_base_tag.php');
+        $this->get($this->getServerUrl() . 'base_tag/frameset_with_base_tag.php');
         $this->assertText('This is page 1');
         $this->click('To page 2');
         $this->assertTitle('Frameset for testing of SimpleTest');
@@ -1741,7 +1728,7 @@ class TestOfFrameAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testUnauthenticatedFrameSendsChallenge() {
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->setFrameFocus('Protected');
         $this->assertAuthentication('Basic');
         $this->assertRealm('SimpleTest basic authentication');
@@ -1749,16 +1736,16 @@ class TestOfFrameAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testCanReadFrameFromAlreadyAuthenticatedRealm() {
-        $this->get($this->samples() . 'protected/');
+        $this->get($this->getServerUrl() . 'protected/');
         $this->authenticate('test', 'secret');
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->setFrameFocus('Protected');
         $this->assertResponse(200);
         $this->assertText('A target for the SimpleTest test suite');
     }
 
     function testCanAuthenticateFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->setFrameFocus('Protected');
         $this->authenticate('test', 'secret');
         $this->assertResponse(200);
@@ -1768,7 +1755,7 @@ class TestOfFrameAuthentication extends SimpleTestAcceptanceTest {
     }
 
     function testCanAuthenticateRedirectedFrame() {
-        $this->get($this->samples() . 'messy_frameset.html');
+        $this->get($this->getServerUrl() . 'messy_frameset.html');
         $this->setFrameFocus('Protected redirect');
         $this->assertResponse(401);
         $this->authenticate('test', 'secret');
@@ -1785,7 +1772,7 @@ class TestOfNestedFrames extends SimpleTestAcceptanceTest {
     }
 
     function testCanNavigateToSpecificContent() {
-        $this->get($this->samples() . 'nested_frameset.html');
+        $this->get($this->getServerUrl() . 'nested_frameset.html');
         $this->assertTitle('Nested frameset for testing of SimpleTest');
 
         $this->assertPattern('/This is frame A/');
@@ -1817,7 +1804,7 @@ class TestOfNestedFrames extends SimpleTestAcceptanceTest {
     }
 
     function testReloadingFramesetPage() {
-        $this->get($this->samples() . 'nested_frameset.html');
+        $this->get($this->getServerUrl() . 'nested_frameset.html');
         $this->assertPattern('/Count: 1/');
         $this->retry();
         $this->assertPattern('/Count: 2/');
@@ -1826,7 +1813,7 @@ class TestOfNestedFrames extends SimpleTestAcceptanceTest {
     }
 
     function testRetryingNestedPageOnlyRetriesThatSet() {
-        $this->get($this->samples() . 'nested_frameset.html');
+        $this->get($this->getServerUrl() . 'nested_frameset.html');
         $this->assertPattern('/Count: 1/');
         $this->setFrameFocus('messy');
         $this->retry();
@@ -1845,7 +1832,7 @@ class TestOfNestedFrames extends SimpleTestAcceptanceTest {
     }
 
     function testAuthenticatingNestedPage() {
-        $this->get($this->samples() . 'nested_frameset.html');
+        $this->get($this->getServerUrl() . 'nested_frameset.html');
         $this->setFrameFocus('messy');
         $this->setFrameFocus('Protected');
         $this->assertAuthentication('Basic');
