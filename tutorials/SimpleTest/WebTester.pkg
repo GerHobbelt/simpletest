@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <refentry id="{@id}">
 <refnamediv>
 <refname>Web tester</refname>
@@ -37,24 +36,32 @@
                 for navigation, content and cookie checks and form handling.
                 Usage of these test cases is similar to the
                 {@link UnitTestCase.html UnitTestCase}...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
 }
-</programlisting>
+
+        ]]></programlisting>
                 Here we are about to test the
-                {@link http://www/lastcraft.com/ Last Craft} site itself.
+                {@link http://www.lastcraft.com/ Last Craft} site itself.
                 If this test case is in a file called <em>lastcraft_test.php</em>
                 then it can be loaded in a runner script just like unit tests...
-<programlisting role="php">
-&lt;?php
-    require_once('simpletest/web_tester.php');
-    require_once('simpletest/reporter.php');
-    
-    $test = &amp;new GroupTest('Web site tests');
-    $test-&gt;addTestFile('lastcraft_test.php');
-    exit ($test-&gt;run(new TextReporter()) ? 0 : 1);
-?&gt;
-</programlisting>
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('simpletest/web_tester.php');
+SimpleTest::prefer(new TextReporter());
+
+class WebTests extends TestSuite {
+    function WebTests() {
+        $this->TestSuite('Web site tests');
+        $this->addFile('lastcraft_test.php');
+    }
+}
+?>
+
+        ]]></programlisting>
                 I am using the text reporter here to more clearly
                 distinguish the web content from the test output.
             </para>
@@ -62,14 +69,16 @@ class TestOfLastcraft extends WebTestCase {
                 Nothing is being tested yet.
                 We can fetch the home page by using the
                 <span class="new_code">get()</span> method...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     
     function testHomepage() {
-        $this-&gt;assertTrue($this-&gt;get('http://www.lastcraft.com/'));
+        $this->assertTrue($this->get('http://www.lastcraft.com/'));
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 The <span class="new_code">get()</span> method will
                 return true only if page content was successfully
                 loaded.
@@ -96,15 +105,17 @@ Test cases run: 1/1, Failures: 0, Exceptions: 0
             <para>
                 To confirm that the page we think we are on is actually the
                 page we are on, we need to verify the page content.
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     
     function testHomepage() {
-        $this-&gt;get('http://www.lastcraft.com/');
-        $this-&gt;assertWantedPattern('/why the last craft/i');
+        $this->get('http://www.lastcraft.com/');
+        $this->assertText('Why the last craft');
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 The page from the last fetch is held in a buffer in
                 the test case, so there is no need to refer to it directly.
                 The pattern match is always made against the buffer.
@@ -121,27 +132,27 @@ class TestOfLastcraft extends WebTestCase {
 </row>
                     <row>
 <entry>
-<span class="new_code">assertWantedPattern($pattern)</span>
-</entry>
-<entry>A Perl pattern match against the page content</entry>
-</row>
-                    <row>
-<entry>
-<span class="new_code">assertNoUnwantedPattern($pattern)</span>
-</entry>
-<entry>A Perl pattern match to not find content</entry>
-</row>
-                    <row>
-<entry>
-<span class="new_code">assertWantedText($text)</span>
+<span class="new_code">assertText($text)</span>
 </entry>
 <entry>Pass if matches visible and "alt" text</entry>
 </row>
                     <row>
 <entry>
-<span class="new_code">assertNoUnwantedText($text)</span>
+<span class="new_code">assertNoText($text)</span>
 </entry>
 <entry>Pass if doesn't match visible and "alt" text</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">assertPattern($pattern)</span>
+</entry>
+<entry>A Perl pattern match against the page content</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">assertNoPattern($pattern)</span>
+</entry>
+<entry>A Perl pattern match to not find content</entry>
 </row>
                     <row>
 <entry>
@@ -217,15 +228,9 @@ class TestOfLastcraft extends WebTestCase {
 </row>
                     <row>
 <entry>
-<span class="new_code">assertNoUnwantedHeader($header)</span>
+<span class="new_code">assertNoHeader($header)</span>
 </entry>
 <entry>Pass if a header was not fetched</entry>
-</row>
-                    <row>
-<entry>
-<span class="new_code">assertHeaderPattern($header, $pattern)</span>
-</entry>
-<entry>Pass if a header was fetched matching this Perl regex</entry>
 </row>
                     <row>
 <entry>
@@ -249,26 +254,38 @@ class TestOfLastcraft extends WebTestCase {
             </para>
             <para>
                 So now we could instead test against the title tag with...
-<programlisting role="php">
-$this-&gt;assertTitle('The Last Craft? Web developer tutorials on PHP, Extreme programming and Object Oriented development');
-</programlisting>
+<programlisting role="php"><![CDATA[
+            
+$this->assertTitle('The Last Craft? Web developer tutorials on PHP, Extreme programming and Object Oriented development');
+
+        ]]></programlisting>
+                ...or, if that is too long and fragile...
+<programlisting role="php"><![CDATA[
+            
+$this->assertTitle(new PatternExpectation('/The Last Craft/'));
+
+        ]]></programlisting>
                 As well as the simple HTML content checks we can check
                 that the MIME type is in a list of allowed types with...
-<programlisting role="php">
-$this-&gt;assertMime(array('text/plain', 'text/html'));
-</programlisting>
+<programlisting role="php"><![CDATA[
+            
+$this->assertMime(array('text/plain', 'text/html'));
+
+        ]]></programlisting>
                 More interesting is checking the HTTP response code.
                 Like the MIME type, we can assert that the response code
                 is in a list of allowed values...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     
     function testRedirects() {
-        $this-&gt;get('http://www.lastcraft.com/test/redirect.php');
-        $this-&gt;assertResponse(200);&lt;/strong&gt;
+        $this->get('http://www.lastcraft.com/test/redirect.php');
+        $this->assertResponse(200);</strong>
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Here we are checking that the fetch is successful by
                 allowing only a 200 HTTP response.
                 This test will pass, but it is not actually correct to do so.
@@ -280,37 +297,41 @@ class TestOfLastcraft extends WebTestCase {
                 than their delivery.
                 If the redirects are of interest then this ability must
                 be disabled...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     
     function testHomepage() {
-        $this-&gt;setMaximumRedirects(0);
-        $this-&gt;get('http://www.lastcraft.com/test/redirect.php');
-        $this-&gt;assertResponse(200);
+        $this->setMaximumRedirects(0);
+        $this->get('http://www.lastcraft.com/test/redirect.php');
+        $this->assertResponse(200);
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 The assertion now fails as expected...
 <pre class="shell">
 Web site tests
 1) Expecting response in [200] got [302]
-	in testhomepage
-	in testoflastcraft
-	in lastcraft_test.php
+    in testhomepage
+    in testoflastcraft
+    in lastcraft_test.php
 FAILURES!!!
 Test cases run: 1/1, Failures: 1, Exceptions: 0
 </pre>
                 We can modify the test to correctly assert redirects with...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     
     function testHomepage() {
-        $this-&gt;setMaximumRedirects(0);
-        $this-&gt;get('http://www.lastcraft.com/test/redirect.php');
-        $this-&gt;assertResponse(array(301, 302, 303, 307));
+        $this->setMaximumRedirects(0);
+        $this->get('http://www.lastcraft.com/test/redirect.php');
+        $this->assertResponse(array(301, 302, 303, 307));
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 This now passes.
             </para>
         </refsect1>
@@ -321,25 +342,36 @@ class TestOfLastcraft extends WebTestCase {
                 clicking links and buttons.
                 Here we confirm that the contact details can be reached
                 from the home page...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfLastcraft extends WebTestCase {
     ...
     function testContact() {
-        $this-&gt;get('http://www.lastcraft.com/');
-        $this-&gt;clickLink('About');
-        $this-&gt;assertTitle('About Last Craft');
+        $this->get('http://www.lastcraft.com/');
+        $this->clickLink('About');
+        $this->assertTitle(new PatternExpectation('/About Last Craft/'));
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 The parameter is the text of the link.
             </para>
             <para>
                 If the target is a button rather than an anchor tag, then
-                <span class="new_code">clickSubmit()</span> should be used
+                <span class="new_code">clickSubmit()</span> can be used
                 with the button title...
-<programlisting role="php">
-$this-&gt;clickSubmit('Go!');
-</programlisting>
+<programlisting role="php"><![CDATA[
+            
+$this->clickSubmit('Go!');
+
+        ]]></programlisting>
+                If you are not sure or don't care, the usual case, then just
+                use the <span class="new_code">click()</span> method...
+<programlisting role="php"><![CDATA[
+            
+$this->click('Go!');
+
+        ]]></programlisting>
             </para>
             <para>
                 The list of navigation methods is...

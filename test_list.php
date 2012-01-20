@@ -15,7 +15,7 @@ require_once dirname(__FILE__) . '/expectation.php';
 /**#@-*/
 
 /**
- *    Wrapper for providing a custom @a ListInvoker 
+ *    Wrapper for providing a custom @see ListInvoker 
  *    which is used to list the tests / cases invoked.
  *    @package SimpleTest
  *    @subpackage UnitTester

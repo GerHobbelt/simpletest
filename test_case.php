@@ -679,10 +679,12 @@ class SimpleFileLoader {
     /**
      *    Lookup classnames from file contents, in case the
      *    file may have been included before.
+	 *
      *    Note: This is probably too clever by half. Figuring this
      *    out after a failed test case is going to be tricky for us,
      *    never mind the user. A test case should not be included
      *    twice anyway.
+	 *
      *    @param string $test_file        File name with classes.
      *    @access protected
      */

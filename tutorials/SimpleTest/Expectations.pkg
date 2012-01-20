@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <refentry id="{@id}">
 <refnamediv>
 <refname>Expectations</refname>
@@ -30,40 +29,42 @@
             <para>
                 For example, suppose we have a news service that has failed
                 to connect to its remote source.
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class NewsService {
     ...
-    function publish(&amp;$writer) {
-        if (! $this-&gt;isConnected()) {
-            $writer-&gt;write('Cannot connect to news service "' .
-                    $this-&gt;_name . '" at this time. ' .
+    function publish($writer) {
+        if (! $this->isConnected()) {
+            $writer->write('Cannot connect to news service "' .
+                    $this->_name . '" at this time. ' .
                     'Please try again later.');
         }
         ...
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Here it is sending its content to a
                 <span class="new_code">Writer</span> class.
                 We could test this behaviour with a
                 <span class="new_code">MockWriter</span> like so...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfNewsService extends UnitTestCase {
     ...
     function testConnectionFailure() {
-        $writer = &amp;new MockWriter($this);
-        $writer-&gt;expectOnce('write', array(
+        $writer = new MockWriter();
+        $writer->expectOnce('write', array(
                 'Cannot connect to news service ' .
                 '"BBC News" at this time. ' .
                 'Please try again later.'));
         
-        $service = &amp;new NewsService('BBC News');
-        $service-&gt;publish($writer);
-        
-        $writer-&gt;tally();
+        $service = new NewsService('BBC News');
+        $service->publish($writer);
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 This is a good example of a brittle test.
                 If we decide to add additional instructions, such as
                 suggesting an alternative news source, we will break
@@ -74,26 +75,26 @@ class TestOfNewsService extends UnitTestCase {
                 To get around this, we would like to do a regular expression
                 test rather than an exact match.
                 We can actually do this with...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfNewsService extends UnitTestCase {
     ...
     function testConnectionFailure() {
-        $writer = &amp;new MockWriter($this);
-        $writer-&gt;expectOnce(
+        $writer = new MockWriter();
+        $writer->expectOnce(
                 'write',
-                array(new WantedPatternExpectation('/cannot connect/i')));
+                array(new PatternExpectation('/cannot connect/i')));
         
-        $service = &amp;new NewsService('BBC News');
-        $service-&gt;publish($writer);
-        
-        $writer-&gt;tally();
+        $service = new NewsService('BBC News');
+        $service->publish($writer);
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Instead of passing in the expected parameter to the
                 <span class="new_code">MockWriter</span> we pass an
                 expectation class called
-                <span class="new_code">WantedPatternExpectation</span>.
+                <span class="new_code">PatternExpectation</span>.
                 The mock object is smart enough to recognise this as special
                 and to treat it differently.
                 Rather than simply comparing the incoming argument to this
@@ -101,7 +102,7 @@ class TestOfNewsService extends UnitTestCase {
                 perform the test.
             </para>
             <para>
-                The <span class="new_code">WantedPatternExpectation</span> takes
+                The <span class="new_code">PatternExpectation</span> takes
                 the regular expression to match in its constructor.
                 Whenever a comparison is made by the <span class="new_code">MockWriter</span>
                 against this expectation class, it will do a
@@ -115,6 +116,12 @@ class TestOfNewsService extends UnitTestCase {
                 The possible expectation classes are...
                 <table frame="all" id="{@id features}}">
 <tbody>
+                    <row>
+<entry>
+<span class="new_code">AnythingExpectation</span>
+</entry>
+<entry>Will always match</entry>
+</row>
                     <row>
 <entry>
 <span class="new_code">EqualExpectation</span>
@@ -141,13 +148,37 @@ class TestOfNewsService extends UnitTestCase {
 </row>
                     <row>
 <entry>
-<span class="new_code">WantedPatternExpectation</span>
+<span class="new_code">WithinMarginExpectation</span>
+</entry>
+<entry>Compares a value to within a margin, i.e. test = expected_value ± margin</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">OutsideMarginExpectation</span>
+</entry>
+<entry>Checks that a value is out side the margin, i.e. test &lt; expected_value − margin ∧ test &gt; expected_value + margin</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">WithinRangeExpectation</span>
+</entry>
+<entry>Checks that a value is inside the specified ({@link http://mathforum.org/library/drmath/view/63762.html inclusive} a.k.a. {@link http://en.wikipedia.org/wiki/Interval_(mathematics) closed}) range, i.e. test ∈ [min, max]</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">OutsideRangeExpectation</span>
+</entry>
+<entry>Checks that a value is outside the specified (inclusive) range, i.e. test ∉ [min, max]</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">PatternExpectation</span>
 </entry>
 <entry>Uses a Perl Regex to match a string</entry>
 </row>
                     <row>
 <entry>
-<span class="new_code">NoUnwantedPatternExpectation</span>
+<span class="new_code">NoPatternExpectation</span>
 </entry>
 <entry>Passes only if failing a Perl Regex</entry>
 </row>
@@ -170,6 +201,18 @@ class TestOfNewsService extends UnitTestCase {
 </entry>
 <entry>Checks a method is available on an object</entry>
 </row>
+                    <row>
+<entry>
+<span class="new_code">TrueExpectation</span>
+</entry>
+<entry>Accepts any PHP variable that evaluates to true</entry>
+</row>
+                    <row>
+<entry>
+<span class="new_code">FalseExpectation</span>
+</entry>
+<entry>Accepts any PHP variable that evaluates to false</entry>
+</row>
                 </tbody>
 </table>
                 Most take the expected value in the constructor.
@@ -177,34 +220,94 @@ class TestOfNewsService extends UnitTestCase {
                 and the <span class="new_code">IsAExpectation</span> and <span class="new_code">NotAExpectation</span> which takes a type
                 or class name as a string.
             </para>
+            <para>
+                Some examples...
+            </para>
+            <para>
+<programlisting role="php"><![CDATA[
+            
+$mock->expectOnce('method', array(new IdenticalExpectation(14)));
+
+        ]]></programlisting>
+                This is the same as <span class="new_code">$mock-&gt;expectOnce('method', array(14))</span>.
+<programlisting role="php"><![CDATA[
+            
+$mock->expectOnce('method', array(new EqualExpectation(14)));
+
+        ]]></programlisting>
+                This is different from the previous version in that the string
+                <span class="new_code">"14"</span> as a parameter will also pass.
+                Sometimes the additional type checks of SimpleTest are too restrictive.
+<programlisting role="php"><![CDATA[
+            
+$mock->expectOnce('method', array(new AnythingExpectation(14)));
+
+        ]]></programlisting>
+                This is the same as <span class="new_code">$mock-&gt;expectOnce('method', array('*'))</span>.
+<programlisting role="php"><![CDATA[
+            
+$mock->expectOnce('method', array(new IdenticalExpectation('*')));
+
+        ]]></programlisting>
+                This is handy if you want to assert a literal <span class="new_code">"*"</span>.
+<programlisting role="php"><![CDATA[
+            
+new NotIdenticalExpectation(14)
+
+        ]]></programlisting>
+                This matches on anything other than integer 14.
+                Even the string <span class="new_code">"14"</span> would pass.
+<programlisting role="php"><![CDATA[
+            
+new WithinMarginExpectation(14.0, 0.001)
+
+        ]]></programlisting>
+                This will accept any value from 13.999 to 14.001 inclusive.
+<programlisting role="php"><![CDATA[
+            
+new WithinRangeExpectation(200, 300 - 1)
+
+        ]]></programlisting>
+				Sometimes, however, you know the allowable range of values and 
+				expressing them as a range rather than a (contrived) mean and margin 
+				makes for a more easily readable test when, for instance, you are
+				fine with any 2xx HTTP response code but not, say, any 4xx or 5xx code.
+				The only drawback, maybe, is the fact that both minimum and maximum 
+				values of the range are considered {@link http://mathforum.org/library/drmath/view/63762.html inclusive},
+				though in the case of {@link http://en.wikipedia.org/wiki/List_of_HTTP_status_codes HTTP response codes}, this can be rewritten as:
+<programlisting role="php"><![CDATA[
+            
+new WithinRangeExpectation(200, 299)
+
+        ]]></programlisting>
+            </para>
         </refsect1>
         <refsect1 id="{@id behaviour}">
 <title>Using expectations to control stubs</title>
             <para>
                 The expectation classes can be used not just for sending assertions
-                from mock objects, but also for selecting behaviour for either
-                the
-                {@link mock objects.html mock objects}
-                or the
-                {@link server stubs.html server stubs}.
+                from mock objects, but also for selecting behaviour for the
+                {@link mock objects.html mock objects}.
                 Anywhere a list of arguments is given, a list of expectation objects
                 can be inserted instead.
             </para>
             <para>
-                Suppose we want an authorisation server stub to simulate a successful login
-                only if it receives a valid session object.
+                Suppose we want a mock authorisation server to simulate a successful login,
+                but only if it receives a valid session object.
                 We can do this as follows...
-<programlisting role="php">
-Stub::generate('Authorisation');
+<programlisting role="php"><![CDATA[
+            
+Mock::generate('Authorisation');
 
-$authorisation = new StubAuthorisation();
-$authorisation-&gt;setReturnValue(
+$authorisation = new MockAuthorisation();
+$authorisation->returns(
         'isAllowed',
         true,
         array(new IsAExpectation('Session', 'Must be a session')));
-$authorisation-&gt;setReturnValue('isAllowed', false);
-</programlisting>
-                We have set the default stub behaviour to return false when
+$authorisation->returns('isAllowed', false);
+
+        ]]></programlisting>
+                We have set the default mock behaviour to return false when
                 <span class="new_code">isAllowed</span> is called.
                 When we call the method with a single parameter that
                 is a <span class="new_code">Session</span> object, it will return true.
@@ -230,8 +333,9 @@ $authorisation-&gt;setReturnValue('isAllowed', false);
                 valid IP addresses.
                 In order to work correctly with the stubs and mocks the new
                 expectation class should extend
-                <span class="new_code">SimpleExpectation</span>...
-<programlisting role="php">
+                <span class="new_code">SimpleExpectation</span> or further extend a subclass...
+<programlisting role="php"><![CDATA[
+            
 class ValidIp extends SimpleExpectation {
     
     function test($ip) {
@@ -242,7 +346,8 @@ class ValidIp extends SimpleExpectation {
         return "Address [$ip] should be a valid IP address";
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 There are only two methods to implement.
                 The <span class="new_code">test()</span> method should
                 evaluate to true if the expectation is to pass, and
@@ -255,6 +360,51 @@ class ValidIp extends SimpleExpectation {
                 This class can now be used in place of the earlier expectation
                 classes.
             </para>
+            <para>
+                Here is a more typical example, matching part of a hash...
+<programlisting role="php"><![CDATA[
+            
+class JustField extends EqualExpectation {
+    private $key;
+    
+    function __construct($key, $expected) {
+        parent::__construct($expected);
+        $this->key = $key;
+    }
+    
+    function test($compare) {
+        if (! isset($compare[$this->key])) {
+            return false;
+        }
+        return parent::test($compare[$this->key]);
+    }
+    
+    function testMessage($compare) {
+        if (! isset($compare[$this->key])) {
+            return 'Key [' . $this->key . '] does not exist';
+        }
+        return 'Key [' . $this->key . '] -> ' .
+                parent::testMessage($compare[$this->key]);
+    }
+}
+
+        ]]></programlisting>
+                We tend to seperate message clauses with
+                "&amp;nbsp;-&gt;&amp;nbsp;".
+                This allows derivative tools to reformat the output.
+            </para>
+            <para>
+                Suppose some authenticator is expecting to be given
+                a database row corresponding to the user, and we
+                only need to confirm the username is correct.
+                We can assert just their username with...
+<programlisting role="php"><![CDATA[
+            
+$mock->expectOnce('authenticate',
+                  array(new JustKey('username', 'marcus')));
+
+        ]]></programlisting>
+            </para>
         </refsect1>
         <refsect1 id="{@id unit}">
 <title>Under the bonnet of the unit tester</title>
@@ -266,21 +416,26 @@ class ValidIp extends SimpleExpectation {
                 homebrew expectation classes within the test suites directly.
             </para>
             <para>
-                The most crude way of doing this is to use the
-                <span class="new_code">SimpleTest::assertExpectation()</span> method to
+                The most crude way of doing this is to use the generic
+                <span class="new_code">SimpleTest::assert()</span> method to
                 test against it directly...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfNetworking extends UnitTestCase {
     ...
     function testGetValidIp() {
-        $server = &amp;new Server();
-        $this-&gt;assertExpectation(
+        $server = &new Server();
+        $this->assert(
                 new ValidIp(),
-                $server-&gt;getIp(),
-                'Server IP address-&gt;%s');
+                $server->getIp(),
+                'Server IP address->%s');
     }
 }
-</programlisting>
+
+        ]]></programlisting>
+                <span class="new_code">assert()</span> will test any expectation class directly.
+            </para>
+            <para>
                 This is a little untidy compared with our usual
                 <span class="new_code">assert...()</span> syntax.
             </para>
@@ -291,29 +446,29 @@ class TestOfNetworking extends UnitTestCase {
                 If we pretend that our expectation is a little more
                 complicated for a moment, so that we want to reuse it,
                 we get...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class TestOfNetworking extends UnitTestCase {
     ...
     function assertValidIp($ip, $message = '%s') {
-        $this-&gt;assertExpectation(new ValidIp(), $ip, $message);
+        $this->assert(new ValidIp(), $ip, $message);
     }
     
     function testGetValidIp() {
-        $server = &amp;new Server();
-        $this-&gt;assertValidIp(
-                $server-&gt;getIp(),
-                'Server IP address-&gt;%s');
+        $server = &new Server();
+        $this->assertValidIp(
+                $server->getIp(),
+                'Server IP address->%s');
     }
 }
-</programlisting>
-                It is unlikely we would ever need this degree of control
-                over the testing machinery.
+
+        ]]></programlisting>
                 It is rare to need the expectations for more than pattern
-                matching.
+                matching, but these facilities do allow testers to build
+                some sort of domain language for testing their application.
                 Also, complex expectation classes could make the tests
                 harder to read and debug.
-                These mechanisms are really of most use to authors of systems
-                that will extend the test framework to create their own tool set.
+                In effect extending the test framework to create their own tool set.
             </para>
         </refsect1>
     </refentry>

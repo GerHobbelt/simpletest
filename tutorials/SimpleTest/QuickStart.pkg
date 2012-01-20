@@ -1,0 +1,469 @@
+<refentry id="{@id}">
+<refnamediv>
+<refname>SimpleTest</refname>
+<refpurpose>
+                The following assumes that you are familiar with the concept
+                of unit testing as well as the PHP web development language.
+                It is a guide for the impatient new user of
+                {@link https://sourceforge.net/project/showfiles.php?group_id=76550 SimpleTest}.
+                For fuller documentation, especially if you are new
+                to unit testing see the ongoing
+                {@link documentation.html documentation}, and for
+                example test cases see the
+                {@link http://www.lastcraft.com/first_test_tutorial.php unit testing tutorial}.
+            </refpurpose>
+</refnamediv>
+            {@toc}
+            
+        
+        
+        <refsect1 id="{@id unit}">
+<title>Using the tester quickly</title>
+            <para>
+                Amongst software testing tools, a unit tester is the one
+                closest to the developer.
+                In the context of agile development the test code sits right
+                next to the source code as both are written simultaneously.
+                In this context SimpleTest aims to be a complete PHP developer
+                test solution and is called "Simple" because it
+                should be easy to use and extend.
+                It wasn't a good choice of name really.
+                It includes all of the typical functions you would expect from
+                {@link http://www.junit.org/ JUnit} and the
+                {@link http://sourceforge.net/projects/phpunit/ PHPUnit}
+                ports, and includes
+                {@link http://www.mockobjects.com mock objects}.
+            </para>
+            <para>
+                What makes this tool immediately useful to the PHP developer is the internal
+                web browser.
+                This allows tests that navigate web sites, fill in forms and test pages.
+                Being able to write these test in PHP means that it is easy to write
+                integrated tests.
+                An example might be confirming that a user was written to a database
+                after a signing up through the web site.
+            </para>
+            <para>
+                The quickest way to demonstrate SimpleTest is with an example.
+            </para>
+            <para>
+                Let us suppose we are testing a simple file logging class called
+                <span class="new_code">Log</span> in <em>classes/log.php</em>.
+                We start by creating a test script which we will call
+                <em>tests/log_test.php</em> and populate it as follows...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('../classes/log.php');
+
+class TestOfLogging extends UnitTestCase {
+}
+?>
+
+        ]]></programlisting>
+                Here the <em>simpletest</em> folder is either local or in the path.
+                You would have to edit these locations depending on where you
+                unpacked the toolset.
+                The "autorun.php" file does more than just include the
+                SimpleTest files, it also runs our test for us.
+            </para>
+            <para>
+                The <span class="new_code">TestOfLogging</span> is our first test case and it's
+                currently empty.
+                Each test case is a class that extends one of the SimpleTet base classes
+                and we can have as many of these in the file as we want.
+            </para>
+            <para>
+                With three lines of scaffolding, and our <span class="new_code">Log</span> class
+                include, we have a test suite.
+                No tests though.
+            </para>
+            <para>
+                For our first test, we'll assume that the <span class="new_code">Log</span> class
+                takes the file name to write to in the constructor, and we have
+                a temporary folder in which to place this file...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('../classes/log.php');
+
+class TestOfLogging extends UnitTestCase {
+    function testLogCreatesNewFileOnFirstMessage() {
+        @unlink('/temp/test.log');
+        $log = new Log('/temp/test.log');
+        $this->assertFalse(file_exists('/temp/test.log'));
+        $log->message('Should write this to a file');
+        $this->assertTrue(file_exists('/temp/test.log'));
+    }
+}
+?>
+
+        ]]></programlisting>
+                When a test case runs, it will search for any method that
+                starts with the string "test"
+                and execute that method.
+                If the method starts "test", it's a test.
+                Note the very long name <span class="new_code">testLogCreatesNewFileOnFirstMessage()</span>.
+                This is considered good style and makes the test output more readable.
+            </para>
+            <para>
+                We would normally have more than one test method in a test case,
+                but that's for later.
+            </para>
+            <para>
+                Assertions within the test methods trigger messages to the
+                test framework which displays the result immediately.
+                This immediate response is important, not just in the event
+                of the code causing a crash, but also so that
+                <span class="new_code">print</span> statements can display
+                their debugging content right next to the assertion concerned.
+            </para>
+            <para>
+                To see these results we have to actually run the tests.
+                No other code is necessary - we can just open the page
+                with our browser.
+            </para>
+            <para>
+                On failure the display looks like this...
+                <div class="demo">
+                    <h1>TestOfLogging</h1>
+                    <span class="fail">Fail</span>: testLogCreatesNewFileOnFirstMessage-&gt;True assertion failed.<br/>
+                    <div style="padding: 8px; margin-top: 1em; background-color: red; color: white;">1/1 test cases complete.
+                    <strong>1</strong> passes and <strong>1</strong> fails.</div>
+                </div>
+                ...and if it passes like this...
+                <div class="demo">
+                    <h1>TestOfLogging</h1>
+                    <div style="padding: 8px; margin-top: 1em; background-color: green; color: white;">1/1 test cases complete.
+                    <strong>2</strong> passes and <strong>0</strong> fails.</div>
+                </div>
+                And if you get this...
+                <div class="demo">
+                    <b>Fatal error</b>:  Failed opening required '../classes/log.php' (include_path='') in <b>/home/marcus/projects/lastcraft/tutorial_tests/Log/tests/log_test.php</b> on line <b>7</b>
+                </div>
+                it means you're missing the <em>classes/Log.php</em> file that could look like...
+<programlisting role="php"><![CDATA[
+            
+<?php
+class Log {
+    function Log($file_path) {
+    }
+
+    function message() {
+    }
+}
+?>
+
+        ]]></programlisting>
+                It's fun to write the code after the test.
+                More than fun even -
+                this system is called "Test Driven Development".
+            </para>
+            <para>
+                For more information about <span class="new_code">UnitTestCase</span>, see
+                the {@link unit test documentation.html unit test documentation}.
+            </para>
+        </refsect1>
+        <refsect1 id="{@id group}">
+<title>Building test suites</title>
+            <para>
+                It is unlikely in a real application that we will only ever run
+                one test case.
+                This means that we need a way of grouping cases into a test
+                script that can, if need be, run every test for the application.
+            </para>
+            <para>
+                Our first step is to create a new file called <em>tests/all_tests.php</em>
+                and insert the following code...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+
+class AllTests extends TestSuite {
+    function AllTests() {
+        $this->TestSuite('All tests');
+        $this->addFile('log_test.php');
+    }
+}
+?>
+
+        ]]></programlisting>
+                The "autorun" include allows our upcoming test suite
+                to be run just by invoking this script.
+            </para>
+            <para>
+                The <span class="new_code">TestSuite</span> subclass must chain it's constructor.
+                This limitation will be removed in future versions.
+            </para>
+            <para>
+                The method <span class="new_code">TestSuite::addFile()</span>
+                will include the test case file and read any new classes
+                that are descended from <span class="new_code">SimpleTestCase</span>.
+                <span class="new_code">UnitTestCase</span> is just one example of a class derived from
+                <span class="new_code">SimpleTestCase</span>, and you can create your own.
+                <span class="new_code">TestSuite::addFile()</span> can include other test suites.
+            </para>
+            <para>
+                The class will not be instantiated yet.
+                When the test suite runs it will construct each instance once
+                it reaches that test, then destroy it straight after.
+                This means that the constructor is run just before each run
+                of that test case, and the destructor is run before the next test case starts.
+            </para>
+            <para>
+                It is common to group test case code into superclasses which are not
+                supposed to run, but become the base classes of other tests.
+                For "autorun" to work properly the test case file should not blindly run
+                any other test case extensions that do not actually run tests.
+                This could result in extra test cases being counted during the test
+                run.
+                Hardly a major problem, but to avoid this inconvenience simply mark your
+                base class as <span class="new_code">abstract</span>.
+                SimpleTest won't run abstract classes.
+                If you are still using PHP4, then
+                a <span class="new_code">SimpleTestOptions::ignore()</span> directive
+                somewhere in the test case file will have the same effect.
+            </para>
+            <para>
+                Also, the test case file should not have been included
+                elsewhere or no cases will be added to this group test.
+                This would be a more serious error as if the test case classes are
+                already loaded by PHP the <span class="new_code">TestSuite::addFile()</span>
+                method will not detect them.
+            </para>
+            <para>
+                To display the results it is necessary only to invoke
+                <em>tests/all_tests.php</em> from the web server or the command line.
+            </para>
+            <para>
+                For more information about building test suites,
+                see the {@link test suite documentation.html test suite documentation}.
+            </para>
+        </refsect1>
+        <refsect1 id="{@id mock}">
+<title>Using mock objects</title>
+            <para>
+                Let's move further into the future and do something really complicated.
+            </para>
+            <para>
+                Assume that our logging class is tested and completed.
+                Assume also that we are testing another class that is
+                required to write log messages, say a
+                <span class="new_code">SessionPool</span>.
+                We want to test a method that will probably end up looking
+                like this...
+<programlisting role="php"><![CDATA[
+            
+class SessionPool {
+    ...
+    function logIn($username) {
+        ...
+        $this->_log->message("User $username logged in.");
+        ...
+    }
+    ...
+}
+
+
+        ]]></programlisting>
+                In the spirit of reuse, we are using our
+                <span class="new_code">Log</span> class.
+                A conventional test case might look like this...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('../classes/log.php');
+require_once('../classes/session_pool.php');
+
+class TestOfSessionLogging extends UnitTestCase {
+    
+    function setUp() {
+        @unlink('/temp/test.log');
+    }
+    
+    function tearDown() {
+        @unlink('/temp/test.log');
+    }
+    
+    function testLoggingInIsLogged() {
+        $log = new Log('/temp/test.log');
+        $session_pool = &new SessionPool($log);
+        $session_pool->logIn('fred');
+        $messages = file('/temp/test.log');
+        $this->assertEqual($messages[0], "User fred logged in.\n");
+    }
+}
+?>
+
+        ]]></programlisting>
+                We'll explain the <span class="new_code">setUp()</span> and <span class="new_code">tearDown()</span>
+                methods later.
+            </para>
+            <para>
+                This test case design is not all bad, but it could be improved.
+                We are spending time fiddling with log files which are
+                not part of our test.
+                We have created close ties with the <span class="new_code">Log</span> class and
+                this test.
+                What if we don't use files any more, but use ths
+                <em>syslog</em> library instead?
+                It means that our <span class="new_code">TestOfSessionLogging</span> test will
+                fail, even thouh it's not testing Logging.
+            </para>
+            <para>
+                It's fragile in smaller ways too.
+                Did you notice the extra carriage return in the message?
+                Was that added by the logger?
+                What if it also added a time stamp or other data?
+            </para>
+            <para>
+                The only part that we really want to test is that a particular
+                message was sent to the logger.
+                We can reduce coupling if we pass in a fake logging class
+                that simply records the message calls for testing, but
+                takes no action.
+                It would have to look exactly like our original though.
+            </para>
+            <para>
+                If the fake object doesn't write to a file then we save on deleting
+                the file before and after each test. We could save even more
+                test code if the fake object would kindly run the assertion for us.
+            <para>
+            </para>
+                Too good to be true?
+                We can create such an object easily...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('../classes/log.php');
+require_once('../classes/session_pool.php');
+
+Mock::generate('Log');
+
+class TestOfSessionLogging extends UnitTestCase {
+    
+    function testLoggingInIsLogged() {
+        $log = &new MockLog();
+        $log->expectOnce('message', array('User fred logged in.'));
+        $session_pool = &new SessionPool($log);
+        $session_pool->logIn('fred');
+    }
+}
+?>
+
+        ]]></programlisting>
+                The <span class="new_code">Mock::generate()</span> call code generated a new class
+                called <span class="new_code">MockLog</span>.
+                This looks like an identical clone, except that we can wire test code
+                to it.
+                That's what <span class="new_code">expectOnce()</span> does.
+                It says that if <span class="new_code">message()</span> is ever called on me, it had
+                better be with the parameter "User fred logged in.".
+            </para>
+            <para>
+                The test will be triggered when the call to
+                <span class="new_code">message()</span> is invoked on the
+                <span class="new_code">MockLog</span> object by <span class="new_code">SessionPool::logIn()</span> code.
+                The mock call will trigger a parameter comparison and then send the
+                resulting pass or fail event to the test display.
+                Wildcards can be included here too, so you don't have to test every parameter of
+                a call when you only want to test one.
+            </para>
+            <para>
+                If the mock reaches the end of the test case without the
+                method being called, the <span class="new_code">expectOnce()</span>
+                expectation will trigger a test failure.
+                In other words the mocks can detect the absence of
+                behaviour as well as the presence.
+            </para>
+            <para>
+                The mock objects in the SimpleTest suite can have arbitrary
+                return values set, sequences of returns, return values
+                selected according to the incoming arguments, sequences of
+                parameter expectations and limits on the number of times
+                a method is to be invoked.
+            </para>
+            <para>
+                For more information about mocking and stubbing, see the
+                {@link mock objects documentation.html mock objects documentation}.
+            </para>
+        </refsect1>
+        <refsect1 id="{@id web}">
+<title>Web page testing</title>
+            <para>
+                One of the requirements of web sites is that they produce web
+                pages.
+                If you are building a project top-down and you want to fully
+                integrate testing along the way then you will want a way of
+                automatically navigating a site and examining output for
+                correctness.
+                This is the job of a web tester.
+            </para>
+            <para>
+                The web testing in SimpleTest is fairly primitive, as there is
+                no JavaScript.
+                Most other browser operations are simulated.
+            </para>
+            <para>
+                To give an idea here is a trivial example where a home
+                page is fetched, from which we navigate to an "about"
+                page and then test some client determined content.
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('simpletest/web_tester.php');
+
+class TestOfAbout extends WebTestCase {
+    function testOurAboutPageGivesFreeReignToOurEgo() {
+        $this->get('http://test-server/index.php');
+        $this->click('About');
+        $this->assertTitle('About why we are so great');
+        $this->assertText('We are really great');
+    }
+}
+?>
+
+        ]]></programlisting>
+                With this code as an acceptance test, you can ensure that
+                the content always meets the specifications of both the
+                developers, and the other project stakeholders.
+            </para>
+            <para>
+                You can navigate forms too...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+require_once('simpletest/web_tester.php');
+
+class TestOfRankings extends WebTestCase {
+    function testWeAreTopOfGoogle() {
+        $this->get('http://google.com/');
+        $this->setField('q', 'simpletest');
+        $this->click("I'm Feeling Lucky");
+        $this->assertTitle('SimpleTest - Unit Testing for PHP');
+    }
+}
+?>
+
+        ]]></programlisting>
+                ...although this could violate Google's(tm) terms and conditions.
+            </para>
+            <para>
+                For more information about web testing, see the
+                {@link scriptable
+                browser documentation.html scriptable
+                browser documentation} and the
+                {@link WebTestCase.html WebTestCase}.
+            </para>
+            <para>
+                {@link http://sourceforge.net/projects/simpletest/ <img src="http://sourceforge.net/sflogo.php?group_id=76550&amp;type=5" width="210" height="62" border="0" alt="SourceForge.net Logo"/>}
+            </para>
+        </refsect1>
+    </refentry>

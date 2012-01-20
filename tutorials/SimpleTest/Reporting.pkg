@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <refentry id="{@id}">
 <refnamediv>
 <refname>Reporting</refname>
 <refpurpose>
-                SimpleTest pretty much follows the MVC pattern
+                SimpleTest pretty much follows the MVC-ish pattern
                 (Model-View-Controller).
                 The reporter classes are the view and the model is your
                 test cases and their hiearchy.
@@ -21,7 +20,7 @@
         <refsect1 id="{@id html}">
 <title>Reporting results in HTML</title>
             <para>
-                The default test display is minimal in the extreme.
+                The default HTML display is minimal in the extreme.
                 It reports success and failure with the conventional red and
                 green bars and shows a breadcrumb trail of test groups
                 for every failed assertion.
@@ -45,9 +44,10 @@
                 For web page based displays there is the
                 <span class="new_code">HtmlReporter</span> class with the following
                 signature...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class HtmlReporter extends SimpleReporter {
-    public HtmlReporter($encoding) { ... }
+    public __construct($encoding) { ... }
     public makeDry(boolean $is_dry) { ... }
     public void paintHeader(string $test_name) { ... }
     public void sendNoCacheHeaders() { ... }
@@ -64,7 +64,7 @@ class HtmlReporter extends SimpleReporter {
     public void paintException(string $message) { ... }
     public void paintMessage(string $message) { ... }
     public void paintFormattedMessage(string $message) { ... }
-    protected string _getCss() { ... }
+    protected string getCss() { ... }
     public array getTestList() { ... }
     public integer getPassCount() { ... }
     public integer getFailCount() { ... }
@@ -72,7 +72,8 @@ class HtmlReporter extends SimpleReporter {
     public integer getTestCaseCount() { ... }
     public integer getTestCaseProgress() { ... }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Here is what some of these methods mean. First the display methods
                 that you will probably want to override...
                 <ul class="api">
@@ -102,7 +103,7 @@ class HtmlReporter extends SimpleReporter {
                         The first start event is usually delivered by the top level group
                         test and so this is where <span class="new_code">$test_name</span>
                         comes from.
-                        It paints the page titles, CSS, body tag, etc.
+                        It paints the page title, CSS, body tag, etc.
                         It returns nothing (<span class="new_code">void</span>).
                     </li>
                     <li>
@@ -148,7 +149,7 @@ class HtmlReporter extends SimpleReporter {
                         by default does nothing.
                     </li>
                     <li>
-                        <span class="new_code">string _getCss()</span>
+                        <span class="new_code">string getCss()</span>
 <br/>
                         Returns the CSS styles as a string for the page header
                         method.
@@ -168,7 +169,7 @@ class HtmlReporter extends SimpleReporter {
                         is the first convenience method for subclasses.
                         Lists the current nesting of the tests as a list
                         of test names.
-                        The first, most deeply nested test, is first in the
+                        The first, top level test case, is first in the
                         list and the current test method will be last.
                     </li>
                     <li>
@@ -201,23 +202,25 @@ class HtmlReporter extends SimpleReporter {
                 </ul>
                 One simple modification is to get the HtmlReporter to display
                 the passes as well as the failures and errors...
-<programlisting role="php">
-class ShowPasses extends HtmlReporter {
+<programlisting role="php"><![CDATA[
+            
+class ReporterShowingPasses extends HtmlReporter {
     
     function paintPass($message) {
         parent::paintPass($message);
-        print "&amp;&lt;span class=\"pass\"&gt;Pass&lt;/span&gt;: ";
-        $breadcrumb = $this-&gt;getTestList();
+        print "<span class=\"pass\">Pass</span>: ";
+        $breadcrumb = $this->getTestList();
         array_shift($breadcrumb);
-        print implode("-&amp;gt;", $breadcrumb);
-        print "-&amp;gt;$message&lt;br /&gt;\n";
+        print implode("-&gt;", $breadcrumb);
+        print "-&gt;$message<br />\n";
     }
     
-    function _getCss() {
-        return parent::_getCss() . ' .pass { color: green; }';
+    protected function getCss() {
+        return parent::getCss() . ' .pass { color: green; }';
     }
 }
-</programlisting>
+
+        ]]></programlisting>
             </para>
             <para>
                 One method that was glossed over was the <span class="new_code">makeDry()</span>
@@ -253,16 +256,15 @@ class ShowPasses extends HtmlReporter {
             <para>
                 A do nothing display, a blank canvas for your own creation, would
                 be...
-<programlisting role="php">
-require_once('simpletest/simple_test.php');
+<programlisting role="php"><![CDATA[
+            
+require_once('simpletest/simpletest.php');
 
 class MyDisplay extends SimpleReporter {
     
-    function paintHeader($test_name) {
-    }
+    function paintHeader($test_name) { }
     
-    function paintFooter($test_name) {
-    }
+    function paintFooter($test_name) { }
     
     function paintStart($test_name, $size) {
         parent::paintStart($test_name, $size);
@@ -279,9 +281,59 @@ class MyDisplay extends SimpleReporter {
     function paintFail($message) {
         parent::paintFail($message);
     }
+    
+    function paintError($message) {
+        parent::paintError($message);
+    }
+    
+    function paintException($exception) {
+        parent::paintException($exception);
+    }
 }
-</programlisting>
+
+        ]]></programlisting>
                 No output would come from this class until you add it.
+            </para>
+            <para>
+                The catch with using this low level class is that you must
+                explicitely invoke it in the test script.
+                The "autorun" facility will not be able to use
+                its runtime context (whether it's running in a web browser
+                or the command line) to select the reporter.
+            </para>
+            <para>
+                You explicitely invoke the test runner like so...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+
+$test = new TestSuite('File test');
+$test->addFile('tests/file_test.php');
+$test->run(new MyReporter());
+?>
+
+        ]]></programlisting>
+                ...perhaps like this...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/simpletest.php');
+require_once('my_reporter.php');
+
+class MyTest extends TestSuite {
+    function __construct() {
+        parent::__construct();
+        $this->addFile('tests/file_test.php');
+    }
+}
+
+$test = new MyTest();
+$test->run(new MyReporter());
+?>
+
+        ]]></programlisting>
+                We'll show how to fit in with "autorun" later.
             </para>
         </refsect1>
         <refsect1 id="{@id cli}">
@@ -290,18 +342,19 @@ class MyDisplay extends SimpleReporter {
                 SimpleTest also ships with a minimal command line reporter.
                 The interface mimics JUnit to some extent, but paints the
                 failure messages as they arrive.
-                To use the command line reporter simply substitute it
+                To use the command line reporter explicitely, substitute it
                 for the HTML version...
-<programlisting role="php">
-&lt;?php
-    require_once('simpletest/unit_tester.php');
-    require_once('simpletest/reporter.php');
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
 
-    $test = &amp;new GroupTest('File test');
-    $test-&gt;addTestFile('tests/file_test.php');
-    $test-&gt;run(new TextReporter());
-?&gt;
-</programlisting>
+$test = new TestSuite('File test');
+$test->addFile('tests/file_test.php');
+$test->run(new TextReporter());
+?>
+
+        ]]></programlisting>
                 Then invoke the test suite from the command line...
 <pre class="shell">
 php file_test.php
@@ -312,15 +365,15 @@ php file_test.php
 <pre class="shell">
 File test
 OK
-Test cases run: 1/1, Failures: 0, Exceptions: 0
+Test cases run: 1/1, Passes: 1, Failures: 0, Exceptions: 0
 </pre>
                 A failure triggers a display like this...
 <pre class="shell">
 File test
 1) True assertion failed.
-	in createnewfile
+    in createNewFile
 FAILURES!!!
-Test cases run: 1/1, Failures: 1, Exceptions: 0
+Test cases run: 1/1, Passes: 0, Failures: 1, Exceptions: 0
 </pre>
             </para>
             <para>
@@ -334,34 +387,56 @@ Test cases run: 1/1, Failures: 1, Exceptions: 0
                 method.
                 We can use that result to exit the script with the desired return
                 code...
-<programlisting role="php">
-&lt;?php
-    require_once('simpletest/unit_tester.php');
-    require_once('simpletest/reporter.php');
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
 
-    $test = &amp;new GroupTest('File test');
-    $test-&gt;addTestFile('tests/file_test.php');
-    exit ($test-&gt;run(new TextReporter()) ? 0 : 1);
-?&gt;
-</programlisting>
-                Of course we don't really want to create two test scripts,
+$test = new TestSuite('File test');
+$test->addFile('tests/file_test.php');
+exit ($test->run(new TextReporter()) ? 0 : 1);
+?>
+
+        ]]></programlisting>
+                Of course we wouldn't really want to create two test scripts,
                 a command line one and a web browser one, for each test suite.
                 The command line reporter includes a method to sniff out the
                 run time environment...
-<programlisting role="php">
-&lt;?php
-    require_once('simpletest/unit_tester.php');
-    require_once('simpletest/reporter.php');
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
 
-    $test = &amp;new GroupTest('File test');
-    $test-&gt;addTestFile('tests/file_test.php');
-    if (TextReporter::inCli()) {
-        exit ($test-&gt;run(new TextReporter()) ? 0 : 1);
-    }
-    $test-&gt;run(new HtmlReporter());
-?&gt;
-</programlisting>
+$test = new TestSuite('File test');
+$test->addFile('tests/file_test.php');
+if (TextReporter::inCli()) {
+    exit ($test->run(new TextReporter()) ? 0 : 1);
+}
+$test->run(new HtmlReporter());
+?>
+
+        ]]></programlisting>
                 This is the form used within SimpleTest itself.
+                When you use the "autorun.php", and no
+                test has been run by the end, this is pretty much
+                the code that SimpleTest will run for you implicitely.
+            </para>
+            <para>
+                In other words, this is gives the same result...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/autorun.php');
+
+class MyTest extends TestSuite {
+    function __construct() {
+        parent::__construct();
+        $this->addFile('tests/file_test.php');
+    }
+}
+?>
+
+        ]]></programlisting>
             </para>
         </refsect1>
         <refsect1 id="{@id xml}">
@@ -392,19 +467,31 @@ Test cases run: 1/1, Failures: 1, Exceptions: 0
   &lt;/group&gt;
 &lt;/run&gt;
 </pre>
-                You can make use of this format with the parser
+                To get your normal test cases to produce this format, on the
+                command line add the <span class="new_code">--xml</span> flag.
+<pre class="shell">
+php my_test.php --xml
+</pre>
+                You can do teh same thing in the web browser by adding the
+                URL parameter <span class="new_code">xml=1</span>.
+                Any true value will do.
+            </para>
+            <para>
+                You can consume this format with the parser
                 supplied as part of SimpleTest itself.
                 This is called <span class="new_code">SimpleTestXmlParser</span> and
                 resides in <em>xml.php</em> within the SimpleTest package...
-<programlisting role="php">
-&lt;?php
-    require_once('simpletest/xml.php');
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/xml.php');
     
-    ...
-    $parser = &amp;new SimpleTestXmlParser(new HtmlReporter());
-    $parser-&gt;parse($test_output);
-?&gt;
-</programlisting>
+...
+$parser = new SimpleTestXmlParser(new HtmlReporter());
+$parser->parse($test_output);
+?>
+
+        ]]></programlisting>
                 The <span class="new_code">$test_output</span> should be the XML format
                 from the XML reporter, and could come from say a command
                 line run of a test case.
@@ -413,8 +500,32 @@ Test cases run: 1/1, Failures: 1, Exceptions: 0
                 There are some odd occasions where this is actually useful.
             </para>
             <para>
+                Most likely it's when you want to isolate a problematic crash
+                prone test.
+                You can collect the XML output using the backtick operator
+                from another test.
+                In that way it runs in its own process...
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('simpletest/xml.php');
+
+if (TextReporter::inCli()) {
+    $parser = new SimpleTestXmlParser(new TextReporter());
+} else {
+    $parser = new SimpleTestXmlParser(new HtmlReporter());
+}
+$parser->parse(`php flakey_test.php --xml`);
+?>
+
+        ]]></programlisting>
+            </para>
+            <para>
+                Another use is breaking up large test suites.
+            </para>
+            <para>
                 A problem with large test suites is thet they can exhaust
-                the default 8Mb memory limit on a PHP process.
+                the default 16Mb memory limit on a PHP process.
                 By having the test groups output in XML and run in
                 separate processes, the output can be reparsed to
                 aggregate the results into a much smaller footprint top level
@@ -426,25 +537,30 @@ Test cases run: 1/1, Failures: 1, Exceptions: 0
                 servers.
                 A test case already exists to do this within the SimpleTest
                 framework, but it is currently experimental...
-<programlisting role="php">
-&lt;?php
-    require_once('../remote.php');
-    require_once('../reporter.php');
+<programlisting role="php"><![CDATA[
+            
+<?php
+require_once('../remote.php');
+require_once('simpletest/autorun.php');
     
-    $test_url = ...;
-    $dry_url = ...;
-    
-    $test = &amp;new GroupTest('Remote tests');
-    $test-&gt;addTestCase(new RemoteTestCase($test_url, $dry_url));
-    $test-&gt;run(new HtmlReporter());
-?&gt;
-</programlisting>
+$test_url = ...;
+$dry_url = ...;
+
+class MyTestOnAnotherServer extends RemoteTestCase {
+    function __construct() {
+        $test_url = ...
+        parent::__construct($test_url, $test_url . ' --dry');
+    }
+}
+?>
+
+        ]]></programlisting>
                 The <span class="new_code">RemoteTestCase</span> takes the actual location
                 of the test runner, basically a web page in XML format.
                 It also takes the URL of a reporter set to do a dry run.
                 This is so that progress can be reported upward correctly.
                 The <span class="new_code">RemoteTestCase</span> can be added to test suites
-                just like any other group test.
+                just like any other test suite.
             </para>
         </refsect1>
     </refentry>

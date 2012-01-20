@@ -18,7 +18,7 @@ require_once(dirname(__FILE__) . '/test_list.php');
 
 /**
  *    Parser for command line arguments. Extracts
- *    the a specific test to run and engages XML
+ *    the specific test to run and engages XML
  *    reporting when necessary.
  *    @package SimpleTest
  *    @subpackage UnitTester
@@ -237,6 +237,13 @@ HELP;
 }
 
 
+/**
+ *    Parser for web page requests. Extracts
+ *    the specific test to run and engages XML
+ *    reporting when necessary.
+ *    @package SimpleTest
+ *    @subpackage UnitTester
+ */
 class WebCommandLineParser extends SimpleCommandLineParser {
     /**
      *    Parses the GET/POST request data to detect properties we are interested in.

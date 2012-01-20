@@ -113,7 +113,7 @@ class HtmlReporter extends SimpleReporter {
      *    trail of the nesting test suites below the
      *    top level test.
      *   
-     *    @note Will only render a message when the SIMPLETEST_PAINT_PASS flag
+     *    Note: Will only render a message when the SIMPLETEST_PAINT_PASS flag
      *          has been set.
      *
      *    @param string $message    Pass message displayed in

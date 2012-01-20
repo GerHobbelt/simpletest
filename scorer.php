@@ -184,7 +184,7 @@ class SimpleScorer {
     /**
      *    Increments the pass count. 
      *
-     *    @note Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are 
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -198,7 +198,7 @@ class SimpleScorer {
     /**
      *    Increments the fail count. 
      *
-     *    @note Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are 
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -212,7 +212,7 @@ class SimpleScorer {
     /**
      *    Increments the error count. 
      *
-     *    @note Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are 
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -226,7 +226,7 @@ class SimpleScorer {
     /**
      *    Increments the exception count. 
      *
-     *    @note Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are 
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -1190,10 +1190,10 @@ class MultipleReporter {
      *    of test cases. Null until the first
      *    test is started.
 	 *
-	 *    @note This is not an ideal implementation (and no ideal exists)
+	 *    Note: This is not an ideal implementation (and no ideal exists)
 	 *          as multiple reporters MAY count the same test cases.
 	 *          Despite this cause for 'overcounting', you may expect
-	 *          @a getTestCaseProgress() to suffer from the same, so
+	 *          @see getTestCaseProgress() to suffer from the same, so
 	 *          the progress to total count ratio should still range between
 	 *          0% and 100%.
 	 *
@@ -1212,10 +1212,10 @@ class MultipleReporter {
      *    Accessor for the number of test cases
      *    completed so far.
 	 *
-	 *    @note This is not an ideal implementation (and no ideal exists)
+	 *    Note: This is not an ideal implementation (and no ideal exists)
 	 *          as multiple reporters MAY count the same test cases.
 	 *          Despite this cause for 'overcounting', you may expect
-	 *          @a getTestCaseCount() to suffer from the same, so
+	 *          @see getTestCaseCount() to suffer from the same, so
 	 *          the progress to total count ratio should still range between
 	 *          0% and 100%.
 	 *

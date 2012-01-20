@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <refentry id="{@id}">
 <refnamediv>
 <refname>Testing forms</refname>
@@ -16,12 +15,14 @@
                 This results in any form controls that are inside &lt;form&gt; tags
                 being available from within the test case.
                 For example, if we have this snippet of HTML...
-<pre>
-&lt;form&gt;
-    &lt;input type="text" name="a" value="A default" /&gt;
-    &lt;input type="submit" value="Go" /&gt;
-&lt;/form&gt;
-</pre>
+<programlisting role="php"><![CDATA[
+            
+<form>
+    <input type="text" name="a" value="A default" />
+    <input type="submit" value="Go" />
+</form>
+
+        ]]></programlisting>
                 Which looks like this...
             </para>
             <para>
@@ -34,45 +35,58 @@
                 We can navigate to this code, via the
                 {@link http://www.lastcraft.com/form_testing_documentation.php LastCraft}
                 site, with the following test...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class SimpleFormTests extends WebTestCase {
-    
     function testDefaultValue() {
-        $this-&gt;get('http://www.lastcraft.com/form_testing_documentation.php');
-        $this-&gt;assertField('a', 'A default');
+        $this->get('http://www.lastcraft.com/form_testing_documentation.php');
+        $this->assertField('a', 'A default');
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Immediately after loading the page all of the HTML controls are set at
                 their default values just as they would appear in the web browser.
                 The assertion tests that a HTML widget exists in the page with the
                 name "a" and that it is currently set to the value
-                "A default"
-            </para>
-            <para>
-                We could submit the form straight away, but first we'll change
-                the value of the text field and only then submit it...
-<programlisting role="php">
+                "A default".
+                As usual, we could use a pattern expectation instead of a fixed
+                string.
+<programlisting role="php"><![CDATA[
+            
 class SimpleFormTests extends WebTestCase {
-
     function testDefaultValue() {
-        $this-&gt;get('http://www.my-site.com/');
-        $this-&gt;assertField('a', 'A default');
-        $this-&gt;setField('a', 'New value');
-        $this-&gt;clickSubmit('Go');
+        $this->get('http://www.lastcraft.com/form_testing_documentation.php');
+        $this->assertField('a', new PatternExpectation('/default/'));
     }
 }
-</programlisting>
+
+        ]]></programlisting>
+                We could submit the form straight away, but first we'll change
+                the value of the text field and only then submit it...
+<programlisting role="php"><![CDATA[
+            
+class SimpleFormTests extends WebTestCase {
+    function testDefaultValue() {
+        $this->get('http://www.my-site.com/');
+        $this->assertField('a', 'A default');
+        $this->setField('a', 'New value');
+        $this->click('Go');
+    }
+}
+
+        ]]></programlisting>
                 Because we didn't specify a method attribute on the form tag, and
                 didn't specify an action either, the test case will follow
                 the usual browser behaviour of submitting the form data as a <em>GET</em>
                 request back to the same location.
-                SimpleTest tries to emulate typical browser behaviour as much as possible,
-                rather than attempting to catch missing attributes on tags.
+                In general SimpleTest tries to emulate typical browser behaviour as much as possible,
+                rather than attempting to catch any form of HTML omission.
                 This is because the target of the testing framework is the PHP application
                 logic, not syntax or other errors in the HTML code.
                 For HTML errors, other tools such as
-                {@link http://www.w3.org/People/Raggett/tidy/ HTMLTidy} should be used.
+                {@link http://www.w3.org/People/Raggett/tidy/ HTMLTidy} should be used,
+                or any of the HTML and CSS validators already out there.
             </para>
             <para>
                 If a field is not present in any form, or if an option is unavailable,
@@ -102,17 +116,18 @@ class SimpleFormTests extends WebTestCase {
             </para>
             <para>
                 The following test will confirm it...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class SimpleFormTests extends WebTestCase {
     ...
     function testNoSuperuserChoiceAvailable() {
-        $this-&gt;get('http://www.lastcraft.com/form_testing_documentation.php');
-        $this-&gt;assertFalse($this-&gt;setField('type', 'Superuser'));
+        $this->get('http://www.lastcraft.com/form_testing_documentation.php');
+        $this->assertFalse($this->setField('type', 'Superuser'));
     }
 }
-</programlisting>
-                The selection will not be changed on a failure to set
-                a widget value.
+
+        ]]></programlisting>
+                The current selection will not be changed if the new value is not an option.
             </para>
             <para>
                 Here is the full list of widgets currently supported...
@@ -127,9 +142,17 @@ class SimpleFormTests extends WebTestCase {
                 </ul>
             </para>
             <para>
-                Although most standard HTML widgets are catered for by <em>SimpleTest</em>'s
-                built in parser, it is unlikely that JavaScript will be implemented
-                anytime soon.
+                The browser emulation offered by SimpleTest mimics
+                the actions which can be perform by a user on a
+                standard HTML page. Javascript is not supported, and
+                it's unlikely that support will be added any time
+                soon.
+            </para>
+            <para>
+                Of particular note is that the Javascript idiom of
+                passing form results by setting a hidden field cannot
+                be performed using the normal SimpleTest
+                commands. See below for a way to test such forms.
             </para>
         </refsect1>
         <refsect1 id="{@id multiple}">
@@ -176,43 +199,87 @@ class SimpleFormTests extends WebTestCase {
             <para>
                 If we wish to disable all but the retrieval privileges and
                 submit this information we can do it like this...
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class SimpleFormTests extends WebTestCase {
     ...
     function testDisableNastyPrivileges() {
-        $this-&gt;get('http://www.lastcraft.com/form_testing_documentation.php');
-        $this-&gt;assertField('crud', array('c', 'r', 'u', 'd'));
-        $this-&gt;setField('crud', array('r'));
-        $this-&gt;clickSubmit('Enable Privileges');
+        $this->get('http://www.lastcraft.com/form_testing_documentation.php');
+        $this->assertField('crud', array('c', 'r', 'u', 'd'));
+        $this->setField('crud', array('r'));
+        $this->click('Enable Privileges');
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 Instead of setting the field to a single value, we give it a list
                 of values.
                 We do the same when testing expected values.
                 We can then write other test code to confirm the effect of this, perhaps
                 by logging in as that user and attempting an update.
             </para>
+        </refsect1>
+        <refsect1 id="{@id hidden-field}">
+<title>Forms which use javascript to set a hidden field</title>
             <para>
-                <title>Raw posting</title>
+                If you want to test a form which relies on javascript to set a hidden
+                field, you can't just call setField().
+                The following code will <em>not</em> work:
+<programlisting role="php"><![CDATA[
+            
+class SimpleFormTests extends WebTestCase {
+    function testEmulateMyJavascriptForm() {
+        // This does *not* work
+        $this->setField('a_hidden_field', '123');
+        $this->clickSubmit('OK');
+    }
+}
+
+        ]]></programlisting>
+                Instead, you need to pass the additional form parameters to the
+                clickSubmit() method:
+<programlisting role="php"><![CDATA[
+            
+class SimpleFormTests extends WebTestCase {
+    function testMyJavascriptForm() {
+        $this->clickSubmit('OK', array('a_hidden_field'=>'123'));
+    }
+
+}
+
+        ]]></programlisting>
+                Bear in mind that in doing this you're effectively stubbing out a
+                part of your software (the javascript code in the form), and
+                perhaps you might be better off using something like 
+                {@link http://selenium.openqa.org/ Selenium} to ensure a complete
+                test.
             </para>
+        </refsect1>
+        <refsect1 id="{@id raw}">
+<title>Raw posting</title>
             <para>
                 If you want to test a form handler, but have not yet written
                 or do not have access to the form itself, you can create a
                 form submission by hand.
-<programlisting role="php">
+<programlisting role="php"><![CDATA[
+            
 class SimpleFormTests extends WebTestCase {
     ...    
     function testAttemptedHack() {
-        $this-&gt;post(
+        $this->post(
                 'http://www.my-site.com/add_user.php',
-                array('type' =&gt; 'superuser'));
-        $this-&gt;assertNoUnwantedPattern('/user created/i');
+                array('type' => 'superuser'));
+        $this->assertNoText('user created');
     }
 }
-</programlisting>
+
+        ]]></programlisting>
                 By adding data to the <span class="new_code">WebTestCase::post()</span>
-                method, we are attempting to fetch the page as a form submission.
+                method, we are emulating a form submission.
+                You would normally only do this as a temporary expedient, or where
+                you are expecting a 3rd party to submit to a form.
+                The exception is when you want tests to protect you from
+                attempts to spoof your pages.
             </para>
         </refsect1>
     </refentry>

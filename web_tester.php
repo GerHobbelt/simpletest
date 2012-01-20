@@ -585,7 +585,7 @@ class WebTestCase extends UnitTestCase {
 	 *    A support method which delivers the fully qualified URL (with 
 	 *    scheme and authority as per RFC3986) given a path and an optional 
 	 *    authentication string; the base is assumed to be the 'default 
-	 *    server URL' as obtained through @ref WebTestCase::getDefaultServerURL().
+	 *    server URL' as obtained through @see WebTestCase::getDefaultServerURL().
 	 *    
      *    @param string $path          A more or less complete URL  or an absolute or relative path.
      *    @param string $dflt_url      A fully qualified URL which is to be used as a basis for completing the given path.
@@ -698,7 +698,7 @@ class WebTestCase extends UnitTestCase {
 
 	/**
 	 *    A support method which delivers the URL (with scheme and authority as per RFC3986) to the targeted test site,
-	 *    where the default test site is assumed to be the URL as provided by @ref WebUnitTest::getDefaultServerUrl(),
+	 *    where the default test site is assumed to be the URL as provided by @see WebUnitTest::getDefaultServerUrl(),
 	 *    which can be overridden by specifying a different URL through the setServerUrl() method.
 	 *    
      *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
@@ -721,7 +721,9 @@ class WebTestCase extends UnitTestCase {
 	 *    A support method with sets the 'server URL' default to the specified URL string. You can always fetch the current
 	 *    URL string through calling the getServerUrl() method.
 	 *
-	 *    @note When the specified URL is not complete, we extend it by applying the default value for the missing parts (scheme, host, path, ...) as provided by @ref WebUnitTest::getDefaultServerUrl()
+	 *    Note: When the specified URL is not complete, we extend it by applying the 
+	 *          default value for the missing parts (scheme, host, path, ...) as 
+	 *          provided by @see WebUnitTest::getDefaultServerUrl()
 	 *
      *    @param string $auth_str      The optional userinfo (cf. RFC3986 section 3.2) part of the URI.
      *    @param string $path          Either the optional complete URL to the test site or the (relative to the starting script) path to the test sample site root directory. Default: './'

@@ -23,7 +23,7 @@ class CodeCoverage  {
     var $maxDirectoryDepth = 20; // reasonable, otherwise arbitrary
     var $title = "Code Coverage";
 
-    # NOTE: This assumes all code shares the same current working directory.
+    // NOTE: This assumes all code shares the same current working directory.
     var $settingsFile = './code-coverage-settings.dat';
 
     static $instance;

@@ -213,7 +213,7 @@ class SimpleTest {
 
 	/**
 	 *    Request a new (child) context and use it from now on, i.e. this is an
-	 *    implicit @ref SimpleTest::getContext().
+	 *    implicit @see SimpleTest::getContext().
 	 *
      *    @return SimpleTestContext    Current test run.
      */
@@ -225,13 +225,13 @@ class SimpleTest {
 	/**
 	 *    Removes ('pops') all child contexts chained to the given context and itself,
 	 *    then makes the parent of the given context the new active context, so this 
-	 *    comes with an implicit @ref SimpleTest::getContext().
+	 *    comes with an implicit @see SimpleTest::getContext().
 	 *
      *    @param SimpleTestContext $context    The context to pop. It must have been 
 	 *                                         produced before by either
-	 *                                         @ref SimpleTest::getContext() or 
-	 *                                         @ref SimpleTest::pushContext().
-     *    @return SimpleTestContext            The now activate @a $context.
+	 *                                         @see SimpleTest::getContext() or 
+	 *                                         @see SimpleTest::pushContext().
+     *    @return SimpleTestContext            The now activate context.
      */
     static function popContext($ctx) {
 		// see if $ctx is indeed a parent of ours ...

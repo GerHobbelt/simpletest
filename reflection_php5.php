@@ -6,11 +6,17 @@
  *  @version    $Id$
  */
 
+/**#@+
+ * The modes used for @see SimpleReflection::getSignature.
+ *
+ * Specifying one of these determines what should be generated exactly: invocation, declaration, argument set or assignment.
+ */
 define('SIG_GEN_DECLARE', 				1);
 define('SIG_GEN_INVOKE_AS_PARENT', 		2);
 define('SIG_GEN_DECLARE_ONLY_THE_ARGS', 3);
 define('SIG_GEN_INVOKE_ONLY_THE_ARGS', 	4);
 define('SIG_GEN_ASSIGN_ONLY_THE_ARGS', 	5);
+/**#@-*/
 
  
 /**
@@ -283,7 +289,7 @@ class SimpleReflection {
      *    of a method.
      *    @param string $name       Method name.
      *    @param integer $mode      Determines what should be generated exactly: invocation, declaration, argument set or assignment.
-     *    @param mixed $propagator  Used by some of the modes to complete the response. Depends on the specified @a $mode.
+     *    @param mixed $propagator  Used by some of the modes to complete the response. Depends on the specified mode.
      *    @return string            Method signature up to last
      *                              bracket.
      *    @access public
@@ -362,7 +368,7 @@ class SimpleReflection {
      *    details must be replicated to be a valid implementation.
      *    @param string $name       Method name.
      *    @param integer $mode      Determines what should be generated exactly: invocation or declaration.
-     *    @param mixed $propagator  Used to complete the response. Depends on the specified @a $mode; may, for instance, contain a set of 'default values' for each of the arguments.
+     *    @param mixed $propagator  Used to complete the response. Depends on the specified mode; may, for instance, contain a set of 'default values' for each of the arguments.
      *    @return string            Method signature up to last
      *                              bracket.
      *    @access protected
@@ -383,7 +389,7 @@ class SimpleReflection {
      *    Generates the interface argument set in various forms (invocation, declaration, assignment).
      *    @param string $name       Method name.
      *    @param integer $mode      Determines what should be generated exactly: argument set for invocation, declaration or assignment.
-     *    @param mixed $propagator  Used to complete the response. Depends on the specified @a $mode; may, for instance, contain a set of 'default values' for each of the arguments.
+     *    @param mixed $propagator  Used to complete the response. Depends on the specified mode; may, for instance, contain a set of 'default values' for each of the arguments.
      *    @return string            Method signature up to last
      *                              bracket.
      *    @access protected
@@ -422,7 +428,7 @@ class SimpleReflection {
     /**
      *    Gets the source code for each parameter.
      *    @param ReflectionMethod $method   Method object from reflection API
-     *    @param mixed $propagator          Used to complete the response. Depends on the specified @a $mode; 
+     *    @param mixed $propagator          Used to complete the response. Depends on the specified mode; 
 	 *                                      may, for instance, contain a set of 'default values' for each of the arguments.
      *    @return array                     List of strings, each a snippet of code.
      *    @access protected

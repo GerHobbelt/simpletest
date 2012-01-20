@@ -464,7 +464,7 @@ class TestOfFrameUrl extends UnitTestCase {
 }
 
 /**
- * @note Based off of http://www.mozilla.org/quality/networking/testing/filetests.html
+ * Based off of @link http://www.mozilla.org/quality/networking/testing/filetests.html
  */
 class TestOfFileUrl extends UnitTestCase {
     
@@ -509,6 +509,5 @@ class TestOfFileUrl extends UnitTestCase {
         $this->assertIdentical($url->getHost(), false);
         $this->assertEqual($url->getPath(), '/C:/config.sys');
     }
-    
 }
 
