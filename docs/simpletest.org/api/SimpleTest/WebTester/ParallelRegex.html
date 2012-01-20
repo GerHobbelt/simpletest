@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class ParallelRegex</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ParallelRegex</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compounded regular expression. Any of     the contained patterns could match and     when one does, it's label is returned.</p>
+		<p class="notes">
+			Located in <a class="field" href="_php_parser.php.html">/php_parser.php</a> (line <span class="field">28</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$case" title="details" class="var-name">$case</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$labels" title="details" class="var-name">$labels</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$patterns" title="details" class="var-name">$patterns</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$regex" title="details" class="var-name">$regex</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																						
+				<div class="method-definition">
+											<span class="method-result">ParallelRegex</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$case</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addPattern" title="details" class="method-name">addPattern</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">true</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getCompoundedRegex" title="details" class="method-name">getCompoundedRegex</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$patterns</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPerlMatchingFlags" title="details" class="method-name">getPerlMatchingFlags</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#match" title="details" class="method-name">match</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$match</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$match</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$case" id="$case"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$case</span>
+						(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$labels" id="$labels"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$labels</span>
+						(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$patterns" id="$patterns"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$patterns</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$regex" id="$regex"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$regex</span>
+						(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor. Starts with no patterns.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">ParallelRegex</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$case</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$case</span><span class="var-description">: True for case sensitive, false                             for insensitive.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddPattern" id="addPattern"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addPattern</span> (line <span class="line-number">55</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a pattern with an optional label.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addPattern
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pattern</span><span class="var-description">: Perl style regex, but ( and )                                 lose the usual meaning.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$label</span><span class="var-description">: Label of regex to be returned                                 on a match.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCompoundedRegex" id="getCompoundedRegex"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCompoundedRegex</span> (line <span class="line-number">96</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compounds the patterns into a single     regular expression separated with the     &quot;or&quot; operator. Caches the regex.</p>
+<p class="description"><p>Will automatically escape (, ) and / tokens.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getCompoundedRegex
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$patterns</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$patterns</span><span class="var-description">: List of patterns in order.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetPerlMatchingFlags" id="getPerlMatchingFlags"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPerlMatchingFlags</span> (line <span class="line-number">114</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for perl regex mode flags to use.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Perl regex flags.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPerlMatchingFlags
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodmatch" id="match"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">match</span> (line <span class="line-number">71</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attempts to match all patterns at once against     a string.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on success.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			match
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$match</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$match</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subject</span><span class="var-description">: String to match against.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$match</span><span class="var-description">: First matched portion of                                 subject.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$match</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:59 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

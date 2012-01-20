@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleCookie</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleCookie</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Cookie data holder. Cookie rules are full of pretty     arbitary stuff. I have used...</p>
+<p class="description"><p>http://wp.netscape.com/newsref/std/cookie_spec.html     http://www.cookiecentral.com/faq/</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_cookies.php.html">/cookies.php</a> (line <span class="field">23</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expiry" title="details" class="var-name">$expiry</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$host" title="details" class="var-name">$host</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$is_secure" title="details" class="var-name">$is_secure</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$name" title="details" class="var-name">$name</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$path" title="details" class="var-name">$path</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$value" title="details" class="var-name">$value</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																														
+				<div class="method-definition">
+											<span class="method-result">SimpleCookie</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$expiry</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$is_secure</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#agePrematurely" title="details" class="method-name">agePrematurely</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$interval</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#fixPath" title="details" class="method-name">fixPath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getExpiry" title="details" class="method-name">getExpiry</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getHost" title="details" class="method-name">getHost</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getName" title="details" class="method-name">getName</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPath" title="details" class="method-name">getPath</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getValue" title="details" class="method-name">getValue</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#isExpired" title="details" class="method-name">isExpired</a>
+											(<span class="var-type">integer/string</span>&nbsp;<span class="var-name">$now</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isSecure" title="details" class="method-name">isSecure</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isValidHost" title="details" class="method-name">isValidHost</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isValidPath" title="details" class="method-name">isValidPath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#setHost" title="details" class="method-name">setHost</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#truncateHost" title="details" class="method-name">truncateHost</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$expiry" id="$expiry"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expiry</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$host" id="$host"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$host</span>
+						(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$is_secure" id="$is_secure"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$is_secure</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$name" id="$name"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$name</span>
+						(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$path" id="$path"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$path</span>
+						(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$value" id="$value"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$value</span>
+						(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor. Sets the stored values.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleCookie</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$expiry</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$is_secure</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Cookie key.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: Value of cookie.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Cookie path if not host wide.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$expiry</span><span class="var-description">: Expiry date as string.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$is_secure</span><span class="var-description">: Currently ignored.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodagePrematurely" id="agePrematurely"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">agePrematurely</span> (line <span class="line-number">190</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ages the cookie by the specified number of     seconds.</p>
+	<ul class="tags">
+				<li><span class="field">public:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			agePrematurely
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$interval</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$interval</span><span class="var-description">: In seconds.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfixPath" id="fixPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">fixPath</span> (line <span class="line-number">211</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a trailing and leading slash to the path     if missing.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			fixPath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path to fix.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetExpiry" id="getExpiry"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getExpiry</span> (line <span class="line-number">156</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for expiry.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Expiry string.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getExpiry
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetHost" id="getHost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getHost</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the truncated host to which this     cookie applies.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Truncated hostname.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getHost
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetName" id="getName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getName</span> (line <span class="line-number">113</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for name.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Cookie key.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPath" id="getPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPath</span> (line <span class="line-number">132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for path.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Valid cookie path.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetValue" id="getValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getValue</span> (line <span class="line-number">123</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for value. A deleted cookie will     have an empty string for this.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Cookie value.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getValue
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisExpired" id="isExpired"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isExpired</span> (line <span class="line-number">174</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if cookie is expired against     the cookie format time or timestamp.</p>
+<p class="description"><p>Will give true for a session cookie.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			isExpired
+		</span>
+					(<span class="var-type">integer/string</span>&nbsp;<span class="var-name">$now</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer/string</span>
+				<span class="var-name">$now</span><span class="var-description">: Time to test against. Result                                 will be false if this time                                 is later than the cookie expiry.                                 Can be either a timestamp integer                                 or a cookie format date.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisSecure" id="isSecure"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isSecure</span> (line <span class="line-number">201</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the secure flag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if cookie needs SSL.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isSecure
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisValidHost" id="isValidHost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isValidHost</span> (line <span class="line-number">87</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test for a cookie being valid for a host name.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if the cookie would be valid                            here.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isValidHost
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Host to test against.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisValidPath" id="isValidPath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isValidPath</span> (line <span class="line-number">144</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests a path to see if the cookie applies     there. The test path must be longer or     equal to the cookie path.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if cookie valid here.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isValidPath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path to test against.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetHost" id="setHost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setHost</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the host. The cookie rules determine</p>
+<p class="description"><p>that the first two parts are taken for     certain TLDs and three for others. If the     new host does not match these rules then the     call will fail.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if hostname is valid.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			setHost
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: New hostname.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtruncateHost" id="truncateHost"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">truncateHost</span> (line <span class="line-number">98</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts just the domain part that determines a     cookie's host validity.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Domain or false on a bad host.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			truncateHost
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Host name to truncate.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:48 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

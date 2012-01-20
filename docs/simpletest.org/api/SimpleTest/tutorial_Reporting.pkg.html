@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Reporting</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+	<table class="tutorial-nav-box">
+	<tr>
+		<td style="width: 30%">
+							<a href="../SimpleTest/tutorial_PartialMock.pkg.html" class="nav-button">Previous</a>
+					</td>
+		<td style="text-align: center">
+							<a href="../SimpleTest/tutorial_SimpleTest.pkg.html" class="nav-button">Up</a>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<a href="../SimpleTest/tutorial_Expectations.pkg.html" class="nav-button">Next</a>
+					</td>
+	</tr>
+	<tr>
+		<td style="width: 30%">
+							<span class="detail">Partial mocks</span>
+					</td>
+		<td style="text-align: center">
+							<span class="detail">Simple Test PHP Unit Test Framework</span>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<span class="detail">Expectations</span>
+					</td>
+	</tr>
+</table>
+	
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">Reporting</h1>
+<h2 class="ref-purpose">SimpleTest pretty much follows the MVC-ish pattern
+                (Model-View-Controller).
+                The reporter classes are the view and the model is your
+                test cases and their hiearchy.
+                The controller is mostly hidden from the user of
+                SimpleTest unless you want to change how the test cases
+                are actually run, in which case it is possible to
+                override the runner objects from within the test case.
+                As usual with MVC, the controller is mostly undefined
+                and there are other places to control the test run.</h2></div>
+            <h1 class="title">Table of Contents</h1>
+<ul class="toc">
+	
+			
+					<li><a href="../SimpleTest/tutorial_Reporting.pkg.html#html">Reporting results in HTML</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Reporting.pkg.html#other">Extending the reporter</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Reporting.pkg.html#cli">The command line reporter</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Reporting.pkg.html#xml">Remote testing</a></li>
+					</ul>
+
+            
+        
+        <span><a name="html"></a><h2 class="title">Reporting results in HTML</h2><p>The default HTML display is minimal in the extreme.
+                It reports success and failure with the conventional red and
+                green bars and shows a breadcrumb trail of test groups
+                for every failed assertion.
+                Here's a fail...
+                File test
+                    Fail: createnewfile-&gt;True assertion failed.
+                    1/1 test cases complete.
+                    0 passes, 1 fails and 0 exceptions.
+                And here all tests passed...
+                File test
+                    1/1 test cases complete.
+                    1 passes, 0 fails and 0 exceptions.
+                The good news is that there are several points in the display
+                hiearchy for subclassing.</p>
+            <p>For web page based displays there is the
+                HtmlReporter class with the following
+                signature...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html">HtmlReporter</a>&nbsp;<span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#method__construct">__construct</a><span class="src-sym">(</span><span class="src-var">$encoding</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleScorer.html#methodmakeDry">makeDry</a><span class="src-sym">(</span><span class="src-id">boolean&nbsp;</span><span class="src-var">$is_dry</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintHeader">paintHeader</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodsendNoCacheHeaders">sendNoCacheHeaders</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintFooter">paintFooter</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintGroupStart">paintGroupStart</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">,&nbsp;</span><span class="src-id">integer&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintGroupEnd">paintGroupEnd</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseStart">paintCaseStart</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseEnd">paintCaseEnd</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodStart">paintMethodStart</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodEnd">paintMethodEnd</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintFail">paintFail</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintPass">paintPass</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintError">paintError</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintException">paintException</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintMessage">paintMessage</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">void&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodpaintFormattedMessage">paintFormattedMessage</a><span class="src-sym">(</span><span class="src-id">string&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">protected&nbsp;</span><span class="src-id">string&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html#methodgetCss">getCss</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-key">array&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestList">getTestList</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">integer&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleScorer.html#methodgetPassCount">getPassCount</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">integer&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleScorer.html#methodgetFailCount">getFailCount</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">integer&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleScorer.html#methodgetExceptionCount">getExceptionCount</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">integer&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestCaseCount">getTestCaseCount</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">public&nbsp;</span><span class="src-id">integer&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestCaseProgress">getTestCaseProgress</a><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span>...&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                Here is what some of these methods mean. First the display methods
+                that you will probably want to override...
+                HtmlReporter(string $encoding)
+
+                        is the constructor.
+                        Note that the unit test sets up the link to the display
+                        rather than the other way around.
+                        The display is a mostly passive receiver of test events.
+                        This allows easy adaption of the display for other test
+                        systems beside unit tests, such as monitoring servers.
+                        The encoding is the character encoding you wish to
+                        display the test output in.
+                        In order to correctly render debug output when
+                        using the web tester, this should match the encoding
+                        of the site you are trying to test.
+                        The available character set strings are described in
+                        the PHP <a href="http://www.php.net/manual/en/function.htmlentities.php">html_entities()</a>
+                        function.
+                    void paintHeader(string $test_name)
+
+                        is called once at the very start of the test when the first
+                        start event arrives.
+                        The first start event is usually delivered by the top level group
+                        test and so this is where $test_name
+                        comes from.
+                        It paints the page title, CSS, body tag, etc.
+                        It returns nothing (void).
+                    void paintFooter(string $test_name)
+
+                        Called at the very end of the test to close any tags opened
+                        by the page header.
+                        By default it also displays the red/green bar and the final
+                        count of results.
+                        Actually the end of the test happens when a test end event
+                        comes in with the same name as the one that started it all
+                        at the same level.
+                        The tests nest you see.
+                        Closing the last test finishes the display.
+                    void paintMethodStart(string $test_name)
+
+                        is called at the start of each test method.
+                        The name normally comes from method name.
+                        The other test start events behave the same way except
+                        that the group test one tells the reporter how large
+                        it is in number of held test cases.
+                        This is so that the reporter can display a progress bar
+                        as the runner churns through the test cases.
+                    void paintMethodEnd(string $test_name)
+
+                        backs out of the test started with the same name.
+                    void paintFail(string $message)
+
+                        paints a failure.
+                        By default it just displays the word fail, a breadcrumbs trail
+                        showing the current test nesting and the message issued by
+                        the assertion.
+                    void paintPass(string $message)
+
+                        by default does nothing.
+                    string getCss()
+
+                        Returns the CSS styles as a string for the page header
+                        method.
+                        Additional styles have to be appended here if you are
+                        not overriding the page header.
+                        You will want to use this method in an overriden page header
+                        if you want to include the original CSS.
+                There are also some accessors to get information on the current
+                state of the test suite.
+                Use these to enrich the display...
+                array getTestList()
+
+                        is the first convenience method for subclasses.
+                        Lists the current nesting of the tests as a list
+                        of test names.
+                        The first, top level test case, is first in the
+                        list and the current test method will be last.
+                    integer getPassCount()
+
+                        returns the number of passes chalked up so far.
+                        Needed for the display at the end.
+                    integer getFailCount()
+
+                        is likewise the number of fails so far.
+                    integer getExceptionCount()
+
+                        is likewise the number of errors so far.
+                    integer getTestCaseCount()
+
+                        is the total number of test cases in the test run.
+                        This includes the grouping tests themselves.
+                    integer getTestCaseProgress()
+
+                        is the number of test cases completed so far.
+                One simple modification is to get the HtmlReporter to display
+                the passes as well as the failures and errors...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">ReporterShowingPasses&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/HtmlReporter.html">HtmlReporter</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintPass</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintPass</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;&lt;span&nbsp;class=\&quot;pass\&quot;&gt;Pass&lt;/span&gt;:&nbsp;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$breadcrumb&nbsp;</span>=&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">getTestList</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.php.net/array_shift">array_shift</a><span class="src-sym">(</span><span class="src-var">$breadcrumb</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<a href="http://www.php.net/implode">implode</a><span class="src-sym">(</span><span class="src-str">&quot;-&amp;gt;&quot;</span><span class="src-sym">,&nbsp;</span><span class="src-var">$breadcrumb</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print&nbsp;<span class="src-str">&quot;</span><span class="src-str">-&amp;gt;<span class="src-var">$message</span>&lt;br&nbsp;/&gt;\n</span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">protected&nbsp;</span><span class="src-key">function&nbsp;</span><span class="src-id">getCss</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">getCss</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span>.&nbsp;<span class="src-str">'&nbsp;.pass&nbsp;{&nbsp;color:&nbsp;green;&nbsp;}'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div></p>
+            <p>One method that was glossed over was the makeDry()
+                method.
+                If you run this method, with no parameters, on the reporter
+                before the test suite is run no actual test methods
+                will be called.
+                You will still get the events of entering and leaving the
+                test methods and test cases, but no passes or failures etc,
+                because the test code will not actually be executed.</p>
+            <p>The reason for this is to allow for more sophistcated
+                GUI displays that allow the selection of individual test
+                cases.
+                In order to build a list of possible tests they need a
+                report on the test structure for drawing, say a tree view
+                of the test suite.
+                With a reporter set to dry run that just sends drawing events
+                this is easily accomplished.</p></span>
+        <span><a name="other"></a><h2 class="title">Extending the reporter</h2><p>Rather than simply modifying the existing display, you might want to
+                produce a whole new HTML look, or even generate text or XML.
+                Rather than override every method in
+                HtmlReporter we can take one
+                step up the class hiearchy to SimpleReporter
+                in the simple_test.php source file.</p>
+            <p>A do nothing display, a blank canvas for your own creation, would
+                be...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/simpletest.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">MyDisplay&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintHeader</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintFooter</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{&nbsp;</span><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintStart</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">,&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintStart</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">,&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintEnd</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">,&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintEnd</span><span class="src-sym">(</span><span class="src-var">$test_name</span><span class="src-sym">,&nbsp;</span><span class="src-var">$size</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintPass</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintPass</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintFail</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintFail</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintError</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintError</span><span class="src-sym">(</span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">paintException</span><span class="src-sym">(</span><span class="src-var">$exception</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">paintException</span><span class="src-sym">(</span><span class="src-var">$exception</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                No output would come from this class until you add it.</p>
+            <p>The catch with using this low level class is that you must
+                explicitely invoke it in the test script.
+                The &quot;autorun&quot; facility will not be able to use
+                its runtime context (whether it's running in a web browser
+                or the command line) to select the reporter.</p>
+            <p>You explicitely invoke the test runner like so...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a></span><span class="src-sym">(</span><span class="src-str">'File&nbsp;test'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id">MyReporter</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                ...perhaps like this...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/simpletest.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'my_reporter.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">MyTest&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">MyTest</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id">MyReporter</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                We'll show how to fit in with &quot;autorun&quot; later.</p></span>
+        <span><a name="cli"></a><h2 class="title">The command line reporter</h2><p>SimpleTest also ships with a minimal command line reporter.
+                The interface mimics JUnit to some extent, but paints the
+                failure messages as they arrive.
+                To use the command line reporter explicitely, substitute it
+                for the HTML version...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a></span><span class="src-sym">(</span><span class="src-str">'File&nbsp;test'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                Then invoke the test suite from the command line...
+php file_test.php
+                You will need the command line version of PHP installed
+                of course.
+                A passing test suite looks like this...
+File test
+OK
+Test cases run: 1/1, Passes: 1, Failures: 0, Exceptions: 0
+                A failure triggers a display like this...
+File test
+1) True assertion failed.
+    in createNewFile
+FAILURES!!!
+Test cases run: 1/1, Passes: 0, Failures: 1, Exceptions: 0</p>
+            <p>One of the main reasons for using a command line driven
+                test suite is of using the tester as part of some automated
+                process.
+                To function properly in shell scripts the test script should
+                return a non-zero exit code on failure.
+                If a test suite fails the value false
+                is returned from the SimpleTest::run()
+                method.
+                We can use that result to exit the script with the desired return
+                code...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a></span><span class="src-sym">(</span><span class="src-str">'File&nbsp;test'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-key">exit&nbsp;</span><span class="src-sym">(</span><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span>?&nbsp;<span class="src-num">0&nbsp;</span>:&nbsp;<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                Of course we wouldn't really want to create two test scripts,
+                a command line one and a web browser one, for each test suite.
+                The command line reporter includes a method to sniff out the
+                run time environment...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a></span><span class="src-sym">(</span><span class="src-str">'File&nbsp;test'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">::</span><span class="src-id">inCli</span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">exit&nbsp;</span><span class="src-sym">(</span><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span>?&nbsp;<span class="src-num">0&nbsp;</span>:&nbsp;<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-var">$test</span><span class="src-sym">-&gt;</span><span class="src-id">run</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/HtmlReporter.html">HtmlReporter</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                This is the form used within SimpleTest itself.
+                When you use the &quot;autorun.php&quot;, and no
+                test has been run by the end, this is pretty much
+                the code that SimpleTest will run for you implicitely.</p>
+            <p>In other words, this is gives the same result...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">MyTest&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/TestSuite.html">TestSuite</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">addFile</span><span class="src-sym">(</span><span class="src-str">'tests/file_test.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div></p></span>
+        <span><a name="xml"></a><h2 class="title">Remote testing</h2><p>SimpleTest ships with an XmlReporter class
+                used for internal communication.
+                When run the output looks like...
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;run&gt;
+  &lt;group size=&quot;4&quot;&gt;
+    &lt;name&gt;Remote tests&lt;/name&gt;
+    &lt;group size=&quot;4&quot;&gt;
+      &lt;name&gt;Visual test with 48 passes, 48 fails and 4 exceptions&lt;/name&gt;
+      &lt;case&gt;
+        &lt;name&gt;testofunittestcaseoutput&lt;/name&gt;
+        &lt;test&gt;
+          &lt;name&gt;testofresults&lt;/name&gt;
+          &lt;pass&gt;This assertion passed&lt;/pass&gt;
+          &lt;fail&gt;This assertion failed&lt;/fail&gt;
+        &lt;/test&gt;
+        &lt;test&gt;
+          ...
+        &lt;/test&gt;
+      &lt;/case&gt;
+    &lt;/group&gt;
+  &lt;/group&gt;
+&lt;/run&gt;
+                To get your normal test cases to produce this format, on the
+                command line add the --xml flag.
+php my_test.php --xml
+                You can do teh same thing in the web browser by adding the
+                URL parameter xml=1.
+                Any true value will do.</p>
+            <p>You can consume this format with the parser
+                supplied as part of SimpleTest itself.
+                This is called SimpleTestXmlParser and
+                resides in xml.php within the SimpleTest package...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/xml.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">...</div></li>
+<li><div class="src-line"><span class="src-var">$parser&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/SimpleTestXmlParser.html">SimpleTestXmlParser</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/HtmlReporter.html">HtmlReporter</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$parser</span><span class="src-sym">-&gt;</span><span class="src-id">parse</span><span class="src-sym">(</span><span class="src-var">$test_output</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                The $test_output should be the XML format
+                from the XML reporter, and could come from say a command
+                line run of a test case.
+                The parser sends events to the reporter just like any
+                other test run.
+                There are some odd occasions where this is actually useful.</p>
+            <p>Most likely it's when you want to isolate a problematic crash
+                prone test.
+                You can collect the XML output using the backtick operator
+                from another test.
+                In that way it runs in its own process...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/xml.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">::</span><span class="src-id">inCli</span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$parser&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/SimpleTestXmlParser.html">SimpleTestXmlParser</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/TextReporter.html">TextReporter</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}&nbsp;</span><span class="src-key">else&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$parser&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/SimpleTestXmlParser.html">SimpleTestXmlParser</a></span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/HtmlReporter.html">HtmlReporter</a></span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-var">$parser</span><span class="src-sym">-&gt;</span><span class="src-id">parse</span><span class="src-sym">(</span>`php&nbsp;flakey_test.php&nbsp;--xml`<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div></p>
+            <p>Another use is breaking up large test suites.</p>
+            <p>A problem with large test suites is thet they can exhaust
+                the default 16Mb memory limit on a PHP process.
+                By having the test groups output in XML and run in
+                separate processes, the output can be reparsed to
+                aggregate the results into a much smaller footprint top level
+                test.</p>
+            <p>Because the XML output can come from anywhere, this opens
+                up the possibility of aggregating test runs from remote
+                servers.
+                A test case already exists to do this within the SimpleTest
+                framework, but it is currently experimental...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'../remote.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-inc">require_once</span><span class="src-sym">(</span><span class="src-str">'simpletest/autorun.php'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$test_url&nbsp;</span>=&nbsp;...<span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$dry_url&nbsp;</span>=&nbsp;...<span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">MyTestOnAnotherServer&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/RemoteTestCase.html">RemoteTestCase</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$test_url&nbsp;</span>=&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-var">$test_url</span><span class="src-sym">,&nbsp;</span><span class="src-var">$test_url&nbsp;</span>.&nbsp;<span class="src-str">'&nbsp;--dry'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-php">?&gt;</span></div></li>
+</ol></div>
+                The RemoteTestCase takes the actual location
+                of the test runner, basically a web page in XML format.
+                It also takes the URL of a reporter set to do a dry run.
+                This is so that progress can be reported upward correctly.
+                The RemoteTestCase can be added to test suites
+                just like any other test suite.</p></span></div>
+
+	<table class="tutorial-nav-box">
+	<tr>
+		<td style="width: 30%">
+							<a href="../SimpleTest/tutorial_PartialMock.pkg.html" class="nav-button">Previous</a>
+					</td>
+		<td style="text-align: center">
+							<a href="../SimpleTest/tutorial_SimpleTest.pkg.html" class="nav-button">Up</a>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<a href="../SimpleTest/tutorial_Expectations.pkg.html" class="nav-button">Next</a>
+					</td>
+	</tr>
+	<tr>
+		<td style="width: 30%">
+							<span class="detail">Partial mocks</span>
+					</td>
+		<td style="text-align: center">
+							<span class="detail">Simple Test PHP Unit Test Framework</span>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<span class="detail">Expectations</span>
+					</td>
+	</tr>
+</table>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:41 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

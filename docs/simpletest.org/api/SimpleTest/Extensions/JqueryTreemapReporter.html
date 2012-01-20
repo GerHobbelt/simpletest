@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class JqueryTreemapReporter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JqueryTreemapReporter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">outputs unordered list representing treemap of test report,  and attaches jQuery Treemap to render results.</p>
+		<p class="notes">
+			Located in <a class="field" href="_extensions---treemap_reporter---jquery.php.html">/extensions/treemap_reporter/jquery.php</a> (line <span class="field">20</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html">SimpleReporterDecorator</a>
+   |
+   --<a href="../../SimpleTest/Extensions/TreemapReporter.html">TreemapReporter</a>
+      |
+      --JqueryTreemapReporter</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#divideMapNodes" title="details" class="method-name">divideMapNodes</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$map</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getCss" title="details" class="method-name">getCss</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintRectangleEnd" title="details" class="method-name">paintRectangleEnd</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintRectangleStart" title="details" class="method-name">paintRectangleStart</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$node</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintResultsFooter" title="details" class="method-name">paintResultsFooter</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintResultsHeader" title="details" class="method-name">paintResultsHeader</a>
+										()
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html">SimpleReporterDecorator</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#var$reporter">SimpleReporterDecorator::$reporter</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methoddivideMapNodes" id="divideMapNodes"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">divideMapNodes</span> (line <span class="line-number">67</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			divideMapNodes
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$map</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$map</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methoddivideMapNodes">TreemapReporter::divideMapNodes()</a></dt>
+						<dd>divides the test results based on a slice and dice algorithm</dd>
+					</dl>
+			
+	</div>
+<a name="methodgetCss" id="getCss"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCss</span> (line <span class="line-number">22</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getCss
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodgetCss">TreemapReporter::getCss()</a></dt>
+						<dd>basic CSS for floating nested divs</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintRectangleEnd" id="paintRectangleEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintRectangleEnd</span> (line <span class="line-number">60</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintRectangleEnd
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintRectangleEnd">TreemapReporter::paintRectangleEnd()</a></dt>
+						<dd>paints end tag for test node div</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintRectangleStart" id="paintRectangleStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintRectangleStart</span> (line <span class="line-number">55</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintRectangleStart
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$node</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$node</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintRectangleStart">TreemapReporter::paintRectangleStart()</a></dt>
+						<dd>paints start tag for div representing a test node</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintResultsFooter" id="paintResultsFooter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintResultsFooter</span> (line <span class="line-number">62</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintResultsFooter
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintResultsFooter">TreemapReporter::paintResultsFooter()</a></dt>
+						<dd>places a clearing break below the end of the test nodes</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintResultsHeader" id="paintResultsHeader"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintResultsHeader</span> (line <span class="line-number">33</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintResultsHeader
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintResultsHeader">TreemapReporter::paintResultsHeader()</a></dt>
+						<dd>paints the HTML header and sets up results</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/Extensions/TreemapReporter.html">TreemapReporter</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#method__construct">TreemapReporter::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methoddivideMapNodes">TreemapReporter::divideMapNodes()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodgetCss">TreemapReporter::getCss()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintFooter">TreemapReporter::paintFooter()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintGroupEnd">TreemapReporter::paintGroupEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintRectangleEnd">TreemapReporter::paintRectangleEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintRectangleStart">TreemapReporter::paintRectangleStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintResultsFooter">TreemapReporter::paintResultsFooter()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/Extensions/TreemapReporter.html#methodpaintResultsHeader">TreemapReporter::paintResultsHeader()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html">SimpleReporterDecorator</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#method__construct">SimpleReporterDecorator::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodcreateInvoker">SimpleReporterDecorator::createInvoker()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodgetDumper">SimpleReporterDecorator::getDumper()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodgetStatus">SimpleReporterDecorator::getStatus()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodgetTestCaseCount">SimpleReporterDecorator::getTestCaseCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodgetTestCaseProgress">SimpleReporterDecorator::getTestCaseProgress()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodgetTestList">SimpleReporterDecorator::getTestList()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincludeBreadCrumb">SimpleReporterDecorator::includeBreadCrumb()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincludeStackTrace">SimpleReporterDecorator::includeStackTrace()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincrementErrorCount">SimpleReporterDecorator::incrementErrorCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincrementExceptionCount">SimpleReporterDecorator::incrementExceptionCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincrementFailCount">SimpleReporterDecorator::incrementFailCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodincrementPassCount">SimpleReporterDecorator::incrementPassCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodmakeDry">SimpleReporterDecorator::makeDry()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodmakeList">SimpleReporterDecorator::makeList()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintCaseEnd">SimpleReporterDecorator::paintCaseEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintCaseStart">SimpleReporterDecorator::paintCaseStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintError">SimpleReporterDecorator::paintError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintException">SimpleReporterDecorator::paintException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintFail">SimpleReporterDecorator::paintFail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintFormattedMessage">SimpleReporterDecorator::paintFormattedMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintGroupEnd">SimpleReporterDecorator::paintGroupEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintGroupStart">SimpleReporterDecorator::paintGroupStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintMessage">SimpleReporterDecorator::paintMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintMethodEnd">SimpleReporterDecorator::paintMethodEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintMethodStart">SimpleReporterDecorator::paintMethodStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintPass">SimpleReporterDecorator::paintPass()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintSignal">SimpleReporterDecorator::paintSignal()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodpaintSkip">SimpleReporterDecorator::paintSkip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporterDecorator.html#methodshouldInvoke">SimpleReporterDecorator::shouldInvoke()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:56 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

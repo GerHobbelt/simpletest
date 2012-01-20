@@ -1,0 +1,1649 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleUrl</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleUrl</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">URL parser to replace parse_url() PHP function which     got broken in PHP 4.3.0. Adds some browser specific     functionality such as expandomatics.</p>
+<p class="description"><p>Guesses a bit trying to separate the host from     the path and tries to keep a raw, possibly unparsable,     request string as long as possible.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_url.php.html">/url.php</a> (line <span class="field">25</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$fragment" title="details" class="var-name">$fragment</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$host" title="details" class="var-name">$host</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$password" title="details" class="var-name">$password</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$path" title="details" class="var-name">$path</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$port" title="details" class="var-name">$port</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$raw" title="details" class="var-name">$raw</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$request" title="details" class="var-name">$request</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$scheme" title="details" class="var-name">$scheme</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$target" title="details" class="var-name">$target</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$username" title="details" class="var-name">$username</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$x" title="details" class="var-name">$x</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$y" title="details" class="var-name">$y</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																										
+				<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getAllTopLevelDomains" title="details" class="method-name">getAllTopLevelDomains</a>
+										()
+									</div>
+																																																																																																																																																																																										
+				<div class="method-definition">
+											<span class="method-result">SimpleUrl</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">''</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRequestParameter" title="details" class="method-name">addRequestParameter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRequestParameters" title="details" class="method-name">addRequestParameters</a>
+											(<span class="var-type">hash/SimpleFormEncoding</span>&nbsp;<span class="var-name">$parameters</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#asString" title="details" class="method-name">asString</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#chompCoordinates" title="details" class="method-name">chompCoordinates</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#chompHost" title="details" class="method-name">chompHost</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#chompLogin" title="details" class="method-name">chompLogin</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#chompPath" title="details" class="method-name">chompPath</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#chompRequest" title="details" class="method-name">chompRequest</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#chompScheme" title="details" class="method-name">chompScheme</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#clearRequest" title="details" class="method-name">clearRequest</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#extractAbsolutePath" title="details" class="method-name">extractAbsolutePath</a>
+											(<span class="var-type">string/SimpleUrl</span>&nbsp;<span class="var-name">$base</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">1</span>)
+									</div>
+																						
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getBasePath" title="details" class="method-name">getBasePath</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getEncodedRequest" title="details" class="method-name">getEncodedRequest</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getFragment" title="details" class="method-name">getFragment</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getHost" title="details" class="method-name">getHost</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string/boolean</span>
+										<a href="#getIdentity" title="details" class="method-name">getIdentity</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">Page</span>
+										<a href="#getPage" title="details" class="method-name">getPage</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPassword" title="details" class="method-name">getPassword</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getPath" title="details" class="method-name">getPath</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getPort" title="details" class="method-name">getPort</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getScheme" title="details" class="method-name">getScheme</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean/string</span>
+										<a href="#getTarget" title="details" class="method-name">getTarget</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getTld" title="details" class="method-name">getTld</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getUsername" title="details" class="method-name">getUsername</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getX" title="details" class="method-name">getX</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getY" title="details" class="method-name">getY</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isRelativePath" title="details" class="method-name">isRelativePath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#makeAbsolute" title="details" class="method-name">makeAbsolute</a>
+											(<span class="var-type">string/SimpleUrl</span>&nbsp;<span class="var-name">$base</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#normalisePath" title="details" class="method-name">normalisePath</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">SimpleFormEncoding</span>
+										<a href="#parseRequest" title="details" class="method-name">parseRequest</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$raw</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCoordinates" title="details" class="method-name">setCoordinates</a>
+											([<span class="var-type">integer</span>&nbsp;<span class="var-name">$x</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$y</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setTarget" title="details" class="method-name">setTarget</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$frame</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$fragment" id="$fragment"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$fragment</span>
+						(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$host" id="$host"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$host</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$password" id="$password"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$password</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$path" id="$path"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$path</span>
+						(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$port" id="$port"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$port</span>
+						(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$raw" id="$raw"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$raw</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$request" id="$request"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$request</span>
+						(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$scheme" id="$scheme"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$scheme</span>
+						(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$target" id="$target"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$target</span>
+						(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$username" id="$username"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$username</span>
+						(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$x" id="$x"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$x</span>
+						(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$y" id="$y"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$y</span>
+						(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetAllTopLevelDomains" id="getAllTopLevelDomains"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getAllTopLevelDomains</span> (line <span class="line-number">546</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A pipe seperated list of all TLDs that result in two part     domain names.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Pipe separated list.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">string</span>
+		<span class="method-name">
+			getAllTopLevelDomains
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">44</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor. Parses URL into sections.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleUrl</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$url</span> = <span class="var-default">''</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: Incoming URL.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddRequestParameter" id="addRequestParameter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRequestParameter</span> (line <span class="line-number">374</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds an additional parameter to the request.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRequestParameter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$key</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$key</span><span class="var-description">: Name of parameter.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: Value as string.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddRequestParameters" id="addRequestParameters"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRequestParameters</span> (line <span class="line-number">385</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds additional parameters to the request.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRequestParameters
+		</span>
+					(<span class="var-type">hash/SimpleFormEncoding</span>&nbsp;<span class="var-name">$parameters</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">hash/SimpleFormEncoding</span>
+				<span class="var-name">$parameters</span><span class="var-description">: Additional                                                 parameters.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodasString" id="asString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">asString</span> (line <span class="line-number">425</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Renders the URL back into a string.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> URL in canonical form.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			asString
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodchompCoordinates" id="chompCoordinates"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompCoordinates</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the X, Y coordinate pair from an image map.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> X, Y as a pair of integers.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			chompCoordinates
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The coordinates will be                          removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodchompHost" id="chompHost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompHost</span> (line <span class="line-number">143</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the host part of an incoming URL.</p>
+<p class="description"><p>Includes the port number part. Will extract     the host if it starts with // or it has     a top level domain or it has at least two     dots.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Host part guess or false.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			chompHost
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The host will be                           removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodchompLogin" id="chompLogin"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompLogin</span> (line <span class="line-number">115</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the username and password from the     incoming URL. The // prefix will be reattached     to the URL after the doublet is extracted.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Two item list of username and                           password. Will urldecode() them.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			chompLogin
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The username and                           password are removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodchompPath" id="chompPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompPath</span> (line <span class="line-number">169</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the path information from the incoming     URL. Strips this path from the URL.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Path part or '/'.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			chompPath
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The host will be                            removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodchompRequest" id="chompRequest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompRequest</span> (line <span class="line-number">184</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Strips off the request data.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Raw request part.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			chompRequest
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The request will be                         removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodchompScheme" id="chompScheme"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">chompScheme</span> (line <span class="line-number">97</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the scheme part of an incoming URL.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Scheme part or false.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			chompScheme
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$url</span><span class="var-description">: URL so far. The scheme will be                          removed.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodclearRequest" id="clearRequest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">clearRequest</span> (line <span class="line-number">394</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clears down all parameters.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clearRequest
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodextractAbsolutePath" id="extractAbsolutePath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">extractAbsolutePath</span> (line <span class="line-number">493</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replaces unknown sections of the path with base parts     to return a complete absolute one.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			extractAbsolutePath
+		</span>
+					(<span class="var-type">string/SimpleUrl</span>&nbsp;<span class="var-name">$base</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">1</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/SimpleUrl</span>
+				<span class="var-name">$base</span><span class="var-description">: Base URL.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">1</span><span class="var-description">: Absolute path.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetBasePath" id="getBasePath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getBasePath</span> (line <span class="line-number">298</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the path to the page.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Path less the page.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getBasePath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetEncodedRequest" id="getEncodedRequest"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getEncodedRequest</span> (line <span class="line-number">356</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for current request parameters     in URL string form. Will return teh original request     if at all possible even if it doesn't make much     sense.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Form is string &quot;?a=1&amp;b=2&quot;, etc.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getEncodedRequest
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetFragment" id="getFragment"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getFragment</span> (line <span class="line-number">310</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for fragment at end of URL after the &quot;#&quot;.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Part after &quot;#&quot;.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getFragment
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetHost" id="getHost"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getHost</span> (line <span class="line-number">245</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for hostname and port.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Hostname only.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getHost
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$default</span><span class="var-description">: Value to use if not present.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetIdentity" id="getIdentity"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getIdentity</span> (line <span class="line-number">522</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts the username and password for use in rendering     a URL.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Form of username:password or false.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string/boolean</span>
+		<span class="method-name">
+			getIdentity
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPage" id="getPage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPage</span> (line <span class="line-number">286</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for page if any. This may be a     directory name if ambiguious.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> name.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">Page</span>
+		<span class="method-name">
+			getPage
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPassword" id="getPassword"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPassword</span> (line <span class="line-number">235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for password.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Password preceding host.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPassword
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPath" id="getPath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPath</span> (line <span class="line-number">273</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for path.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Full path including leading slash if implied.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getPath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetPort" id="getPort"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPort</span> (line <span class="line-number">264</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for port number.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> TCP/IP port number.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getPort
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetScheme" id="getScheme"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getScheme</span> (line <span class="line-number">217</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for protocol part.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Scheme name, e.g &quot;http&quot;.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getScheme
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$default</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$default</span><span class="var-description">: Value to use if not present.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetTarget" id="getTarget"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTarget</span> (line <span class="line-number">406</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the frame target if present. Although     not strictly part of the URL specification it     acts as similarily to the browser.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Frame name or false if none.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean/string</span>
+		<span class="method-name">
+			getTarget
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetTld" id="getTld"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTld</span> (line <span class="line-number">254</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for top level domain.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Last part of host.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getTld
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetUsername" id="getUsername"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getUsername</span> (line <span class="line-number">226</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for user name.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Username preceding host.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getUsername
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetX" id="getX"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getX</span> (line <span class="line-number">335</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for horizontal image coordinate.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> X value.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getX
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetY" id="getY"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getY</span> (line <span class="line-number">344</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for vertical image coordinate.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Y value.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getY
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisRelativePath" id="isRelativePath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isRelativePath</span> (line <span class="line-number">512</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Simple test to see if a path part is relative.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if starts with a &quot;/&quot;.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isRelativePath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Path to test.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmakeAbsolute" id="makeAbsolute"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">makeAbsolute</span> (line <span class="line-number">461</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replaces unknown sections to turn a relative     URL into an absolute one. The base URL can     be either a string or a SimpleUrl object.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			makeAbsolute
+		</span>
+					(<span class="var-type">string/SimpleUrl</span>&nbsp;<span class="var-name">$base</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/SimpleUrl</span>
+				<span class="var-name">$base</span><span class="var-description">: Base URL.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodnormalisePath" id="normalisePath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">normalisePath</span> (line <span class="line-number">535</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replaces . and .. sections of the path.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Path with dots removed if possible.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			normalisePath
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Unoptimised path.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparseRequest" id="parseRequest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parseRequest</span> (line <span class="line-number">198</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Breaks the request down into an object.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Parsed data.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleFormEncoding</span>
+		<span class="method-name">
+			parseRequest
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$raw</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$raw</span><span class="var-description">: Raw request.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCoordinates" id="setCoordinates"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCoordinates</span> (line <span class="line-number">321</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets image coordinates. Set to false to clear     them.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCoordinates
+		</span>
+					([<span class="var-type">integer</span>&nbsp;<span class="var-name">$x</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$y</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$x</span><span class="var-description">: Horizontal position.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$y</span><span class="var-description">: Vertical position.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetTarget" id="setTarget"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setTarget</span> (line <span class="line-number">415</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attaches a frame target.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setTarget
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$frame</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$frame</span><span class="var-description">: Name of frame.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:08 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

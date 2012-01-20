@@ -1,0 +1,1191 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimplePhpPageBuilder</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimplePhpPageBuilder</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">SAX event handler. Maintains a list of     open tags and dispatches them as they close.</p>
+		<p class="notes">
+			Located in <a class="field" href="_php_parser.php.html">/php_parser.php</a> (line <span class="field">691</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$complete_forms" title="details" class="var-name">$complete_forms</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$frameset" title="details" class="var-name">$frameset</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$frameset_nesting_level" title="details" class="var-name">$frameset_nesting_level</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$left_over_labels" title="details" class="var-name">$left_over_labels</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$loading_frames" title="details" class="var-name">$loading_frames</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$open_forms" title="details" class="var-name">$open_forms</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$page" title="details" class="var-name">$page</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$private_content_tag" title="details" class="var-name">$private_content_tag</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$tags" title="details" class="var-name">$tags</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptFormEnd" title="details" class="method-name">acceptFormEnd</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptFormStart" title="details" class="method-name">acceptFormStart</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptFrame" title="details" class="method-name">acceptFrame</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFrameTag.html">SimpleFrameTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptFramesetEnd" title="details" class="method-name">acceptFramesetEnd</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptFramesetStart" title="details" class="method-name">acceptFramesetStart</a>
+											(<span class="var-type">SimpleFramesetTag</span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptLabelEnd" title="details" class="method-name">acceptLabelEnd</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptLabelStart" title="details" class="method-name">acceptLabelStart</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptPageEnd" title="details" class="method-name">acceptPageEnd</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#acceptTag" title="details" class="method-name">acceptTag</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#addContent" title="details" class="method-name">addContent</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addContentTagToOpenTags" title="details" class="method-name">addContentTagToOpenTags</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addContentToAllOpenTags" title="details" class="method-name">addContentToAllOpenTags</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#can" title="details" class="method-name">can</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>
+										<a href="#createPage" title="details" class="method-name">createPage</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$response</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">SimpleSaxParser</span>
+										<a href="#createParser" title="details" class="method-name">createParser</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimplePhpPageBuilder.html">SimplePhpPageBuilder</a></span>&nbsp;<span class="var-name">$listener</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#endElement" title="details" class="method-name">endElement</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#free" title="details" class="method-name">free</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#hasNamedTagOnOpenTagStack" title="details" class="method-name">hasNamedTagOnOpenTagStack</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isFormElement" title="details" class="method-name">isFormElement</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isLoadingFrames" title="details" class="method-name">isLoadingFrames</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#openTag" title="details" class="method-name">openTag</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>
+										<a href="#parse" title="details" class="method-name">parse</a>
+											(<span class="var-type">$response</span>&nbsp;<span class="var-name">$response</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#startElement" title="details" class="method-name">startElement</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$complete_forms" id="$complete_forms"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$complete_forms</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">696</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$frameset" id="$frameset"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$frameset</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">697</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$frameset_nesting_level" id="$frameset_nesting_level"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$frameset_nesting_level</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">699</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$left_over_labels" id="$left_over_labels"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$left_over_labels</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">700</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$loading_frames" id="$loading_frames"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$loading_frames</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">698</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$open_forms" id="$open_forms"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$open_forms</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">695</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$page" id="$page"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$page</span>
+						(line <span class="line-number">693</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$private_content_tag" id="$private_content_tag"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$private_content_tag</span>
+						(line <span class="line-number">694</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$tags" id="$tags"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$tags</span>
+						(line <span class="line-number">692</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodacceptFormEnd" id="acceptFormEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptFormEnd</span> (line <span class="line-number">981</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Closes the most recently opened form.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptFormEnd
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodacceptFormStart" id="acceptFormStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptFormStart</span> (line <span class="line-number">973</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens a form. New widgets go here.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptFormStart
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Tag to accept.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacceptFrame" id="acceptFrame"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptFrame</span> (line <span class="line-number">1016</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Takes a single frame tag and stashes it in     the current frame set.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptFrame
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFrameTag.html">SimpleFrameTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFrameTag.html">SimpleFrameTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Tag to accept.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacceptFramesetEnd" id="acceptFramesetEnd"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptFramesetEnd</span> (line <span class="line-number">1004</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Closes the most recently opened frameset.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptFramesetEnd
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodacceptFramesetStart" id="acceptFramesetStart"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptFramesetStart</span> (line <span class="line-number">993</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens a frameset. A frameset may contain nested     frameset tags.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptFramesetStart
+		</span>
+					(<span class="var-type">SimpleFramesetTag</span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleFramesetTag</span>
+				<span class="var-name">$tag</span><span class="var-description">: Tag to accept.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacceptLabelEnd" id="acceptLabelEnd"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptLabelEnd</span> (line <span class="line-number">945</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Closes the most recently opened label.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptLabelEnd
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodacceptLabelStart" id="acceptLabelStart"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptLabelStart</span> (line <span class="line-number">936</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens a label for a described widget.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptLabelStart
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleFormTag.html">SimpleFormTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Tag to accept.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodacceptPageEnd" id="acceptPageEnd"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptPageEnd</span> (line <span class="line-number">1039</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Marker for end of complete page. Any work in     progress can now be closed.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptPageEnd
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodacceptTag" id="acceptTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">acceptTag</span> (line <span class="line-number">916</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a tag to the page.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			acceptTag
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Tag to accept.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddContent" id="addContent"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addContent</span> (line <span class="line-number">856</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Unparsed, but relevant data. The data is added     to every open tag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> False on parse error.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			addContent
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$text</span><span class="var-description">: May include unparsed tags.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddContentTagToOpenTags" id="addContentTagToOpenTags"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addContentTagToOpenTags</span> (line <span class="line-number">886</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parsed data in tag form. The parsed tag is added     to every open tag. Used for adding options to select     fields only.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addContentTagToOpenTags
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Option tags only.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddContentToAllOpenTags" id="addContentToAllOpenTags"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addContentToAllOpenTags</span> (line <span class="line-number">871</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Any content fills all currently open tags unless it     is part of an option tag.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addContentToAllOpenTags
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$text</span><span class="var-description">: May include unparsed tags.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcan" id="can"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">can</span> (line <span class="line-number">723</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This builder is always available.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Always true.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			can
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodcreatePage" id="createPage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">createPage</span> (line <span class="line-number">750</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates an empty page.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> New unparsed page.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>
+		<span class="method-name">
+			createPage
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$response</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$response</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreateParser" id="createParser"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">createParser</span> (line <span class="line-number">761</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates the parser used with the builder.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Parser to generate                                          events for the builder.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleSaxParser</span>
+		<span class="method-name">
+			createParser
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimplePhpPageBuilder.html">SimplePhpPageBuilder</a></span>&nbsp;<span class="var-name">$listener</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimplePhpPageBuilder.html">SimplePhpPageBuilder</a></span>
+				<span class="var-name">$listener</span><span class="var-description">: Target of parser.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodendElement" id="endElement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">endElement</span> (line <span class="line-number">813</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">End of element event.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> False on parse error.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			endElement
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Element name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfree" id="free"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">free</span> (line <span class="line-number">707</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Frees up any references so as to allow the PHP garbage     collection from unset() to work.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			free
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodhasNamedTagOnOpenTagStack" id="hasNamedTagOnOpenTagStack"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">hasNamedTagOnOpenTagStack</span> (line <span class="line-number">845</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if there are any open tags awaiting     closure that match the tag name.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if any are still open.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			hasNamedTagOnOpenTagStack
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Element name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisFormElement" id="isFormElement"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isFormElement</span> (line <span class="line-number">964</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests to see if a tag is a possible form     element.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if form element.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isFormElement
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: HTML element name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisLoadingFrames" id="isLoadingFrames"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isLoadingFrames</span> (line <span class="line-number">1030</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if in the middle of reading     a frameset.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if inframeset.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isLoadingFrames
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodopenTag" id="openTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">openTag</span> (line <span class="line-number">903</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens a tag for receiving content. Multiple tags     will be receiving input at the same time.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			openTag
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: New content tag.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparse" id="parse"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">parse</span> (line <span class="line-number">734</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reads the raw content and send events     into the page to be built.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Newly parsed page.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>
+		<span class="method-name">
+			parse
+		</span>
+					(<span class="var-type">$response</span>&nbsp;<span class="var-name">$response</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$response</span>
+				<span class="var-name">$response</span><span class="var-description">: SimpleHttpResponse  Fetched response.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstartElement" id="startElement"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">startElement</span> (line <span class="line-number">773</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Start of element event. Opens a new tag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> False on parse error.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			startElement
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Element name.</span>			</li>
+					<li>
+				<span class="var-type">hash</span>
+				<span class="var-name">$attributes</span><span class="var-description">: Attributes without content                                 are marked as true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:59 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

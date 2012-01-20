@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs for page autorun.php</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/autorun.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+									<a href="#sec-includes">Includes</a>
+			|											<a href="#sec-functions">Functions</a>
+			</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Autorunner which runs all tests cases found in a file   that includes this module.</p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		
+			</div>
+</div>
+		
+
+	<a name="sec-includes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Includes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Includes</span>
+			|													<a href="#sec-functions">Functions</a>
+					</div>
+		<div class="info-box-body">	
+			<a name="_dirname(__FILE__)_/collector_php"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">dirname(__FILE__).'/collector.php'</span>)
+			(line <span class="line-number">14</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">include simpletest files</p>
+	
+</div>
+<a name="_dirname(__FILE__)_/unit_tester_php"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">dirname(__FILE__).'/unit_tester.php'</span>)
+			(line <span class="line-number">12</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">include simpletest files</p>
+	
+</div>
+<a name="_dirname(__FILE__)_/default_reporter_php"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">dirname(__FILE__).'/default_reporter.php'</span>)
+			(line <span class="line-number">15</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">include simpletest files</p>
+	
+</div>
+<a name="_dirname(__FILE__)_/mock_objects_php"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">dirname(__FILE__).'/mock_objects.php'</span>)
+			(line <span class="line-number">13</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">include simpletest files</p>
+	
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<a name="sec-functions"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Functions</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-includes">Includes</a>
+				|												<span class="disabled">Functions</span>
+		</div>
+		<div class="info-box-body">	
+			<a name="functioncapture_new_classes" id="functioncapture_new_classes"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">capture_new_classes</span> (line <span class="line-number">95</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Every class since the first autorun include. This     is safe enough if require_once() is always used.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Class names.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			capture_new_classes
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functioninitial_file" id="functioninitial_file"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">initial_file</span> (line <span class="line-number">77</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">The first autorun file.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Filename of first autorun script.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			initial_file
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functionrun_local_tests" id="functionrun_local_tests"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">run_local_tests</span> (line <span class="line-number">44</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">run all recent test cases if no test has     so far been run. Uses the DefaultReporter which can have     it's output controlled with SimpleTest::prefer().</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> false if there were test failures, true if                          there were no failures, null if tests are                          already running</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean/null</span>
+		<span class="method-name">
+			run_local_tests
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functionsimpletest_autorun" id="functionsimpletest_autorun"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="method-title">simpletest_autorun</span> (line <span class="line-number">25</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Exit handler to run all recent test cases and exit system if in CLI</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			simpletest_autorun
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+<a name="functiontests_have_run" id="functiontests_have_run"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="method-title">tests_have_run</span> (line <span class="line-number">66</span>)
+	</div> 
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks the current test context to see if a test has     ever been run.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if tests have run.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			tests_have_run
+		</span>
+				()
+			</div>
+
+		
+	
+</div>
+		</div>
+	</div>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:47 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

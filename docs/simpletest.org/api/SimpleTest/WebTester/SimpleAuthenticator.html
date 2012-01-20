@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleAuthenticator</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleAuthenticator</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Manages security realms.</p>
+		<p class="notes">
+			Located in <a class="field" href="_authentication.php.html">/authentication.php</a> (line <span class="field">131</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$realms" title="details" class="var-name">$realms</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																		
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#addBasicHeaders" title="details" class="method-name">addBasicHeaders</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
+									</div>
+																																																										
+				<div class="method-definition">
+											<span class="method-result">SimpleAuthenticator</span>
+										<a href="#SimpleAuthenticator" title="details" class="method-name">SimpleAuthenticator</a>
+										()
+									</div>
+																						
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addHeaders" title="details" class="method-name">addHeaders</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRealm" title="details" class="method-name">addRealm</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realm</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleRealm.html">SimpleRealm</a></span>
+										<a href="#findRealmFromUrl" title="details" class="method-name">findRealmFromUrl</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#restartSession" title="details" class="method-name">restartSession</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setIdentityForRealm" title="details" class="method-name">setIdentityForRealm</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realm</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$realms" id="$realms"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$realms</span>
+						(line <span class="line-number">132</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodaddBasicHeaders" id="addBasicHeaders"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static addBasicHeaders</span> (line <span class="line-number">230</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Presents the appropriate headers for this     location for basic authentication.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			addBasicHeaders
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>
+				<span class="var-name">$request</span><span class="var-description">: Request to modify.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$username</span><span class="var-description">: Username for realm.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$password</span><span class="var-description">: Password for realm.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodSimpleAuthenticator" id="SimpleAuthenticator"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor SimpleAuthenticator</span> (line <span class="line-number">138</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clears the realms.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleAuthenticator</span>
+		<span class="method-name">
+			SimpleAuthenticator
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodaddHeaders" id="addHeaders"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addHeaders</span> (line <span class="line-number">209</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Presents the appropriate headers for this location.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addHeaders
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>&nbsp;<span class="var-name">$request</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleHttpRequest.html">SimpleHttpRequest</a></span>
+				<span class="var-name">$request</span><span class="var-description">: Request to modify.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+				<span class="var-name">$url</span><span class="var-description">: Base of realm.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddRealm" id="addRealm"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRealm</span> (line <span class="line-number">166</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a new realm centered the current URL.</p>
+<p class="description"><p>Browsers vary wildly on their behaviour in this     regard. Mozilla ignores the realm and presents     only when challenged, wasting bandwidth. IE     just carries on presenting until a new challenge     occours. SimpleTest tries to follow the spirit of     the original standards committee and treats the     base URL as the root of a file tree shaped realm.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRealm
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realm</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+				<span class="var-name">$url</span><span class="var-description">: Base of realm.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Authentication type for this                              realm. Only Basic authentication                              is currently supported.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$realm</span><span class="var-description">: Name of realm.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfindRealmFromUrl" id="findRealmFromUrl"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">findRealmFromUrl</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Finds the name of the realm by comparing URLs.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Name of realm.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleRealm.html">SimpleRealm</a></span>
+		<span class="method-name">
+			findRealmFromUrl
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+				<span class="var-name">$url</span><span class="var-description">: URL to test.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrestartSession" id="restartSession"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">restartSession</span> (line <span class="line-number">146</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Starts with no realms set up.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			restartSession
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetIdentityForRealm" id="setIdentityForRealm"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setIdentityForRealm</span> (line <span class="line-number">179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the current identity to be presented     against that realm.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setIdentityForRealm
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$realm</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$username</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$password</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Server hosting realm.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$realm</span><span class="var-description">: Name of realm.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$username</span><span class="var-description">: Username for realm.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$password</span><span class="var-description">: Password for realm.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:46 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

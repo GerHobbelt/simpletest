@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleSeleniumRemoteControl</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleSeleniumRemoteControl</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Based on the Domain51_Testing_Selenium class available at  http://domain51.googlecode.com/svn/Domain51/trunk/</p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Travis Swicegood &lt;<a href="mailto:development">[at] domain51 [dot] com development [at] domain51 [dot] com</a>&gt;</li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_extensions---selenium---remote-control.php.html">/extensions/selenium/remote-control.php</a> (line <span class="field">16</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$browser" title="details" class="var-name">$browser</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$browserUrl" title="details" class="var-name">$browserUrl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$commandMap" title="details" class="var-name">$commandMap</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$host" title="details" class="var-name">$host</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$port" title="details" class="var-name">$port</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$sessionId" title="details" class="var-name">$sessionId</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$timeout" title="details" class="var-name">$timeout</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">SimpleSeleniumRemoteControl</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$browser</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$browserUrl</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">'localhost'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">4444</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30000</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#buildUrlCmd" title="details" class="method-name">buildUrlCmd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">array()</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#cmd" title="details" class="method-name">cmd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">array()</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#initCurl" title="details" class="method-name">initCurl</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#isUp" title="details" class="method-name">isUp</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#sendRequest" title="details" class="method-name">sendRequest</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#server" title="details" class="method-name">server</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#sessionIdParser" title="details" class="method-name">sessionIdParser</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$response</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#start" title="details" class="method-name">start</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#stop" title="details" class="method-name">stop</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__call" title="details" class="method-name">__call</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$browser" id="$browser"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$browser</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">18</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$browserUrl" id="$browserUrl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$browserUrl</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">19</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$commandMap" id="$commandMap"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$commandMap</span>
+			 = <span class="var-default">array(<br />		'bool' =&gt; array(<br />			'verify', <br />			'verifyTextPresent', <br />			'verifyTextNotPresent',<br />			'verifyValue'<br />		),'string'=&gt;array('getNewBrowserSession',),)</span>			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$host" id="$host"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$host</span>
+			 = <span class="var-default"> 'localhost'</span>			(line <span class="line-number">20</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$port" id="$port"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$port</span>
+			 = <span class="var-default"> 4444</span>			(line <span class="line-number">21</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$sessionId" id="$sessionId"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$sessionId</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$timeout" id="$timeout"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$timeout</span>
+			 = <span class="var-default"> 30000</span>			(line <span class="line-number">22</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">37</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleSeleniumRemoteControl</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$browser</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$browserUrl</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">'localhost'</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$port</span> = <span class="var-default">4444</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$timeout</span> = <span class="var-default">30000</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$browser</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$browserUrl</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$host</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$port</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$timeout</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodbuildUrlCmd" id="buildUrlCmd"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">buildUrlCmd</span> (line <span class="line-number">85</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			buildUrlCmd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$arguments</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcmd" id="cmd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">cmd</span> (line <span class="line-number">100</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			cmd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$arguments</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodinitCurl" id="initCurl"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">initCurl</span> (line <span class="line-number">110</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			initCurl
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisUp" id="isUp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isUp</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			isUp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsendRequest" id="sendRequest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sendRequest</span> (line <span class="line-number">122</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			sendRequest
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$url</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodserver" id="server"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">server</span> (line <span class="line-number">81</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			server
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsessionIdParser" id="sessionIdParser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">sessionIdParser</span> (line <span class="line-number">45</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			sessionIdParser
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$response</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$response</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstart" id="start"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">start</span> (line <span class="line-number">49</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			start
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodstop" id="stop"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">stop</span> (line <span class="line-number">54</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			stop
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="method__call" id="__call"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">__call</span> (line <span class="line-number">59</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__call
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$arguments</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:00 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

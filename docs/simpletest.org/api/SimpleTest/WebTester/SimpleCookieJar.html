@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleCookieJar</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleCookieJar</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Repository for cookies. This stuff is a     tiny bit browser dependent.</p>
+		<p class="notes">
+			Located in <a class="field" href="_cookies.php.html">/cookies.php</a> (line <span class="field">228</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cookies" title="details" class="var-name">$cookies</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																														
+				<div class="method-definition">
+											<span class="method-result">SimpleCookieJar</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#agePrematurely" title="details" class="method-name">agePrematurely</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$interval</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#findFirstMatch" title="details" class="method-name">findFirstMatch</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCookie.html">SimpleCookie</a></span>&nbsp;<span class="var-name">$cookie</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getCookieValue" title="details" class="method-name">getCookieValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isMatch" title="details" class="method-name">isMatch</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTest.html">SimpleTest</a></span>&nbsp;<span class="var-name">$cookie</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#restartSession" title="details" class="method-name">restartSession</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$date</span> = <span class="var-default">false</span>], <span class="var-type">string/integer</span>&nbsp;<span class="var-name">$now</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#selectAsPairs" title="details" class="method-name">selectAsPairs</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setCookie" title="details" class="method-name">setCookie</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$expiry</span> = <span class="var-default">false</span>])
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$cookies" id="$cookies"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cookies</span>
+						(line <span class="line-number">229</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constructor. Jar starts empty.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleCookieJar</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodagePrematurely" id="agePrematurely"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">agePrematurely</span> (line <span class="line-number">270</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ages all cookies in the cookie jar.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			agePrematurely
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$interval</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$interval</span><span class="var-description">: The old session is moved                                  into the past by this number                                  of seconds. Cookies now over                                  age will be removed.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfindFirstMatch" id="findFirstMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">findFirstMatch</span> (line <span class="line-number">301</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Finds a matching cookie to write over or the     first empty slot if none.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Available slot.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			findFirstMatch
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCookie.html">SimpleCookie</a></span>&nbsp;<span class="var-name">$cookie</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCookie.html">SimpleCookie</a></span>
+				<span class="var-name">$cookie</span><span class="var-description">: Cookie to write into jar.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCookieValue" id="getCookieValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCookieValue</span> (line <span class="line-number">326</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reads the most specific cookie value from the     browser cookies. Looks for the longest path that     matches.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> False if not present, else the                                value as a string.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getCookieValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Host to search.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Applicable path.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name of cookie to read.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisMatch" id="isMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isMatch</span> (line <span class="line-number">350</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests cookie for matching against search     criteria.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if matched.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isMatch
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTest.html">SimpleTest</a></span>&nbsp;<span class="var-name">$cookie</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$host</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$path</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTest.html">SimpleTest</a></span>
+				<span class="var-name">$cookie</span><span class="var-description">: Cookie to test.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Host must match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Cookie path must be shorter than                                  this path.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Name must match.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrestartSession" id="restartSession"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">restartSession</span> (line <span class="line-number">245</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes expired and temporary cookies as if     the browser was closed and re-opened.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			restartSession
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$date</span> = <span class="var-default">false</span>], <span class="var-type">string/integer</span>&nbsp;<span class="var-name">$now</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string/integer</span>
+				<span class="var-name">$now</span><span class="var-description">: Time to test expiry against.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$date</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodselectAsPairs" id="selectAsPairs"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">selectAsPairs</span> (line <span class="line-number">370</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Uses a URL to sift relevant cookies by host and     path. Results are list of strings of form &quot;name=value&quot;.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Valid name and value pairs.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			selectAsPairs
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+				<span class="var-name">$url</span><span class="var-description">: Url to select by.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetCookie" id="setCookie"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setCookie</span> (line <span class="line-number">286</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets an additional cookie. If a cookie has     the same name and path it is replaced.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setCookie
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$path</span> = <span class="var-default">'/'</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$expiry</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Cookie key.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: Value of cookie.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Host upon which the cookie is valid.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$path</span><span class="var-description">: Cookie path if not host wide.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$expiry</span><span class="var-description">: Expiry date.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:49 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

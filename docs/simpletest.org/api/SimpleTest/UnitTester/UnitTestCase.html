@@ -1,0 +1,1125 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class UnitTestCase</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class UnitTestCase</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Standard unit test class for day to day testing     of PHP code XP style. Adds some useful standard     assertions.</p>
+		<p class="notes">
+			Located in <a class="field" href="_unit_tester.php.html">/unit_tester.php</a> (line <span class="field">23</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a>
+   |
+   --UnitTestCase</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-vars">Vars</a>
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/Extensions/SeleneseTestCase.html">SeleneseTestCase</a></td>
+					<td>
+											SeleneseTestCase
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/Extensions/SeleniumTestCase.html">SeleniumTestCase</a></td>
+					<td>
+											Provides test case wrapper to a Selenium remote  control instance.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/SimpleInternalValidator/SimpleInternalValidator.html">SimpleInternalValidator</a></td>
+					<td>
+											Internal validation test class for SimpleTest internals testing.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/WebTestCase.html">WebTestCase</a></td>
+					<td>
+											Test case for testing of web pages. Allows     fetching of pages, parsing of HTML and     submitting forms.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">UnitTestCase</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertClone" title="details" class="method-name">assertClone</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertCopy" title="details" class="method-name">assertCopy</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertEqual" title="details" class="method-name">assertEqual</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertFalse" title="details" class="method-name">assertFalse</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$result</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertIdentical" title="details" class="method-name">assertIdentical</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertIsA" title="details" class="method-name">assertIsA</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNoPattern" title="details" class="method-name">assertNoPattern</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNotA" title="details" class="method-name">assertNotA</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNotEqual" title="details" class="method-name">assertNotEqual</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNotIdentical" title="details" class="method-name">assertNotIdentical</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNotNull" title="details" class="method-name">assertNotNull</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertNull" title="details" class="method-name">assertNull</a>
+											(<span class="var-type">null</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertOutsideMargin" title="details" class="method-name">assertOutsideMargin</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$margin</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertPattern" title="details" class="method-name">assertPattern</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertReference" title="details" class="method-name">assertReference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertSame" title="details" class="method-name">assertSame</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertTrue" title="details" class="method-name">assertTrue</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$result</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assertWithinMargin" title="details" class="method-name">assertWithinMargin</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$margin</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$label">SimpleTestCase::$label</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$observers">SimpleTestCase::$observers</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$reporter">SimpleTestCase::$reporter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$running">SimpleTestCase::$running</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$should_skip">SimpleTestCase::$should_skip</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">32</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates an empty test case. Should be subclassed     with test methods for a functional test case.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">UnitTestCase</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$label</span><span class="var-description">: Name of test case. Will use                              the class name if none specified.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#method__construct">SimpleTestCase::__construct()</a></dt>
+						<dd>Sets up the test with no display.</dd>
+					</dl>
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleneseTestCase.html#method__construct">SeleneseTestCase::__construct()</a>
+								: constructor
+							</li>
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleniumTestCase.html#method__construct">SeleniumTestCase::__construct()</a>
+							</li>
+					<li>
+				<a href="../../SimpleTest/SimpleInternalValidator/SimpleInternalValidator.html#method__construct">SimpleInternalValidator::__construct()</a>
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#method__construct">WebTestCase::__construct()</a>
+								: Creates an empty test case. Should be subclassed     with test methods for a functional test case.
+							</li>
+				</ul>
+	</div>
+<a name="methodassertClone" id="assertClone"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertClone</span> (line <span class="line-number">285</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if both parameters refer     to different objects. Fail otherwise. The objects     have to be identical though.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertClone
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Object reference to check.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Hopefully not the same object.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$first</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$second</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertCopy" id="assertCopy"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertCopy</span> (line <span class="line-number">310</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if both parameters refer     to different variables. Fail otherwise. The objects     have to be identical references though.</p>
+<p class="description"><p>This will fail under E_STRICT with objects. Use     assertClone() for this.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertCopy
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Object reference to check.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Hopefully not the same object.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$first</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$second</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertEqual" id="assertEqual"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertEqual</span> (line <span class="line-number">139</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the two parameters have     the same value only. Otherwise a fail.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertEqual
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertFalse" id="assertFalse"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertFalse</span> (line <span class="line-number">62</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will be true on false and vice versa. False     is the PHP definition of false, so that null,     empty strings, zero and an empty array all count     as false.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertFalse
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$result</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$result</span><span class="var-description">: Pass on false.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertIdentical" id="assertIdentical"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertIdentical</span> (line <span class="line-number">205</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the two parameters have     the same value and same type. Otherwise a fail.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertIdentical
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertIsA" id="assertIsA"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertIsA</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Type and class test. Will pass if class     matches the type name or is a subclass or     if not an object, but the type is correct.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertIsA
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$object</span><span class="var-description">: Object to test.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Type name as string.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertNoPattern" id="assertNoPattern"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNoPattern</span> (line <span class="line-number">349</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the perl regex pattern     is not present in subject. Fail if found.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNoPattern
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pattern</span><span class="var-description">: Perl regex to look for including                               the regex delimiters.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subject</span><span class="var-description">: String to search in.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodassertNoPattern">WebTestCase::assertNoPattern()</a>
+								: Will trigger a pass if the perl regex pattern     is not present in raw content.
+							</li>
+				</ul>
+	</div>
+<a name="methodassertNotA" id="assertNotA"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNotA</span> (line <span class="line-number">123</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Type and class mismatch test. Will pass if class     name or underling type does not match the one     specified.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNotA
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$object</span><span class="var-description">: Object to test.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Type name as string.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertNotEqual" id="assertNotEqual"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNotEqual</span> (line <span class="line-number">155</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the two parameters have     a different value. Otherwise a fail.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNotEqual
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertNotIdentical" id="assertNotIdentical"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNotIdentical</span> (line <span class="line-number">221</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the two parameters have     the different value or different type.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNotIdentical
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertNotNull" id="assertNotNull"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNotNull</span> (line <span class="line-number">88</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will be true if the value is set.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNotNull
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Supposedly set value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertNull" id="assertNull"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertNull</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will be true if the value is null.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertNull
+		</span>
+					(<span class="var-type">null</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">null</span>
+				<span class="var-name">$value</span><span class="var-description">: Supposedly null value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertOutsideMargin" id="assertOutsideMargin"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertOutsideMargin</span> (line <span class="line-number">189</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the two parameters differ     by more than the margin.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertOutsideMargin
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$margin</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$margin</span><span class="var-description">: Fuzziness of match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertPattern" id="assertPattern"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertPattern</span> (line <span class="line-number">332</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the Perl regex pattern     is found in the subject. Fail otherwise.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertPattern
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$pattern</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$subject</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$pattern</span><span class="var-description">: Perl regex to look for including                               the regex delimiters.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$subject</span><span class="var-description">: String to search in.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodassertPattern">WebTestCase::assertPattern()</a>
+								: Will trigger a pass if the Perl regex pattern     is found in the raw content.
+							</li>
+				</ul>
+	</div>
+<a name="methodassertReference" id="assertReference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertReference</span> (line <span class="line-number">240</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if both parameters refer     to the same object or value. Fail otherwise.</p>
+<p class="description"><p>This will cause problems testing objects under     E_STRICT.     TODO: Replace with expectation.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertReference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">&$first</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Reference to check.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Hopefully the same variable.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$first</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$second</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertSame" id="assertSame"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertSame</span> (line <span class="line-number">265</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if both parameters refer     to the same object. Fail otherwise. This has     the same semantics as the PHPUnit assertSame.</p>
+<p class="description"><p>That is, if values are passed in it has roughly     the same affect as assertIdentical.     TODO: Replace with expectation.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertSame
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Object reference to check.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Hopefully the same object.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertTrue" id="assertTrue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertTrue</span> (line <span class="line-number">48</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Called from within the test methods to register     passes and failures.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertTrue
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$result</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$result</span><span class="var-description">: Pass on true.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display describing                               the test state.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodassertWithinMargin" id="assertWithinMargin"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assertWithinMargin</span> (line <span class="line-number">172</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will trigger a pass if the if the first parameter     is near enough to the second by the margin.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assertWithinMargin
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$margin</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$margin</span><span class="var-description">: Fuzziness of match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#method__construct">SimpleTestCase::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodafter">SimpleTestCase::after()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodassert">SimpleTestCase::assert()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodbefore">SimpleTestCase::before()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcheckExpectation">SimpleTestCase::checkExpectation()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcoerceExpectation">SimpleTestCase::coerceExpectation()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodconstructFailMessage">SimpleTestCase::constructFailMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodconstructPassMessage">SimpleTestCase::constructPassMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcreateInvoker">SimpleTestCase::createInvoker()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methoddump">SimpleTestCase::dump()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methoderror">SimpleTestCase::error()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexception">SimpleTestCase::exception()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectError">SimpleTestCase::expectError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectException">SimpleTestCase::expectException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectFail">SimpleTestCase::expectFail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodfail">SimpleTestCase::fail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetAssertionLine">SimpleTestCase::getAssertionLine()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetDumper">SimpleTestCase::getDumper()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetLabel">SimpleTestCase::getLabel()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetReporter">SimpleTestCase::getReporter()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetSize">SimpleTestCase::getSize()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetTests">SimpleTestCase::getTests()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetURLregex">SimpleTestCase::getURLregex()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodignoreException">SimpleTestCase::ignoreException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodisTest">SimpleTestCase::isTest()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodpass">SimpleTestCase::pass()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodrun">SimpleTestCase::run()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodsetUp">SimpleTestCase::setUp()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodshouldSkip">SimpleTestCase::shouldSkip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodsignal">SimpleTestCase::signal()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskip">SimpleTestCase::skip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskipIf">SimpleTestCase::skipIf()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskipUnless">SimpleTestCase::skipUnless()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodtearDown">SimpleTestCase::tearDown()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodtell">SimpleTestCase::tell()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:08 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

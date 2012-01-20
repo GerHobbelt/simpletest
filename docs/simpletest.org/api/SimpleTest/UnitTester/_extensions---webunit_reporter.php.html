@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs for page webunit_reporter.php</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="file-name">/extensions/webunit_reporter.php</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-classes">Classes</a>
+			|							<a href="#sec-includes">Includes</a>
+			|							<a href="#sec-constants">Constants</a>
+										</div>
+	<div class="info-box-body">	
+		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">base include file for SimpleTest PUnit reporter</p>
+	<ul class="tags">
+				<li><span class="field">version:</span> $Id$</li>
+			</ul>
+		
+			</div>
+</div>
+		
+	<a name="sec-classes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Classes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Classes</span>
+			|							<a href="#sec-includes">Includes</a>
+				|										<a href="#sec-constants">Constants</a>
+															</div>
+		<div class="info-box-body">	
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em; vertical-align: top">
+						<a href="../../SimpleTest/UnitTester/WebUnitReporter.html">WebUnitReporter</a>
+					</td>
+					<td>
+											Sample minimal test displayer. Generates only     failure messages and a pass count.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+	<a name="sec-includes"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Includes</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-classes">Classes</a>
+				|						<span class="disabled">Includes</span>
+			|							<a href="#sec-constants">Constants</a>
+															</div>
+		<div class="info-box-body">	
+			<a name="_SIMPLE_TEST_reporter_php"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name"><a href="../../SimpleTest/UnitTester/_reporter.php.html">SIMPLE_TEST.'reporter.php'</a></span>)
+			(line <span class="line-number">16</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+<a name="_SIMPLE_TEST_runner_php"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="include-title">
+			<span class="include-type">require_once</span>
+			(<span class="include-name">SIMPLE_TEST.'runner.php'</span>)
+			(line <span class="line-number">15</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+</div>
+		</div>
+	</div>
+	
+	<a name="sec-constants"></a>	
+	<div class="info-box">
+		<div class="info-box-title">Constants</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-classes">Classes</a>
+				|										<a href="#sec-includes">Includes</a>
+				|						<span class="disabled">Constants</span>
+											</div>
+		<div class="info-box-body">	
+			<a name="defineSIMPLETEST_WEBUNIT_CSS"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SIMPLETEST_WEBUNIT_CSS</span> = '/* this space reseved for future use */'
+			(line <span class="line-number">70</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Not used yet.</p>
+<p class="description"><p>May be needed for localized styles we need at runtime, not in the stylesheet.</p></p>
+	
+		
+</div>
+<a name="defineSIMPLETEST_WEBUNIT_HEAD"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SIMPLETEST_WEBUNIT_HEAD</span> = &lt;&lt;&lt;EOS<br />&lt;html&gt;<br />&lt;head&gt;<br />&lt;title&gt;%s&lt;/title&gt;<br />&lt;script type=&quot;text/javascript&quot; src=&quot;%sx.js&quot;&gt;&lt;/script&gt;<br />&lt;script type=&quot;text/javascript&quot; src=&quot;%swebunit.js&quot;&gt;&lt;/script&gt;<br />&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;%swebunit.css&quot; title=&quot;Default&quot;&gt;&lt;/link&gt;<br />&lt;style type=&quot;text/css&quot;&gt;<br />%s<br />&lt;/style&gt;<br />&lt;/head&gt;<br />&lt;body&gt;<br />&lt;div id=&quot;wait&quot;&gt;<br />	&lt;h1&gt;&amp;nbsp;Running %s&amp;nbsp;&lt;/h1&gt;<br />	Please wait...&lt;br /&gt;<br />	&lt;img src=&quot;%swait.gif&quot; border=&quot;0&quot;&gt;&lt;br /&gt;&amp;nbsp;<br />&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />wait_start();<br />&lt;/script&gt;<br />&lt;div id=&quot;webunit&quot;&gt;<br />	&lt;div id=&quot;run&quot;&gt;&lt;/div&gt;&lt;br /&gt;<br />	&lt;div id=&quot;tabs&quot;&gt;<br />		&lt;div id=&quot;visible_tab&quot;&gt;visible tab content&lt;/div&gt;<br />		&amp;nbsp;&amp;nbsp;&lt;span id=&quot;failtab&quot; class=&quot;activetab&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;javascript:activate_tab('fail');&quot;&gt;Fail&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;<br />		&lt;span id=&quot;treetab&quot; class=&quot;inactivetab&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;javascript:activate_tab('tree');&quot;&gt;Tree&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;<br />	&lt;/div&gt;<br />	&lt;div id=&quot;msg&quot;&gt;Click on a failed test case method in the tree tab to view output here.&lt;/div&gt;<br />&lt;/div&gt;<br />&lt;div id=&quot;fail&quot;&gt;&lt;/div&gt;<br />&lt;div id=&quot;tree&quot;&gt;&lt;/div&gt;<br />&lt;!-- open a new script to capture js vars as the tests run --&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />layout();<br /><br />&lt;html&gt;<br />&lt;head&gt;<br />&lt;title&gt;%s&lt;/title&gt;<br />&lt;script type=&quot;text/javascript&quot; src=&quot;%sx.js&quot;&gt;&lt;/script&gt;<br />&lt;script type=&quot;text/javascript&quot; src=&quot;%swebunit.js&quot;&gt;&lt;/script&gt;<br />&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;%swebunit.css&quot; title=&quot;Default&quot;&gt;&lt;/link&gt;<br />&lt;style type=&quot;text/css&quot;&gt;<br />%s<br />&lt;/style&gt;<br />&lt;/head&gt;<br />&lt;body&gt;<br />&lt;div id=&quot;wait&quot;&gt;<br />	&lt;h1&gt;&amp;nbsp;Running %s&amp;nbsp;&lt;/h1&gt;<br />	Please wait...&lt;br /&gt;<br />	&lt;img src=&quot;%swait.gif&quot; border=&quot;0&quot;&gt;&lt;br /&gt;&amp;nbsp;<br />&lt;/div&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />wait_start();<br />&lt;/script&gt;<br />&lt;div id=&quot;webunit&quot;&gt;<br />	&lt;div id=&quot;run&quot;&gt;&lt;/div&gt;&lt;br /&gt;<br />	&lt;div id=&quot;tabs&quot;&gt;<br />		&lt;div id=&quot;visible_tab&quot;&gt;visible tab content&lt;/div&gt;<br />		&amp;nbsp;&amp;nbsp;&lt;span id=&quot;failtab&quot; class=&quot;activetab&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;javascript:activate_tab('fail');&quot;&gt;Fail&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;<br />		&lt;span id=&quot;treetab&quot; class=&quot;inactivetab&quot;&gt;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;javascript:activate_tab('tree');&quot;&gt;Tree&lt;/a&gt;&amp;nbsp;&amp;nbsp;&lt;/span&gt;<br />	&lt;/div&gt;<br />	&lt;div id=&quot;msg&quot;&gt;Click on a failed test case method in the tree tab to view output here.&lt;/div&gt;<br />&lt;/div&gt;<br />&lt;div id=&quot;fail&quot;&gt;&lt;/div&gt;<br />&lt;div id=&quot;tree&quot;&gt;&lt;/div&gt;<br />&lt;!-- open a new script to capture js vars as the tests run --&gt;<br />&lt;script type=&quot;text/javascript&quot;&gt;<br />layout();<br /><br />EOS
+			(line <span class="line-number">28</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Main sprintf template for the start of the page.</p>
+<p class="description"><p>Sequence of parameters is: <ul><li>title - string</li><li>script path - string</li><li>script path - string</li><li>css path - string</li><li>additional css - string</li><li>title - string</li><li>image path - string</li></ul></p></p>
+	
+		
+</div>
+		</div>
+	</div>
+	
+	
+	
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:09 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

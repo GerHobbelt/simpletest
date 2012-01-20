@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleTestXmlParser</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleTestXmlParser</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parser for importing the output of the XmlReporter.</p>
+<p class="description"><p>Dispatches that output to another reporter.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_xml.php.html">/xml.php</a> (line <span class="field">474</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$attributes" title="details" class="var-name">$attributes</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$content" title="details" class="var-name">$content</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expat" title="details" class="var-name">$expat</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$in_content_tag" title="details" class="var-name">$in_content_tag</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$listener" title="details" class="var-name">$listener</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$tag_stack" title="details" class="var-name">$tag_stack</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">SimpleTestXmlParser</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>&nbsp;<span class="var-name">$listener</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addContent" title="details" class="method-name">addContent</a>
+											(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">resource</span>
+										<a href="#createParser" title="details" class="method-name">createParser</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#defaultContent" title="details" class="method-name">defaultContent</a>
+											(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$default</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#endElement" title="details" class="method-name">endElement</a>
+											(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">NestedXmlTag</span>
+										<a href="#getCurrentNestingTag" title="details" class="method-name">getCurrentNestingTag</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">@boolean</span>
+										<a href="#isLeaf" title="details" class="method-name">isLeaf</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#parse" title="details" class="method-name">parse</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$chunk</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">NestedXmlTag</span>
+										<a href="#popNestingTag" title="details" class="method-name">popNestingTag</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">NestedXmlTag</span>
+										<a href="#pushNestingTag" title="details" class="method-name">pushNestingTag</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$nested</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#startElement" title="details" class="method-name">startElement</a>
+											(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$attributes" id="$attributes"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$attributes</span>
+						(line <span class="line-number">480</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$content" id="$content"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$content</span>
+						(line <span class="line-number">479</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$expat" id="$expat"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expat</span>
+						(line <span class="line-number">476</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$in_content_tag" id="$in_content_tag"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$in_content_tag</span>
+						(line <span class="line-number">478</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$listener" id="$listener"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$listener</span>
+						(line <span class="line-number">475</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$tag_stack" id="$tag_stack"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$tag_stack</span>
+						(line <span class="line-number">477</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">488</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Loads a listener with the SimpleReporter     interface.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleTestXmlParser</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>&nbsp;<span class="var-name">$listener</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>
+				<span class="var-name">$listener</span><span class="var-description">: Listener of tag events.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddContent" id="addContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addContent</span> (line <span class="line-number">631</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Content between start and end elements.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addContent
+		</span>
+					(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">resource</span>
+				<span class="var-name">$expat</span><span class="var-description">: Parser handle.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$text</span><span class="var-description">: Usually output messages.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreateParser" id="createParser"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">createParser</span> (line <span class="line-number">518</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up expat as the XML parser.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Expat handle.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">resource</span>
+		<span class="method-name">
+			createParser
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddefaultContent" id="defaultContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">defaultContent</span> (line <span class="line-number">644</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">XML and Doctype handler. Discards all such content.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			defaultContent
+		</span>
+					(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$default</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">resource</span>
+				<span class="var-name">$expat</span><span class="var-description">: Parser handle.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$default</span><span class="var-description">: Text of default content.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodendElement" id="endElement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">endElement</span> (line <span class="line-number">597</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">End of element event.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			endElement
+		</span>
+					(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">resource</span>
+				<span class="var-name">$expat</span><span class="var-description">: Parser handle.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tag</span><span class="var-description">: Element name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCurrentNestingTag" id="getCurrentNestingTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentNestingTag</span> (line <span class="line-number">543</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for current test structure tag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The group, case or method tag                              being parsed.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">NestedXmlTag</span>
+		<span class="method-name">
+			getCurrentNestingTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodisLeaf" id="isLeaf"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isLeaf</span> (line <span class="line-number">563</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test if tag is a leaf node with only text content.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if leaf, false if nesting.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">@boolean</span>
+		<span class="method-name">
+			isLeaf
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tag</span><span class="var-description">: XML tag name.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodparse" id="parse"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">parse</span> (line <span class="line-number">504</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Parses a block of XML sending the results to     the listener.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if valid XML.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			parse
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$chunk</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$chunk</span><span class="var-description">: Block of text to read.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpopNestingTag" id="popNestingTag"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">popNestingTag</span> (line <span class="line-number">553</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Ends a nesting tag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The group, case or method tag                              just finished.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">NestedXmlTag</span>
+		<span class="method-name">
+			popNestingTag
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodpushNestingTag" id="pushNestingTag"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">pushNestingTag</span> (line <span class="line-number">533</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Opens a new test nesting level.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The group, case or method tag                              to start.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">NestedXmlTag</span>
+		<span class="method-name">
+			pushNestingTag
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$nested</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$nested</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstartElement" id="startElement"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">startElement</span> (line <span class="line-number">577</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Handler for start of event element.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			startElement
+		</span>
+					(<span class="var-type">resource</span>&nbsp;<span class="var-name">$expat</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">resource</span>
+				<span class="var-name">$expat</span><span class="var-description">: Parser handle.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tag</span><span class="var-description">: Element name.</span>			</li>
+					<li>
+				<span class="var-type">hash</span>
+				<span class="var-name">$attributes</span><span class="var-description">: Name value pairs.                                Attributes without content                                are marked as true.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:11 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

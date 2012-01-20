@@ -1,0 +1,1780 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleMock</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleMock</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">A base class or delegate that extends an</p>
+<p class="description"><p>empty collection of methods that can have their     return values set and expectations made of the     calls upon them. The mock will assert the     expectations against it's attached test case in     addition to the server stub behaviour or returning     preprogrammed responses.</p></p>
+		<p class="notes">
+			Located in <a class="field" href="_mock_objects.php.html">/mock_objects.php</a> (line <span class="field">639</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$actions" title="details" class="var-name">$actions</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$call_counts" title="details" class="var-name">$call_counts</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expectations" title="details" class="var-name">$expectations</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expected_args" title="details" class="var-name">$expected_args</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expected_args_at" title="details" class="var-name">$expected_args_at</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$expected_counts" title="details" class="var-name">$expected_counts</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$is_strict" title="details" class="var-name">$is_strict</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$max_counts" title="details" class="var-name">$max_counts</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$wildcard" title="details" class="var-name">$wildcard</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																																																																																																																														
+				<div class="method-definition">
+											<span class="method-result">SimpleMock</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addCall" title="details" class="method-name">addCall</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#atTestEnd" title="details" class="method-name">atTestEnd</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_method</span>, <span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span>&nbsp;<span class="var-name">$test</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#checkArgumentsIsArray" title="details" class="method-name">checkArgumentsIsArray</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$task</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#checkExpectations" title="details" class="method-name">checkExpectations</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#dieOnNoMethod" title="details" class="method-name">dieOnNoMethod</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$task</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#disableEStrict" title="details" class="method-name">disableEStrict</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#disableExpectationNameChecks" title="details" class="method-name">disableExpectationNameChecks</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#emulateCall" title="details" class="method-name">&amp;emulateCall</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$step</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#errorAt" title="details" class="method-name">errorAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$error</span> = <span class="var-default">'A mock error'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span> = <span class="var-default">E_USER_ERROR</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#errorOn" title="details" class="method-name">errorOn</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$error</span> = <span class="var-default">'A mock error'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span> = <span class="var-default">E_USER_ERROR</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expect" title="details" class="method-name">expect</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectAt" title="details" class="method-name">expectAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectAtLeastOnce" title="details" class="method-name">expectAtLeastOnce</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectCallCount" title="details" class="method-name">expectCallCount</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectMaximumCallCount" title="details" class="method-name">expectMaximumCallCount</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectMinimumCallCount" title="details" class="method-name">expectMinimumCallCount</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectNever" title="details" class="method-name">expectNever</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#expectOnce" title="details" class="method-name">expectOnce</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getCallCount" title="details" class="method-name">getCallCount</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">SimpeTestCase</span>
+										<a href="#getCurrentTestCase" title="details" class="method-name">getCurrentTestCase</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#invoke" title="details" class="method-name">&amp;invoke</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#replaceWildcards" title="details" class="method-name">replaceWildcards</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#restoreEStrict" title="details" class="method-name">restoreEStrict</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$was</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returns" title="details" class="method-name">returns</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returnsAt" title="details" class="method-name">returnsAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returnsByReference" title="details" class="method-name">returnsByReference</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$reference</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returnsByReferenceAt" title="details" class="method-name">returnsByReferenceAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$reference</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returnsByValue" title="details" class="method-name">returnsByValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#returnsByValueAt" title="details" class="method-name">returnsByValueAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setReturnReference" title="details" class="method-name">setReturnReference</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setReturnReferenceAt" title="details" class="method-name">setReturnReferenceAt</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setReturnValue" title="details" class="method-name">setReturnValue</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setReturnValueAt" title="details" class="method-name">setReturnValueAt</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#throwAt" title="details" class="method-name">throwAt</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$exception</span> = <span class="var-default">false</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#throwOn" title="details" class="method-name">throwOn</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$exception</span> = <span class="var-default">false</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$actions" id="$actions"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$actions</span>
+						(line <span class="line-number">640</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$call_counts" id="$call_counts"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$call_counts</span>
+						(line <span class="line-number">644</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$expectations" id="$expectations"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expectations</span>
+						(line <span class="line-number">641</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$expected_args" id="$expected_args"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expected_args</span>
+						(line <span class="line-number">647</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$expected_args_at" id="$expected_args_at"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expected_args_at</span>
+						(line <span class="line-number">648</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$expected_counts" id="$expected_counts"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$expected_counts</span>
+						(line <span class="line-number">645</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$is_strict" id="$is_strict"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$is_strict</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">643</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$max_counts" id="$max_counts"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$max_counts</span>
+						(line <span class="line-number">646</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$wildcard" id="$wildcard"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$wildcard</span>
+			 = <span class="var-default"> MOCK_ANYTHING</span>			(line <span class="line-number">642</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">654</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates an empty action list and expectation list.</p>
+<p class="description"><p>All call counts are set to zero.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleMock</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodaddCall" id="addCall"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addCall</span> (line <span class="line-number">741</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds one to the call count of a method.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addCall
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method called.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Arguments as an array.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodatTestEnd" id="atTestEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">atTestEnd</span> (line <span class="line-number">1096</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Receives event from unit test that the current     test method has finished. Totals up the call     counts and triggers a test assertion if a test     is present for expected call counts.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			atTestEnd
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_method</span>, <span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span>&nbsp;<span class="var-name">$test</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_method</span><span class="var-description">: Current method name.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span>
+				<span class="var-name">$test</span><span class="var-description">: Test to send message to.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcheckArgumentsIsArray" id="checkArgumentsIsArray"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkArgumentsIsArray</span> (line <span class="line-number">695</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Die if bad arguments array is passed.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Valid arguments</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			checkArgumentsIsArray
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$task</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$args</span><span class="var-description">: The arguments value to be checked.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$task</span><span class="var-description">: Description of task attempt.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcheckExpectations" id="checkExpectations"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkExpectations</span> (line <span class="line-number">1153</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests the arguments against expectations.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			checkExpectations
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method to check.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Argument list to match.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: The position of this call                                  in the call history.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddieOnNoMethod" id="dieOnNoMethod"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">dieOnNoMethod</span> (line <span class="line-number">709</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Triggers a PHP error if the method is not part     of this object.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			dieOnNoMethod
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$task</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Name of method.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$task</span><span class="var-description">: Description of task attempt.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddisableEStrict" id="disableEStrict"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">disableEStrict</span> (line <span class="line-number">1179</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Our mock has to be able to return anything, including    variable references. To allow for these mixed returns    we have to disable the E_STRICT warnings while the    method calls are emulated.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disableEStrict
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddisableExpectationNameChecks" id="disableExpectationNameChecks"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">disableExpectationNameChecks</span> (line <span class="line-number">677</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Disables a name check when setting expectations.</p>
+<p class="description"><p>This hack is needed for the partial mocks.</p></p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			disableExpectationNameChecks
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodemulateCall" id="emulateCall"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">emulateCall</span> (line <span class="line-number">1142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Finds the return value matching the incoming     arguments. If there is no matching value found     then an error is triggered.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Stored return or other action.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			&amp;emulateCall
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$step</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Calling arguments.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$step</span><span class="var-description">: Current position in the                                call history.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoderrorAt" id="errorAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">errorAt</span> (line <span class="line-number">1083</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up a trigger to throw an error upon a specific     method call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			errorAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$error</span> = <span class="var-default">'A mock error'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span> = <span class="var-default">E_USER_ERROR</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: When to throw the exception. A                               value of 0 throws immediately.                               A value of 1 actually allows one call                               to this method before throwing. 2                               will allow two calls before throwing                               and so on.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name to throw on.</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$error</span><span class="var-description">: Error message to trigger.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Optional argument list filter.                               If given then the exception                               will only be thrown if the                               method call matches the arguments.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$severity</span><span class="var-description">: The PHP severity level. Defaults                               to E_USER_ERROR.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoderrorOn" id="errorOn"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">errorOn</span> (line <span class="line-number">1060</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up a trigger to throw an error upon the     method call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			errorOn
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$error</span> = <span class="var-default">'A mock error'</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span> = <span class="var-default">E_USER_ERROR</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name to throw on.</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$error</span><span class="var-description">: Error message to trigger.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Optional argument list filter.                               If given then the exception                               will only be thrown if the                               method call matches the arguments.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$severity</span><span class="var-description">: The PHP severity level. Defaults                               to E_USER_ERROR.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpect" id="expect"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">expect</span> (line <span class="line-number">885</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up an expected call with a set of     expected parameters in that call. All     calls will be compared to these expectations     regardless of when the call is made.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expect
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to test.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Expected parameters for the call                                  including wildcards.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectAt" id="expectAt"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectAt</span> (line <span class="line-number">907</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up an expected call with a set of     expected parameters in that call. The     expected call count will be adjusted if it     is set too low to reach this call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: Number of calls in the future at                               which to test. Next call is 0.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to test.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Expected parameters for the call                               including wildcards.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectAtLeastOnce" id="expectAtLeastOnce"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectAtLeastOnce</span> (line <span class="line-number">999</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Convenience method for requiring a method     call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectAtLeastOnce
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to track.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Expected argument list or                                 false for any arguments.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectCallCount" id="expectCallCount"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectCallCount</span> (line <span class="line-number">929</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets an expectation for the number of times     a method will be called. The tally method     is used to check this.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectCallCount
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to test.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$count</span><span class="var-description">: Number of times it should                                  have been called at tally.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectMaximumCallCount" id="expectMaximumCallCount"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectMaximumCallCount</span> (line <span class="line-number">944</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the number of times a method may be called     before a test failure is triggered.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectMaximumCallCount
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to test.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$count</span><span class="var-description">: Most number of times it should                                  have been called.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectMinimumCallCount" id="expectMinimumCallCount"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectMinimumCallCount</span> (line <span class="line-number">959</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the number of times to call a method to prevent     a failure on the tally.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectMinimumCallCount
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$count</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to test.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$count</span><span class="var-description">: Least number of times it should                                have been called.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectNever" id="expectNever"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectNever</span> (line <span class="line-number">972</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Convenience method for barring a method     call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectNever
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to ban.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectOnce" id="expectOnce"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectOnce</span> (line <span class="line-number">984</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Convenience method for a single method     call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			expectOnce
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method call to track.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Expected argument list or                               false for any arguments.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Overridden message.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCallCount" id="getCallCount"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCallCount</span> (line <span class="line-number">753</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Fetches the call count of a method so far.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Number of calls so far.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getCallCount
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name called.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetCurrentTestCase" id="getCurrentTestCase"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getCurrentTestCase</span> (line <span class="line-number">685</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Finds currently running test.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Current test case.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpeTestCase</span>
+		<span class="method-name">
+			getCurrentTestCase
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodinvoke" id="invoke"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">invoke</span> (line <span class="line-number">1116</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the expected value for the method name     and checks expectations. Will generate any     test assertions as a result of expectations     if there is a test present.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Stored return.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			&amp;invoke
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Name of method to simulate.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Arguments as an array.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreplaceWildcards" id="replaceWildcards"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">replaceWildcards</span> (line <span class="line-number">724</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Replaces wildcard matches with wildcard     expectations in the argument list.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Argument list with                             expectations.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			replaceWildcards
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Raw argument list.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrestoreEStrict" id="restoreEStrict"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">restoreEStrict</span> (line <span class="line-number">1189</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Restores the E_STRICT level if it was previously set.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			restoreEStrict
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$was</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$was</span><span class="var-description">: Previous error reporting level.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturns" id="returns"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">returns</span> (line <span class="line-number">770</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed on by all calls to this method that match.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returns
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Result of call by value/handle.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                                 including wildcards.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturnsAt" id="returnsAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">returnsAt</span> (line <span class="line-number">788</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed only when the required call count     is reached.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returnsAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: Number of calls in the future                              to which the result applies. If                              not set then all calls will return                              the value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Result of call passed.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                              including wildcards.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturnsByReference" id="returnsByReference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">returnsByReference</span> (line <span class="line-number">842</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed by reference for all calls.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returnsByReference
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$reference</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$reference</span><span class="var-description">: Result of the call will be this object.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                                 including wildcards.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$reference</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturnsByReferenceAt" id="returnsByReferenceAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">returnsByReferenceAt</span> (line <span class="line-number">865</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed by value only when the required call count     is reached.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returnsByReferenceAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$reference</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: Number of calls in the future                               to which the result applies. If                               not set then all calls will return                               the value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$reference</span><span class="var-description">: Result of the call will be this object.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                               including wildcards.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$reference</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturnsByValue" id="returnsByValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">returnsByValue</span> (line <span class="line-number">801</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed by value for all calls to this method.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returnsByValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Result of call passed by value.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                                 including wildcards.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodreturnsByValueAt" id="returnsByValueAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">returnsByValueAt</span> (line <span class="line-number">824</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a return for a parameter list that will     be passed by value only when the required call count     is reached.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			returnsByValueAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: Number of calls in the future                              to which the result applies. If                              not set then all calls will return                              the value.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Result of call passed by value.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: List of parameters to match                              including wildcards.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetReturnReference" id="setReturnReference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setReturnReference</span> (line <span class="line-number">848</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setReturnReference
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$reference</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$args</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetReturnReferenceAt" id="setReturnReferenceAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setReturnReferenceAt</span> (line <span class="line-number">871</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setReturnReferenceAt
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$reference</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$timing</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$reference</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$args</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetReturnValue" id="setReturnValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setReturnValue</span> (line <span class="line-number">807</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setReturnValue
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$args</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetReturnValueAt" id="setReturnValueAt"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setReturnValueAt</span> (line <span class="line-number">830</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setReturnValueAt
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$timing</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$args</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodthrowAt" id="throwAt"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">throwAt</span> (line <span class="line-number">1042</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up a trigger to throw an exception upon the     method call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			throwAt
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$timing</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$exception</span> = <span class="var-default">false</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$timing</span><span class="var-description">: When to throw the exception. A                               value of 0 throws immediately.                               A value of 1 actually allows one call                               to this method before throwing. 2                               will allow two calls before throwing                               and so on.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name to throw on.</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$exception</span><span class="var-description">: Exception object to throw.                               If not given then a simple                               Exception object is thrown.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Optional argument list filter.                               If given then the exception                               will only be thrown if the                               method call matches the arguments.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodthrowOn" id="throwOn"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">throwOn</span> (line <span class="line-number">1018</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up a trigger to throw an exception upon the     method call.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			throwOn
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$exception</span> = <span class="var-default">false</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name to throw on.</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$exception</span><span class="var-description">: Exception object to throw.                               If not given then a simple                               Exception object is thrown.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$args</span><span class="var-description">: Optional argument list filter.                               If given then the exception                               will only be thrown if the                               method call matches the arguments.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:58 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleForm</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleForm</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Form tag class to hold widget values.</p>
+		<p class="notes">
+			Located in <a class="field" href="_form.php.html">/form.php</a> (line <span class="field">22</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$action" title="details" class="var-name">$action</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$buttons" title="details" class="var-name">$buttons</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$checkboxes" title="details" class="var-name">$checkboxes</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$default_target" title="details" class="var-name">$default_target</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$encoding" title="details" class="var-name">$encoding</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$id" title="details" class="var-name">$id</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$images" title="details" class="var-name">$images</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$method" title="details" class="var-name">$method</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$radios" title="details" class="var-name">$radios</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$widgets" title="details" class="var-name">$widgets</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																														
+				<div class="method-definition">
+											<span class="method-result">SimpleForm</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>&nbsp;<span class="var-name">$page</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addCheckbox" title="details" class="method-name">addCheckbox</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html">SimpleCheckboxTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addRadioButton" title="details" class="method-name">addRadioButton</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html">SimpleRadioButtonTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#addWidget" title="details" class="method-name">addWidget</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#attachLabelBySelector" title="details" class="method-name">attachLabelBySelector</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$label</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+										<a href="#createAction" title="details" class="method-name">createAction</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$action</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$page</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$base</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">SimpleFormEncoding</span>
+										<a href="#encode" title="details" class="method-name">encode</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+										<a href="#getAction" title="details" class="method-name">getAction</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getId" title="details" class="method-name">getId</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getMethod" title="details" class="method-name">getMethod</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string/array</span>
+										<a href="#getValue" title="details" class="method-name">getValue</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#hasImage" title="details" class="method-name">hasImage</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#hasSubmit" title="details" class="method-name">hasSubmit</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setDefaultTarget" title="details" class="method-name">setDefaultTarget</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$frame</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#setEncodingClass" title="details" class="method-name">setEncodingClass</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#setField" title="details" class="method-name">setField</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$position</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setWidget" title="details" class="method-name">setWidget</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>&nbsp;<span class="var-name">$tag</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">hash</span>
+										<a href="#submit" title="details" class="method-name">submit</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>
+										<a href="#submitButton" title="details" class="method-name">submitButton</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, [<span class="var-type">hash</span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>
+										<a href="#submitImage" title="details" class="method-name">submitImage</a>
+											(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$x</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$y</span>, [<span class="var-type">hash</span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$action" id="$action"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$action</span>
+						(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$buttons" id="$buttons"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$buttons</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$checkboxes" id="$checkboxes"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$checkboxes</span>
+						(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$default_target" id="$default_target"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$default_target</span>
+						(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$encoding" id="$encoding"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$encoding</span>
+						(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$id" id="$id"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$id</span>
+						(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$images" id="$images"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$images</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$method" id="$method"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$method</span>
+						(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$radios" id="$radios"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$radios</span>
+						(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$widgets" id="$widgets"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$widgets</span>
+						(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Starts with no held controls/widgets.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleForm</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>&nbsp;<span class="var-name">$page</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Form tag to read.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimplePage.html">SimplePage</a></span>
+				<span class="var-name">$page</span><span class="var-description">: Holding page.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddCheckbox" id="addCheckbox"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addCheckbox</span> (line <span class="line-number">188</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a checkbox, making it a group on a repeated name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addCheckbox
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html">SimpleCheckboxTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html">SimpleCheckboxTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Incoming form control.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddRadioButton" id="addRadioButton"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">addRadioButton</span> (line <span class="line-number">175</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a radio button, building a group if necessary.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addRadioButton
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html">SimpleRadioButtonTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html">SimpleRadioButtonTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Incoming form control.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodaddWidget" id="addWidget"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">addWidget</span> (line <span class="line-number">144</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Adds a tag contents to the form.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			addWidget
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Input tag to add.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodattachLabelBySelector" id="attachLabelBySelector"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">attachLabelBySelector</span> (line <span class="line-number">255</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Used by the page object to set widgets labels to     external label tags.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			attachLabelBySelector
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$label</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$label</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreateAction" id="createAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">createAction</span> (line <span class="line-number">93</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Combined action attribute with current location     to get an absolute form target.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Absolute form target.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+		<span class="method-name">
+			createAction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$action</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$page</span>, <span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>&nbsp;<span class="var-name">$base</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$action</span><span class="var-description">: Action attribute from form tag.</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+				<span class="var-name">$base</span><span class="var-description">: Page location.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$page</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodencode" id="encode"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">encode</span> (line <span class="line-number">122</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates the encoding for the current values in the     form.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Request to submit.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleFormEncoding</span>
+		<span class="method-name">
+			encode
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetAction" id="getAction"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAction</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Absolute URL of the target.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> URL target.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleUrl.html">SimpleUrl</a></span>
+		<span class="method-name">
+			getAction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetId" id="getId"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getId</span> (line <span class="line-number">136</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">ID field of form for unique identification.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Unique tag ID.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getId
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetMethod" id="getMethod"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMethod</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for method of form submission.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Either get or post.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getMethod
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetValue" id="getValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getValue</span> (line <span class="line-number">210</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts current value from form.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Value(s) as string or null                                       if not set.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string/array</span>
+		<span class="method-name">
+			getValue
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodhasImage" id="hasImage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">hasImage</span> (line <span class="line-number">287</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if a form has an image control.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if present.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			hasImage
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodhasSubmit" id="hasSubmit"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">hasSubmit</span> (line <span class="line-number">272</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if a form has a submit button.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if present.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			hasSubmit
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetDefaultTarget" id="setDefaultTarget"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setDefaultTarget</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the frame target within a frameset.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setDefaultTarget
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$frame</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$frame</span><span class="var-description">: Name of frame.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetEncodingClass" id="setEncodingClass"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setEncodingClass</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates the request packet to be sent by the form.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Packet class.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			setEncodingClass
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Form tag to read.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetField" id="setField"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setField</span> (line <span class="line-number">233</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets a widget value within the form.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if value is legal, false                                       otherwise. If the field is not                                       present, nothing will be set.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			setField
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$position</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: Value to input into the widget.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$position</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetWidget" id="setWidget"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setWidget</span> (line <span class="line-number">160</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the widget into the form, grouping radio     buttons if any.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setWidget
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>&nbsp;<span class="var-name">$tag</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleWidget.html">SimpleWidget</a></span>
+				<span class="var-name">$tag</span><span class="var-description">: Incoming form control.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsubmit" id="submit"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">submit</span> (line <span class="line-number">353</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Simply submits the form without the submit button     value. Used when there is only one button or it     is unimportant.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Submitted values.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">hash</span>
+		<span class="method-name">
+			submit
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$additional</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsubmitButton" id="submitButton"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">submitButton</span> (line <span class="line-number">305</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the submit values for a selected button.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Submitted values or false                                       if there is no such button                                       in the form.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>
+		<span class="method-name">
+			submitButton
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, [<span class="var-type">hash</span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+					<li>
+				<span class="var-type">hash</span>
+				<span class="var-name">$additional</span><span class="var-description">: Additional data for the form.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsubmitImage" id="submitImage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">submitImage</span> (line <span class="line-number">331</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the submit values for an image.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Submitted values or false                                       if there is no such button in the                                       form.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>
+		<span class="method-name">
+			submitImage
+		</span>
+					(<span class="var-type">SimpleSelector</span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$x</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$y</span>, [<span class="var-type">hash</span>&nbsp;<span class="var-name">$additional</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleSelector</span>
+				<span class="var-name">$selector</span><span class="var-description">: Criteria to apply.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$x</span><span class="var-description">: X-coordinate of click.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$y</span><span class="var-description">: Y-coordinate of click.</span>			</li>
+					<li>
+				<span class="var-type">hash</span>
+				<span class="var-name">$additional</span><span class="var-description">: Additional data for the form.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:55 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

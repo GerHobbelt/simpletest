@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class CoverageCalculator</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class CoverageCalculator</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+		<p class="notes">
+			Located in <a class="field" href="_extensions---coverage---coverage_calculator.php.html">/extensions/coverage/coverage_calculator.php</a> (line <span class="field">10</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																										
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#reportFilename" title="details" class="method-name">reportFilename</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$filename</span>)
+									</div>
+																																										
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#coverageByFileVariables" title="details" class="method-name">coverageByFileVariables</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#lineCoverage" title="details" class="method-name">lineCoverage</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#lineCoverageCodeToStyleClass" title="details" class="method-name">lineCoverageCodeToStyleClass</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#percentCoverageByFile" title="details" class="method-name">percentCoverageByFile</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$results</span>)
+									</div>
+																						
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#totalCoverage" title="details" class="method-name">totalCoverage</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#totalLoc" title="details" class="method-name">totalLoc</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#variables" title="details" class="method-name">variables</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$untouched</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodreportFilename" id="reportFilename"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static reportFilename</span> (line <span class="line-number">62</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			reportFilename
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$filename</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$filename</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcoverageByFileVariables" id="coverageByFileVariables"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">coverageByFileVariables</span> (line <span class="line-number">12</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			coverageByFileVariables
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlineCoverage" id="lineCoverage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">lineCoverage</span> (line <span class="line-number">52</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			lineCoverage
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$total</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$line</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodlineCoverageCodeToStyleClass" id="lineCoverageCodeToStyleClass"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">lineCoverageCodeToStyleClass</span> (line <span class="line-number">30</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			lineCoverageCodeToStyleClass
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$line</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpercentCoverageByFile" id="percentCoverageByFile"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">percentCoverageByFile</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			percentCoverageByFile
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$file</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$results</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">&$results</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtotalCoverage" id="totalCoverage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">totalCoverage</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			totalCoverage
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$total</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtotalLoc" id="totalLoc"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">totalLoc</span> (line <span class="line-number">48</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			totalLoc
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$total</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$total</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvariables" id="variables"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">variables</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			variables
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$coverage</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$untouched</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$coverage</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$untouched</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:49 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

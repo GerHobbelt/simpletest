@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class EclipseReporter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class EclipseReporter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">base reporter class for eclipse plugin</p>
+		<p class="notes">
+			Located in <a class="field" href="_eclipse.php.html">/eclipse.php</a> (line <span class="field">23</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a>
+   |
+   --EclipseReporter</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$case" title="details" class="var-name">$case</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$cc" title="details" class="var-name">$cc</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$error" title="details" class="var-name">$error</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$fail" title="details" class="var-name">$fail</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$group" title="details" class="var-name">$group</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$listener" title="details" class="var-name">$listener</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$message" title="details" class="var-name">$message</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$method" title="details" class="var-name">$method</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$pass" title="details" class="var-name">$pass</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																						
+				<div class="method-definition">
+											<span class="method-result">EclipseReporter</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$listener</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cc</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/Eclipse/EclipseInvoker.html">EclipseInvoker</a></span>
+										<a href="#createInvoker" title="details" class="method-name">createInvoker</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleInvoker.html">SimpleInvoker</a></span>&nbsp;<span class="var-name">$invoker</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleSocket.html">SimpleSocket</a></span>
+										<a href="#createListener" title="details" class="method-name">createListener</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">&quot;127.0.0.1&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#escapeVal" title="details" class="method-name">escapeVal</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$raw</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleDumper.html">SimpleDumper</a></span>
+										<a href="#getDumper" title="details" class="method-name">getDumper</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintCaseEnd" title="details" class="method-name">paintCaseEnd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintCaseStart" title="details" class="method-name">paintCaseStart</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintError" title="details" class="method-name">paintError</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintException" title="details" class="method-name">paintException</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$exception</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintFail" title="details" class="method-name">paintFail</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintFooter" title="details" class="method-name">paintFooter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintGroupEnd" title="details" class="method-name">paintGroupEnd</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$group</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintGroupStart" title="details" class="method-name">paintGroupStart</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$group</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$size</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintHeader" title="details" class="method-name">paintHeader</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintMethodEnd" title="details" class="method-name">paintMethodEnd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintMethodStart" title="details" class="method-name">paintMethodStart</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintPass" title="details" class="method-name">paintPass</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$case" id="$case"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$case</span>
+						(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$cc" id="$cc"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$cc</span>
+						(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$error" id="$error"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$error</span>
+						(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$fail" id="$fail"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$fail</span>
+						(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$group" id="$group"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$group</span>
+						(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$listener" id="$listener"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$listener</span>
+						(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$message" id="$message"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$message</span>
+						(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$method" id="$method"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$method</span>
+						(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$pass" id="$pass"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$pass</span>
+						(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$errors">SimpleScorer::$errors</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$exceptions">SimpleScorer::$exceptions</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$fails">SimpleScorer::$fails</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$is_dry_run">SimpleScorer::$is_dry_run</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$list_tests">SimpleScorer::$list_tests</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$passes">SimpleScorer::$passes</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$show_breadcrumb">SimpleScorer::$show_breadcrumb</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$show_stacktrace">SimpleScorer::$show_stacktrace</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reporter to be run inside of Eclipse interface.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">EclipseReporter</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$listener</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cc</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$listener</span><span class="var-description">: Eclipse listener (?).</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$cc</span><span class="var-description">: Whether to include test coverage.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#method__construct">SimpleScorer::__construct()</a></dt>
+						<dd>Starts the test run with no results.</dd>
+					</dl>
+			
+	</div>
+<a name="methodcreateInvoker" id="createInvoker"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">createInvoker</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Wraps the test in an output buffer.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Decorator with output buffering.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/Eclipse/EclipseInvoker.html">EclipseInvoker</a></span>
+		<span class="method-name">
+			createInvoker
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleInvoker.html">SimpleInvoker</a></span>&nbsp;<span class="var-name">$invoker</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleInvoker.html">SimpleInvoker</a></span>
+				<span class="var-name">$invoker</span><span class="var-description">: Current test runner.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodcreateInvoker">SimpleScorer::createInvoker()</a></dt>
+						<dd>Can wrap the invoker in preperation for running     a test.</dd>
+					</dl>
+			
+	</div>
+<a name="methodcreateListener" id="createListener"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">createListener</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Localhost connection from Eclipse.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Connection to Eclipse.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/WebTester/SimpleSocket.html">SimpleSocket</a></span>
+		<span class="method-name">
+			createListener
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$port</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$host</span> = <span class="var-default">&quot;127.0.0.1&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$port</span><span class="var-description">: Port to connect to Eclipse.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$host</span><span class="var-description">: Normally localhost.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodescapeVal" id="escapeVal"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">escapeVal</span> (line <span class="line-number">87</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">C style escaping.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Replaced with C backslashed tokens.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			escapeVal
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$raw</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$raw</span><span class="var-description">: String with backslashes, quotes and whitespace.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetDumper" id="getDumper"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDumper</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Means to display human readable object comparisons.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Visual comparer.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleDumper.html">SimpleDumper</a></span>
+		<span class="method-name">
+			getDumper
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodpaintCaseEnd" id="paintCaseEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintCaseEnd</span> (line <span class="line-number">218</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Drops the name.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintCaseEnd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: Name of test or other label.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$case</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseEnd">SimpleScorer::paintCaseEnd()</a></dt>
+						<dd>Paints the end of a test case.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintCaseStart" id="paintCaseStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintCaseStart</span> (line <span class="line-number">209</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stashes the test case name for the later failure message.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintCaseStart
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: Name of test or other label.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$case</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseStart">SimpleScorer::paintCaseStart()</a></dt>
+						<dd>Paints the start of a test case.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintError" id="paintError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintError</span> (line <span class="line-number">127</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stash the first error. Clicking the test     item goes to first error.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintError
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Test message, but we only wnat the first.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintError">SimpleScorer::paintError()</a></dt>
+						<dd>Deals with PHP 4 throwing an error.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintException" id="paintException"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintException</span> (line <span class="line-number">142</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stash the first exception. Clicking the test     item goes to first message.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintException
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$exception</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Test message, but we only wnat the first.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$exception</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintException">SimpleScorer::paintException()</a></dt>
+						<dd>Deals with PHP 5 throwing an exception.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintFail" id="paintFail"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintFail</span> (line <span class="line-number">112</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stash the first failing item. Clicking the test     item goes to first fail.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintFail
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Test message, but we only wnat the first.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFail">SimpleScorer::paintFail()</a></dt>
+						<dd>Potentially show the fail message.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintFooter" id="paintFooter"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintFooter</span> (line <span class="line-number">171</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">We don't display any special footer.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintFooter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: The top level test.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpaintGroupEnd" id="paintGroupEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintGroupEnd</span> (line <span class="line-number">243</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Paints coverage report if enabled.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintGroupEnd
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$group</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$group</span><span class="var-description">: Name of test or other label.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupEnd">SimpleScorer::paintGroupEnd()</a></dt>
+						<dd>Paints the end of a group test.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintGroupStart" id="paintGroupStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintGroupStart</span> (line <span class="line-number">229</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stashes the name of the test suite. Starts test coverage     if enabled.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintGroupStart
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$group</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$size</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$group</span><span class="var-description">: Name of test or other label.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$size</span><span class="var-description">: Number of test cases starting.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupStart">SimpleScorer::paintGroupStart()</a></dt>
+						<dd>Paints the start of a group test.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintHeader" id="paintHeader"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintHeader</span> (line <span class="line-number">163</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">We don't display any special header.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintHeader
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: First test top level                                  to start.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpaintMethodEnd" id="paintMethodEnd"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintMethodEnd</span> (line <span class="line-number">193</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Only send one message if the test passes, after that     suppress the message.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintMethodEnd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: Name of test that is ending.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodEnd">SimpleScorer::paintMethodEnd()</a></dt>
+						<dd>Paints the end of a test method.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintMethodStart" id="paintMethodStart"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintMethodStart</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Paints nothing at the start of a test method, but stash     the method name for later.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintMethodStart
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: Name of test that is starting.</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodStart">SimpleScorer::paintMethodStart()</a></dt>
+						<dd>Paints the start of a test method.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintPass" id="paintPass"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintPass</span> (line <span class="line-number">99</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Stash the first passing item. Clicking the test     item goes to first pass.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintPass
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Test message, but we only wnat the first.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintPass">SimpleScorer::paintPass()</a></dt>
+						<dd>Potentially show the pass message.</dd>
+					</dl>
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#method__construct">SimpleScorer::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodcreateInvoker">SimpleScorer::createInvoker()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetExceptionCount">SimpleScorer::getExceptionCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetFailCount">SimpleScorer::getFailCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetPassCount">SimpleScorer::getPassCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetStatus">SimpleScorer::getStatus()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincludeBreadCrumb">SimpleScorer::includeBreadCrumb()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincludeStackTrace">SimpleScorer::includeStackTrace()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementErrorCount">SimpleScorer::incrementErrorCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementExceptionCount">SimpleScorer::incrementExceptionCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementFailCount">SimpleScorer::incrementFailCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementPassCount">SimpleScorer::incrementPassCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodmakeDry">SimpleScorer::makeDry()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodmakeList">SimpleScorer::makeList()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseEnd">SimpleScorer::paintCaseEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseStart">SimpleScorer::paintCaseStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintError">SimpleScorer::paintError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintException">SimpleScorer::paintException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFail">SimpleScorer::paintFail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFormattedMessage">SimpleScorer::paintFormattedMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupEnd">SimpleScorer::paintGroupEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupStart">SimpleScorer::paintGroupStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMessage">SimpleScorer::paintMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodEnd">SimpleScorer::paintMethodEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodStart">SimpleScorer::paintMethodStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintPass">SimpleScorer::paintPass()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintSignal">SimpleScorer::paintSignal()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintSkip">SimpleScorer::paintSkip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodshouldInvoke">SimpleScorer::shouldInvoke()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:51 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

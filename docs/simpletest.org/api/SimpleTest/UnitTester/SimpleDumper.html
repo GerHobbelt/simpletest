@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleDumper</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleDumper</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Displays variables as text and does diffs.</p>
+		<p class="notes">
+			Located in <a class="field" href="_dumper.php.html">/dumper.php</a> (line <span class="field">20</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#clipString" title="details" class="method-name">clipString</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$size</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$position</span> = <span class="var-default">0</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeArrayDifference" title="details" class="method-name">describeArrayDifference</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeBooleanDifference" title="details" class="method-name">describeBooleanDifference</a>
+											(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeDifference" title="details" class="method-name">describeDifference</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeFloatDifference" title="details" class="method-name">describeFloatDifference</a>
+											(<span class="var-type">float</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeGenericDifference" title="details" class="method-name">describeGenericDifference</a>
+											(<span class="var-type">null</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeIntegerDifference" title="details" class="method-name">describeIntegerDifference</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeNullDifference" title="details" class="method-name">describeNullDifference</a>
+											(<span class="var-type">null</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeObjectDifference" title="details" class="method-name">describeObjectDifference</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeResourceDifference" title="details" class="method-name">describeResourceDifference</a>
+											(<span class="var-type">resource</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeStringDifference" title="details" class="method-name">describeStringDifference</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#describeValue" title="details" class="method-name">describeValue</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#dump" title="details" class="method-name">dump</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$variable</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getMembers" title="details" class="method-name">getMembers</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getPrivatePropertyNoMatterWhat" title="details" class="method-name">getPrivatePropertyNoMatterWhat</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getType" title="details" class="method-name">getType</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isMatchingKeys" title="details" class="method-name">isMatchingKeys</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isTypeMatch" title="details" class="method-name">isTypeMatch</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#stringDiffersAt" title="details" class="method-name">stringDiffersAt</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$second</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#unmangle" title="details" class="method-name">unmangle</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$mangled</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodclipString" id="clipString"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">clipString</span> (line <span class="line-number">118</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clips a string to a maximum length.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Shortened version.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			clipString
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$size</span>, [<span class="var-type">integer</span>&nbsp;<span class="var-name">$position</span> = <span class="var-default">0</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: String to truncate.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$size</span><span class="var-description">: Minimum string size to show.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$position</span><span class="var-description">: Centre of string section.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeArrayDifference" id="describeArrayDifference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeArrayDifference</span> (line <span class="line-number">241</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between two arrays.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeArrayDifference
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$first</span><span class="var-description">: First array.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Array to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeBooleanDifference" id="describeBooleanDifference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeBooleanDifference</span> (line <span class="line-number">169</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between a boolean and another variable.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeBooleanDifference
+		</span>
+					(<span class="var-type">boolean</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$first</span><span class="var-description">: First boolean.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Boolean to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeDifference" id="describeDifference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeDifference</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between two variables. Uses a     dynamic call.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Description of difference.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeDifference
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: First variable.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeFloatDifference" id="describeFloatDifference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeFloatDifference</span> (line <span class="line-number">222</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between two floating point numbers.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeFloatDifference
+		</span>
+					(<span class="var-type">float</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">float</span>
+				<span class="var-name">$first</span><span class="var-description">: First float.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Float to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeGenericDifference" id="describeGenericDifference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeGenericDifference</span> (line <span class="line-number">141</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between two variables. The minimal     version.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeGenericDifference
+		</span>
+					(<span class="var-type">null</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">null</span>
+				<span class="var-name">$first</span><span class="var-description">: First value.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare with.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeIntegerDifference" id="describeIntegerDifference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeIntegerDifference</span> (line <span class="line-number">203</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between an integer and another variable.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeIntegerDifference
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$first</span><span class="var-description">: First number.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Number to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeNullDifference" id="describeNullDifference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeNullDifference</span> (line <span class="line-number">156</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between a null and another variable.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeNullDifference
+		</span>
+					(<span class="var-type">null</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">null</span>
+				<span class="var-name">$first</span><span class="var-description">: First null.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Null to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeObjectDifference" id="describeObjectDifference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeObjectDifference</span> (line <span class="line-number">307</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between two objects.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeObjectDifference
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$first</span><span class="var-description">: First object.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Object to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeResourceDifference" id="describeResourceDifference"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeResourceDifference</span> (line <span class="line-number">295</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between a resource and another variable.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeResourceDifference
+		</span>
+					(<span class="var-type">resource</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">resource</span>
+				<span class="var-name">$first</span><span class="var-description">: First resource.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Resource to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeStringDifference" id="describeStringDifference"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeStringDifference</span> (line <span class="line-number">182</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates a human readable description of the     difference between a string and another variable.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable description.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeStringDifference
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$first</span><span class="var-description">: First string.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: String to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddescribeValue" id="describeValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">describeValue</span> (line <span class="line-number">28</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Renders a variable in a shorter form than print_r().</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Human readable string form.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			describeValue
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Variable to render as a string.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddump" id="dump"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">dump</span> (line <span class="line-number">399</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sends a formatted dump of a variable to a string.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Output from print_r().</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			dump
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$variable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$variable</span><span class="var-description">: Variable to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetMembers" id="getMembers"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getMembers</span> (line <span class="line-number">324</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get all members of an object including private and protected ones.</p>
+<p class="description"><p>A safer form of casting to an array.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Names and values in the object.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getMembers
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$object</span><span class="var-description">: Object to list members of,                               including private ones.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetPrivatePropertyNoMatterWhat" id="getPrivatePropertyNoMatterWhat"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getPrivatePropertyNoMatterWhat</span> (line <span class="line-number">347</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Extracts a private member's value when reflection won't play ball.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Value of property.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getPrivatePropertyNoMatterWhat
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Property name.</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$object</span><span class="var-description">: Object to read.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetType" id="getType"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getType</span> (line <span class="line-number">53</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets the string representation of a type.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Type.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getType
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: Variable to check against.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisMatchingKeys" id="isMatchingKeys"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">isMatchingKeys</span> (line <span class="line-number">275</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compares two arrays to see if their key lists match.</p>
+<p class="description"><p>For an identical match, the ordering and types of the keys     is significant.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if matching.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isMatchingKeys
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$second</span>, <span class="var-type">boolean</span>&nbsp;<span class="var-name">$identical</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$first</span><span class="var-description">: First array.</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$second</span><span class="var-description">: Array to compare with.</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$identical</span><span class="var-description">: If true then type anomolies count.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisTypeMatch" id="isTypeMatch"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isTypeMatch</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests to see if types match.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if matches.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isTypeMatch
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$first</span><span class="var-description">: First variable.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$second</span><span class="var-description">: Value to compare with.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodstringDiffersAt" id="stringDiffersAt"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">stringDiffersAt</span> (line <span class="line-number">375</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Find the first character position that differs     in two strings by binary chop.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Position of first differing                                 character.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			stringDiffersAt
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$first</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$second</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$first</span><span class="var-description">: First string.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$second</span><span class="var-description">: String to compare with.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodunmangle" id="unmangle"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">unmangle</span> (line <span class="line-number">361</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes crud from property name after it's been converted     to an array.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Cleaned up name.</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			unmangle
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$mangled</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$mangled</span><span class="var-description">: Name from array cast.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:51 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

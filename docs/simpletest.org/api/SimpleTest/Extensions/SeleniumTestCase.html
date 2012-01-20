@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SeleniumTestCase</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SeleniumTestCase</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Provides test case wrapper to a Selenium remote  control instance.</p>
+		<p class="notes">
+			Located in <a class="field" href="_extensions---selenium.php.html">/extensions/selenium.php</a> (line <span class="field">21</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a>
+   |
+   --<a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a>
+      |
+      --SeleniumTestCase</pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$browser" title="details" class="var-name">$browser</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$browserUrl" title="details" class="var-name">$browserUrl</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$host" title="details" class="var-name">$host</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$newInstanceEachTest" title="details" class="var-name">$newInstanceEachTest</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$port" title="details" class="var-name">$port</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$selenium" title="details" class="var-name">$selenium</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$timeout" title="details" class="var-name">$timeout</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																						
+				<div class="method-definition">
+											<span class="method-result">SeleniumTestCase</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">'Selenium Test Case'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setUp" title="details" class="method-name">setUp</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tearDown" title="details" class="method-name">tearDown</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#verifyText" title="details" class="method-name">verifyText</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#verifyTextNotPresent" title="details" class="method-name">verifyTextNotPresent</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#verifyTextPresent" title="details" class="method-name">verifyTextPresent</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#verifyTitle" title="details" class="method-name">verifyTitle</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$pattern</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#verifyValue" title="details" class="method-name">verifyValue</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#__call" title="details" class="method-name">__call</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$browser" id="$browser"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$browser</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">26</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Selenium instantiation variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$browserUrl" id="$browserUrl"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$browserUrl</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">27</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Selenium instantiation variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$host" id="$host"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$host</span>
+			 = <span class="var-default"> 'localhost'</span>			(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Selenium instantiation variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$newInstanceEachTest" id="$newInstanceEachTest"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$newInstanceEachTest</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$port" id="$port"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$port</span>
+			 = <span class="var-default"> '4444'</span>			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Selenium instantiation variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$selenium" id="$selenium"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$selenium</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$timeout" id="$timeout"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$timeout</span>
+			 = <span class="var-default"> 30000</span>			(line <span class="line-number">30</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Selenium instantiation variables</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$label">SimpleTestCase::$label</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$observers">SimpleTestCase::$observers</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$reporter">SimpleTestCase::$reporter</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$running">SimpleTestCase::$running</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#var$should_skip">SimpleTestCase::$should_skip</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">36</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SeleniumTestCase</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$name</span> = <span class="var-default">'Selenium Test Case'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$name</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/UnitTestCase.html#method__construct">UnitTestCase::__construct()</a></dt>
+						<dd>Creates an empty test case. Should be subclassed     with test methods for a functional test case.</dd>
+					</dl>
+			
+	</div>
+<a name="methodsetUp" id="setUp"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setUp</span> (line <span class="line-number">50</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setUp
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodsetUp">SimpleTestCase::setUp()</a></dt>
+						<dd>Sets up unit test wide variables at the start     of each test method. To be overridden in     actual user test cases.</dd>
+					</dl>
+			
+	</div>
+<a name="methodtearDown" id="tearDown"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">tearDown</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tearDown
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodtearDown">SimpleTestCase::tearDown()</a></dt>
+						<dd>Clears the data set in the setUp() method call.</dd>
+					</dl>
+			
+	</div>
+<a name="methodverifyText" id="verifyText"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">verifyText</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			verifyText
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$text</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodverifyTextNotPresent" id="verifyTextNotPresent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">verifyTextNotPresent</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			verifyTextNotPresent
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$text</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodverifyTextPresent" id="verifyTextPresent"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">verifyTextPresent</span> (line <span class="line-number">101</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			verifyTextPresent
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$text</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$text</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodverifyTitle" id="verifyTitle"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">verifyTitle</span> (line <span class="line-number">132</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			verifyTitle
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$pattern</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$pattern</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodverifyValue" id="verifyValue"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">verifyValue</span> (line <span class="line-number">121</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			verifyValue
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$selector</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$selector</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$value</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__call" id="__call"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">__call</span> (line <span class="line-number">74</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			__call
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$method</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$arguments</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$method</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$arguments</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#method__construct">UnitTestCase::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertClone">UnitTestCase::assertClone()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertCopy">UnitTestCase::assertCopy()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertEqual">UnitTestCase::assertEqual()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertFalse">UnitTestCase::assertFalse()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertIdentical">UnitTestCase::assertIdentical()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertIsA">UnitTestCase::assertIsA()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNoPattern">UnitTestCase::assertNoPattern()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNotA">UnitTestCase::assertNotA()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNotEqual">UnitTestCase::assertNotEqual()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNotIdentical">UnitTestCase::assertNotIdentical()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNotNull">UnitTestCase::assertNotNull()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertNull">UnitTestCase::assertNull()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertOutsideMargin">UnitTestCase::assertOutsideMargin()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertPattern">UnitTestCase::assertPattern()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertReference">UnitTestCase::assertReference()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertSame">UnitTestCase::assertSame()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertTrue">UnitTestCase::assertTrue()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/UnitTestCase.html#methodassertWithinMargin">UnitTestCase::assertWithinMargin()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html">SimpleTestCase</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#method__construct">SimpleTestCase::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodafter">SimpleTestCase::after()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodassert">SimpleTestCase::assert()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodbefore">SimpleTestCase::before()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcheckExpectation">SimpleTestCase::checkExpectation()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcoerceExpectation">SimpleTestCase::coerceExpectation()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodconstructFailMessage">SimpleTestCase::constructFailMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodconstructPassMessage">SimpleTestCase::constructPassMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodcreateInvoker">SimpleTestCase::createInvoker()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methoddump">SimpleTestCase::dump()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methoderror">SimpleTestCase::error()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexception">SimpleTestCase::exception()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectError">SimpleTestCase::expectError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectException">SimpleTestCase::expectException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodexpectFail">SimpleTestCase::expectFail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodfail">SimpleTestCase::fail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetAssertionLine">SimpleTestCase::getAssertionLine()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetDumper">SimpleTestCase::getDumper()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetLabel">SimpleTestCase::getLabel()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetReporter">SimpleTestCase::getReporter()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetSize">SimpleTestCase::getSize()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetTests">SimpleTestCase::getTests()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodgetURLregex">SimpleTestCase::getURLregex()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodignoreException">SimpleTestCase::ignoreException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodisTest">SimpleTestCase::isTest()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodpass">SimpleTestCase::pass()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodrun">SimpleTestCase::run()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodsetUp">SimpleTestCase::setUp()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodshouldSkip">SimpleTestCase::shouldSkip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodsignal">SimpleTestCase::signal()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskip">SimpleTestCase::skip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskipIf">SimpleTestCase::skipIf()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodskipUnless">SimpleTestCase::skipUnless()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodtearDown">SimpleTestCase::tearDown()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleTestCase.html#methodtell">SimpleTestCase::tell()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:03 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

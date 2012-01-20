@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+						<script src="media/lib/classTree.js"></script>
+									<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+									<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "media/images/plus.png";
+				imgMinus.src = "media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+						<h3 class="package-title">SimpleTest</h3>
+<div class="tree">
+<script language="Javascript">
+if (document.getElementById) {
+			var tree = new WebFXTree('<span class="package">SimpleTest</span>');
+		tree.setBehavior('classic');
+	
+					var todos = new WebFXTreeItem('To-do List', 'todolist.html');
+			tree.add(todos);
+		
+		var class_trees = new WebFXTreeItem('Class trees', 'classtrees_SimpleTest.html');
+		tree.add(class_trees);
+
+		var elements = new WebFXTreeItem('Index of elements', 'elementindex_SimpleTest.html');		
+		tree.add(elements);
+
+		var parent_node;
+
+					var tree_tutorial = new WebFXTreeItem('Tutorial(s)/Manual(s)', '');
+			tree.add(tree_tutorial);
+			
+							var tree_inner_tutorial = new WebFXTreeItem('Package-level', '');
+				tree_tutorial.add(tree_inner_tutorial);
+				
+				parent_node = tree_inner_tutorial;
+										var aSimpleTestpkgnode = new WebFXTreeItem('Simple Test PHP Unit Test Framework','SimpleTest/tutorial_SimpleTest.pkg.html', parent_node);
+
+  var aSimpleTestpkg_old_parent_node = parent_node;
+	parent_node = aSimpleTestpkgnode;
+		var aUnitTestCasepkgnode = new WebFXTreeItem('Unit tester','SimpleTest/tutorial_UnitTestCase.pkg.html', parent_node);
+
+	var aGroupTestspkgnode = new WebFXTreeItem('Group tests','SimpleTest/tutorial_GroupTests.pkg.html', parent_node);
+
+	var aMockObjectspkgnode = new WebFXTreeItem('Mock objects','SimpleTest/tutorial_MockObjects.pkg.html', parent_node);
+
+	var aPartialMockpkgnode = new WebFXTreeItem('Partial mocks','SimpleTest/tutorial_PartialMock.pkg.html', parent_node);
+
+	var aReportingpkgnode = new WebFXTreeItem('Reporting','SimpleTest/tutorial_Reporting.pkg.html', parent_node);
+
+	var aExpectationspkgnode = new WebFXTreeItem('Expectations','SimpleTest/tutorial_Expectations.pkg.html', parent_node);
+
+	var aWebTesterpkgnode = new WebFXTreeItem('Web tester','SimpleTest/tutorial_WebTester.pkg.html', parent_node);
+
+	var aFormTestingpkgnode = new WebFXTreeItem('Testing forms','SimpleTest/tutorial_FormTesting.pkg.html', parent_node);
+
+	var aAuthenticationpkgnode = new WebFXTreeItem('Authentication','SimpleTest/tutorial_Authentication.pkg.html', parent_node);
+
+	var aBrowserpkgnode = new WebFXTreeItem('Scriptable browser','SimpleTest/tutorial_Browser.pkg.html', parent_node);
+
+
+	parent_node = aSimpleTestpkg_old_parent_node;
+
+										var aQuickStartpkgnode = new WebFXTreeItem('SimpleTest','SimpleTest/tutorial_QuickStart.pkg.html', parent_node);
+
+
+										
+						
+					
+			
+		    		    			var tree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			
+    			tree.add(tree_classe);
+    						    		    			var tree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('SimpleTestCompatibility', 'SimpleTest/SimpleTestCompatibility.html');
+        				tree_classe.add(classe);
+        			    			    	
+    			tree.add(tree_classe);
+    				
+					var tree_function = new WebFXTreeItem('Function(s)', '');
+			
+							var fic = new WebFXTreeItem('capture_new_classes', 'SimpleTest/_autorun.php.html#functioncapture_new_classes');
+				tree_function.add(fic);
+							var fic = new WebFXTreeItem('initial_file', 'SimpleTest/_autorun.php.html#functioninitial_file');
+				tree_function.add(fic);
+							var fic = new WebFXTreeItem('run_local_tests', 'SimpleTest/_autorun.php.html#functionrun_local_tests');
+				tree_function.add(fic);
+							var fic = new WebFXTreeItem('simpletest_autorun', 'SimpleTest/_autorun.php.html#functionsimpletest_autorun');
+				tree_function.add(fic);
+							var fic = new WebFXTreeItem('tests_have_run', 'SimpleTest/_autorun.php.html#functiontests_have_run');
+				tree_function.add(fic);
+					
+			tree.add(tree_function);
+			
+					var tree_file = new WebFXTreeItem('File(s)', '');
+	
+							var file = new WebFXTreeItem('autorun.php', 'SimpleTest/_autorun.php.html');
+				tree_file.add(file);
+							var file = new WebFXTreeItem('compatibility.php', 'SimpleTest/_compatibility.php.html');
+				tree_file.add(file);
+							var file = new WebFXTreeItem('expectation.php', 'SimpleTest/_expectation.php.html');
+				tree_file.add(file);
+							var file = new WebFXTreeItem('file.php', 'SimpleTest/_extensions---coverage---templates---file.php.html');
+				tree_file.add(file);
+							var file = new WebFXTreeItem('index.php', 'SimpleTest/_extensions---coverage---templates---index.php.html');
+				tree_file.add(file);
+							var file = new WebFXTreeItem('web_tester.php', 'SimpleTest/_web_tester.php.html');
+				tree_file.add(file);
+				
+			tree.add(tree_file);
+		
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">DomTestCase</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('CssSelector', 'SimpleTest/DomTestCase/CssSelector.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('css_selector.php', 'SimpleTest/DomTestCase/_extensions---dom_tester---css_selector.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">Eclipse</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('EclipseInvoker', 'SimpleTest/Eclipse/EclipseInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('EclipseReporter', 'SimpleTest/Eclipse/EclipseReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('eclipse.php', 'SimpleTest/Eclipse/_eclipse.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">Extensions</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			    			        			    			        			    			        			    			        			    			        			    			            				var classe = new WebFXTreeItem('CoverageWriter', 'SimpleTest/Extensions/CoverageWriter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('CodeCoverage', 'SimpleTest/Extensions/CodeCoverage.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ColorTextReporter', 'SimpleTest/Extensions/ColorTextReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('CoverageCalculator', 'SimpleTest/Extensions/CoverageCalculator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('CoverageDataHandler', 'SimpleTest/Extensions/CoverageDataHandler.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('CoverageReporter', 'SimpleTest/Extensions/CoverageReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('CoverageUtils', 'SimpleTest/Extensions/CoverageUtils.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			        			    			            				var classe = new WebFXTreeItem('CssSelectorExpectation', 'SimpleTest/Extensions/CssSelectorExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('DomTestCase', 'SimpleTest/Extensions/DomTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('JqueryTreemapReporter', 'SimpleTest/Extensions/JqueryTreemapReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('JUnitXMLReporter', 'SimpleTest/Extensions/JUnitXMLReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('PHPUnit_TestCase', 'SimpleTest/Extensions/PHPUnit_TestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('Recorder', 'SimpleTest/Extensions/Recorder.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SeleneseTestCase', 'SimpleTest/Extensions/SeleneseTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SeleniumTestCase', 'SimpleTest/Extensions/SeleniumTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleResult', 'SimpleTest/Extensions/SimpleResult.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleResultOfException', 'SimpleTest/Extensions/SimpleResultOfException.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleResultOfFail', 'SimpleTest/Extensions/SimpleResultOfFail.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleResultOfPass', 'SimpleTest/Extensions/SimpleResultOfPass.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSeleniumRemoteControl', 'SimpleTest/Extensions/SimpleSeleniumRemoteControl.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TestDoxReporter', 'SimpleTest/Extensions/TestDoxReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TreemapNode', 'SimpleTest/Extensions/TreemapNode.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TreemapRecorder', 'SimpleTest/Extensions/TreemapRecorder.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TreemapReporter', 'SimpleTest/Extensions/TreemapReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TreemapStack', 'SimpleTest/Extensions/TreemapStack.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+					var subpackagetree_function = new WebFXTreeItem('Function(s)', '');
+			
+							var fic = new WebFXTreeItem('stop_coverage', 'SimpleTest/Extensions/_extensions---coverage---autocoverage.php.html#functionstop_coverage');
+				subpackagetree_function.add(fic);
+						
+			subpackagetree.add(subpackagetree_function);
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('autocoverage.php', 'SimpleTest/Extensions/_extensions---coverage---autocoverage.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('colortext_reporter.php', 'SimpleTest/Extensions/_extensions---colortext_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage.php', 'SimpleTest/Extensions/_extensions---coverage---coverage.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage_calculator.php', 'SimpleTest/Extensions/_extensions---coverage---coverage_calculator.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage_data_handler.php', 'SimpleTest/Extensions/_extensions---coverage---coverage_data_handler.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage_reporter.php', 'SimpleTest/Extensions/_extensions---coverage---coverage_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage_utils.php', 'SimpleTest/Extensions/_extensions---coverage---coverage_utils.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('coverage_writer.php', 'SimpleTest/Extensions/_extensions---coverage---coverage_writer.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('dom_tester.php', 'SimpleTest/Extensions/_extensions---dom_tester.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('jquery.php', 'SimpleTest/Extensions/_extensions---treemap_reporter---jquery.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('junit_xml_reporter.php', 'SimpleTest/Extensions/_extensions---junit_xml_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('pear_test_case.php', 'SimpleTest/Extensions/_extensions---pear_test_case.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('php-coverage-close.php', 'SimpleTest/Extensions/_extensions---coverage---bin---php-coverage-close.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('php-coverage-open.php', 'SimpleTest/Extensions/_extensions---coverage---bin---php-coverage-open.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('php-coverage-report.php', 'SimpleTest/Extensions/_extensions---coverage---bin---php-coverage-report.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('recorder.php', 'SimpleTest/Extensions/_recorder.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('remote-control.php', 'SimpleTest/Extensions/_extensions---selenium---remote-control.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('selenese_tester.php', 'SimpleTest/Extensions/_extensions---selenese_tester.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('selenium.php', 'SimpleTest/Extensions/_extensions---selenium.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('testdox.php', 'SimpleTest/Extensions/_extensions---testdox.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('treemap_recorder.php', 'SimpleTest/Extensions/_extensions---treemap_reporter---treemap_recorder.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('treemap_reporter.php', 'SimpleTest/Extensions/_extensions---treemap_reporter.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">MockObjects</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('AnythingExpectation', 'SimpleTest/MockObjects/AnythingExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('CallCountExpectation', 'SimpleTest/MockObjects/CallCountExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('FailedExpectation', 'SimpleTest/MockObjects/FailedExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('FalseExpectation', 'SimpleTest/MockObjects/FalseExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MaximumCallCountExpectation', 'SimpleTest/MockObjects/MaximumCallCountExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MinimumCallCountExpectation', 'SimpleTest/MockObjects/MinimumCallCountExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('Mock', 'SimpleTest/MockObjects/Mock.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MockGenerator', 'SimpleTest/MockObjects/MockGenerator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ParametersExpectation', 'SimpleTest/MockObjects/ParametersExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleByReference', 'SimpleTest/MockObjects/SimpleByReference.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleByValue', 'SimpleTest/MockObjects/SimpleByValue.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCallSchedule', 'SimpleTest/MockObjects/SimpleCallSchedule.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleErrorThrower', 'SimpleTest/MockObjects/SimpleErrorThrower.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleMock', 'SimpleTest/MockObjects/SimpleMock.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleReturn', 'SimpleTest/MockObjects/SimpleReturn.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSignatureMap', 'SimpleTest/MockObjects/SimpleSignatureMap.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleThrower', 'SimpleTest/MockObjects/SimpleThrower.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TrueExpectation', 'SimpleTest/MockObjects/TrueExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('mock_objects.php', 'SimpleTest/MockObjects/_mock_objects.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">SimpleInternalValidator</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('SimpleInternalValidator', 'SimpleTest/SimpleInternalValidator/SimpleInternalValidator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+					var subpackagetree_function = new WebFXTreeItem('Function(s)', '');
+			
+							var fic = new WebFXTreeItem('InternalValidator', 'SimpleTest/SimpleInternalValidator/_internal_tester.php.html#functionInternalValidator');
+				subpackagetree_function.add(fic);
+						
+			subpackagetree.add(subpackagetree_function);
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('internal_tester.php', 'SimpleTest/SimpleInternalValidator/_internal_tester.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">UnitTester</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('BadTestSuite', 'SimpleTest/UnitTester/BadTestSuite.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('DefaultReporter', 'SimpleTest/UnitTester/DefaultReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('DetachedTestCase', 'SimpleTest/UnitTester/DetachedTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('EqualExpectation', 'SimpleTest/UnitTester/EqualExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ExceptionExpectation', 'SimpleTest/UnitTester/ExceptionExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('HtmlReporter', 'SimpleTest/UnitTester/HtmlReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('IdenticalExpectation', 'SimpleTest/UnitTester/IdenticalExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('IsAExpectation', 'SimpleTest/UnitTester/IsAExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ListTestInvoker', 'SimpleTest/UnitTester/ListTestInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ListTestReporter', 'SimpleTest/UnitTester/ListTestReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MemberExpectation', 'SimpleTest/UnitTester/MemberExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MethodExistsExpectation', 'SimpleTest/UnitTester/MethodExistsExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MultipleReporter', 'SimpleTest/UnitTester/MultipleReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NestingCaseTag', 'SimpleTest/UnitTester/NestingCaseTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NestingGroupTag', 'SimpleTest/UnitTester/NestingGroupTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NestingMethodTag', 'SimpleTest/UnitTester/NestingMethodTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NestingXmlTag', 'SimpleTest/UnitTester/NestingXmlTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NoPassesReporter', 'SimpleTest/UnitTester/NoPassesReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NoPatternExpectation', 'SimpleTest/UnitTester/NoPatternExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NoSkipsReporter', 'SimpleTest/UnitTester/NoSkipsReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NotAExpectation', 'SimpleTest/UnitTester/NotAExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NotEqualExpectation', 'SimpleTest/UnitTester/NotEqualExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NoTextExpectation', 'SimpleTest/UnitTester/NoTextExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NotIdenticalExpectation', 'SimpleTest/UnitTester/NotIdenticalExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('OutsideMarginExpectation', 'SimpleTest/UnitTester/OutsideMarginExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('OutsideRangeExpectation', 'SimpleTest/UnitTester/OutsideRangeExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('PatternExpectation', 'SimpleTest/UnitTester/PatternExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ReferenceExpectation', 'SimpleTest/UnitTester/ReferenceExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('RemoteTestCase', 'SimpleTest/UnitTester/RemoteTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SelectiveReporter', 'SimpleTest/UnitTester/SelectiveReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ShellTestCase', 'SimpleTest/UnitTester/ShellTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleArguments', 'SimpleTest/UnitTester/SimpleArguments.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCollector', 'SimpleTest/UnitTester/SimpleCollector.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCommandLineParser', 'SimpleTest/UnitTester/SimpleCommandLineParser.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCoverageWriter', 'SimpleTest/UnitTester/SimpleCoverageWriter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleDumper', 'SimpleTest/UnitTester/SimpleDumper.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleErrorQueue', 'SimpleTest/UnitTester/SimpleErrorQueue.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleErrorTrappingInvoker', 'SimpleTest/UnitTester/SimpleErrorTrappingInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleExceptionTrap', 'SimpleTest/UnitTester/SimpleExceptionTrap.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleExceptionTrappingInvoker', 'SimpleTest/UnitTester/SimpleExceptionTrappingInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleExpectation', 'SimpleTest/UnitTester/SimpleExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFailQueue', 'SimpleTest/UnitTester/SimpleFailQueue.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFailTrappingInvoker', 'SimpleTest/UnitTester/SimpleFailTrappingInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFileLoader', 'SimpleTest/UnitTester/SimpleFileLoader.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHelp', 'SimpleTest/UnitTester/SimpleHelp.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleInvoker', 'SimpleTest/UnitTester/SimpleInvoker.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleInvokerDecorator', 'SimpleTest/UnitTester/SimpleInvokerDecorator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimplePatternCollector', 'SimpleTest/UnitTester/SimplePatternCollector.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleReflection', 'SimpleTest/UnitTester/SimpleReflection.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleReporter', 'SimpleTest/UnitTester/SimpleReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleReporterDecorator', 'SimpleTest/UnitTester/SimpleReporterDecorator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleScorer', 'SimpleTest/UnitTester/SimpleScorer.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleShell', 'SimpleTest/UnitTester/SimpleShell.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleStackTrace', 'SimpleTest/UnitTester/SimpleStackTrace.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTest', 'SimpleTest/UnitTester/SimpleTest.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTestCase', 'SimpleTest/UnitTester/SimpleTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTestContext', 'SimpleTest/UnitTester/SimpleTestContext.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTestXmlParser', 'SimpleTest/UnitTester/SimpleTestXmlParser.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TestSuite', 'SimpleTest/UnitTester/TestSuite.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TextExpectation', 'SimpleTest/UnitTester/TextExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('TextReporter', 'SimpleTest/UnitTester/TextReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('UnitTestCase', 'SimpleTest/UnitTester/UnitTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('WebCommandLineParser', 'SimpleTest/UnitTester/WebCommandLineParser.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('WebUnitReporter', 'SimpleTest/UnitTester/WebUnitReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('WithinMarginExpectation', 'SimpleTest/UnitTester/WithinMarginExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('WithinRangeExpectation', 'SimpleTest/UnitTester/WithinRangeExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('XmlReporter', 'SimpleTest/UnitTester/XmlReporter.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+					var subpackagetree_function = new WebFXTreeItem('Function(s)', '');
+			
+							var fic = new WebFXTreeItem('IsNotCausedBySimpleTest', 'SimpleTest/UnitTester/_errors.php.html#functionIsNotCausedBySimpleTest');
+				subpackagetree_function.add(fic);
+							var fic = new WebFXTreeItem('IsNotTimeZoneNag', 'SimpleTest/UnitTester/_errors.php.html#functionIsNotTimeZoneNag');
+				subpackagetree_function.add(fic);
+							var fic = new WebFXTreeItem('SimpleTestErrorHandler', 'SimpleTest/UnitTester/_errors.php.html#functionSimpleTestErrorHandler');
+				subpackagetree_function.add(fic);
+						
+			subpackagetree.add(subpackagetree_function);
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('arguments.php', 'SimpleTest/UnitTester/_arguments.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('collector.php', 'SimpleTest/UnitTester/_collector.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('default_reporter.php', 'SimpleTest/UnitTester/_default_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('detached.php', 'SimpleTest/UnitTester/_detached.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('dumper.php', 'SimpleTest/UnitTester/_dumper.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('errors.php', 'SimpleTest/UnitTester/_errors.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('exceptions.php', 'SimpleTest/UnitTester/_exceptions.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('fails.php', 'SimpleTest/UnitTester/_fails.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('invoker.php', 'SimpleTest/UnitTester/_invoker.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('reflection_php4.php', 'SimpleTest/UnitTester/_reflection_php4.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('reflection_php5.php', 'SimpleTest/UnitTester/_reflection_php5.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('remote.php', 'SimpleTest/UnitTester/_remote.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('reporter.php', 'SimpleTest/UnitTester/_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('scorer.php', 'SimpleTest/UnitTester/_scorer.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('shell_tester.php', 'SimpleTest/UnitTester/_shell_tester.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('simpletest.php', 'SimpleTest/UnitTester/_simpletest.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('simple_coverage_writer.php', 'SimpleTest/UnitTester/_extensions---coverage---simple_coverage_writer.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('test_case.php', 'SimpleTest/UnitTester/_test_case.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('test_list.php', 'SimpleTest/UnitTester/_test_list.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('unit_tester.php', 'SimpleTest/UnitTester/_unit_tester.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('webunit_reporter.php', 'SimpleTest/UnitTester/_extensions---webunit_reporter.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('xml.php', 'SimpleTest/UnitTester/_xml.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+							var subpackagetree = new WebFXTreeItem('<span class="sub-package">WebTester</span>', '');
+		
+			
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Interface(s)', '');
+    			
+    			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			    			        			
+    			subpackagetree.add(subpackagetree_classe);
+    				
+		    		    			var subpackagetree_classe = new WebFXTreeItem('Class(es)', '');
+    			
+    			    			            				var classe = new WebFXTreeItem('FieldExpectation', 'SimpleTest/WebTester/FieldExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('HttpHeaderExpectation', 'SimpleTest/WebTester/HttpHeaderExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('MultipleSelectionTag', 'SimpleTest/WebTester/MultipleSelectionTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('NoHttpHeaderExpectation', 'SimpleTest/WebTester/NoHttpHeaderExpectation.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('ParallelRegex', 'SimpleTest/WebTester/ParallelRegex.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleAnchorTag', 'SimpleTest/WebTester/SimpleAnchorTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleAttachment', 'SimpleTest/WebTester/SimpleAttachment.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleAuthenticator', 'SimpleTest/WebTester/SimpleAuthenticator.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleBaseTag', 'SimpleTest/WebTester/SimpleBaseTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleBrowser', 'SimpleTest/WebTester/SimpleBrowser.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleBrowserHistory', 'SimpleTest/WebTester/SimpleBrowserHistory.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleButtonTag', 'SimpleTest/WebTester/SimpleButtonTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleById', 'SimpleTest/WebTester/SimpleById.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleByLabel', 'SimpleTest/WebTester/SimpleByLabel.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleByLabelOrName', 'SimpleTest/WebTester/SimpleByLabelOrName.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleByName', 'SimpleTest/WebTester/SimpleByName.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCheckboxGroup', 'SimpleTest/WebTester/SimpleCheckboxGroup.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCheckboxTag', 'SimpleTest/WebTester/SimpleCheckboxTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCookie', 'SimpleTest/WebTester/SimpleCookie.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleCookieJar', 'SimpleTest/WebTester/SimpleCookieJar.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleDeleteEncoding', 'SimpleTest/WebTester/SimpleDeleteEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleEncodedPair', 'SimpleTest/WebTester/SimpleEncodedPair.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleEncoding', 'SimpleTest/WebTester/SimpleEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleEntityEncoding', 'SimpleTest/WebTester/SimpleEntityEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFileSocket', 'SimpleTest/WebTester/SimpleFileSocket.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleForm', 'SimpleTest/WebTester/SimpleForm.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFormTag', 'SimpleTest/WebTester/SimpleFormTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFrameset', 'SimpleTest/WebTester/SimpleFrameset.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleFrameTag', 'SimpleTest/WebTester/SimpleFrameTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleGetEncoding', 'SimpleTest/WebTester/SimpleGetEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHeadEncoding', 'SimpleTest/WebTester/SimpleHeadEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHtmlLexer', 'SimpleTest/WebTester/SimpleHtmlLexer.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHtmlSaxParser', 'SimpleTest/WebTester/SimpleHtmlSaxParser.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHttpHeaders', 'SimpleTest/WebTester/SimpleHttpHeaders.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHttpRequest', 'SimpleTest/WebTester/SimpleHttpRequest.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleHttpResponse', 'SimpleTest/WebTester/SimpleHttpResponse.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleImageSubmitTag', 'SimpleTest/WebTester/SimpleImageSubmitTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleLabelTag', 'SimpleTest/WebTester/SimpleLabelTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleLexer', 'SimpleTest/WebTester/SimpleLexer.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleMultipartEncoding', 'SimpleTest/WebTester/SimpleMultipartEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleOptionTag', 'SimpleTest/WebTester/SimpleOptionTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimplePage', 'SimpleTest/WebTester/SimplePage.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimplePhpPageBuilder', 'SimpleTest/WebTester/SimplePhpPageBuilder.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimplePostEncoding', 'SimpleTest/WebTester/SimplePostEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleProxyRoute', 'SimpleTest/WebTester/SimpleProxyRoute.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimplePutEncoding', 'SimpleTest/WebTester/SimplePutEncoding.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleRadioButtonTag', 'SimpleTest/WebTester/SimpleRadioButtonTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleRadioGroup', 'SimpleTest/WebTester/SimpleRadioGroup.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleRealm', 'SimpleTest/WebTester/SimpleRealm.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleRoute', 'SimpleTest/WebTester/SimpleRoute.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSecureSocket', 'SimpleTest/WebTester/SimpleSecureSocket.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSelectionTag', 'SimpleTest/WebTester/SimpleSelectionTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSocket', 'SimpleTest/WebTester/SimpleSocket.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleStateStack', 'SimpleTest/WebTester/SimpleStateStack.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleStickyError', 'SimpleTest/WebTester/SimpleStickyError.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleSubmitTag', 'SimpleTest/WebTester/SimpleSubmitTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTag', 'SimpleTest/WebTester/SimpleTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTagBuilder', 'SimpleTest/WebTester/SimpleTagBuilder.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTagGroup', 'SimpleTest/WebTester/SimpleTagGroup.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTextAreaTag', 'SimpleTest/WebTester/SimpleTextAreaTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTextTag', 'SimpleTest/WebTester/SimpleTextTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTidyPageBuilder', 'SimpleTest/WebTester/SimpleTidyPageBuilder.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleTitleTag', 'SimpleTest/WebTester/SimpleTitleTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleUploadTag', 'SimpleTest/WebTester/SimpleUploadTag.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleUrl', 'SimpleTest/WebTester/SimpleUrl.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleUserAgent', 'SimpleTest/WebTester/SimpleUserAgent.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('SimpleWidget', 'SimpleTest/WebTester/SimpleWidget.html');
+        				subpackagetree_classe.add(classe);
+        			    			    			            				var classe = new WebFXTreeItem('WebTestCase', 'SimpleTest/WebTester/WebTestCase.html');
+        				subpackagetree_classe.add(classe);
+        			    			    	
+    			subpackagetree.add(subpackagetree_classe);
+    				
+				
+					var subpackagetree_file = new WebFXTreeItem('File(s)', '');
+			
+							var file = new WebFXTreeItem('authentication.php', 'SimpleTest/WebTester/_authentication.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('browser.php', 'SimpleTest/WebTester/_browser.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('cookies.php', 'SimpleTest/WebTester/_cookies.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('encoding.php', 'SimpleTest/WebTester/_encoding.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('form.php', 'SimpleTest/WebTester/_form.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('frames.php', 'SimpleTest/WebTester/_frames.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('http.php', 'SimpleTest/WebTester/_http.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('page.php', 'SimpleTest/WebTester/_page.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('php_parser.php', 'SimpleTest/WebTester/_php_parser.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('selector.php', 'SimpleTest/WebTester/_selector.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('socket.php', 'SimpleTest/WebTester/_socket.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('tag.php', 'SimpleTest/WebTester/_tag.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('tidy_parser.php', 'SimpleTest/WebTester/_tidy_parser.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('url.php', 'SimpleTest/WebTester/_url.php.html');
+				subpackagetree_file.add(file);
+							var file = new WebFXTreeItem('user_agent.php', 'SimpleTest/WebTester/_user_agent.php.html');
+				subpackagetree_file.add(file);
+					
+			subpackagetree.add(subpackagetree_file);
+			
+	  tree.add(subpackagetree);
+	
+document.write(tree);
+}
+</script>
+</div>
+<p class="notes">
+	Generated by 
+	<a href="http://www.phpdoc.org" target="_blank">phpDocumentor <span class="field">1.4.3</span></a>
+</p>
+</body>
+</html>

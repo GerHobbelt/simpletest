@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Expectations</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+						<script src="../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../media/images/plus.png";
+				imgMinus.src = "../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+	<table class="tutorial-nav-box">
+	<tr>
+		<td style="width: 30%">
+							<a href="../SimpleTest/tutorial_Reporting.pkg.html" class="nav-button">Previous</a>
+					</td>
+		<td style="text-align: center">
+							<a href="../SimpleTest/tutorial_SimpleTest.pkg.html" class="nav-button">Up</a>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<a href="../SimpleTest/tutorial_WebTester.pkg.html" class="nav-button">Next</a>
+					</td>
+	</tr>
+	<tr>
+		<td style="width: 30%">
+							<span class="detail">Reporting</span>
+					</td>
+		<td style="text-align: center">
+							<span class="detail">Simple Test PHP Unit Test Framework</span>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<span class="detail">Web tester</span>
+					</td>
+	</tr>
+</table>
+	
+<div><a name=""></a><div class="ref-title-box"><h1 class="ref-title">Expectations</h1>
+<h2 class="ref-purpose"></h2></div>
+            <h1 class="title">Table of Contents</h1>
+<ul class="toc">
+	
+			
+					<li><a href="../SimpleTest/tutorial_Expectations.pkg.html#mock">More control over mock objects</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Expectations.pkg.html#behaviour">Using expectations to control stubs</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Expectations.pkg.html#extending">Creating your own expectations</a></li>
+					
+					<li><a href="../SimpleTest/tutorial_Expectations.pkg.html#unit">Under the bonnet of the unit tester</a></li>
+					</ul>
+
+            
+        <span><a name="mock"></a><h2 class="title">More control over mock objects</h2><p>The default behaviour of the
+                mock
+                in
+                <a href="http://sourceforge.net/projects/simpletest/">SimpleTest</a>
+                is either an identical match on the argument or to allow any argument at all.
+                For almost all tests this is sufficient.
+                Sometimes, though, you want to weaken a test case.</p>
+            <p>One place where a test can be too tightly coupled is with
+                text matching.
+                Suppose we have a component that outputs a helpful error
+                message when something goes wrong.
+                You want to test that the correct error was sent, but the actual
+                text may be rather long.
+                If you test for the text exactly, then every time the exact wording
+                of the message changes, you will have to go back and edit the test suite.</p>
+            <p>For example, suppose we have a news service that has failed
+                to connect to its remote source.
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">NewsService&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">publish</span><span class="src-sym">(</span><span class="src-var">$writer</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!&nbsp;</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">isConnected</span><span class="src-sym">(</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$writer</span><span class="src-sym">-&gt;</span><span class="src-id">write</span><span class="src-sym">(</span><span class="src-str">'Cannot&nbsp;connect&nbsp;to&nbsp;news&nbsp;service&nbsp;&quot;'&nbsp;</span>.</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">_name&nbsp;</span>.&nbsp;<span class="src-str">'&quot;&nbsp;at&nbsp;this&nbsp;time.&nbsp;'&nbsp;</span>.</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Please&nbsp;try&nbsp;again&nbsp;later.'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                Here it is sending its content to a
+                Writer class.
+                We could test this behaviour with a
+                MockWriter like so...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestOfNewsService&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testConnectionFailure</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$writer&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">MockWriter</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$writer</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'write'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Cannot&nbsp;connect&nbsp;to&nbsp;news&nbsp;service&nbsp;'&nbsp;</span>.</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'&quot;BBC&nbsp;News&quot;&nbsp;at&nbsp;this&nbsp;time.&nbsp;'&nbsp;</span>.</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Please&nbsp;try&nbsp;again&nbsp;later.'</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$service&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">NewsService</span><span class="src-sym">(</span><span class="src-str">'BBC&nbsp;News'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$service</span><span class="src-sym">-&gt;</span><span class="src-id">publish</span><span class="src-sym">(</span><span class="src-var">$writer</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                This is a good example of a brittle test.
+                If we decide to add additional instructions, such as
+                suggesting an alternative news source, we will break
+                our tests even though no underlying functionality
+                has been altered.</p>
+            <p>To get around this, we would like to do a regular expression
+                test rather than an exact match.
+                We can actually do this with...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestOfNewsService&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testConnectionFailure</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$writer&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">MockWriter</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$writer</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'write'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/PatternExpectation.html">PatternExpectation</a></span><span class="src-sym">(</span><span class="src-str">'/cannot&nbsp;connect/i'</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$service&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">NewsService</span><span class="src-sym">(</span><span class="src-str">'BBC&nbsp;News'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$service</span><span class="src-sym">-&gt;</span><span class="src-id">publish</span><span class="src-sym">(</span><span class="src-var">$writer</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                Instead of passing in the expected parameter to the
+                MockWriter we pass an
+                expectation class called
+                PatternExpectation.
+                The mock object is smart enough to recognise this as special
+                and to treat it differently.
+                Rather than simply comparing the incoming argument to this
+                object, it uses the expectation object itself to
+                perform the test.</p>
+            <p>The PatternExpectation takes
+                the regular expression to match in its constructor.
+                Whenever a comparison is made by the MockWriter
+                against this expectation class, it will do a
+                preg_match() with this pattern.
+                With our test case above, as long as &quot;cannot connect&quot;
+                appears in the text of the string, the mock will issue a pass
+                to the unit tester.
+                The rest of the text does not matter.</p>
+            <p>The possible expectation classes are...
+                <table frame = "border"><tbody><tr><td>AnythingExpectation</td>
+<td>Will always match</td></tr>
+                    <tr><td>EqualExpectation</td>
+<td>An equality, rather than the stronger identity comparison</td></tr>
+                    <tr><td>NotEqualExpectation</td>
+<td>An inequality comparison</td></tr>
+                    <tr><td>IndenticalExpectation</td>
+<td>The default mock object check which must match exactly</td></tr>
+                    <tr><td>NotIndenticalExpectation</td>
+<td>Inverts the mock object logic</td></tr>
+                    <tr><td>WithinMarginExpectation</td>
+<td>Compares a value to within a margin, i.e. test = expected_value ± margin</td></tr>
+                    <tr><td>OutsideMarginExpectation</td>
+<td>Checks that a value is out side the margin, i.e. test &lt; expected_value ? margin ? test &gt; expected_value + margin</td></tr>
+                    <tr><td>WithinRangeExpectation</td>
+<td>Checks that a value is inside the specified (<a href="http://mathforum.org/library/drmath/view/63762.html">inclusive</a> a.k.a. <a href="http://en.wikipedia.org/wiki/Interval_(mathematics)">closed</a>) range, i.e. test ? [min, max]</td></tr>
+                    <tr><td>OutsideRangeExpectation</td>
+<td>Checks that a value is outside the specified (inclusive) range, i.e. test ? [min, max]</td></tr>
+                    <tr><td>PatternExpectation</td>
+<td>Uses a Perl Regex to match a string</td></tr>
+                    <tr><td>NoPatternExpectation</td>
+<td>Passes only if failing a Perl Regex</td></tr>
+                    <tr><td>IsAExpectation</td>
+<td>Checks the type or class name only</td></tr>
+                    <tr><td>NotAExpectation</td>
+<td>Opposite of the IsAExpectation</td></tr>
+                    <tr><td>MethodExistsExpectation</td>
+<td>Checks a method is available on an object</td></tr>
+                    <tr><td>TrueExpectation</td>
+<td>Accepts any PHP variable that evaluates to true</td></tr>
+                    <tr><td>FalseExpectation</td>
+<td>Accepts any PHP variable that evaluates to false</td></tr></tbody></table>
+                Most take the expected value in the constructor.
+                The exceptions are the pattern matchers, which take a regular expression,
+                and the IsAExpectation and NotAExpectation which takes a type
+                or class name as a string.</p>
+            <p>Some examples...</p>
+            <p><div class="src-code"><ol><li><div class="src-line"><span class="src-var">$mock</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'method'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/IdenticalExpectation.html">IdenticalExpectation</a></span><span class="src-sym">(</span><span class="src-num">14</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+</ol></div>
+                This is the same as $mock-&gt;expectOnce('method', array(14)).
+<div class="src-code"><ol><li><div class="src-line"><span class="src-var">$mock</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'method'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/EqualExpectation.html">EqualExpectation</a></span><span class="src-sym">(</span><span class="src-num">14</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+</ol></div>
+                This is different from the previous version in that the string
+                &quot;14&quot; as a parameter will also pass.
+                Sometimes the additional type checks of SimpleTest are too restrictive.
+<div class="src-code"><ol><li><div class="src-line"><span class="src-var">$mock</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'method'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/MockObjects/AnythingExpectation.html">AnythingExpectation</a></span><span class="src-sym">(</span><span class="src-num">14</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+</ol></div>
+                This is the same as $mock-&gt;expectOnce('method', array('*')).
+<div class="src-code"><ol><li><div class="src-line"><span class="src-var">$mock</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'method'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/IdenticalExpectation.html">IdenticalExpectation</a></span><span class="src-sym">(</span><span class="src-str">'*'</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+</ol></div>
+                This is handy if you want to assert a literal &quot;*&quot;.
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/NotIdenticalExpectation.html">NotIdenticalExpectation</a></span><span class="src-sym">(</span><span class="src-num">14</span><span class="src-sym">)</span></div></li>
+</ol></div>
+                This matches on anything other than integer 14.
+                Even the string &quot;14&quot; would pass.
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/WithinMarginExpectation.html">WithinMarginExpectation</a></span><span class="src-sym">(</span><span class="src-num">14.0</span><span class="src-sym">,&nbsp;</span><span class="src-num">0.001</span><span class="src-sym">)</span></div></li>
+</ol></div>
+                This will accept any value from 13.999 to 14.001 inclusive.
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/WithinRangeExpectation.html">WithinRangeExpectation</a></span><span class="src-sym">(</span><span class="src-num">200</span><span class="src-sym">,&nbsp;</span><span class="src-num">300&nbsp;</span>-&nbsp;<span class="src-num">1</span><span class="src-sym">)</span></div></li>
+</ol></div>
+				Sometimes, however, you know the allowable range of values and 
+				expressing them as a range rather than a (contrived) mean and margin 
+				makes for a more easily readable test when, for instance, you are
+				fine with any 2xx HTTP response code but not, say, any 4xx or 5xx code.
+				The only drawback, maybe, is the fact that both minimum and maximum 
+				values of the range are considered <a href="http://mathforum.org/library/drmath/view/63762.html">inclusive</a>,
+				though in the case of <a href="http://en.wikipedia.org/wiki/List_of_HTTP_status_codes">HTTP response codes</a>, this can be rewritten as:
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/WithinRangeExpectation.html">WithinRangeExpectation</a></span><span class="src-sym">(</span><span class="src-num">200</span><span class="src-sym">,&nbsp;</span><span class="src-num">299</span><span class="src-sym">)</span></div></li>
+</ol></div></p></span>
+        <span><a name="behaviour"></a><h2 class="title">Using expectations to control stubs</h2><p>The expectation classes can be used not just for sending assertions
+                from mock objects, but also for selecting behaviour for the
+                mock.
+                Anywhere a list of arguments is given, a list of expectation objects
+                can be inserted instead.</p>
+            <p>Suppose we want a mock authorisation server to simulate a successful login,
+                but only if it receives a valid session object.
+                We can do this as follows...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-id"><a href="../SimpleTest/MockObjects/Mock.html">Mock</a></span><span class="src-sym">::</span><a href="../SimpleTest/MockObjects/Mock.html#methodgenerate">generate</a><span class="src-sym">(</span><span class="src-str">'Authorisation'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;</div></li>
+<li><div class="src-line"><span class="src-var">$authorisation&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">MockAuthorisation</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$authorisation</span><span class="src-sym">-&gt;</span><span class="src-id">returns</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'isAllowed'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">true</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id"><a href="../SimpleTest/UnitTester/IsAExpectation.html">IsAExpectation</a></span><span class="src-sym">(</span><span class="src-str">'Session'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'Must&nbsp;be&nbsp;a&nbsp;session'</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><span class="src-var">$authorisation</span><span class="src-sym">-&gt;</span><span class="src-id">returns</span><span class="src-sym">(</span><span class="src-str">'isAllowed'</span><span class="src-sym">,&nbsp;</span><span class="src-id">false</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+</ol></div>
+                We have set the default mock behaviour to return false when
+                isAllowed is called.
+                When we call the method with a single parameter that
+                is a Session object, it will return true.
+                We have also added a second parameter as a message.
+                This will be displayed as part of the mock object
+                failure message if this expectation is the cause of
+                a failure.</p>
+            <p>This kind of sophistication is rarely useful, but is included for
+                completeness.</p></span>
+        <span><a name="extending"></a><h2 class="title">Creating your own expectations</h2><p>The expectation classes have a very simple structure.
+                So simple that it is easy to create your own versions for
+                commonly used test logic.</p>
+            <p>As an example here is the creation of a class to test for
+                valid IP addresses.
+                In order to work correctly with the stubs and mocks the new
+                expectation class should extend
+                SimpleExpectation or further extend a subclass...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">ValidIp&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">test</span><span class="src-sym">(</span><span class="src-var">$ip</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-sym">(</span><a href="http://www.php.net/ip2long">ip2long</a><span class="src-sym">(</span><span class="src-var">$ip</span><span class="src-sym">)&nbsp;</span>!=&nbsp;-<span class="src-num">1</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testMessage</span><span class="src-sym">(</span><span class="src-var">$ip</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">&quot;</span><span class="src-str">Address&nbsp;[<span class="src-var">$ip</span>]&nbsp;should&nbsp;be&nbsp;a&nbsp;valid&nbsp;IP&nbsp;address</span><span class="src-str">&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                There are only two methods to implement.
+                The test() method should
+                evaluate to true if the expectation is to pass, and
+                false otherwise.
+                The testMessage() method
+                should simply return some helpful text explaining the test
+                that was carried out.</p>
+            <p>This class can now be used in place of the earlier expectation
+                classes.</p>
+            <p>Here is a more typical example, matching part of a hash...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">JustField&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/EqualExpectation.html">EqualExpectation</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">private&nbsp;</span><span class="src-var">$key</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-var">$key</span><span class="src-sym">,&nbsp;</span><span class="src-var">$expected</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">__construct</span><span class="src-sym">(</span><span class="src-var">$expected</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key&nbsp;</span>=&nbsp;<span class="src-var">$key</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">test</span><span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!&nbsp;</span>isset<span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">[</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">false</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">test</span><span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">[</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testMessage</span><span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!&nbsp;</span>isset<span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">[</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key</span><span class="src-sym">]</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">'Key&nbsp;['&nbsp;</span>.&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key&nbsp;</span>.&nbsp;<span class="src-str">']&nbsp;does&nbsp;not&nbsp;exist'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-str">'Key&nbsp;['&nbsp;</span>.&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key&nbsp;</span>.&nbsp;<span class="src-str">']&nbsp;-&gt;&nbsp;'&nbsp;</span>.</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">parent</span><span class="src-sym">::</span><span class="src-id">testMessage</span><span class="src-sym">(</span><span class="src-var">$compare</span><span class="src-sym">[</span><span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-var">key</span><span class="src-sym">]</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                We tend to seperate message clauses with
+                &quot;&amp;nbsp;-&gt;&amp;nbsp;&quot;.
+                This allows derivative tools to reformat the output.</p>
+            <p>Suppose some authenticator is expecting to be given
+                a database row corresponding to the user, and we
+                only need to confirm the username is correct.
+                We can assert just their username with...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-var">$mock</span><span class="src-sym">-&gt;</span><span class="src-id">expectOnce</span><span class="src-sym">(</span><span class="src-str">'authenticate'</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">array</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id">JustKey</span><span class="src-sym">(</span><span class="src-str">'username'</span><span class="src-sym">,&nbsp;</span><span class="src-str">'marcus'</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+</ol></div></p></span>
+        <span><a name="unit"></a><h2 class="title">Under the bonnet of the unit tester</h2><p>The <a href="http://sourceforge.net/projects/simpletest/">SimpleTest unit testing framework</a>
+                also uses the expectation classes internally for the
+                <a href="../SimpleTest/UnitTester/UnitTestCase.html">class.html UnitTestCase class</a>.
+                We can also take advantage of these mechanisms to reuse our
+                homebrew expectation classes within the test suites directly.</p>
+            <p>The most crude way of doing this is to use the generic
+                SimpleTest::assert() method to
+                test against it directly...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestOfNetworking&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testGetValidIp</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$server&nbsp;</span>=&nbsp;<span class="src-sym">&amp;</span><span class="src-key">new&nbsp;</span><span class="src-id">Server</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">assert</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">ValidIp</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$server</span><span class="src-sym">-&gt;</span><span class="src-id">getIp</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Server&nbsp;IP&nbsp;address-&gt;%s'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                assert() will test any expectation class directly.</p>
+            <p>This is a little untidy compared with our usual
+                assert...() syntax.</p>
+            <p>For such a simple case we would normally create a
+                separate assertion method on our test case rather
+                than bother using the expectation class.
+                If we pretend that our expectation is a little more
+                complicated for a moment, so that we want to reuse it,
+                we get...
+<div class="src-code"><ol><li><div class="src-line"><span class="src-key">class&nbsp;</span><span class="src-id">TestOfNetworking&nbsp;</span><span class="src-key">extends&nbsp;</span><a href="../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a>&nbsp;<span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;...</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">assertValidIp</span><span class="src-sym">(</span><span class="src-var">$ip</span><span class="src-sym">,&nbsp;</span><span class="src-var">$message&nbsp;</span>=&nbsp;<span class="src-str">'%s'</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">assert</span><span class="src-sym">(</span><span class="src-key">new&nbsp;</span><span class="src-id">ValidIp</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-var">$ip</span><span class="src-sym">,&nbsp;</span><span class="src-var">$message</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">function&nbsp;</span><span class="src-id">testGetValidIp</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$server&nbsp;</span>=&nbsp;<span class="src-sym">&amp;</span><span class="src-key">new&nbsp;</span><span class="src-id">Server</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$this</span><span class="src-sym">-&gt;</span><span class="src-id">assertValidIp</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$server</span><span class="src-sym">-&gt;</span><span class="src-id">getIp</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'Server&nbsp;IP&nbsp;address-&gt;%s'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><span class="src-sym">}</span></div></li>
+</ol></div>
+                It is rare to need the expectations for more than pattern
+                matching, but these facilities do allow testers to build
+                some sort of domain language for testing their application.
+                Also, complex expectation classes could make the tests
+                harder to read and debug.
+                In effect extending the test framework to create their own tool set.</p></span></div>
+
+	<table class="tutorial-nav-box">
+	<tr>
+		<td style="width: 30%">
+							<a href="../SimpleTest/tutorial_Reporting.pkg.html" class="nav-button">Previous</a>
+					</td>
+		<td style="text-align: center">
+							<a href="../SimpleTest/tutorial_SimpleTest.pkg.html" class="nav-button">Up</a>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<a href="../SimpleTest/tutorial_WebTester.pkg.html" class="nav-button">Next</a>
+					</td>
+	</tr>
+	<tr>
+		<td style="width: 30%">
+							<span class="detail">Reporting</span>
+					</td>
+		<td style="text-align: center">
+							<span class="detail">Simple Test PHP Unit Test Framework</span>
+					</td>
+		<td style="text-align: right; width: 30%">
+							<span class="detail">Web tester</span>
+					</td>
+	</tr>
+</table>
+	
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:41 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleTest</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleTest</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registry and test context. Includes a few     global options that I'm slowly getting rid of.</p>
+		<p class="notes">
+			Located in <a class="field" href="_simpletest.php.html">/simpletest.php</a> (line <span class="field">23</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+												<div class="var-title">
+					static <span class="var-type">mixed</span>
+					<a href="#$context" title="details" class="var-name">$context</a>
+				</div>
+																							</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+										
+				<div class="method-definition">
+					static 						<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+										<a href="#getContext" title="details" class="method-name">getContext</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getDefaultProxy" title="details" class="method-name">getDefaultProxy</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getDefaultProxyPassword" title="details" class="method-name">getDefaultProxyPassword</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getDefaultProxyUsername" title="details" class="method-name">getDefaultProxyUsername</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">hash</span>
+										<a href="#getDefaults" title="details" class="method-name">getDefaults</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#getMockBaseClass" title="details" class="method-name">getMockBaseClass</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">array</span>
+										<a href="#getParsers" title="details" class="method-name">getParsers</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">hash</span>
+										<a href="#getRegistry" title="details" class="method-name">&amp;getRegistry</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">string</span>
+										<a href="#getVersion" title="details" class="method-name">getVersion</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#ignore" title="details" class="method-name">ignore</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#ignoreParentsIfIgnored" title="details" class="method-name">ignoreParentsIfIgnored</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$classes</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">boolean</span>
+										<a href="#isIgnored" title="details" class="method-name">isIgnored</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+										<a href="#popContext" title="details" class="method-name">popContext</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$ctx</span>, <span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>&nbsp;<span class="var-name">$context</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#prefer" title="details" class="method-name">prefer</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span> = <span class="var-default">null</span>])
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">array|object|null</span>
+										<a href="#preferred" title="details" class="method-name">preferred</a>
+											(<span class="var-type">array|string</span>&nbsp;<span class="var-name">$classes</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+										<a href="#pushContext" title="details" class="method-name">pushContext</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#setMockBaseClass" title="details" class="method-name">setMockBaseClass</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$mock_base</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#setParsers" title="details" class="method-name">setParsers</a>
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$parsers</span>)
+									</div>
+														
+				<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#useProxy" title="details" class="method-name">useProxy</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$proxy</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$password</span> = <span class="var-default">false</span>])
+									</div>
+																																																																																																																																																																							</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$context" id="$context"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">mixed</span>
+			<span class="var-name">$context</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodgetContext" id="getContext"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getContext</span> (line <span class="line-number">207</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the context of the current     test run.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Current test run.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+		<span class="method-name">
+			getContext
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetDefaultProxy" id="getDefaultProxy"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getDefaultProxy</span> (line <span class="line-number">145</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for default proxy host.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Proxy URL.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">string</span>
+		<span class="method-name">
+			getDefaultProxy
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetDefaultProxyPassword" id="getDefaultProxyPassword"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getDefaultProxyPassword</span> (line <span class="line-number">163</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for default proxy password.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Proxy password for authentication.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">string</span>
+		<span class="method-name">
+			getDefaultProxyPassword
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetDefaultProxyUsername" id="getDefaultProxyUsername"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getDefaultProxyUsername</span> (line <span class="line-number">154</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for default proxy username.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Proxy username for authentication.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">string</span>
+		<span class="method-name">
+			getDefaultProxyUsername
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetDefaults" id="getDefaults"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getDefaults</span> (line <span class="line-number">264</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Constant default values.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> All registry defaults.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">hash</span>
+		<span class="method-name">
+			getDefaults
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetMockBaseClass" id="getMockBaseClass"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getMockBaseClass</span> (line <span class="line-number">286</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			getMockBaseClass
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetParsers" id="getParsers"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getParsers</span> (line <span class="line-number">174</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for default HTML parsers.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> List of parsers to try in                       order until one responds true                       to can().</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">array</span>
+		<span class="method-name">
+			getParsers
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetRegistry" id="getRegistry"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getRegistry</span> (line <span class="line-number">194</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for global registry of options.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> All stored values.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">hash</span>
+		<span class="method-name">
+			&amp;getRegistry
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetVersion" id="getVersion"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static getVersion</span> (line <span class="line-number">30</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reads the SimpleTest version from the release file.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Version string.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">string</span>
+		<span class="method-name">
+			getVersion
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodignore" id="ignore"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static ignore</span> (line <span class="line-number">40</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the name of a test case to ignore, usually</p>
+<p class="description"><p>because the class is an abstract case that should</p></p>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			ignore
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span><span class="var-description">: Add a class to ignore.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodignoreParentsIfIgnored" id="ignoreParentsIfIgnored"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static ignoreParentsIfIgnored</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Scans the now complete ignore list, and adds</p>
+<p class="description"><p>all parent classes to the list. If a class     is not a runnable test case, then it's parents     wouldn't be either. This is syntactic sugar     to cut down on ommissions of ignore()'s or     missing abstract declarations. This cannot     be done whilst loading classes wiithout forcing     a particular order on the class declarations and     the ignore() calls. It's just nice to have the ignore()     calls at the top of the file before the actual declarations.</p></p>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			ignoreParentsIfIgnored
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$classes</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$classes</span><span class="var-description">: Class names of interest.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodisIgnored" id="isIgnored"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static isIgnored</span> (line <span class="line-number">120</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Test to see if a test case is in the ignore     list. Quite obviously the ignore list should     be a separate object and will be one day.</p>
+<p class="description"><p>This method is internal to SimpleTest. Don't     use it.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if should not be run.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">boolean</span>
+		<span class="method-name">
+			isIgnored
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span><span class="var-description">: Class name to test.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpopContext" id="popContext"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static popContext</span> (line <span class="line-number">236</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Removes ('pops') all child contexts chained to the given context and itself,     then makes the parent of the given context the new active context, so this     comes with an implicit @see SimpleTest::getContext().</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The now activate context.</li>
+				<li><span class="field">see:</span> SimpleTest::getContext() or</li>
+				<li><span class="field">see:</span> SimpleTest::pushContext().</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+		<span class="method-name">
+			popContext
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$ctx</span>, <span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>&nbsp;<span class="var-name">$context</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+				<span class="var-name">$context</span><span class="var-description">: The context to pop. It must have been                                          produced before by either</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$ctx</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodprefer" id="prefer"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static prefer</span> (line <span class="line-number">78</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Puts the object to the global pool of 'preferred' objects    which can be retrieved with SimpleTest :: preferred() method.</p>
+<p class="description"><p>Instances of the same class are overwritten.</p></p>
+	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../SimpleTest/UnitTester/SimpleTest.html#methodpreferred">SimpleTest::preferred()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			prefer
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$object</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$object</span><span class="var-description">: Preferred object</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$tag</span><span class="var-description">: Optional name for the object being stored. When empty, the object class name will be used as a tag as a default.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpreferred" id="preferred"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static preferred</span> (line <span class="line-number">98</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Retrieves 'preferred' objects from global pool. Class filter</p>
+<p class="description"><p>can be applied in order to retrieve the object of the specific    class</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> associative array</li>
+				<li><span class="field">see:</span> <a href="../../SimpleTest/UnitTester/SimpleTest.html#methodprefer">SimpleTest::prefer()</a></li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">array|object|null</span>
+		<span class="method-name">
+			preferred
+		</span>
+					(<span class="var-type">array|string</span>&nbsp;<span class="var-name">$classes</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array|string</span>
+				<span class="var-name">$classes</span><span class="var-description">: Allowed classes or interfaces.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpushContext" id="pushContext"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static pushContext</span> (line <span class="line-number">220</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Request a new (child) context and use it from now on, i.e. this is an     implicit @see SimpleTest::getContext().</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Current test run.</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleTestContext.html">SimpleTestContext</a></span>
+		<span class="method-name">
+			pushContext
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetMockBaseClass" id="setMockBaseClass"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static setMockBaseClass</span> (line <span class="line-number">278</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			setMockBaseClass
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$mock_base</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$mock_base</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetParsers" id="setParsers"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static setParsers</span> (line <span class="line-number">185</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set the list of HTML parsers to attempt to use by default.</p>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			setParsers
+		</span>
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$parsers</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$parsers</span><span class="var-description">: List of parsers to try in                              order until one responds true                              to can().</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoduseProxy" id="useProxy"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static useProxy</span> (line <span class="line-number">134</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets proxy to use on all requests for when     testing from behind a firewall. Set host     to false to disable. This will take effect     if there are no other proxy settings.</p>
+	
+	<div class="method-signature">
+		static <span class="method-result">void</span>
+		<span class="method-name">
+			useProxy
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$proxy</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$username</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$password</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$proxy</span><span class="var-description">: Proxy host as URL.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$username</span><span class="var-description">: Proxy username for authentication.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$password</span><span class="var-description">: Proxy password for authentication.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

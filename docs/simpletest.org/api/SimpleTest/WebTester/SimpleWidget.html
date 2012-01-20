@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleWidget</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleWidget</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Form element.</p>
+		<p class="notes">
+			Located in <a class="field" href="_tag.php.html">/tag.php</a> (line <span class="field">337</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a>
+   |
+   --SimpleWidget</pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleTextTag.html">SimpleTextTag</a></td>
+					<td>
+											Text, password and hidden field.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleSubmitTag.html">SimpleSubmitTag</a></td>
+					<td>
+											Submit button as input tag.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleImageSubmitTag.html">SimpleImageSubmitTag</a></td>
+					<td>
+											Image button as input tag.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleButtonTag.html">SimpleButtonTag</a></td>
+					<td>
+											Submit button as button tag.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleTextAreaTag.html">SimpleTextAreaTag</a></td>
+					<td>
+											Content tag for text area.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleUploadTag.html">SimpleUploadTag</a></td>
+					<td>
+											File upload widget.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleSelectionTag.html">SimpleSelectionTag</a></td>
+					<td>
+											Drop down widget.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/MultipleSelectionTag.html">MultipleSelectionTag</a></td>
+					<td>
+											Drop down widget.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleOptionTag.html">SimpleOptionTag</a></td>
+					<td>
+											Option for selection field.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html">SimpleRadioButtonTag</a></td>
+					<td>
+											Radio button.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html">SimpleCheckboxTag</a></td>
+					<td>
+											Checkbox widget.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$is_set" title="details" class="var-name">$is_set</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$label" title="details" class="var-name">$label</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$value" title="details" class="var-name">$value</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																						
+				<div class="method-definition">
+											<span class="method-result">SimpleWidget</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getDefault" title="details" class="method-name">getDefault</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getName" title="details" class="method-name">getName</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getValue" title="details" class="method-name">getValue</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#isLabel" title="details" class="method-name">isLabel</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#resetValue" title="details" class="method-name">resetValue</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setLabel" title="details" class="method-name">setLabel</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#setValue" title="details" class="method-name">setValue</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#write" title="details" class="method-name">write</a>
+											(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>&nbsp;<span class="var-name">$encoding</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$is_set" id="$is_set"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$is_set</span>
+						(line <span class="line-number">340</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$label" id="$label"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$label</span>
+						(line <span class="line-number">339</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$value" id="$value"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$value</span>
+						(line <span class="line-number">338</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#var$attributes">SimpleTag::$attributes</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#var$content">SimpleTag::$content</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#var$name">SimpleTag::$name</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">348</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Starts with a named tag with attributes only.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleWidget</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">hash</span>&nbsp;<span class="var-name">$attributes</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$name</span><span class="var-description">: Tag name.</span>			</li>
+					<li>
+				<span class="var-type">hash</span>
+				<span class="var-name">$attributes</span><span class="var-description">: Attribute names and                                string values.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/WebTester/SimpleTag.html#method__construct">SimpleTag::__construct()</a></dt>
+						<dd>Starts with a named tag with attributes only.</dd>
+					</dl>
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleTextTag.html#method__construct">SimpleTextTag::__construct()</a>
+								: Starts with a named tag with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSubmitTag.html#method__construct">SimpleSubmitTag::__construct()</a>
+								: Starts with a named tag with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleImageSubmitTag.html#method__construct">SimpleImageSubmitTag::__construct()</a>
+								: Starts with a named tag with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleButtonTag.html#method__construct">SimpleButtonTag::__construct()</a>
+								: Starts with a named tag with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleTextAreaTag.html#method__construct">SimpleTextAreaTag::__construct()</a>
+								: Starts with a named tag with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleUploadTag.html#method__construct">SimpleUploadTag::__construct()</a>
+								: Starts with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSelectionTag.html#method__construct">SimpleSelectionTag::__construct()</a>
+								: Starts with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/MultipleSelectionTag.html#method__construct">MultipleSelectionTag::__construct()</a>
+								: Starts with attributes only.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleOptionTag.html#method__construct">SimpleOptionTag::__construct()</a>
+								: Stashes the attributes.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html#method__construct">SimpleRadioButtonTag::__construct()</a>
+								: Stashes the attributes.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html#method__construct">SimpleCheckboxTag::__construct()</a>
+								: Starts with attributes only.
+							</li>
+				</ul>
+	</div>
+<a name="methodgetDefault" id="getDefault"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDefault</span> (line <span class="line-number">370</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for default value parsed with the tag.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Parsed value.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getDefault
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleTextAreaTag.html#methodgetDefault">SimpleTextAreaTag::getDefault()</a>
+								: Accessor for starting value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSelectionTag.html#methodgetDefault">SimpleSelectionTag::getDefault()</a>
+								: Scans options for defaults. If none, then     the first option is selected.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/MultipleSelectionTag.html#methodgetDefault">MultipleSelectionTag::getDefault()</a>
+								: Scans options for defaults to populate the     value array().
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleOptionTag.html#methodgetDefault">SimpleOptionTag::getDefault()</a>
+								: Accessor for starting value. Will be set to     the option label if no value exists.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html#methodgetDefault">SimpleRadioButtonTag::getDefault()</a>
+								: Accessor for starting value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html#methodgetDefault">SimpleCheckboxTag::getDefault()</a>
+								: Accessor for starting value. The default     value is &quot;on&quot;.
+							</li>
+				</ul>
+	</div>
+<a name="methodgetName" id="getName"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getName</span> (line <span class="line-number">361</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for name submitted as the key in     GET/POST variables hash.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Parsed value.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getName
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetValue" id="getValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getValue</span> (line <span class="line-number">381</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for currently set value or default if     none.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Value set by form or default                         if none.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getValue
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSelectionTag.html#methodgetValue">SimpleSelectionTag::getValue()</a>
+								: Accessor for current selection value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/MultipleSelectionTag.html#methodgetValue">MultipleSelectionTag::getValue()</a>
+								: Accessor for current selection value.
+							</li>
+				</ul>
+	</div>
+<a name="methodisLabel" id="isLabel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">isLabel</span> (line <span class="line-number">426</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reads external or internal label.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True is match.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			isLabel
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$label</span><span class="var-description">: Label to test.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSubmitTag.html#methodisLabel">SimpleSubmitTag::isLabel()</a>
+								: Test for a label match when searching.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleImageSubmitTag.html#methodisLabel">SimpleImageSubmitTag::isLabel()</a>
+								: Test for a label match when searching.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleButtonTag.html#methodisLabel">SimpleButtonTag::isLabel()</a>
+								: Test for a label match when searching.
+							</li>
+				</ul>
+	</div>
+<a name="methodresetValue" id="resetValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">resetValue</span> (line <span class="line-number">405</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Resets the form element value back to the     default.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			resetValue
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsetLabel" id="setLabel"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">setLabel</span> (line <span class="line-number">415</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Allows setting of a label externally, say by a     label tag.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setLabel
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$label</span><span class="var-description">: Label to attach.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetValue" id="setValue"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setValue</span> (line <span class="line-number">394</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets the current form element value.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if allowed.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			setValue
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$value</span><span class="var-description">: New value.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleTextTag.html#methodsetValue">SimpleTextTag::setValue()</a>
+								: Sets the current form element value. Cannot     change the value of a hidden field.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSubmitTag.html#methodsetValue">SimpleSubmitTag::setValue()</a>
+								: Disables the setting of the button value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleImageSubmitTag.html#methodsetValue">SimpleImageSubmitTag::setValue()</a>
+								: Disables the setting of the button value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleButtonTag.html#methodsetValue">SimpleButtonTag::setValue()</a>
+								: Disables the setting of the button value.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleTextAreaTag.html#methodsetValue">SimpleTextAreaTag::setValue()</a>
+								: Applies word wrapping if needed.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleSelectionTag.html#methodsetValue">SimpleSelectionTag::setValue()</a>
+								: Can only set allowed values.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/MultipleSelectionTag.html#methodsetValue">MultipleSelectionTag::setValue()</a>
+								: Can only set allowed values. Any illegal value     will result in a failure, but all correct values     will be set.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleOptionTag.html#methodsetValue">SimpleOptionTag::setValue()</a>
+								: Does nothing.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleRadioButtonTag.html#methodsetValue">SimpleRadioButtonTag::setValue()</a>
+								: The only allowed value sn the one in the     &quot;value&quot; attribute.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleCheckboxTag.html#methodsetValue">SimpleCheckboxTag::setValue()</a>
+								: The only allowed value in the one in the     &quot;value&quot; attribute. The default for this     attribute is &quot;on&quot;. If this widget is set to     true, then the usual value will be taken.
+							</li>
+				</ul>
+	</div>
+<a name="methodwrite" id="write"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">write</span> (line <span class="line-number">435</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Dispatches the value into the form encoded packet.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			write
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>&nbsp;<span class="var-name">$encoding</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/WebTester/SimpleEncoding.html">SimpleEncoding</a></span>
+				<span class="var-name">$encoding</span><span class="var-description">: Form packet.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleImageSubmitTag.html#methodwrite">SimpleImageSubmitTag::write()</a>
+								: Dispatches the value into the form encoded packet.
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/SimpleUploadTag.html#methodwrite">SimpleUploadTag::write()</a>
+								: Dispatches the value into the form encoded packet.
+							</li>
+				</ul>
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/WebTester/SimpleTag.html">SimpleTag</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#method__construct">SimpleTag::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodaddContent">SimpleTag::addContent()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodaddTag">SimpleTag::addTag()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodaddTags">SimpleTag::addTags()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodexpectEndTag">SimpleTag::expectEndTag()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodgetAttribute">SimpleTag::getAttribute()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodgetChildElements">SimpleTag::getChildElements()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodgetContent">SimpleTag::getContent()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodgetTagName">SimpleTag::getTagName()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodgetText">SimpleTag::getText()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodisId">SimpleTag::isId()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodisPrivateContent">SimpleTag::isPrivateContent()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/WebTester/SimpleTag.html#methodsetAttribute">SimpleTag::setAttribute()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:06 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

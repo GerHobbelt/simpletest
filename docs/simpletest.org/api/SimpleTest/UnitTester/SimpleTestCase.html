@@ -1,0 +1,1682 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class SimpleTestCase</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class SimpleTestCase</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+							<a href="#sec-descendents">Descendents</a>
+			|											<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Basic test case. This is the smallest unit of a test     suite. It searches for     all methods that start with the the string &quot;test&quot; and     runs them. Working test cases extend this class.</p>
+		<p class="notes">
+			Located in <a class="field" href="_test_case.php.html">/test_case.php</a> (line <span class="field">40</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+	<a name="sec-descendents"></a>
+	<div class="info-box">
+		<div class="info-box-title">Direct descendents</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+			<span class="disabled">Descendents</span>
+			|												<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+								|															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<table cellpadding="2" cellspacing="0" class="class-table">
+				<tr>
+					<th class="class-table-header">Class</th>
+					<th class="class-table-header">Description</th>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/Extensions/PHPUnit_TestCase.html">PHPUnit_TestCase</a></td>
+					<td>
+											Adapter for PEAR PHPUnit test case to allow     legacy PEAR test cases to be used with SimpleTest.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/UnitTester/ShellTestCase.html">ShellTestCase</a></td>
+					<td>
+											Test case for testing of command line scripts and     utilities. Usually scripts that are external to the     PHP code, but support it in some way.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></td>
+					<td>
+											Standard unit test class for day to day testing     of PHP code XP style. Adds some useful standard     assertions.
+										</td>
+				</tr>
+							</table>
+		</div>
+	</div>
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$label" title="details" class="var-name">$label</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$observers" title="details" class="var-name">$observers</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$reporter" title="details" class="var-name">$reporter</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$running" title="details" class="var-name">$running</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$should_skip" title="details" class="var-name">$should_skip</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																																										
+				<div class="method-definition">
+					static 						<span class="method-result">boolean</span>
+										<a href="#isTest" title="details" class="method-name">isTest</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+									</div>
+																																																																																																		
+				<div class="method-definition">
+											<span class="method-result">SimpleTestCase</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#after" title="details" class="method-name">after</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#assert" title="details" class="method-name">assert</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#before" title="details" class="method-name">before</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#checkExpectation" title="details" class="method-name">checkExpectation</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>
+										<a href="#coerceExpectation" title="details" class="method-name">coerceExpectation</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$expected</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#constructFailMessage" title="details" class="method-name">constructFailMessage</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#constructPassMessage" title="details" class="method-name">constructPassMessage</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleInvoker.html">SimpleInvoker</a></span>
+										<a href="#createInvoker" title="details" class="method-name">createInvoker</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#dump" title="details" class="method-name">dump</a>
+											(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$variable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#error" title="details" class="method-name">error</a>
+											(<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$line</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#exception" title="details" class="method-name">exception</a>
+											(<span class="var-type">Exception</span>&nbsp;<span class="var-name">$exception</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+										<a href="#expectError" title="details" class="method-name">expectError</a>
+											([<span class="var-type">SimpleExpectation/string</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+										<a href="#expectException" title="details" class="method-name">expectException</a>
+											([<span class="var-type">SimpleExpectation/Exception</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+										<a href="#expectFail" title="details" class="method-name">expectFail</a>
+											([<span class="var-type">SimpleExpectation/string</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">null</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#fail" title="details" class="method-name">fail</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;Fail&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getAssertionLine" title="details" class="method-name">getAssertionLine</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getDumper" title="details" class="method-name">getDumper</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getLabel" title="details" class="method-name">getLabel</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>
+										<a href="#getReporter" title="details" class="method-name">getReporter</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">integer</span>
+										<a href="#getSize" title="details" class="method-name">getSize</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">array</span>
+										<a href="#getTests" title="details" class="method-name">getTests</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#getURLregex" title="details" class="method-name">getURLregex</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#ignoreException" title="details" class="method-name">ignoreException</a>
+											([<span class="var-type">SimpleExpectation/Exception</span>&nbsp;<span class="var-name">$ignored</span> = <span class="var-default">false</span>])
+									</div>
+																						
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#pass" title="details" class="method-name">pass</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;Pass&quot;</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">boolean</span>
+										<a href="#run" title="details" class="method-name">run</a>
+											(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>&nbsp;<span class="var-name">$reporter</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setUp" title="details" class="method-name">setUp</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#shouldSkip" title="details" class="method-name">shouldSkip</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#signal" title="details" class="method-name">signal</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$payload</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skip" title="details" class="method-name">skip</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipIf" title="details" class="method-name">skipIf</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$should_skip</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#skipUnless" title="details" class="method-name">skipUnless</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$shouldnt_skip</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">false</span>])
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tearDown" title="details" class="method-name">tearDown</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tell" title="details" class="method-name">tell</a>
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$observer</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+<a name="var$label" id="$label"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$label</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$observers" id="$observers"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$observers</span>
+						(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$reporter" id="$reporter"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$reporter</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">42</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$running" id="$running"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$running</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$should_skip" id="$should_skip"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$should_skip</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+							<a href="#sec-descendents">Descendents</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="methodisTest" id="isTest"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static isTest</span> (line <span class="line-number">213</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tests to see if the method is a test that should     be run. Currently any method that starts with 'test'     is a candidate.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if test method.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		static <span class="method-result">boolean</span>
+		<span class="method-name">
+			isTest
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$class</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$class</span><span class="var-description">: Class name of the method to try.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Method name to try.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">53</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up the test with no display.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">SimpleTestCase</span>
+		<span class="method-name">
+			__construct
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$label</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$label</span><span class="var-description">: If no test name is given then                             the class name is used.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/Extensions/PHPUnit_TestCase.html#method__construct">PHPUnit_TestCase::__construct()</a>
+								: Constructor. Sets the test name.
+							</li>
+					<li>
+				<a href="../../SimpleTest/UnitTester/ShellTestCase.html#method__construct">ShellTestCase::__construct()</a>
+								: Creates an empty test case. Should be subclassed     with test methods for a functional test case.
+							</li>
+					<li>
+				<a href="../../SimpleTest/UnitTester/UnitTestCase.html#method__construct">UnitTestCase::__construct()</a>
+								: Creates an empty test case. Should be subclassed     with test methods for a functional test case.
+							</li>
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleneseTestCase.html#method__construct">SeleneseTestCase::__construct()</a>
+								: constructor
+							</li>
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleniumTestCase.html#method__construct">SeleniumTestCase::__construct()</a>
+							</li>
+					<li>
+				<a href="../../SimpleTest/SimpleInternalValidator/SimpleInternalValidator.html#method__construct">SimpleInternalValidator::__construct()</a>
+							</li>
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#method__construct">WebTestCase::__construct()</a>
+								: Creates an empty test case. Should be subclassed     with test methods for a functional test case.
+							</li>
+				</ul>
+	</div>
+<a name="methodafter" id="after"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">after</span> (line <span class="line-number">250</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Announces the end of the test. Includes private clean up.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			after
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Test method just finished.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodafter">WebTestCase::after()</a>
+								: Announces the end of the test. Includes private clean up.
+							</li>
+				</ul>
+	</div>
+<a name="methodassert" id="assert"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">assert</span> (line <span class="line-number">543</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Runs an expectation directly, for extending the     tests with new expectation classes.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			assert
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>
+				<span class="var-name">$expectation</span><span class="var-description">: Expectation subclass.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$compare</span><span class="var-description">: Value to compare.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/SimpleInternalValidator/SimpleInternalValidator.html#methodassert">SimpleInternalValidator::assert()</a>
+								: Runs an expectation directly, for extending the     tests with new expectation classes.
+							</li>
+				</ul>
+	</div>
+<a name="methodbefore" id="before"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">before</span> (line <span class="line-number">223</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Announces the start of the test.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			before
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$method</span><span class="var-description">: Test method just started.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodbefore">WebTestCase::before()</a>
+								: Announces the start of the test.
+							</li>
+				</ul>
+	</div>
+<a name="methodcheckExpectation" id="checkExpectation"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">checkExpectation</span> (line <span class="line-number">529</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Runs an expectation directly, taking a possibly expected fail     into account by turning the tables then.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True on pass / expected fail, false on fail / unexpected pass.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			checkExpectation
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$compare</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>
+				<span class="var-name">$expectation</span><span class="var-description">: Expectation subclass.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$compare</span><span class="var-description">: Value to compare.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcoerceExpectation" id="coerceExpectation"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">coerceExpectation</span> (line <span class="line-number">471</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Creates an equality expectation if the     object/value is not already some type     of expectation.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Expectation object.</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleExpectation.html">SimpleExpectation</a></span>
+		<span class="method-name">
+			coerceExpectation
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$expected</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$expected</span><span class="var-description">: Expected value.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodconstructFailMessage" id="constructFailMessage"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">constructFailMessage</span> (line <span class="line-number">496</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct 'fail' message. Takes expected fails into account.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			constructFailMessage
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$expectation</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$compare</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodconstructPassMessage" id="constructPassMessage"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">constructPassMessage</span> (line <span class="line-number">486</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Construct 'pass' message. Takes expected fails into account.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			constructPassMessage
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$expectation</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$compare</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;%s&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$expectation</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$compare</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcreateInvoker" id="createInvoker"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">createInvoker</span> (line <span class="line-number">126</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Used to invoke the single tests.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Individual test runner.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleInvoker.html">SimpleInvoker</a></span>
+		<span class="method-name">
+			createInvoker
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methoddump" id="dump"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">dump</span> (line <span class="line-number">571</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sends a formatted dump of a variable to the     test suite for those emergency debugging     situations.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The original variable.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			dump
+		</span>
+					(<span class="var-type">mixed</span>&nbsp;<span class="var-name">$variable</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$variable</span><span class="var-description">: Variable to display.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to display.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoderror" id="error"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">error</span> (line <span class="line-number">322</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Formats a PHP error and dispatches it to the     reporter.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			error
+		</span>
+					(<span class="var-type">integer</span>&nbsp;<span class="var-name">$severity</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$message</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$line</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$severity</span><span class="var-description">: PHP error code.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Text of error.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: File error occoured in.</span>			</li>
+					<li>
+				<span class="var-type">integer</span>
+				<span class="var-name">$line</span><span class="var-description">: Line number of error.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methoderror">WebTestCase::error()</a>
+								: Formats a PHP error and dispatches it to the     reporter.
+							</li>
+				</ul>
+	</div>
+<a name="methodexception" id="exception"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">exception</span> (line <span class="line-number">337</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Formats an exception and dispatches it to the     reporter.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			exception
+		</span>
+					(<span class="var-type">Exception</span>&nbsp;<span class="var-name">$exception</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">Exception</span>
+				<span class="var-name">$exception</span><span class="var-description">: Object thrown.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodexception">WebTestCase::exception()</a>
+								: Formats an exception and dispatches it to the     reporter.
+							</li>
+				</ul>
+	</div>
+<a name="methodexpectError" id="expectError"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectError</span> (line <span class="line-number">430</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prepares for an error. If the error mismatches it     passes through, otherwise it is swallowed. Any     left over errors trigger failures.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> This test object.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+		<span class="method-name">
+			expectError
+		</span>
+					([<span class="var-type">SimpleExpectation/string</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleExpectation/string</span>
+				<span class="var-name">$expected</span><span class="var-description">: The error to match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message on failure.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectException" id="expectException"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectException</span> (line <span class="line-number">445</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prepares for an exception. If the error mismatches it     passes through, otherwise it is swallowed. Any     left over errors trigger failures.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> This test object.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+		<span class="method-name">
+			expectException
+		</span>
+					([<span class="var-type">SimpleExpectation/Exception</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleExpectation/Exception</span>
+				<span class="var-name">$expected</span><span class="var-description">: The error to match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message on failure.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodexpectFail" id="expectFail"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">expectFail</span> (line <span class="line-number">405</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Prepares for an failure. If the failure mismatches it  passes through, otherwise it is swallowed. Any  left over expected failures are reported before the end  of the test.</p>
+<p class="description"><p>For example, use $this-&gt;expectedFail()-&gt;assert... to mark the assert as an  expected fail.</p><p>You may want to use expectFail() in two different scenarios:</p><p>1) If your test reveals a bug then use this function with the     relevant parameter to link/refer to your bugtracker. This is     necessary because it is much easier to write a test than     fix a bug. It's also self-documenting -- before a release,     all these expectFail() calls should be removed.</p><p>2) You want to test the behaviour of SimpleTest itself, including     how it renders failed tests. This is a special case which     applies to all expectFail() calls in the SimpleTest:./test/     directory.</p></p>
+	<ul class="tags">
+				<li><span class="field">return:</span> This test object.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/UnitTestCase.html">UnitTestCase</a></span>
+		<span class="method-name">
+			expectFail
+		</span>
+					([<span class="var-type">SimpleExpectation/string</span>&nbsp;<span class="var-name">$expected</span> = <span class="var-default">false</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleExpectation/string</span>
+				<span class="var-name">$expected</span><span class="var-description">: The error to match.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: A message describing the known bug or an absolute URL pointing                                              to the issue in any bugtracker.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodfail" id="fail"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">fail</span> (line <span class="line-number">309</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sends a fail event with a message.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			fail
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;Fail&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Message to send.</span>			</li>
+				</ul>
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodfail">WebTestCase::fail()</a>
+								: Sends a fail event with a message.
+							</li>
+				</ul>
+	</div>
+<a name="methodgetAssertionLine" id="getAssertionLine"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getAssertionLine</span> (line <span class="line-number">557</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Uses a stack trace to find the line of an assertion.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Line number of first assert*                              method embedded in format string.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getAssertionLine
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/WebTester/WebTestCase.html#methodgetAssertionLine">WebTestCase::getAssertionLine()</a>
+								: Uses a stack trace to find the line of an assertion.
+							</li>
+				</ul>
+	</div>
+<a name="methodgetDumper" id="getDumper"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getDumper</span> (line <span class="line-number">505</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Obtain the dumper instance related to this test.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getDumper
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetLabel" id="getLabel"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getLabel</span> (line <span class="line-number">65</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the test name for subclasses.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Name of the test.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getLabel
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetReporter" id="getReporter"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getReporter</span> (line <span class="line-number">74</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the registered reporter.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> The registered reporter or FALSE if none is known at the time of this call.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>
+		<span class="method-name">
+			getReporter
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetSize" id="getSize"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getSize</span> (line <span class="line-number">588</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the number of subtests including myself.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Number of test cases.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">integer</span>
+		<span class="method-name">
+			getSize
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetTests" id="getTests"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getTests</span> (line <span class="line-number">194</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Gets a list of test names. Normally that will     be all internal methods that start with the     name &quot;test&quot;. This method should be overridden     if you want a different rule.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> List of test names.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">array</span>
+		<span class="method-name">
+			getTests
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodgetURLregex" id="getURLregex"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getURLregex</span> (line <span class="line-number">357</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			getURLregex
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodignoreException" id="ignoreException"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">ignoreException</span> (line <span class="line-number">459</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Tells SimpleTest to ignore an upcoming exception as not relevant     to the current test. It doesn't affect the test, whether thrown or     not.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			ignoreException
+		</span>
+					([<span class="var-type">SimpleExpectation/Exception</span>&nbsp;<span class="var-name">$ignored</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">SimpleExpectation/Exception</span>
+				<span class="var-name">$ignored</span><span class="var-description">: The error to ignore.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpass" id="pass"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">pass</span> (line <span class="line-number">300</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">deprecated:</span> </li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			pass
+		</span>
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">&quot;Pass&quot;</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodrun" id="run"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">run</span> (line <span class="line-number">140</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Uses reflection to run every method within itself     starting with the string &quot;test&quot; unless a method     is specified.</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if all tests passed.</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">boolean</span>
+		<span class="method-name">
+			run
+		</span>
+					(<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>&nbsp;<span class="var-name">$reporter</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span>
+				<span class="var-name">$reporter</span><span class="var-description">: Current test reporter.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodsetUp" id="setUp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setUp</span> (line <span class="line-number">234</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up unit test wide variables at the start     of each test method. To be overridden in     actual user test cases.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setUp
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleniumTestCase.html#methodsetUp">SeleniumTestCase::setUp()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodshouldSkip" id="shouldSkip"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">shouldSkip</span> (line <span class="line-number">106</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Accessor for the protected variable $shoud_skip</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			shouldSkip
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodsignal" id="signal"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">signal</span> (line <span class="line-number">350</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">For user defined expansion of the available messages.</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			signal
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$payload</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$type</span><span class="var-description">: Tag for sorting the signals.</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$payload</span><span class="var-description">: Extra user specific information.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskip" id="skip"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skip</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is a placeholder for skipping tests. In this     method you place skipIf() and skipUnless() calls to     set the skipping state.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skip
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodskipIf" id="skipIf"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipIf</span> (line <span class="line-number">94</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will issue a message to the reporter and tell the test     case to skip if the incoming flag is true.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipIf
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$should_skip</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">'%s'</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$should_skip</span><span class="var-description">: Condition causing the tests to be skipped.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Text of skip condition.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodskipUnless" id="skipUnless"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">skipUnless</span> (line <span class="line-number">117</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Will issue a message to the reporter and tell the test     case to skip if the incoming flag is false.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			skipUnless
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$shouldnt_skip</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$message</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$shouldnt_skip</span><span class="var-description">: Condition causing the tests to be run.</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$message</span><span class="var-description">: Text of skip condition.</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtearDown" id="tearDown"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">tearDown</span> (line <span class="line-number">242</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Clears the data set in the setUp() method call.</p>
+<p class="description"><p>To be overridden by the user in actual user test cases.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tearDown
+		</span>
+				()
+			</div>
+	
+		
+			
+			<hr class="separator" />
+		<div class="notes">Redefined in descendants as:</div>
+		<ul class="redefinitions">
+					<li>
+				<a href="../../SimpleTest/Extensions/SeleniumTestCase.html#methodtearDown">SeleniumTestCase::tearDown()</a>
+							</li>
+				</ul>
+	</div>
+<a name="methodtell" id="tell"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">tell</span> (line <span class="line-number">263</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Sets up an observer for the test end.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tell
+		</span>
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$observer</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$observer</span><span class="var-description">: Must have atTestEnd()                                method.</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:59:07 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>

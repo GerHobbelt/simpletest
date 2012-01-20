@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos  -->
+			<title>Docs For Class JUnitXMLReporter</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+						<script src="../../media/lib/classTree.js"></script>
+												<script language="javascript" type="text/javascript">
+				var imgPlus = new Image();
+				var imgMinus = new Image();
+				imgPlus.src = "../../media/images/plus.png";
+				imgMinus.src = "../../media/images/minus.png";
+				
+				function showNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgMinus.src;
+					oTable.style.display = "block";
+				}
+				
+				function hideNode(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+							var oImg = document.layers["img" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+							var oImg = document.all["img" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+							var oImg = document.getElementById("img" + Node);
+									break;
+							}
+					oImg.src = imgPlus.src;
+					oTable.style.display = "none";
+				}
+				
+				function nodeIsVisible(Node){
+							switch(navigator.family){
+								case 'nn4':
+									// Nav 4.x code fork...
+							var oTable = document.layers["span" + Node];
+									break;
+								case 'ie4':
+									// IE 4/5 code fork...
+							var oTable = document.all["span" + Node];
+									break;
+								case 'gecko':
+									// Standards Compliant code fork...
+							var oTable = document.getElementById("span" + Node);
+									break;
+							}
+					return (oTable && oTable.style.display == "block");
+				}
+				
+				function toggleNodeVisibility(Node){
+					if (nodeIsVisible(Node)){
+						hideNode(Node);
+					}else{
+						showNode(Node);
+					}
+				}
+			</script>
+					</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class JUnitXMLReporter</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-vars">Vars</a>
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Reporter which outputs test results in a format compatible  with JUnit / Maven XML output. Can be used for integrating  test suite with continuous integration servers such as  Atlassian Bamboo.</p>
+		<p class="notes">
+			Located in <a class="field" href="_extensions---junit_xml_reporter.php.html">/extensions/junit_xml_reporter.php</a> (line <span class="field">22</span>)
+		</p>
+		
+				
+		<pre><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a>
+   |
+   --<a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a>
+      |
+      --JUnitXMLReporter</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-vars">Vars</a>
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																														
+				<div class="method-definition">
+											<span class="method-result">JUnitXMLReporter</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+										()
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintCaseEnd" title="details" class="method-name">paintCaseEnd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintCaseStart" title="details" class="method-name">paintCaseStart</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintException" title="details" class="method-name">paintException</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$exception</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintFail" title="details" class="method-name">paintFail</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintFooter" title="details" class="method-name">paintFooter</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintHeader" title="details" class="method-name">paintHeader</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$test_name</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintMethodEnd" title="details" class="method-name">paintMethodEnd</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$test</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#paintMethodStart" title="details" class="method-name">paintMethodStart</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$test</span>)
+									</div>
+														
+				<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#terminateAbnormally" title="details" class="method-name">terminateAbnormally</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$message</span>)
+									</div>
+											</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			
+							<h4>Inherited Variables</h4>
+				<A NAME='inherited_vars'><!-- --></A>
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#var$progress">SimpleReporter::$progress</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#var$size">SimpleReporter::$size</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#var$test_stack">SimpleReporter::$test_stack</a></span><br>
+							</span>
+											</blockquote> 
+									<p>Inherited from <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a></span></p>
+					<blockquote>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$errors">SimpleScorer::$errors</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$exceptions">SimpleScorer::$exceptions</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$fails">SimpleScorer::$fails</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$is_dry_run">SimpleScorer::$is_dry_run</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$list_tests">SimpleScorer::$list_tests</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$passes">SimpleScorer::$passes</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$show_breadcrumb">SimpleScorer::$show_breadcrumb</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#var$show_stacktrace">SimpleScorer::$show_stacktrace</a></span><br>
+							</span>
+											</blockquote> 
+										
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-vars">Vars</a>
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">23</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">JUnitXMLReporter</span>
+		<span class="method-name">
+			__construct
+		</span>
+				()
+			</div>
+	
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#method__construct">SimpleReporter::__construct()</a></dt>
+						<dd>Starts the display with no results in.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintCaseEnd" id="paintCaseEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintCaseEnd</span> (line <span class="line-number">69</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintCaseEnd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$case</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseEnd">SimpleReporter::paintCaseEnd()</a></dt>
+						<dd>Paints the end of a test case. Will paint the page     footer if the stack of tests has unwound.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintCaseStart" id="paintCaseStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintCaseStart</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintCaseStart
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$case</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$case</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseStart">SimpleReporter::paintCaseStart()</a></dt>
+						<dd>Paints the start of a test case. Will also paint     the page header and footer if this is the     first test. Will stash the size if the first     start.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintException" id="paintException"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintException</span> (line <span class="line-number">96</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintException
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$exception</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$exception</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintException">SimpleScorer::paintException()</a></dt>
+						<dd>Deals with PHP 5 throwing an exception.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintFail" id="paintFail"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintFail</span> (line <span class="line-number">89</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintFail
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$message</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFail">SimpleScorer::paintFail()</a></dt>
+						<dd>Potentially show the fail message.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintFooter" id="paintFooter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintFooter</span> (line <span class="line-number">47</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Paints the end of the test with a summary of     the passes and failures.</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintFooter
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$test_name</span><span class="var-description">: Name class of test.</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintFooter">SimpleReporter::paintFooter()</a></dt>
+						<dd>Paints the test document footer.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintHeader" id="paintHeader"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintHeader</span> (line <span class="line-number">30</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintHeader
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$test_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$test_name</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintHeader">SimpleReporter::paintHeader()</a></dt>
+						<dd>Paints the test document header.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintMethodEnd" id="paintMethodEnd"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintMethodEnd</span> (line <span class="line-number">80</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintMethodEnd
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$test</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$test</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodEnd">SimpleReporter::paintMethodEnd()</a></dt>
+						<dd>Paints the end of a test method. Will paint the page     footer if the stack of tests has unwound.</dd>
+					</dl>
+			
+	</div>
+<a name="methodpaintMethodStart" id="paintMethodStart"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">paintMethodStart</span> (line <span class="line-number">73</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			paintMethodStart
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$test</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$test</span>			</li>
+				</ul>
+		
+			<hr class="separator" />
+		<div class="notes">Redefinition of:</div>
+		<dl>
+			<dt><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodStart">SimpleReporter::paintMethodStart()</a></dt>
+						<dd>Paints the start of a test method.</dd>
+					</dl>
+			
+	</div>
+<a name="methodterminateAbnormally" id="terminateAbnormally"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">terminateAbnormally</span> (line <span class="line-number">103</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			terminateAbnormally
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$message</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$message</span>			</li>
+				</ul>
+		
+			
+	</div>
+							<h4>Inherited Methods</h4>
+				<a name='inherited_methods'><!-- --></a>	
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleReporter.html">SimpleReporter</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#method__construct">SimpleReporter::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodgetDumper">SimpleReporter::getDumper()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestCaseCount">SimpleReporter::getTestCaseCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestCaseProgress">SimpleReporter::getTestCaseProgress()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodgetTestList">SimpleReporter::getTestList()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodinCli">SimpleReporter::inCli()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseEnd">SimpleReporter::paintCaseEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintCaseStart">SimpleReporter::paintCaseStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintFooter">SimpleReporter::paintFooter()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintGroupEnd">SimpleReporter::paintGroupEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintGroupStart">SimpleReporter::paintGroupStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintHeader">SimpleReporter::paintHeader()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodEnd">SimpleReporter::paintMethodEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodpaintMethodStart">SimpleReporter::paintMethodStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleReporter.html#methodserializePayload">SimpleReporter::serializePayload()</a></span><br>
+											</blockquote>
+									<!-- =========== Summary =========== -->
+					<p>Inherited From <span class="classname"><a href="../../SimpleTest/UnitTester/SimpleScorer.html">SimpleScorer</a></span></p>
+					<blockquote>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#method__construct">SimpleScorer::__construct()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodcreateInvoker">SimpleScorer::createInvoker()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetExceptionCount">SimpleScorer::getExceptionCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetFailCount">SimpleScorer::getFailCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetPassCount">SimpleScorer::getPassCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodgetStatus">SimpleScorer::getStatus()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincludeBreadCrumb">SimpleScorer::includeBreadCrumb()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincludeStackTrace">SimpleScorer::includeStackTrace()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementErrorCount">SimpleScorer::incrementErrorCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementExceptionCount">SimpleScorer::incrementExceptionCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementFailCount">SimpleScorer::incrementFailCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodincrementPassCount">SimpleScorer::incrementPassCount()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodmakeDry">SimpleScorer::makeDry()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodmakeList">SimpleScorer::makeList()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseEnd">SimpleScorer::paintCaseEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintCaseStart">SimpleScorer::paintCaseStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintError">SimpleScorer::paintError()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintException">SimpleScorer::paintException()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFail">SimpleScorer::paintFail()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintFormattedMessage">SimpleScorer::paintFormattedMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupEnd">SimpleScorer::paintGroupEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintGroupStart">SimpleScorer::paintGroupStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMessage">SimpleScorer::paintMessage()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodEnd">SimpleScorer::paintMethodEnd()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintMethodStart">SimpleScorer::paintMethodStart()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintPass">SimpleScorer::paintPass()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintSignal">SimpleScorer::paintSignal()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodpaintSkip">SimpleScorer::paintSkip()</a></span><br>
+													<span class="method-name"><a href="../../SimpleTest/UnitTester/SimpleScorer.html#methodshouldInvoke">SimpleScorer::shouldInvoke()</a></span><br>
+											</blockquote>
+										
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Fri, 20 Jan 2012 01:58:57 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.3</a>
+	</p>
+	</div></body>
+</html>
