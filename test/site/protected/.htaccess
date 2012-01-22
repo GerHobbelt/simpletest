@@ -1,5 +1,5 @@
 AuthName "SimpleTest basic authentication"
 AuthType Basic
 # http://httpd.apache.org/docs/2.2/mod/mod_authn_file.html
-AuthUserFile C:/+sites/lockedin-syndrome/tooling/simpletest/test/site/protected/.htpasswd
+AuthUserFile C:/~sites/lockedin-syndrome/tooling/simpletest/test/site/protected/.htpasswd
 require valid-user

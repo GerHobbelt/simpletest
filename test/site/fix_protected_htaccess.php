@@ -94,7 +94,6 @@
 					$found = true;
 					if ($val[1] !== $protpwdfile)
 					{
-						echo "<pre>$protpwdfile</pre>";
 						$val[1] = $protpwdfile;
 						$edited = true;
 					}
