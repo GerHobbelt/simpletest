@@ -395,14 +395,14 @@ class DefaultReporter extends SimpleReporterDecorator {
     /**
      *  Assembles the appropriate reporter for the environment.
      */
-    function __construct() {
+    function __construct($arguments = null) {
 		$in_cli = SimpleReporter::inCli();
 		
         if ($in_cli) {
-            $parser = new SimpleCommandLineParser($_SERVER['argv']);
+            $parser = new SimpleCommandLineParser(is_array($arguments) ? $arguments : $_SERVER['argv']);
 		}
 		else {
-            $parser = new WebCommandLineParser(array_merge(array(), (isset($_GET) && is_array($_GET) ? $_GET : array()), (isset($_POST) && is_array($_POST) ? $_POST : array())));
+            $parser = new WebCommandLineParser(is_array($arguments) ? $arguments : array_merge(array(), (isset($_GET) && is_array($_GET) ? $_GET : array()), (isset($_POST) && is_array($_POST) ? $_POST : array())));
 		}
         $interfaces = ($parser->isXml() ? array('XmlReporter') : ($in_cli ? array('TextReporter') : array('HtmlReporter')));
 		if ($parser->help()) {
