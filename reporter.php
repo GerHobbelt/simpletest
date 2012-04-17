@@ -245,7 +245,7 @@ class HtmlReporter extends SimpleReporter {
      */
     function paintFormattedMessage($message) {
         parent::paintFormattedMessage($message);
-        print '<pre>' . $this->htmlEntities($message) . '</pre>';
+        print '<pre class="st-fmtd-message">' . $this->htmlEntities($message) . '</pre>';
     }
 
     /**
