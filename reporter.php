@@ -258,7 +258,7 @@ class HtmlReporter extends SimpleReporter {
 		$message = rtrim($message);
 		$message = ltrim($message, "\n\r\x0B");
         $message = htmlentities($message, ENT_COMPAT, $this->character_set);
-		$message = str_replace("\n", "\n<br />", $message);
+		//$message = str_replace("\n", "\n<br />", $message);
 		return $message;
     }
 }
