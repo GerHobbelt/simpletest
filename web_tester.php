@@ -1457,6 +1457,18 @@ class WebTestCase extends SimpleTestCase {
                 sprintf($message, "Not expecting cookie [$name]"));
     }
 
+	    /**
+     *    Wrapper for brevity around the assertTrue() method.
+     *    @param boolean $result    Pass on true.
+     *    @param string $message    Message to display describing
+     *                              the test state.
+     *    @return boolean           True on pass
+     *    @access public
+     */
+	function t($result, $message = '%s'){
+		return $this->assertTrue($result, $message);
+	}
+
     /**
      *    Called from within the test methods to register
      *    passes and failures.
