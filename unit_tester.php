@@ -60,7 +60,7 @@ class UnitTestCase extends SimpleTestCase {
      *    @access public
      */
     function t($result, $message = '%s') {
-        return $this->assertTrue($result, $message);
+        return $this->assert(new TrueExpectation(), $result, $message);
     }
 
     /**
