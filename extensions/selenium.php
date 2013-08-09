@@ -3,7 +3,7 @@
  *	base include file for SimpleTest
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
+ *	@version	$Id: selenium.php 1953 2009-09-20 01:26:25Z jsweat $
  */
 /**#@+
  *  include other SimpleTest class files

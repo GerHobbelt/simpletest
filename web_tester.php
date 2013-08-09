@@ -3,7 +3,7 @@
  *  Base include file for SimpleTest.
  *  @package    SimpleTest
  *  @subpackage WebTester
- *  @version    $Id$
+ *  @version    $Id: web_tester.php 2013 2011-04-29 09:29:45Z pp11 $
  */
 
 /**#@+
@@ -1012,8 +1012,8 @@ class WebTestCase extends SimpleTestCase {
      *    @return boolean/string  Page on success.
      *    @access public
      */
-    function submitFormById($id) {
-        return $this->failOnError($this->browser->submitFormById($id));
+    function submitFormById($id, $additional = false) {
+        return $this->failOnError($this->browser->submitFormById($id, $additional));
     }
 
     /**
@@ -1499,20 +1499,6 @@ class WebTestCase extends SimpleTestCase {
                 new EqualExpectation($first),
                 $second,
                 $message);
-    }
-
-    /**
-     *    Pass-thru for assertEqual
-     *
-     *    @see assertEqual()
-     *    @param mixed $first          Value to compare.
-     *    @param mixed $second         Value to compare.
-     *    @param string $message       Message to display.
-     *    @return boolean              True on pass
-     *    @access public
-     */
-    function assertEquals($first, $second, $message = "%s") {
-        return $this->assertEqual($first, $second, $message);
     }
 
     /**

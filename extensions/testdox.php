@@ -1,16 +1,15 @@
 <?php
 /**
- *	base include file for SimpleTest
+ *	Extension for a TestDox reporter
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
+ *	@version	$Id: testdox.php 2004 2010-10-31 13:44:14Z jsweat $
  */
 
 /**
- *	base include file for SimpleTest
+ * 	TestDox reporter 
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
  */
 class TestDoxReporter extends SimpleReporter
 {
@@ -39,7 +38,6 @@ class TestDoxReporter extends SimpleReporter
             return;
         }
         $test_name = $matches[1];
-
         $test_name = preg_replace('/([A-Z])([A-Z])/', '$1 $2', $test_name);
         echo '- ' . strtolower(preg_replace('/([a-zA-Z])([A-Z0-9])/', '$1 $2', $test_name));
     }

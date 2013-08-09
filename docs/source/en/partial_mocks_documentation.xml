@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
+<!-- $Id: partial_mocks_documentation.xml 2000 2010-10-29 14:21:33Z lastcraft $ -->
 <page title="Partial mock objects documentation" here="Partial mocks">
     <long_title>SimpleTest for PHP partial mocks documentation</long_title>
     <content>
@@ -100,7 +100,7 @@ require_once('socket.php');
 class Telnet {
     ...<strong>
     function connect($ip, $port, $username, $password, $socket = false) {
-        if (!$socket) {
+        if (! $socket) {
             $socket = new Socket($ip, $port);
         }
         $socket->read( ... );</strong>
@@ -164,8 +164,7 @@ class TelnetTest extends UnitTestCase {
         $network = new MockNetwork();
         $network->returnsByReference('createSocket', $socket);
         $telnet = new Telnet($network);
-        $telnet->connect('127.0.0.1', 21, 'Me', 'Secret');
-        ...</strong>
+        $telnet->connect('127.0.0.1', 21, 'Me', 'Secret');</strong>
     }
 }
 ]]></php>

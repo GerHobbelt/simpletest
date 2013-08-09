@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: scorer.php 2011 2011-04-29 08:22:48Z pp11 $
  */
 
 /**#@+*/
@@ -166,7 +166,7 @@ class SimpleScorer {
     function paintException($exception) {
         $this->exceptions++;
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -253,10 +253,9 @@ class SimpleReporter extends SimpleScorer {
         $this->size = null;
         $this->progress = 0;
     }
-    
+
     /**
-     *    Gets the formatter for privateiables and other small
-     *    generic data items.
+     *    Gets the formatter for small generic data items.
      *    @return SimpleDumper          Formatter.
      *    @access public
      */
@@ -448,8 +447,22 @@ class SimpleReporterDecorator {
     }
 
     /**
+     *    The nesting of the test cases so far. Not
+     *    all reporters have this facility.
+     *    @return array        Test list if accessible.
+     *    @access public
+     */
+    function getTestList() {
+        if (method_exists($this->reporter, 'getTestList')) {
+            return $this->reporter->getTestList();
+        } else {
+            return array();
+        }
+    }
+
+    /**
      *    The reporter has a veto on what should be run.
-     *    @param string $test_case_name  name of test case.
+     *    @param string $test_case_name  Name of test case.
      *    @param string $method          Name of test method.
      *    @return boolean                True if test should be run.
      *    @access public
@@ -459,7 +472,7 @@ class SimpleReporterDecorator {
     }
 
     /**
-     *    Can wrap the invoker in preperation for running
+     *    Can wrap the invoker in preparation for running
      *    a test.
      *    @param SimpleInvoker $invoker   Individual test runner.
      *    @return SimpleInvoker           Wrapped test runner.
@@ -468,7 +481,7 @@ class SimpleReporterDecorator {
     function createInvoker($invoker) {
         return $this->reporter->createInvoker($invoker);
     }
-    
+
     /**
      *    Gets the formatter for privateiables and other small
      *    generic data items.
@@ -570,7 +583,7 @@ class SimpleReporterDecorator {
     function paintException($exception) {
         $this->reporter->paintException($exception);
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -688,7 +701,7 @@ class MultipleReporter {
         }
         return $invoker;
     }
-    
+
     /**
      *    Gets the formatter for privateiables and other small
      *    generic data items.
@@ -799,7 +812,7 @@ class MultipleReporter {
             $this->reporters[$i]->paintError($message);
         }
     }
-    
+
     /**
      *    Chains to the wrapped reporter.
      *    @param Exception $exception    Exception to display.

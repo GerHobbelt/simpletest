@@ -3,7 +3,7 @@
  *  Base include file for SimpleTest
  *  @package        SimpleTest
  *  @subpackage     Extensions
- *  @version        $Id$
+ *  @version        $Id: colortext_reporter.php 1802 2008-09-08 10:43:58Z maetl_ $
  */
 
 /**

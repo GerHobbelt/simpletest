@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- $Id$ -->
+<!-- $Id: web_tester_documentation.xml 2033 2011-06-08 21:12:40Z pp11 $ -->
 <page title="Documentation sur le testeur web" here="Le testeur web">
-    <synchronisation lang="en" version="1687" date="24/03/2008" maintainer="pp11" />
+    <synchronisation lang="en" version="1876" date="08/06/2011" maintainer="pp11" />
     <long_title>Documentation SimpleTest : tester des scripts web</long_title>
     <content>
         <section name="telecharger" title="Télécharger une page">

@@ -3,7 +3,7 @@
  *	@package	SimpleTest
  *	@subpackage	DomTestCase
  *  @author     Perrick Penet <perrick@noparking.net>
- *	@version	$Id$
+ *	@version	$Id: css_selector.php 1953 2009-09-20 01:26:25Z jsweat $
  */
 
 /**

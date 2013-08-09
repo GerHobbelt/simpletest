@@ -6,7 +6,7 @@
 // 
 // SimpleTest - http://simpletest.sf.net/
 // Copyright (c) 2003,2004 Marcus Baker (marcus@lastcraft.com)
-// $Id$
+// $Id: webunit.js 506 2004-02-14 18:24:13Z jsweat $
 
 
 // Variables:

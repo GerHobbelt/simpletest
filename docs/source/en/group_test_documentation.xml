@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
+<!-- $Id: group_test_documentation.xml 2007 2010-12-17 02:55:54Z jsweat $ -->
 <page title="Test suite documentation" here="Group tests">
     <long_title>SimpleTest for PHP test suites</long_title>
     <content>
@@ -134,7 +134,7 @@ class AllFileTests extends TestSuite {
                 may want to group the tests together in all sorts of ways.
             </p>
             <p>
-                Everything we have dewcrbed so far with test scripts applies to
+                Everything we have described so far with test scripts applies to
                 <code>TestSuite</code>s as well...
 <php><![CDATA[
 <?php

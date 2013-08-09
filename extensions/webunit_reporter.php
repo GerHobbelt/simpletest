@@ -3,7 +3,7 @@
  *	base include file for SimpleTest PUnit reporter
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
+ *	@version	$Id: webunit_reporter.php 1836 2008-12-21 00:02:26Z edwardzyang $
  */
 
 /**

@@ -2,7 +2,7 @@
 /**
  *  index file for test site
  *  @package    SimpleTest
- *  @version    $Id$
+ *  @version    $Id: index.php 2048 2012-01-23 09:57:58Z pp11 $
  */
 
 /**
@@ -20,7 +20,7 @@ foreach ($languages as $language) {
 
     while (($file = readdir($dir)) !== false) {
 	    if (is_file($source_path.$language.$file) and preg_match("/\.xml$/", $file)) {
-	        $source = simplexml_load_file($source_path.$language.$file, "SimpleTestXMLElement");
+	    	$source = simplexml_load_file($source_path.$language.$file, "SimpleTestXMLElement");
 	        $destination = $source->destination(dirname(__FILE__).'/map.xml');
 
 			if (!empty($destination)) {
@@ -54,7 +54,7 @@ foreach ($languages as $language) {
 				$synchronisation = new PackagingSynchronisation($source_path.$language.$file);
 				$result .= " ".$synchronisation->result();
 
-				echo $destination_path.$destination." : ".$result."\n";
+				echo $destination." : ".$result."\n";
 			}
 	    }
 	}

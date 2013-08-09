@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: frames_test.php 1899 2009-07-28 19:33:42Z lastcraft $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../tag.php');
 require_once(dirname(__FILE__) . '/../page.php');

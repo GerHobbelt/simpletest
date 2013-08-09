@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: dumper.php 1909 2009-07-29 15:58:11Z dgheath $
  */
 /**
  * does type matter

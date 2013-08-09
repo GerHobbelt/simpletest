@@ -3,7 +3,7 @@
  *  Base include file for SimpleTest.
  *  @package    SimpleTest
  *  @subpackage WebTester
- *  @version    $Id$
+ *  @version    $Id: form.php 2013 2011-04-29 09:29:45Z pp11 $
  */
 
 /**#@+
@@ -106,6 +106,9 @@ class SimpleForm {
         $url = $this->action;
         if ($this->default_target && ! $url->getTarget()) {
             $url->setTarget($this->default_target);
+        }
+        if ($this->getMethod() == 'get') {
+            $url->clearRequest();
         }
         return $url;
     }
@@ -347,8 +350,12 @@ class SimpleForm {
      *    @return hash           Submitted values.
      *    @access public
      */
-    function submit() {
-        return $this->encode();
+    function submit($additional = false) {
+        $encoding = $this->encode();
+        if ($additional) {
+            $encoding->merge($additional);
+        }
+        return $encoding;
     }
 }
 ?>

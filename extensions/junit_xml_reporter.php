@@ -2,7 +2,7 @@
 /**
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
+ *	@version	$Id: junit_xml_reporter.php 1982 2010-03-28 11:57:54Z lastcraft $
  *  @author Patrice Neff - mailinglists@patrice.ch (original code)
  */
 
@@ -22,7 +22,6 @@ require_once dirname(__FILE__).'/../reporter.php';
 class JUnitXMLReporter extends SimpleReporter {
     function __construct() {
         parent::__construct();
-
         $this->doc = new DOMDocument();
         $this->doc->loadXML('<testsuite/>');
         $this->root = $this->doc->documentElement;
@@ -120,4 +119,3 @@ class JUnitXMLReporter extends SimpleReporter {
     }
 }
 ?>
-

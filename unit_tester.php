@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: unit_tester.php 1882 2009-07-01 14:30:05Z lastcraft $
  */
 
 /**#@+
@@ -141,20 +141,6 @@ class UnitTestCase extends SimpleTestCase {
                 new EqualExpectation($first),
                 $second,
                 $message);
-    }
-
-    /**
-     *    Pass-thru for assertEqual
-     *
-     *    @see assertEqual()
-     *    @param mixed $first          Value to compare.
-     *    @param mixed $second         Value to compare.
-     *    @param string $message       Message to display.
-     *    @return boolean              True on pass
-     *    @access public
-     */
-    function assertEquals($first, $second, $message = "%s") {
-        return $this->assertEqual($first, $second, $message);
     }
 
     /**

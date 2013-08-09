@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: cookies_test.php 1506 2007-05-07 00:58:03Z lastcraft $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../cookies.php');
 

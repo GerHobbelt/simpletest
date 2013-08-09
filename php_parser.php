@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage WebTester
- *  @version    $Id$
+ *  @version    $Id: php_parser.php 1927 2009-07-31 12:45:36Z dgheath $
  */
 
 /**#@+
@@ -170,7 +170,7 @@ class SimpleStateStack {
 
 /**
  *    Accepts text and breaks it into tokens.
- *    Some optimisation to make sure the
+ *    Some optimisation to make the sure the
  *    content is only scanned by the PHP regex
  *    parser once. Lexer modes must not start
  *    with leading underscores.

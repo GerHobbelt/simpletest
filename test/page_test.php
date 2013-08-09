@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: page_test.php 1913 2009-07-29 16:50:56Z lastcraft $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../expectation.php');
 require_once(dirname(__FILE__) . '/../http.php');
@@ -161,31 +161,6 @@ class TestOfHtmlStrippingAndNormalisation extends UnitTestCase {
         $this->assertEqual(
                 SimplePage::normalise('&lt;&gt;&quot;&amp;&#039;'),
                 '<>"&\'');
-    }
-
-    function testUtf8WhitespaceNbsp() {
-        $this->assertEqual(
-                SimplePage::normalise(' § '.html_entity_decode('&nbsp;', ENT_COMPAT, 'UTF-8').'729', 'UTF-8'), // chr(194).chr(160)
-                '§ 729');
-        $this->assertEqual(
-                SimplePage::normalise(html_entity_decode('&nbsp;', ENT_COMPAT, 'UTF-8'), 'UTF-8'),
-                '');
-        $this->assertEqual(
-                strlen(SimplePage::normalise(html_entity_decode('a&nbsp;b', ENT_COMPAT, 'UTF-8'), 'UTF-8')),
-                3);
-        $this->assertEqual(
-                strlen(SimplePage::normalise(html_entity_decode('a&nbsp; b', ENT_COMPAT, 'ISO-8859-1'), 'ISO-8859-1')),
-                3);
-        $this->assertEqual(
-                SimplePage::normalise('&raquo; &raquo;', 'UTF-8'),
-                '» »');
-        $this->assertEqual(
-                SimplePage::normalise('&raquo; &raquo;', 'ISO-8859-1'),
-                utf8_decode('» »'));
-        # latin1 strings should not get converted to utf8
-        $this->assertEqual(
-                strlen(SimplePage::normalise(utf8_decode('ä'))),
-                1);
     }
 }
 ?>

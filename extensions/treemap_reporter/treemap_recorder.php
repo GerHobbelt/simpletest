@@ -3,7 +3,7 @@
  *	extension file for SimpleTest
  *  @package        SimpleTest
  *  @subpackage     Extensions
- *	@version	$Id$
+ *	@version	$Id: treemap_recorder.php 2018 2011-04-30 03:32:40Z maetl_ $
  */
 
 /**
@@ -202,7 +202,7 @@ class TreemapNode {
   	 * Return list of child nodes from direct edges.
 	 */
 	function getChildren() {
-		uksort($this->_children, array($this, 'compareChildren'));
+		@uksort($this->_new_children, array($this, 'compareChildren'));
 		return $this->_children;
 	}
 

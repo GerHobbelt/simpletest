@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: interfaces_test.php 1981 2010-03-23 23:29:56Z lastcraft $
 require_once(dirname(__FILE__) . '/../autorun.php');
 if (function_exists('spl_classes')) {
     include(dirname(__FILE__) . '/support/spl_examples.php');
@@ -50,7 +50,7 @@ class TestOfSpl extends UnitTestCase {
             return;
         }
         foreach(spl_classes() as $class) {
-            if ($class == 'SplHeap') {
+            if ($class == 'SplHeap' or $class = 'SplFileObject') {
                 continue;
             }
             if (version_compare(PHP_VERSION, '5.1', '<') &&

@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: shell_tester.php 2011 2011-04-29 08:22:48Z pp11 $
  */
 
 /**#@+
@@ -154,7 +154,7 @@ class ShellTestCase extends SimpleTestCase {
     function assertFalse($result, $message = '%s') {
         return $this->assert(new FalseExpectation(), $result, $message);
     }
-    
+
     /**
      *    Will trigger a pass if the two parameters have
      *    the same value only. Otherwise a fail. This
@@ -170,20 +170,6 @@ class ShellTestCase extends SimpleTestCase {
                 new EqualExpectation($first),
                 $second,
                 $message);
-    }
-    
-    /**
-     *    Pass-thru for assertEqual
-     *
-     *    @see assertEqual()
-     *    @param mixed $first          Value to compare.
-     *    @param mixed $second         Value to compare.
-     *    @param string $message       Message to display.
-     *    @return boolean              True on pass
-     *    @access public
-     */
-    function assertEquals($first, $second, $message = "%s") {
-        return $this->assertEqual($first, $second, $message);
     }
 
     /**

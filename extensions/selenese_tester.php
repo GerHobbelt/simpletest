@@ -2,7 +2,7 @@
 /**
  *	@package	SimpleTest
  *	@subpackage	Extensions
- *	@version	$Id$
+ *	@version	$Id: selenese_tester.php 1802 2008-09-08 10:43:58Z maetl_ $
  */
 
 /**#@+

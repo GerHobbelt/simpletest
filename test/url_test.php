@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: url_test.php 1998 2010-07-27 09:55:55Z pp11 $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../url.php');
 
@@ -85,17 +85,17 @@ class TestOfUrl extends UnitTestCase {
     
     function testEncodingParameters() {
         $url = new SimpleUrl('');
-        $url->addRequestParameter('a', '?!"\'#~@[]{}:;<>,./|£$%^&*()_+-=');
+        $url->addRequestParameter('a', '?!"\'#~@[]{}:;<>,./|$%^&*()_+-=');
         $this->assertIdentical(
                 $request = $url->getEncodedRequest(),
-                '?a=%3F%21%22%27%23%7E%40%5B%5D%7B%7D%3A%3B%3C%3E%2C.%2F%7C%A3%24%25%5E%26%2A%28%29_%2B-%3D');
+                '?a=%3F%21%22%27%23%7E%40%5B%5D%7B%7D%3A%3B%3C%3E%2C.%2F%7C%24%25%5E%26%2A%28%29_%2B-%3D');
     }
     
     function testDecodingParameters() {            
-        $url = new SimpleUrl('?a=%3F%21%22%27%23%7E%40%5B%5D%7B%7D%3A%3B%3C%3E%2C.%2F%7C%A3%24%25%5E%26%2A%28%29_%2B-%3D');
+        $url = new SimpleUrl('?a=%3F%21%22%27%23%7E%40%5B%5D%7B%7D%3A%3B%3C%3E%2C.%2F%7C%24%25%5E%26%2A%28%29_%2B-%3D');
         $this->assertEqual(
                 $url->getEncodedRequest(),
-                '?a=' . urlencode('?!"\'#~@[]{}:;<>,./|£$%^&*()_+-='));
+                '?a=' . urlencode('?!"\'#~@[]{}:;<>,./|$%^&*()_+-='));
     }
     
     function testUrlInQueryDoesNotConfuseParsing() {
@@ -198,9 +198,9 @@ class TestOfUrl extends UnitTestCase {
 
     function testUsernameAndPasswordAreUrlDecoded() {
         $url = new SimpleUrl('http://' . urlencode('test@test') .
-                ':' . urlencode('$!£@*&%') . '@www.lastcraft.com');
+                ':' . urlencode('$!ï¿½@*&%') . '@www.lastcraft.com');
         $this->assertEqual($url->getUsername(), 'test@test');
-        $this->assertEqual($url->getPassword(), '$!£@*&%');
+        $this->assertEqual($url->getPassword(), '$!ï¿½@*&%');
     }
     
     function testBlitz() {
@@ -269,6 +269,30 @@ class TestOfUrl extends UnitTestCase {
         $this->assertPreserved('http://www.example.com:8080/');
     }
     
+    function testUrlWithTwoSlashesInPath() {
+        $url = new SimpleUrl('/article/categoryedit/insert//');
+        $this->assertEqual($url->getPath(), '/article/categoryedit/insert//');
+    }
+    
+    function testUrlWithRequestKeyEncoded() {
+        $url = new SimpleUrl('/?foo%5B1%5D=bar');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar');
+        $url->addRequestParameter('a[1]', 'b[]');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar&a%5B1%5D=b%5B%5D');
+
+        $url = new SimpleUrl('/');
+        $url->addRequestParameter('a[1]', 'b[]');
+        $this->assertEqual($url->getEncodedRequest(), '?a%5B1%5D=b%5B%5D');
+    }
+
+    function testUrlWithRequestKeyEncodedAndParamNamLookingLikePair() {
+        $url = new SimpleUrl('/');
+        $url->addRequestParameter('foo[]=bar', '');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
+        $url = new SimpleUrl('/?foo%5B%5D%3Dbar=');
+        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
+    }
+
     function assertUrl($raw, $parts, $params = false, $coords = false) {
         if (! is_array($params)) {
             $params = array();
@@ -289,34 +313,10 @@ class TestOfUrl extends UnitTestCase {
         }
     }
     
-    function testUrlWithTwoSlashesInPath() {
-        $url = new SimpleUrl('/article/categoryedit/insert//');
-        $this->assertEqual($url->getPath(), '/article/categoryedit/insert//');
-    }
-    
     function assertPreserved($string) {
         $url = new SimpleUrl($string);
         $this->assertEqual($url->asString(), $string);
     }
-
-    function testUrlWithRequestKeyEncoded() {
-        $url = new SimpleUrl('/?foo%5B1%5D=bar');
-        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar');
-        $url->addRequestParameter('a[1]', 'b[]');
-        $this->assertEqual($url->getEncodedRequest(), '?foo%5B1%5D=bar&a%5B1%5D=b%5B%5D');
-
-        $url = new SimpleUrl('/');
-        $url->addRequestParameter('a[1]', 'b[]');
-        $this->assertEqual($url->getEncodedRequest(), '?a%5B1%5D=b%5B%5D');
-
-        // param name, looking like pair
-        $url = new SimpleUrl('/');
-        $url->addRequestParameter('foo[]=bar', '');
-        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
-        $url = new SimpleUrl('/?foo%5B%5D%3Dbar=');
-        $this->assertEqual($url->getEncodedRequest(), '?foo%5B%5D%3Dbar=');
-    }
-
 }
 
 class TestOfAbsoluteUrls extends UnitTestCase {

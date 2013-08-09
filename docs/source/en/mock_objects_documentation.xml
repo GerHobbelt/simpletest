@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
+<!-- $Id: mock_objects_documentation.xml 2008 2011-04-27 12:03:33Z pp11 $ -->
 <page title="Mock objects documentation" here="Mock objects">
     <long_title>SimpleTest for PHP mock objects documentation</long_title>
     <content>
@@ -334,8 +334,8 @@ function testTaskReads() {
 $buy_books = 'Buy books';
 $write_code = 'Write code';
 $pad = new MockPad();
-$vector-><strong>returnsByReferenceAt(0, 'note', $buy_books, array('*', 3));
-$vector-><strong>returnsByReferenceAt(1, 'note', $write_code, array('*', 3));
+$vector-><strong>returnsByReferenceAt(0, 'note', $buy_books, array('*', 3));</strong>
+$vector-><strong>returnsByReferenceAt(1, 'note', $write_code, array('*', 3));</strong>
 ]]></php>
                 This will return a reference to <code>$buy_books</code> and
                 then to <code>$write_code</code>, but only if two parameters

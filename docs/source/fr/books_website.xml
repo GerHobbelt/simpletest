@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<!-- $Id$ -->
+<!-- $Id: books_website.xml 1686 2008-03-06 08:55:19Z pp11 $ -->
 <page title="Livres" here="Livres">
     <synchronisation lang="en" version="1684" date="06/03/2008" maintainer="pp11" />
     <long_title>Livres avec / à propos / pas loin de SimpleTest</long_title>

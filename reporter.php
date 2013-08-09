@@ -3,13 +3,14 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: reporter.php 2005 2010-11-02 14:09:34Z lastcraft $
  */
 
 /**#@+
  *  include other SimpleTest class files
  */
 require_once(dirname(__FILE__) . '/scorer.php');
+//require_once(dirname(__FILE__) . '/arguments.php');
 /**#@-*/
 
 /**
@@ -105,7 +106,6 @@ class HtmlReporter extends SimpleReporter {
      *    top level test.
      *    @param string $message    Failure message displayed in
      *                              the context of the other tests.
-     *    @access public
      */
     function paintFail($message) {
         parent::paintFail($message);
@@ -147,7 +147,7 @@ class HtmlReporter extends SimpleReporter {
                 ' line ' . $exception->getLine() . ']';
         print " -&gt; <strong>" . $this->htmlEntities($message) . "</strong><br />\n";
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -178,13 +178,7 @@ class HtmlReporter extends SimpleReporter {
      *    @access protected
      */
     protected function htmlEntities($message) {
-        # TODO: character set is meant to define the source (of $message). That's not $this->character_set
-        $r = htmlentities($message, ENT_COMPAT, $this->character_set);
-        if( $r == '' && $message != '' ) {
-            # Conversion failed, keep original.
-            $r = $message;
-        }
-        return $r;
+        return htmlentities($message, ENT_COMPAT, $this->character_set);
     }
 }
 
@@ -202,7 +196,6 @@ class TextReporter extends SimpleReporter {
     /**
      *    Does nothing yet. The first output will
      *    be sent on the first test start.
-     *    @access public
      */
     function __construct() {
         parent::__construct();
@@ -288,7 +281,7 @@ class TextReporter extends SimpleReporter {
         print "\tin " . implode("\n\tin ", array_reverse($breadcrumb));
         print "\n";
     }
-    
+
     /**
      *    Prints the message for skipping tests.
      *    @param string $message    Text of skip condition.
@@ -320,7 +313,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
     private $just_this_case = false;
     private $just_this_test = false;
     private $on;
-    
+
     /**
      *    Selects the test case or group to be run,
      *    and optionally a specific test.
@@ -369,7 +362,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
         }
         return false;
     }
-    
+
     /**
      *    Switch on testing for the group or subgroup.
      *    @access private
@@ -377,7 +370,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
     protected function on() {
         $this->on = true;
     }
-    
+
     /**
      *    Switch off testing for the group or subgroup.
      *    @access private
@@ -385,7 +378,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
     protected function off() {
         $this->on = false;
     }
-    
+
     /**
      *    Is this group actually being tested?
      *    @return boolean     True if the current test group is active.
@@ -441,7 +434,7 @@ class SelectiveReporter extends SimpleReporterDecorator {
  *    @subpackage UnitTester
  */
 class NoSkipsReporter extends SimpleReporterDecorator {
-    
+
     /**
      *    Does nothing.
      *    @param string $message    Text of skip condition.

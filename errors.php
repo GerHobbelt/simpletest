@@ -3,7 +3,7 @@
  *  base include file for SimpleTest
  *  @package    SimpleTest
  *  @subpackage UnitTester
- *  @version    $Id$
+ *  @version    $Id: errors.php 2011 2011-04-29 08:22:48Z pp11 $
  */
 
 /**#@+
@@ -43,7 +43,7 @@ class SimpleErrorTrappingInvoker extends SimpleInvokerDecorator {
         restore_error_handler();
         $queue->tally();
     }
-    
+
     /**
      *    Wires up the error queue for a single test.
      *    @return SimpleErrorQueue    Queue connected to the test.
@@ -120,7 +120,7 @@ class SimpleErrorQueue {
         $content = str_replace('%', '%%', $content);
         $this->testLatestError($severity, $content, $filename, $line);
     }
-    
+
     /**
      *    Any errors still in the queue are sent to the test
      *    case. Any unfulfilled expectations trigger failures.
@@ -232,7 +232,7 @@ function SimpleTestErrorHandler($severity, $message, $filename = null, $line = n
     $severity = $severity & error_reporting();
     if ($severity) {
         restore_error_handler();
-        if (IsNotCausedBySimpleTest($message)) {
+        if (IsNotCausedBySimpleTest($message) && IsNotTimeZoneNag($message)) {
             if (ini_get('log_errors')) {
                 $label = SimpleErrorQueue::getSeverityAsString($severity);
                 error_log("$label: $message in $filename on line $line");
@@ -253,5 +253,15 @@ function SimpleTestErrorHandler($severity, $message, $filename = null, $line = n
  */
 function IsNotCausedBySimpleTest($message) {
     return ! preg_match('/returned by reference/', $message);
+}
+
+/**
+ *  Certain messages caused by PHP are just noise.
+ *  These have to be filtered.
+ *  @param string $message      Message to filter.
+ *  @return boolean             True if genuine failure.
+ */
+function IsNotTimeZoneNag($message) {
+    return ! preg_match('/not safe to rely .* timezone settings/', $message);
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: unit_tests.php 1986 2010-04-02 10:02:42Z lastcraft $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../unit_tester.php');
 require_once(dirname(__FILE__) . '/../shell_tester.php');
@@ -13,6 +13,7 @@ class UnitTests extends TestSuite {
         $path = dirname(__FILE__);
         $this->addFile($path . '/errors_test.php');
         $this->addFile($path . '/exceptions_test.php');
+        $this->addFile($path . '/arguments_test.php');
         $this->addFile($path . '/autorun_test.php');
         $this->addFile($path . '/compatibility_test.php');
         $this->addFile($path . '/simpletest_test.php');
@@ -23,6 +24,7 @@ class UnitTests extends TestSuite {
         $this->addFile($path . '/mock_objects_test.php');
         $this->addFile($path . '/interfaces_test.php');
         $this->addFile($path . '/collector_test.php');
+        $this->addFile($path . '/recorder_test.php');
         $this->addFile($path . '/adapter_test.php');
         $this->addFile($path . '/socket_test.php');
         $this->addFile($path . '/encoding_test.php');

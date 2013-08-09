@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
+<!-- $Id: web_tester_documentation.xml 1876 2009-06-12 16:30:24Z pp11 $ -->
 <page title="Web tester documentation" here="Web tester">
     <long_title>SimpleTest for PHP web script testing documentation</long_title>
     <content>

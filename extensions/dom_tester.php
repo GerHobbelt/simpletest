@@ -3,7 +3,7 @@
  *	@package	SimpleTest
  *	@subpackage	Extensions
  *  @author     Perrick Penet <perrick@noparking.net>
- *	@version	$Id$
+ *	@version	$Id: dom_tester.php 1982 2010-03-28 11:57:54Z lastcraft $
  */
 
 /**#@+
@@ -116,5 +116,4 @@ class DomTestCase extends WebTestCase {
                 $message);
     }
 }
-
 ?>

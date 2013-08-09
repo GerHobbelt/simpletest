@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: page_request.php 2013 2011-04-29 09:29:45Z pp11 $
 
 class PageRequest {
     private $parsed;
@@ -47,13 +47,13 @@ class PageRequest {
     }
     
     function get() {
-        $request = &new PageRequest($_SERVER['QUERY_STRING']);
+        $request = new PageRequest($_SERVER['QUERY_STRING']);
         return $request->getAll();
     }
     
     function post() {
         global $HTTP_RAW_POST_DATA;
-        $request = &new PageRequest($HTTP_RAW_POST_DATA);
+        $request = new PageRequest($HTTP_RAW_POST_DATA);
         return $request->getAll();
     }
 }

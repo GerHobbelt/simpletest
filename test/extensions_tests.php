@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: extensions_tests.php 1643 2008-01-22 20:50:23Z pp11 $
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../collector.php');
 

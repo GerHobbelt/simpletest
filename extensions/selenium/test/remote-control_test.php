@@ -1,5 +1,5 @@
 <?php
-// $Id$
+// $Id: remote-control_test.php 1642 2008-01-22 20:49:15Z pp11 $
 require_once(dirname(__FILE__) . '/../../../autorun.php');
 require_once(dirname(__FILE__) . '/../remote-control.php');
 

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- $Id$ -->
+<!-- $Id: form_testing_documentation.xml 1952 2009-09-15 13:55:45Z arialdomartini $ -->
 <page title="Form testing documentation" here="Testing forms">
     <long_title>SimpleTest documentation for testing HTML forms</long_title>
     <content>

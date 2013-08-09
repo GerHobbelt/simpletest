@@ -3,7 +3,9 @@
 class SimpleTestXMLElement extends SimpleXMLElement {
     function title() {
         $titles = $this->xpath('//page');
-        return $titles[0]->attributes()->title;
+        if (isset($titles[0])) {
+	        return $titles[0]->attributes()->title;
+        }
     }
     
     function transform_code($code) {
@@ -212,7 +214,9 @@ class SimpleTestXMLElement extends SimpleXMLElement {
 
     function here() {
         $pages = $this->xpath('//page');
-        return $pages[0]->attributes()->here;
+        if (isset($pages[0])) {
+	        return $pages[0]->attributes()->here;
+        }
     }
 
     function parent($map) {
@@ -413,13 +417,13 @@ class PackagingSynchronisation {
 
     function result() {
         if (!$this->isSynchronisable()) {
-            return "<span style=\"color : green\">source</span>";
+            return "source";
         } elseif (!$this->sourceRevision()) {
-            return "<span style=\"color : red\"><strong>missing id</strong></span>";
+            return "MISSING ID";
         } elseif ($this->sourceRevision() > $this->lastSynchroRevision()) {
-            return "<span style=\"color : red\"><strong>late</strong></span>";
+            return "LATE";
         } else {
-            return "<span style=\"color : green\">synchro</span>";
+            return "synchro";
         }
     }
     
