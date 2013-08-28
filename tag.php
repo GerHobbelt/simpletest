@@ -78,14 +78,30 @@ class SimpleTagBuilder {
         }
         $type = strtolower(trim($attributes['type']));
         $map = array(
-                'submit' => 'SimpleSubmitTag',
-                'image' => 'SimpleImageSubmitTag',
-                'checkbox' => 'SimpleCheckboxTag',
-                'radio' => 'SimpleRadioButtonTag',
-                'text' => 'SimpleTextTag',
-                'hidden' => 'SimpleTextTag',
-                'password' => 'SimpleTextTag',
-                'file' => 'SimpleUploadTag');
+            'submit'   => 'SimpleSubmitTag',
+            'image'    => 'SimpleImageSubmitTag',
+            'checkbox' => 'SimpleCheckboxTag',
+            'radio'    => 'SimpleRadioButtonTag',
+            'text'     => 'SimpleTextTag',
+            'hidden'   => 'SimpleTextTag',
+            'password' => 'SimpleTextTag',
+            'file'     => 'SimpleUploadTag',
+            // HTML 5 new input types
+            'color'          => 'SimpleTextTag',
+            'date'           => 'SimpleTextTag',
+            'datetime'       => 'SimpleTextTag',
+            'datetime-local' => 'SimpleTextTag',
+            'email'          => 'SimpleTextTag',
+            'month'          => 'SimpleTextTag',
+            'number'         => 'SimpleTextTag',
+            'ranje'          => 'SimpleTextTag',
+            'search'         => 'SimpleTextTag',
+            'tel'            => 'SimpleTextTag',
+            'time'           => 'SimpleTextTag',
+            'url'            => 'SimpleTextTag',
+            'weel'           => 'SimpleTextTag'
+        );
+
         if (array_key_exists($type, $map)) {
             $tag_class = $map[$type];
             return new $tag_class($attributes);
