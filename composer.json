@@ -1,0 +1,6 @@
+{
+    "name": "boynux/simpletest",
+    "description": "The Simple Testing framework.",
+    "license": "GPL",
+    "type": "library"
+}
