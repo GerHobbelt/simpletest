@@ -1,0 +1,1 @@
+git submodule add https://github.com/akester/include-simpletest.git simpletest && cd simpletest && git checkout 1.1.0 && cd .. && git add simpletest && git commit
