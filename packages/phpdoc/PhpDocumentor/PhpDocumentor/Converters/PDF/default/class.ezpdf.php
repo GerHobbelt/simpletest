@@ -733,7 +733,7 @@ function ezTable(&$data,$cols='',$title='',$options=''){
   foreach($maxWidth as $colName => $w){
     $pos[$colName]=$t;
     // if the column width has been specified then set that here, also total the
-    // width avaliable for adjustment
+    // width available for adjustment
     if (isset($options['cols'][$colName]) && isset($options['cols'][$colName]['width']) && $options['cols'][$colName]['width']>0){
       $t=$t+$options['cols'][$colName]['width'];
       $maxWidth[$colName] = $options['cols'][$colName]['width']-$options['gap'];
