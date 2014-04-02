@@ -789,6 +789,15 @@ class WebTestCase extends UnitTestCase {
     function showText() {
         $this->dump(wordwrap($this->browser->getContentAsText(), 80));
     }
+    
+    /**
+     *    Returns an array of XHR content, imploded by comma.
+     *    @access public
+     */
+    function getAjaxData() {
+    	$text = $this->browser->getContentAsText();
+    	return $text ? explode(',', $text) : null;
+    }
 
     /**
      *    Simulates the closing and reopening of the browser.
