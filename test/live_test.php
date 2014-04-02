@@ -16,8 +16,8 @@ class LiveHttpTestCase extends UnitTestCase {
     {
         static $scheme_ports = array('http' => 80, 'https' => 443, 'telnet' => 23);
 
-        WebTestCase::setDefaultServerUrl();
-        $url = WebTestCase::getDefaultServerUrl();
+        WebserverDefaults::setServerURL();
+        $url = WebserverDefaults::getServerURL();
         if (!empty($url))
         {
             $info = parse_url($url);

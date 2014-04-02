@@ -850,7 +850,7 @@
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">A support method which delivers the fully qualified URL (with     scheme and authority as per RFC3986) given a path and an optional     authentication string; the base is assumed to be the 'default     server URL' as obtained through @see WebTestCase::getDefaultServerURL().</p>
+<p class="short-description">A support method which delivers the fully qualified URL (with     scheme and authority as per RFC3986) given a path and an optional     authentication string; the base is assumed to be the 'default     server URL' as obtained through @see WebserverDefaults::getServerURL().</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> The completed URL.</li>
 				<li><span class="field">access:</span> public</li>
@@ -2743,7 +2743,7 @@
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">A support method which delivers the URL (with scheme and authority as per RFC3986) to the targeted test site,     where the default test site is assumed to be the URL as provided by @see WebUnitTest::getDefaultServerUrl(),     which can be overridden by specifying a different URL through the setServerUrl() method.</p>
+<p class="short-description">A support method which delivers the URL (with scheme and authority as per RFC3986) to the targeted test site,     where the default test site is assumed to be the URL as provided by @see WebserverDefaults::getServerUrl(),     which can be overridden by specifying a different URL through the setServerUrl() method.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> The URL as currently configured.</li>
 				<li><span class="field">access:</span> public</li>
@@ -3383,7 +3383,7 @@
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">A support method with sets the 'server URL' default to the specified URL string. You can always fetch the current     URL string through calling the getServerUrl() method.</p>
-<p class="description"><p>Note: When the specified URL is not complete, we extend it by applying the           default value for the missing parts (scheme, host, path, ...) as           provided by @see WebUnitTest::getDefaultServerUrl()</p></p>
+<p class="description"><p>Note: When the specified URL is not complete, we extend it by applying the           default value for the missing parts (scheme, host, path, ...) as           provided by @see WebserverDefaults::getServerUrl()</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> The URL as currently configured.</li>
 				<li><span class="field">access:</span> public</li>

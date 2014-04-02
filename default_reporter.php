@@ -10,6 +10,7 @@
  *  include other SimpleTest class files
  */
 require_once(dirname(__FILE__) . '/simpletest.php');
+require_once(dirname(__FILE__) . '/default_server.php');
 require_once(dirname(__FILE__) . '/scorer.php');
 require_once(dirname(__FILE__) . '/reporter.php');
 require_once(dirname(__FILE__) . '/xml.php');
@@ -123,8 +124,8 @@ class SimpleCommandLineParser {
      *    @return string        THe default server URL (FQDN + test root directory).
      */
     function getServerUrl() {
-        WebTestCase::setDefaultServerUrl(null /* auth str */, $this->server_uri);
-        return WebTestCase::getDefaultServerUrl();
+        WebserverDefaults::setServerUrl(null /* auth str */, $this->server_uri);
+        return WebserverDefaults::getServerUrl();
     }
 
     /**
