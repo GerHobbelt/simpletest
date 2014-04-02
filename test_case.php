@@ -147,7 +147,8 @@ class SimpleTestCase {
         to invoke the inner run(), but we MUST pop the context once the run() itself is
         done to ensure that all expectXXX queues are aligned with the correct (nested)
         tests. Hence, when a user wants access to the inner context's reporter, they should
-        ask the test instance, not the global scope. (See test/errors_test.php ~ line )testswe do NOT pop context at the end of this call. Instead,
+        ask the test instance, not the global scope. (See test/errors_test.php ~ line )
+        We do NOT pop context at the end of this call. Instead,
         we use a heuristic to keep the chain/number of contexts to a minimum by popping
         all /sub/contexts before we return, as those won't be accessible by grandparent
         tests anyhow.
