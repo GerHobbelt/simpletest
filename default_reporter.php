@@ -27,9 +27,11 @@ class SimpleCommandLineParser {
     protected $to_property = array(
             'case' => 'case', 'c' => 'case', 'class' => 'case',
             'test' => 'test', 't' => 'test', 'method' => 'test',
+            'server-uri' => 'server_uri', 'server_uri' => 'server_uri',
     );
     protected $case = '';
     protected $test = '';
+    protected $server_uri = null;
     protected $xml = false;
     protected $dry = false;
     protected $make_list = false;
@@ -55,11 +57,11 @@ class SimpleCommandLineParser {
             array_shift($arguments);
         }
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^--?(test|case|class|method|t|c|server-uri)=(.+)$/', $argument, $matches)) {
+            if (preg_match('/^--?(test|case|class|method|t|c|server-uri|server_uri)=(.+)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 $this->$property = $matches[2];
                 unset($arguments[$i]);
-            } elseif (preg_match('/^--?(test|case|class|method|t|c|server-uri)$/', $argument, $matches)) {
+            } elseif (preg_match('/^--?(test|case|class|method|t|c|server-uri|server_uri)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 if (isset($arguments[$i + 1])) {
                     $this->$property = $arguments[$i + 1];
@@ -114,6 +116,15 @@ class SimpleCommandLineParser {
      */
     function getTestCase() {
         return $this->case;
+    }
+
+    /**
+     *    Get the user-specified default server URL.
+     *    @return string        THe default server URL (FQDN + test root directory).
+     */
+    function getServerUrl() {
+        WebTestCase::setDefaultServerUrl(null /* auth str */, $this->server_uri);
+        return WebTestCase::getDefaultServerUrl();
     }
 
     /**
@@ -196,8 +207,7 @@ These command line arguments were unrecognized:
 ERR;
         }
 
-        WebTestCase::setDefaultServerUrl();
-        $url = WebTestCase::getDefaultServerUrl();
+        $url = $this->getServerUrl();
 
         return <<<HELP
 $err
@@ -272,7 +282,7 @@ class WebCommandLineParser extends SimpleCommandLineParser {
         }
         $arguments = array_merge(array(), $arguments); // clone array, so we can edit it locally at no risk.
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^(test|case|class|method|t|c|server-uri)$/', $i)) {
+            if (preg_match('/^(test|case|class|method|t|c|server-uri|server_uri)$/', $i)) {
                 $property = $this->to_property[$i];
                 $this->$property = $argument;
                 unset($arguments[$i]);
@@ -340,8 +350,7 @@ class WebCommandLineParser extends SimpleCommandLineParser {
 ERR;
         }
 
-        WebTestCase::setDefaultServerUrl();
-        $url = WebTestCase::getDefaultServerUrl();
+        $url = $this->getServerUrl();
 
         return <<<HELP
 
@@ -442,11 +451,16 @@ class DefaultReporter extends SimpleReporterDecorator {
             $parser = new WebCommandLineParser(is_array($arguments) ? $arguments : array_merge(array(), (isset($_GET) && is_array($_GET) ? $_GET : array()), (isset($_POST) && is_array($_POST) ? $_POST : array())));
         }
         $interfaces = ($parser->isXml() ? array('XmlReporter') : ($in_cli ? array('TextReporter') : array('HtmlReporter')));
+        $interfaces = ($parser->isXml() ? array('XmlReporter') : ($in_cli ? array('TextReporter') : array('HtmlReporter')));
         if ($parser->help()) {
             // I'm not sure if we should do the echo'ing here -- ezyang
             echo $parser->getHelpText();
             exit(1);
         }
+
+        // make sure we set the 'default server URI' for all tests now s it's a once-only write operation and we gotta be the first to win:
+        /* void */$parser->getServerUrl();
+
         $reporter = new SelectiveReporter(
                 SimpleTest::preferred($interfaces),
                 $parser->getTestCase(),
