@@ -69,7 +69,7 @@ class ColorTextReporter extends TextReporter {
      * @param int
      * @access protected
      */
-    function _setColor($color) {
+    protected function setColor($color) {
         printf("%s[%sm\n", chr(27), $color);
     }
     
@@ -79,7 +79,7 @@ class ColorTextReporter extends TextReporter {
      *
      * @access protected
      */
-    function _resetColor() {
+    protected function resetColor() {
         $this->setColor(0);
     }
 }
