@@ -55,11 +55,11 @@ class SimpleCommandLineParser {
             array_shift($arguments);
         }
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^--?(test|case|class|method|t|c)=(.+)$/', $argument, $matches)) {
+            if (preg_match('/^--?(test|case|class|method|t|c|server-uri)=(.+)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 $this->$property = $matches[2];
                 unset($arguments[$i]);
-            } elseif (preg_match('/^--?(test|case|class|method|t|c)$/', $argument, $matches)) {
+            } elseif (preg_match('/^--?(test|case|class|method|t|c|server-uri)$/', $argument, $matches)) {
                 $property = $this->to_property[$matches[1]];
                 if (isset($arguments[$i + 1])) {
                     $this->$property = $arguments[$i + 1];
@@ -195,6 +195,10 @@ These command line arguments were unrecognized:
 
 ERR;
         }
+
+        WebTestCase::setDefaultServerUrl();
+        $url = WebTestCase::getDefaultServerUrl();
+
         return <<<HELP
 $err
 SimpleTest command line default reporter (autorun)
@@ -207,6 +211,10 @@ Usage: php <test_file> [args...]
     --test=<method>
     --method=<method>
     -t <method>     Run only the test method <method>
+
+    --server-uri=<uri>
+                    Override the default server root path where test requests
+                    will be sent
 
     --no-skip
     -s              Suppress skip messages
@@ -232,6 +240,15 @@ Usage: php <test_file> [args...]
     --help
     -h              Display this help message
 
+
+Notes:
+    Web requests (which are part of the tests) are sent to this default
+    server URL unless the test itself specifies an override:
+
+        $url
+
+    You can alter the default 'server/root' URI above by specifying the URL
+    as an argument for the '--server-uri' commandline option.
 HELP;
     }
 }
@@ -255,7 +272,7 @@ class WebCommandLineParser extends SimpleCommandLineParser {
         }
         $arguments = array_merge(array(), $arguments); // clone array, so we can edit it locally at no risk.
         foreach ($arguments as $i => $argument) {
-            if (preg_match('/^(test|case|class|method|t|c)$/', $i)) {
+            if (preg_match('/^(test|case|class|method|t|c|server-uri)$/', $i)) {
                 $property = $this->to_property[$i];
                 $this->$property = $argument;
                 unset($arguments[$i]);
@@ -322,6 +339,10 @@ class WebCommandLineParser extends SimpleCommandLineParser {
     <hr />
 ERR;
         }
+
+        WebTestCase::setDefaultServerUrl();
+        $url = WebTestCase::getDefaultServerUrl();
+
         return <<<HELP
 
 <div class="help-message">
@@ -337,6 +358,9 @@ ERR;
         <dt>method=<var>method</var></dt>
         <dt>t=<var>method</var></dt>
         <dd>Run only the test method <var>method</var></dd>
+
+        <dt>server-uri=<var>uri</var></dt>
+        <dd>Override the default server root path where test requests will be sent</dd>
 
         <dt>no-skip</dt>
         <dt>s</dt>
@@ -374,6 +398,19 @@ ERR;
 
     <p>Note that you can switch any of the boolean options ON or OFF by providing a 'true' (T/J/Y/non zero integer number)
     or 'false' (F/N/0) value. <em>No value</em> specified implies 'true'.</p>
+
+    <p>
+    Notes:
+    Web requests (which are part of the tests) are sent to this default
+    server URL unless the test itself specifies an override:
+    </p>
+
+    <pre>$url</pre>
+
+    <p>
+    You can alter the default 'server/root' URI above by specifying the URL
+    as an argument for the <code>--server-uri</code> commandline option.
+    </p>
 </div>
 
 HELP;

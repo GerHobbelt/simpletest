@@ -576,7 +576,8 @@ class WebTestCase extends UnitTestCase {
 
             self::$default_server_url = $url;
         }
-        else {
+        else 
+        {
             $url = self::$default_server_url;
         }
         return $url;
