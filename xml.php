@@ -55,10 +55,7 @@ class XmlReporter extends SimpleReporter {
      *    @access public
      */
     function toParsedXml($text) {
-        return str_replace(
-                array('&', '<', '>', '"', '\''),
-                array('&amp;', '&lt;', '&gt;', '&quot;', '&apos;'),
-                $text);
+        return htmlentities($text, ENT_QUOTES | ENT_DISALLOWED, 'UTF-8', true /* double encode */);
     }
 
     /**
