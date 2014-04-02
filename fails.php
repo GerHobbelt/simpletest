@@ -122,7 +122,7 @@ class SimpleFailQueue {
      */
     function tally() {
         while (list($expected, $message) = $this->extractExpectation()) {
-			$this->test->fail($this->test->constructFailMessage($expected, 'tally dangling', "%s -> Expected fail not caught"));
+            $this->test->fail($this->test->constructFailMessage($expected, 'tally dangling', "%s -> Expected fail not caught"));
         }
     }
 
@@ -139,9 +139,9 @@ class SimpleFailQueue {
             $this->test->assert($expected, $content, sprintf(
                     $message,
                     "%s -> Unexpected pass: [$content] $file_and_line"));
-			return -1 * $mode;
+            return -1 * $mode;
         }
-		return $mode;
+        return $mode;
     }
 
     /**

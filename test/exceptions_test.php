@@ -135,40 +135,40 @@ class TestOfCallingTearDownAfterExceptions extends UnitTestCase {
         throw new Exception(__FUNCTION__);
     }
 
-	function testDebriWasRemovedOnce() {
+    function testDebriWasRemovedOnce() {
         $this->assertEqual($this->debri, 0);
-	}
+    }
 }
 
 class TestOfExceptionThrownInSetUpDoesNotRunTestBody extends UnitTestCase {
 
-	function setUp() {
+    function setUp() {
         $this->expectException();
         throw new Exception();
-	}
+    }
 
-	function testShouldNotBeRun() {
+    function testShouldNotBeRun() {
         $this->fail('This test body should not be run');
-	}
+    }
 
-	function testShouldNotBeRunEither() {
+    function testShouldNotBeRunEither() {
         $this->fail('This test body should not be run either');
-	}
+    }
 }
 
 class TestOfExpectExceptionWithSetUp extends UnitTestCase {
 
-	function setUp() {
+    function setUp() {
         $this->expectException();
-	}
+    }
 
-	function testThisExceptionShouldBeCaught() {
+    function testThisExceptionShouldBeCaught() {
         throw new Exception();
-	}
+    }
 
-	function testJustThrowingMyTestException() {
+    function testJustThrowingMyTestException() {
         throw new MyTestException();
-	}
+    }
 }
 
 class TestOfThrowingExceptionsInTearDown extends UnitTestCase {

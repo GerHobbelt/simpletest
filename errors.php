@@ -125,7 +125,7 @@ class SimpleErrorQueue {
      */
     function tally() {
         while (list($expected, $message) = $this->extractExpectation()) {
-			$this->test->fail($this->test->constructFailMessage($expected, 'tally dangling', "%s -> Expected error not caught"));
+            $this->test->fail($this->test->constructFailMessage($expected, 'tally dangling', "%s -> Expected error not caught"));
         }
     }
 

@@ -34,41 +34,41 @@ final class SimpleInternalValidator extends UnitTestCase {
      */
     function assert($expectation, $compare, $message = '%s') {
         if (!$this->checkExpectation($expectation, $compare)) {
-			$failmsg = $this->constructFailMessage($expectation, $compare, $message);
-			$stack = array();
-	        if (function_exists('debug_backtrace')) {
-				$stack = array_reverse(debug_backtrace());
-			}
-			$state = 0;
-			$stackdump = '';
-			$i = 0;
-			foreach ($stack as $frame) {
-				if ($state < 2 && !empty($frame['function']) && strncmp($frame['function'], 'invoke', 6) == 0) {
-					$state = 1;
-				}
-				else if ($state == 1) {
-					$state = 2;
-				}
-				else if ($state == 2 && !empty($frame['class']) && strcmp($frame['class'], 'SimpleInternalValidator') == 0) {
-					$state = 3;
-				}
-				if ($state == 2) {
-					$file = strtr(@$frame['file'], '\\', '/');
-					$path = explode('/', $file);
-					if (count($path) > 2) {
-						$path = array_slice($path, count($path) - 2);
-						$file = implode('/', $path);
-					}
-					$i++;
-					$stackdump .= "[" . $i . "] " . @$frame['class'] . @$frame['type'] . @$frame['function'] . ' at line ' . @$frame['line'] . ' in file ' . $file . "\n";
-				}
-			}
-			throw new Exception($failmsg . " --> Stack trace:\n" . $stackdump); 
+            $failmsg = $this->constructFailMessage($expectation, $compare, $message);
+            $stack = array();
+            if (function_exists('debug_backtrace')) {
+                $stack = array_reverse(debug_backtrace());
+            }
+            $state = 0;
+            $stackdump = '';
+            $i = 0;
+            foreach ($stack as $frame) {
+                if ($state < 2 && !empty($frame['function']) && strncmp($frame['function'], 'invoke', 6) == 0) {
+                    $state = 1;
+                }
+                else if ($state == 1) {
+                    $state = 2;
+                }
+                else if ($state == 2 && !empty($frame['class']) && strcmp($frame['class'], 'SimpleInternalValidator') == 0) {
+                    $state = 3;
+                }
+                if ($state == 2) {
+                    $file = strtr(@$frame['file'], '\\', '/');
+                    $path = explode('/', $file);
+                    if (count($path) > 2) {
+                        $path = array_slice($path, count($path) - 2);
+                        $file = implode('/', $path);
+                    }
+                    $i++;
+                    $stackdump .= "[" . $i . "] " . @$frame['class'] . @$frame['type'] . @$frame['function'] . ' at line ' . @$frame['line'] . ' in file ' . $file . "\n";
+                }
+            }
+            throw new Exception($failmsg . " --> Stack trace:\n" . $stackdump);
         }
     }
 }
 
 
 function InternalValidator() {
-	return new SimpleInternalValidator();
+    return new SimpleInternalValidator();
 }

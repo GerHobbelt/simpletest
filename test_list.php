@@ -15,34 +15,34 @@ require_once dirname(__FILE__) . '/expectation.php';
 /**#@-*/
 
 /**
- *    Wrapper for providing a custom @see ListInvoker 
+ *    Wrapper for providing a custom @see ListInvoker
  *    which is used to list the tests / cases invoked.
  *    @package SimpleTest
  *    @subpackage UnitTester
  */
 class ListTestReporter extends SimpleReporterDecorator {
-	protected $make_list;
-	
+    protected $make_list;
+
     /**
      *    Set up a ListTestReporter instance.
      *    @param SimpleScorer $reporter       Reporter to receive events.
      */
     function __construct($reporter) {
         parent::__construct($reporter);
-		$this->make_list = false;
+        $this->make_list = false;
     }
 
-	/**
-	 *    Signals that the next run will list the tests.
+    /**
+     *    Signals that the next run will list the tests.
      *    @param boolean $do_list             run will show Tests' names if true.
      *    @return SimpleReporterDecorator     This instance.
      *    @access public
-	 */
-	function makeList($do_list = true) {
-		$this->make_list = $do_list;
+     */
+    function makeList($do_list = true) {
+        $this->make_list = $do_list;
         $this->reporter->makeList($do_list);
-		return $this;
-	}
+        return $this;
+    }
 
     /**
      *    Can wrap the invoker when listing the tests is enabled.
@@ -51,12 +51,12 @@ class ListTestReporter extends SimpleReporterDecorator {
      *    @access public
      */
     function createInvoker($invoker) {
-		if ($this->make_list) {
-			return new ListTestInvoker($this->reporter->createInvoker($invoker));
-		}
-		else {
-			return $this->reporter->createInvoker($invoker);
-		}
+        if ($this->make_list) {
+            return new ListTestInvoker($this->reporter->createInvoker($invoker));
+        }
+        else {
+            return $this->reporter->createInvoker($invoker);
+        }
     }
 }
 
@@ -78,7 +78,7 @@ class ListTestInvoker extends SimpleInvokerDecorator {
 
     /**
      *    Lists rather then invokes a test method. Consequently,
-	 *    we do not invoke the setUp() and tearDown() calls either.
+     *    we do not invoke the setUp() and tearDown() calls either.
      *    @param string $method    Test method to call.
      *    @access public
      */
@@ -86,13 +86,13 @@ class ListTestInvoker extends SimpleInvokerDecorator {
         $context = SimpleTest::getContext();
         $test = $this->getTestCase(); // $context->getTest();
         $reporter = $context->getReporter();
-		// use 'user signal' as the way to render the list entry:
-		$case = get_class($test);
-		if ($case != $test->getLabel()) {
-			$case = sprintf("%s [%s]", $case, $test->getLabel());
-		}
-		$show_breadcrumb = $reporter->includeBreadCrumb(false);
-		$reporter->paintSignal("Test", sprintf("Case: %s | Method: %s", $case, $method));
-		$reporter->includeBreadCrumb($show_breadcrumb);
+        // use 'user signal' as the way to render the list entry:
+        $case = get_class($test);
+        if ($case != $test->getLabel()) {
+            $case = sprintf("%s [%s]", $case, $test->getLabel());
+        }
+        $show_breadcrumb = $reporter->includeBreadCrumb(false);
+        $reporter->paintSignal("Test", sprintf("Case: %s | Method: %s", $case, $method));
+        $reporter->includeBreadCrumb($show_breadcrumb);
     }
 }

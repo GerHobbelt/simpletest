@@ -1,6 +1,6 @@
 <?php
     require_once('self.php');
-	
+
     header('Location: ' . my_path() . 'network_confirm.php?r=rrr');
 ?><html>
     <head><title>Redirection test</title></head>

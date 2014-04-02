@@ -97,11 +97,11 @@ class TestOfPageHeaders extends UnitTestCase {
 
 class TestOfHtmlStrippingAndNormalisation extends UnitTestCase {
 
-	function testImageSuppressionWhileKeepingParagraphsAndAltText() {
+    function testImageSuppressionWhileKeepingParagraphsAndAltText() {
         $this->assertEqual(
                 SimplePage::normalise('<img src="foo.png" /><p>some text</p><img src="bar.png" alt="bar" />'),
                 'some text bar');
-	}
+    }
 
     function testSpaceNormalisation() {
         $this->assertEqual(

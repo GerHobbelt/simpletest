@@ -11,14 +11,14 @@
  *
  * Specifying one of these determines what should be generated exactly: invocation, declaration, argument set or assignment.
  */
-define('SIG_GEN_DECLARE', 				1);
-define('SIG_GEN_INVOKE_AS_PARENT', 		2);
+define('SIG_GEN_DECLARE',               1);
+define('SIG_GEN_INVOKE_AS_PARENT',      2);
 define('SIG_GEN_DECLARE_ONLY_THE_ARGS', 3);
-define('SIG_GEN_INVOKE_ONLY_THE_ARGS', 	4);
-define('SIG_GEN_ASSIGN_ONLY_THE_ARGS', 	5);
+define('SIG_GEN_INVOKE_ONLY_THE_ARGS',  4);
+define('SIG_GEN_ASSIGN_ONLY_THE_ARGS',  5);
 /**#@-*/
 
- 
+
 /**
  *    Version specific reflection API.
  *    @package SimpleTest
@@ -295,72 +295,72 @@ class SimpleReflection {
      *    @access public
      */
     function getSignature($name, $mode = SIG_GEN_DECLARE, $propagator = null) {
-		$decl_prefix = ($mode == SIG_GEN_DECLARE ? 'function ' : '');
-		$class = ($mode == SIG_GEN_INVOKE_AS_PARENT ? 'parent::' : '');
-		$only_the_args = ($mode == SIG_GEN_INVOKE_ONLY_THE_ARGS || $mode == SIG_GEN_ASSIGN_ONLY_THE_ARGS || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS);
-		
-		$candidate_reply = false;
-		if ($name == '__set') {
-			$candidate_reply = $decl_prefix . $class . (!$only_the_args ? '__set($key, $value)' :  '$key, $value');
-		}
-		if ($name == '__call') {
-			$candidate_reply = $decl_prefix . $class . (!$only_the_args ? '__call($method, $arguments)' : '$method, $arguments');
-		}
-		if (version_compare(phpversion(), '5.1.0', '>=')) {
-			if (in_array($name, array('__get', '__isset', '__unset'))) {
-				$candidate_reply = $decl_prefix . $class . (!$only_the_args ? $name . '($key)' : '$key');
-			}
-		}
-		if ($name == '__toString') {
-			$candidate_reply = $decl_prefix . $class . (!$only_the_args ? $name . '()' : '');
-		}
+        $decl_prefix = ($mode == SIG_GEN_DECLARE ? 'function ' : '');
+        $class = ($mode == SIG_GEN_INVOKE_AS_PARENT ? 'parent::' : '');
+        $only_the_args = ($mode == SIG_GEN_INVOKE_ONLY_THE_ARGS || $mode == SIG_GEN_ASSIGN_ONLY_THE_ARGS || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS);
+
+        $candidate_reply = false;
+        if ($name == '__set') {
+            $candidate_reply = $decl_prefix . $class . (!$only_the_args ? '__set($key, $value)' :  '$key, $value');
+        }
+        if ($name == '__call') {
+            $candidate_reply = $decl_prefix . $class . (!$only_the_args ? '__call($method, $arguments)' : '$method, $arguments');
+        }
+        if (version_compare(phpversion(), '5.1.0', '>=')) {
+            if (in_array($name, array('__get', '__isset', '__unset'))) {
+                $candidate_reply = $decl_prefix . $class . (!$only_the_args ? $name . '($key)' : '$key');
+            }
+        }
+        if ($name == '__toString') {
+            $candidate_reply = $decl_prefix . $class . (!$only_the_args ? $name . '()' : '');
+        }
 
         // This wonky try-catch is a work around for a faulty method_exists()
         // in early versions of PHP 5 which would return false for static
         // methods. The Reflection classes work fine, but hasMethod()
         // doesn't exist prior to PHP 5.1.0, so we need to use a more crude
         // detection method.
-		if ($candidate_reply === false && !$only_the_args) {
-			try {
-				$interface = new ReflectionClass($this->interface);
-				$interface->getMethod($name);
-			} catch (ReflectionException $e) {
-				$candidate_reply = $decl_prefix . $class . $name . '()';
-			}
-		}
+        if ($candidate_reply === false && !$only_the_args) {
+            try {
+                $interface = new ReflectionClass($this->interface);
+                $interface->getMethod($name);
+            } catch (ReflectionException $e) {
+                $candidate_reply = $decl_prefix . $class . $name . '()';
+            }
+        }
 
-		switch ($mode) {
-		case SIG_GEN_ASSIGN_ONLY_THE_ARGS:
-		default:
-			if ($candidate_reply !== false) {
-				trigger_error('Mock/Reflection does not (yet) support mode ' . $mode . ' for ' . $name);
-				return '';
-			}
-			// fall through! 
-		case SIG_GEN_DECLARE_ONLY_THE_ARGS:
-		case SIG_GEN_INVOKE_ONLY_THE_ARGS:
-			if ($candidate_reply !== false) {
-				if (is_array($propagator) && isset($propagator['prefix']) && !empty($candidate_reply)) {
-					$candidate_reply = $propagator['prefix'] . $candidate_reply;
-				}
-				if (is_array($propagator) && isset($propagator['postfix']) && !empty($candidate_reply)) {
-					$candidate_reply .= $propagator['postfix'];
-				}
-				return $candidate_reply;
-			}
-			else {
-				return $this->getArgumentsSignature($name, $mode, $propagator);
-			}
-			
-		case SIG_GEN_DECLARE:
-		case SIG_GEN_INVOKE_AS_PARENT:
-			if ($candidate_reply !== false) {
-				return $candidate_reply;
-			}
-			else {
-				return $this->getFullSignature($name, $mode, $propagator);
-			}
-		}
+        switch ($mode) {
+        case SIG_GEN_ASSIGN_ONLY_THE_ARGS:
+        default:
+            if ($candidate_reply !== false) {
+                trigger_error('Mock/Reflection does not (yet) support mode ' . $mode . ' for ' . $name);
+                return '';
+            }
+            // fall through!
+        case SIG_GEN_DECLARE_ONLY_THE_ARGS:
+        case SIG_GEN_INVOKE_ONLY_THE_ARGS:
+            if ($candidate_reply !== false) {
+                if (is_array($propagator) && isset($propagator['prefix']) && !empty($candidate_reply)) {
+                    $candidate_reply = $propagator['prefix'] . $candidate_reply;
+                }
+                if (is_array($propagator) && isset($propagator['postfix']) && !empty($candidate_reply)) {
+                    $candidate_reply .= $propagator['postfix'];
+                }
+                return $candidate_reply;
+            }
+            else {
+                return $this->getArgumentsSignature($name, $mode, $propagator);
+            }
+
+        case SIG_GEN_DECLARE:
+        case SIG_GEN_INVOKE_AS_PARENT:
+            if ($candidate_reply !== false) {
+                return $candidate_reply;
+            }
+            else {
+                return $this->getFullSignature($name, $mode, $propagator);
+            }
+        }
     }
 
     /**
@@ -374,12 +374,12 @@ class SimpleReflection {
      *    @access protected
      */
     protected function getFullSignature($name, $mode, $propagator) {
-		$decl_prefix = ($mode == SIG_GEN_DECLARE ? 'function ' : '');
+        $decl_prefix = ($mode == SIG_GEN_DECLARE ? 'function ' : '');
         $interface = new ReflectionClass($this->interface);
         $method = $interface->getMethod($name);
         $reference = $method->returnsReference() ? '&' : '';
         $static = (($method->isStatic() && $mode == SIG_GEN_DECLARE) ? 'static ' : '');
-		$class = ($mode == SIG_GEN_INVOKE_AS_PARENT ? ($method->isStatic() ? $this->interface . '::' : 'parent::') : '');
+        $class = ($mode == SIG_GEN_INVOKE_AS_PARENT ? ($method->isStatic() ? $this->interface . '::' : 'parent::') : '');
         return $static . $decl_prefix . $reference . $class . $name . '(' .
                 implode(', ', $this->getParameterSignatures($method, $mode, $propagator)) .
                 ')';
@@ -398,38 +398,38 @@ class SimpleReflection {
         $interface = new ReflectionClass($this->interface);
         $method = $interface->getMethod($name);
         $reference = $method->returnsReference() ? '&' : '';
-		$argset = $this->getParameterSignatures($method, $mode, $propagator);
+        $argset = $this->getParameterSignatures($method, $mode, $propagator);
 
-		switch ($mode) {
-		case SIG_GEN_DECLARE_ONLY_THE_ARGS:
-		case SIG_GEN_INVOKE_ONLY_THE_ARGS:
+        switch ($mode) {
+        case SIG_GEN_DECLARE_ONLY_THE_ARGS:
+        case SIG_GEN_INVOKE_ONLY_THE_ARGS:
             $ret = implode(', ', $argset);
-			if (is_array($propagator) && isset($propagator['prefix']) && !empty($ret)) {
-				$ret = $propagator['prefix'] . $ret;
-			}
-			if (is_array($propagator) && isset($propagator['postfix']) && !empty($ret)) {
-				$ret .= $propagator['postfix'];
-			}
-			return $ret;
-			
-		case SIG_GEN_ASSIGN_ONLY_THE_ARGS:
-            $ret = implode(";\n        ", $argset);
-			if (!empty($ret)) {
-				$ret .= ";\n";
-			}
-			return $ret;
+            if (is_array($propagator) && isset($propagator['prefix']) && !empty($ret)) {
+                $ret = $propagator['prefix'] . $ret;
+            }
+            if (is_array($propagator) && isset($propagator['postfix']) && !empty($ret)) {
+                $ret .= $propagator['postfix'];
+            }
+            return $ret;
 
-		default:
-			trigger_error('Mock/Reflection getArgumentsSignature() does not (yet) support mode ' . $mode . ' for ' . $name);
-			return '';
-		}
+        case SIG_GEN_ASSIGN_ONLY_THE_ARGS:
+            $ret = implode(";\n        ", $argset);
+            if (!empty($ret)) {
+                $ret .= ";\n";
+            }
+            return $ret;
+
+        default:
+            trigger_error('Mock/Reflection getArgumentsSignature() does not (yet) support mode ' . $mode . ' for ' . $name);
+            return '';
+        }
     }
 
     /**
      *    Gets the source code for each parameter.
      *    @param ReflectionMethod $method   Method object from reflection API
-     *    @param mixed $propagator          Used to complete the response. Depends on the specified mode; 
-	 *                                      may, for instance, contain a set of 'default values' for each of the arguments.
+     *    @param mixed $propagator          Used to complete the response. Depends on the specified mode;
+     *                                      may, for instance, contain a set of 'default values' for each of the arguments.
      *    @return array                     List of strings, each a snippet of code.
      *    @access protected
      */
@@ -438,38 +438,38 @@ class SimpleReflection {
         foreach ($method->getParameters() as $parameter) {
             $signature = '';
             $type = $parameter->getClass();
-			if ($mode == SIG_GEN_DECLARE || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS) {
-				if (is_null($type) && version_compare(phpversion(), '5.1.0', '>=') && $parameter->isArray()) {
-					$signature .= 'array ';
-				} elseif (!is_null($type)) {
-					$signature .= $type->getName() . ' ';
-				}
-				if ($parameter->isPassedByReference()) {
-					$signature .= '&';
-				}
-			}
+            if ($mode == SIG_GEN_DECLARE || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS) {
+                if (is_null($type) && version_compare(phpversion(), '5.1.0', '>=') && $parameter->isArray()) {
+                    $signature .= 'array ';
+                } elseif (!is_null($type)) {
+                    $signature .= $type->getName() . ' ';
+                }
+                if ($parameter->isPassedByReference()) {
+                    $signature .= '&';
+                }
+            }
             $varname = $this->suppressSpurious($parameter->getName());
-			if ($mode != SIG_GEN_ASSIGN_ONLY_THE_ARGS || $this->isOptional($parameter)) {
-				$signature .= '$' . $varname;
-				if ($this->isOptional($parameter) && ($mode == SIG_GEN_DECLARE || $mode == SIG_GEN_ASSIGN_ONLY_THE_ARGS || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS)) {
-					if (is_array($propagator) && isset($propagator['assign']) && is_array($propagator['assign']) && isset($propagator['assign'][$varname])) {
-						$value = var_export($propagator['assign'][$varname], true);
-					}
-					else {
-						$value = 'null';
-					}
-					$signature .= ' = ' . $value;
-				}
-				$signatures[] = $signature;
-			}
-			else {
-				// write an assignment statement only for non-optional arguments when the caller actually specified a value to set them to:
-				if (is_array($propagator) && isset($propagator['assign']) && is_array($propagator['assign']) && isset($propagator['assign'][$varname])) {
-					$value = var_export($propagator['assign'][$varname], true);
-					$signature .= '$' . $varname . ' = ' . $value;
-					$signatures[] = $signature;
-				}
-			}
+            if ($mode != SIG_GEN_ASSIGN_ONLY_THE_ARGS || $this->isOptional($parameter)) {
+                $signature .= '$' . $varname;
+                if ($this->isOptional($parameter) && ($mode == SIG_GEN_DECLARE || $mode == SIG_GEN_ASSIGN_ONLY_THE_ARGS || $mode == SIG_GEN_DECLARE_ONLY_THE_ARGS)) {
+                    if (is_array($propagator) && isset($propagator['assign']) && is_array($propagator['assign']) && isset($propagator['assign'][$varname])) {
+                        $value = var_export($propagator['assign'][$varname], true);
+                    }
+                    else {
+                        $value = 'null';
+                    }
+                    $signature .= ' = ' . $value;
+                }
+                $signatures[] = $signature;
+            }
+            else {
+                // write an assignment statement only for non-optional arguments when the caller actually specified a value to set them to:
+                if (is_array($propagator) && isset($propagator['assign']) && is_array($propagator['assign']) && isset($propagator['assign'][$varname])) {
+                    $value = var_export($propagator['assign'][$varname], true);
+                    $signature .= '$' . $varname . ' = ' . $value;
+                    $signatures[] = $signature;
+                }
+            }
         }
         return $signatures;
     }

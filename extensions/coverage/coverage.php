@@ -112,15 +112,15 @@ class CodeCoverage  {
         }
     }
 
-    function writeSettings() {       
+    function writeSettings() {
         file_put_contents($this->settingsFile, $this->getSettings());
     }
 
     function getSettings() {
         $data = array(
-    	'log' => realpath($this->log), 
-    	'includes' => $this->includes, 
-    	'excludes' => $this->excludes);
+        'log' => realpath($this->log),
+        'includes' => $this->includes,
+        'excludes' => $this->excludes);
         return serialize($data);
     }
 

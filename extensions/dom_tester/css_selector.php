@@ -1,14 +1,14 @@
 <?php
 /**
- *	@package	SimpleTest
- *	@subpackage	DomTestCase
+ *  @package    SimpleTest
+ *  @subpackage DomTestCase
  *  @author     Perrick Penet <perrick@noparking.net>
- *	@version	$Id$
+ *  @version    $Id$
  */
 
 /**
  * CssSelector
- * 
+ *
  * Allow to navigate a DOM with CSS selector.
  *
  * based on getElementsBySelector version 0.4 - Simon Willison, 2003-03-25
@@ -17,8 +17,8 @@
  * derived from sfDomCssSelector Id 3053 (Symfony version 1.0.2) - Fabien Potencier, 2006-12-16
  * http://www.symfony-project.com/api/symfony/util/sfDomCssSelector.html
  *
- *	@package	SimpleTest
- *	@subpackage	DomTestCase
+ *  @package    SimpleTest
+ *  @subpackage DomTestCase
  * @param DomDocument $dom
  */
 
@@ -169,7 +169,7 @@ class CssSelector {
           $token = $matches[1] ? $matches[1] : '*';
           $combinator = $matches[2] ? $matches[2] : '';
         }
-        
+
         // If we get here, token is JUST an element (not a class or ID selector)
         $nodes = $this->getElementsByTagName($nodes, $token, $combinator);
       }
@@ -215,14 +215,14 @@ class CssSelector {
           }
           break;
         case '+':
-			$element = $node->nextSibling;
-			if (isset($element->nodeName) and $element->nodeName == "#text") {
-				$element = $element->nextSibling;
-			}
-			if ($element && $tagName == $element->nodeName) {
-				$founds[] = $element;
-			}
-			break;
+            $element = $node->nextSibling;
+            if (isset($element->nodeName) and $element->nodeName == "#text") {
+                $element = $element->nextSibling;
+            }
+            if ($element && $tagName == $element->nodeName) {
+                $founds[] = $element;
+            }
+            break;
         case ':first-child':
           foreach ($node->getElementsByTagName($tagName) as $element) {
             if (count($founds) == 0) {

@@ -15,72 +15,72 @@
  */
 class SimpleSeleniumRemoteControl
 {
-	protected $browser = '';
-	protected $browserUrl = '';
-	protected $host = 'localhost';
-	protected $port = 4444;
-	protected $timeout = 30000;
-	protected $sessionId = null;
+    protected $browser = '';
+    protected $browserUrl = '';
+    protected $host = 'localhost';
+    protected $port = 4444;
+    protected $timeout = 30000;
+    protected $sessionId = null;
 
-	protected $commandMap = array(
-		'bool' => array(
-			'verify', 
-			'verifyTextPresent', 
-			'verifyTextNotPresent',
-			'verifyValue'
-		),
-		'string' => array(
-			'getNewBrowserSession',
-		),
-	);
+    protected $commandMap = array(
+        'bool' => array(
+            'verify',
+            'verifyTextPresent',
+            'verifyTextNotPresent',
+            'verifyValue'
+        ),
+        'string' => array(
+            'getNewBrowserSession',
+        ),
+    );
 
-	public function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000) {
-		$this->browser = $browser;
-		$this->browserUrl = $browserUrl;
-		$this->host = $host;
-		$this->port = $port;
-		$this->timeout = $timeout;
-	}
+    public function __construct($browser, $browserUrl, $host = 'localhost', $port = 4444, $timeout = 30000) {
+        $this->browser = $browser;
+        $this->browserUrl = $browserUrl;
+        $this->host = $host;
+        $this->port = $port;
+        $this->timeout = $timeout;
+    }
 
-	public function sessionIdParser($response) {
-		return substr($response, 3);
-	}
-	
-	public function start() {
-		$response = $this->cmd('getNewBrowserSession', array($this->browser, $this->browserUrl));
-		$this->sessionId = $this->sessionIdParser($response);
-	}
+    public function sessionIdParser($response) {
+        return substr($response, 3);
+    }
 
-	public function stop() {
-		$this->cmd('testComplete');
-		$this->sessionId = null;
-	}
+    public function start() {
+        $response = $this->cmd('getNewBrowserSession', array($this->browser, $this->browserUrl));
+        $this->sessionId = $this->sessionIdParser($response);
+    }
 
-	public function __call($method, $arguments) {
-		$response = $this->cmd($method, $arguments);
-		
-		foreach ($this->commandMap as $type => $commands) {
-			if (!in_array($method, $commands)) {
-				continue;
-				$type = null;
-			}
-			break;
-		}
+    public function stop() {
+        $this->cmd('testComplete');
+        $this->sessionId = null;
+    }
 
-		switch ($type) {
-			case 'bool' :
-				return substr($response, 0, 2) == 'OK' ? true : false;
-				break;
+    public function __call($method, $arguments) {
+        $response = $this->cmd($method, $arguments);
 
-			case 'string' :
-			default:
-				return $response;
-		}
-	}
-	
-	protected function server() {
-		return "http://{$this->host}:{$this->port}/selenium-server/driver/";
-	}
+        foreach ($this->commandMap as $type => $commands) {
+            if (!in_array($method, $commands)) {
+                continue;
+                $type = null;
+            }
+            break;
+        }
+
+        switch ($type) {
+            case 'bool' :
+                return substr($response, 0, 2) == 'OK' ? true : false;
+                break;
+
+            case 'string' :
+            default:
+                return $response;
+        }
+    }
+
+    protected function server() {
+        return "http://{$this->host}:{$this->port}/selenium-server/driver/";
+    }
 
     public function buildUrlCmd($method, $arguments = array()) {
         $params = array(
@@ -97,17 +97,17 @@ class SimpleSeleniumRemoteControl
         return $this->server()."?".implode('&', $params);
     }
 
-	public function cmd($method, $arguments = array()) {
+    public function cmd($method, $arguments = array()) {
           $url = $this->buildUrlCmd($method, $arguments);
           $response = $this->sendRequest($url);
           return $response;
-	}
+    }
 
-	public function isUp() {
+    public function isUp() {
         return (bool)@fsockopen($this->host, $this->port, $errno, $errstr, 30);
-	}
-	
-	protected function initCurl($url) {
+    }
+
+    protected function initCurl($url) {
         if (!function_exists('curl_init')) {
             throw new Exception('this code currently requires the curl extension');
         }
@@ -116,10 +116,10 @@ class SimpleSeleniumRemoteControl
         }
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, floor($this->timeout));
-		return $ch;	
-	}
-	
-	protected function sendRequest($url) {
+        return $ch;
+    }
+
+    protected function sendRequest($url) {
         $ch = $this->initCurl($url);
         $result = curl_exec($ch);
         if (($errno = curl_errno($ch)) != 0) {
@@ -127,5 +127,5 @@ class SimpleSeleniumRemoteControl
         }
         curl_close($ch);
         return $result;
-	}
+    }
 }

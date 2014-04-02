@@ -174,7 +174,7 @@ class SimpleBrowser {
      */
     function __construct() {
         $this->user_agent = $this->createUserAgent();
-		InternalValidator()->assertIsA($this->user_agent, 'SimpleUserAgent');
+        InternalValidator()->assertIsA($this->user_agent, 'SimpleUserAgent');
         $this->user_agent->useProxy(
                 SimpleTest::getDefaultProxy(),
                 SimpleTest::getDefaultProxyUsername(),

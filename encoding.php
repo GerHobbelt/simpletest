@@ -444,7 +444,7 @@ class SimpleEntityEncoding extends SimpleEncoding {
 
     function __construct($query = false, $content_type = false) {
         $this->content_type = $content_type;
-    	if (is_string($query)) {
+        if (is_string($query)) {
             $this->body = $query;
             parent::__construct();
         } else {
@@ -459,9 +459,9 @@ class SimpleEntityEncoding extends SimpleEncoding {
      */
     function getContentType() {
         if (!$this->content_type) {
-        	return ($this->body) ? 'text/plain' : 'application/x-www-form-urlencoded';
+            return ($this->body) ? 'text/plain' : 'application/x-www-form-urlencoded';
         }
-    	return $this->content_type;
+        return $this->content_type;
     }
 
     /**

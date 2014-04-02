@@ -4,7 +4,7 @@
  * @subpackage     Extensions
  */
 /**
- * @todo	which db abstraction layer is this?
+ * @todo    which db abstraction layer is this?
  */
 require_once 'DB/sqlite.php';
 

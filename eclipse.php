@@ -43,7 +43,7 @@ class EclipseReporter extends SimpleScorer {
         $this->group = "";
         $this->method = "";
         $this->cc = $cc;
-		$this->message = "";
+        $this->message = "";
         $this->error = false;
         $this->fail = false;
         $this->pass = false;

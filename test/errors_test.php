@@ -38,23 +38,23 @@ class TestOfErrorQueue extends UnitTestCase {
 }
 
 SimpleTest::ignore('TestOfErrorTrapQueueBug');
-class TestOfErrorTrapQueueBug extends UnitTestCase 
+class TestOfErrorTrapQueueBug extends UnitTestCase
 {
-    function testAnyFalseyErrorCanBeSwallowed() 
-	{
-		/*
-			offical release & CVS: 
-			
-			it would barf on this, because SimpleTest created a TrueExpectation() instance 
-			instead of an AnythingExpectation() for an empty expect argument, but then 
-			an AnythingExpectation() would have broken the broken assert logic in the tally() 
-			as well (an AnythingExpectation() being TRUEish all the time), so it's
-			twice bitten for the price of one there, I guess...
-			
-			Correct code must catch this falsey trigger_error() bugger and hence 'pass'.
-		*/
+    function testAnyFalseyErrorCanBeSwallowed()
+    {
+        /*
+            offical release & CVS:
+
+            it would barf on this, because SimpleTest created a TrueExpectation() instance
+            instead of an AnythingExpectation() for an empty expect argument, but then
+            an AnythingExpectation() would have broken the broken assert logic in the tally()
+            as well (an AnythingExpectation() being TRUEish all the time), so it's
+            twice bitten for the price of one there, I guess...
+
+            Correct code must catch this falsey trigger_error() bugger and hence 'pass'.
+        */
         $this->expectError();
-		trigger_error(false);
+        trigger_error(false);
     }
 }
 
@@ -95,14 +95,14 @@ class TestOfErrorTrap extends UnitTestCase {
     }
 
     function testAnyFalseyErrorCanBeSwallowed() {
-		$test = new TestOfErrorTrapQueueBug();
-		$this->assertTrue($test->run(new SimpleReporter()));
-		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
-		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
-		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
-		$this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
-		$this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
+        $test = new TestOfErrorTrapQueueBug();
+        $this->assertTrue($test->run(new SimpleReporter()));
+        $reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
+        $this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+        $this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+        $this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+        $this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
+        $this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
     }
 
     function testErrorCanBeSwallowedByPatternMatching() {
@@ -271,7 +271,7 @@ class TestOfLeftOverAnythingErrors extends UnitTestCase {
     function testExpectOneErrorGetZero() {
         $this->expectError(new AnythingExpectation());
         $this->assertTrue(true);
-		// no error, so we'll have an AnythingExpectation dangling in the tally: it should pop up there!
+        // no error, so we'll have an AnythingExpectation dangling in the tally: it should pop up there!
     }
 }
 
@@ -280,48 +280,48 @@ class TestRunnerForLeftOverAndNotEnoughErrors extends UnitTestCase {
     function testRunLeftOverErrorsTestCase() {
         $test = new TestOfLeftOverErrors();
         $this->assertFalse($test->run(new SimpleReporter()));
-		// also make sure that the test run did produce exactly 1 failure, nothing else:
-		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
-		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
-		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
-		$this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
-		$this->assertEqual($reporter->getExceptionCount(), 1, "%s -> Fail getExceptionCount");
+        // also make sure that the test run did produce exactly 1 failure, nothing else:
+        $reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
+        $this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+        $this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+        $this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+        $this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
+        $this->assertEqual($reporter->getExceptionCount(), 1, "%s -> Fail getExceptionCount");
     }
 
     function testRunNotEnoughErrors() {
         $test = new TestOfNotEnoughErrors();
         $this->assertFalse($test->run(new SimpleReporter()));
-		// also make sure that the test run did produce exactly 1 failure, nothing else:
-		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
-		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
-		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
-		$this->assertEqual($reporter->getFailCount(), 1, "%s -> Fail getFailCount");
-		$this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
+        // also make sure that the test run did produce exactly 1 failure, nothing else:
+        $reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
+        $this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+        $this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+        $this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+        $this->assertEqual($reporter->getFailCount(), 1, "%s -> Fail getFailCount");
+        $this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
     }
 
     function testRunAnythingError() {
         $test = new TestOfAnythingErrors();
         $this->assertFalse($test->run(new SimpleReporter()));
-		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
-		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
-		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
-		$this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
-		$this->assertEqual($reporter->getExceptionCount(), 1, "%s -> Fail getExceptionCount");
+        $reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
+        $this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+        $this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+        $this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+        $this->assertEqual($reporter->getFailCount(), 0, "%s -> Fail getFailCount");
+        $this->assertEqual($reporter->getExceptionCount(), 1, "%s -> Fail getExceptionCount");
     }
 
     function testRunLeftOverAnythingError() {
         $test = new TestOfLeftOverAnythingErrors();
-		// this is done this way to test nesting of expects: the expectFail() here should NOT be munched by the inner TestOfLeftOverAnythingErrors() test:
+        // this is done this way to test nesting of expects: the expectFail() here should NOT be munched by the inner TestOfLeftOverAnythingErrors() test:
         $this->expectFail()->assertTrue($test->run(new SimpleReporter()));
-		$reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
-		$this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
-		$this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
-		$this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
-		$this->assertEqual($reporter->getFailCount(), 1, "%s -> Fail getFailCount");
-		$this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
+        $reporter = $test->getReporter(); // get the inner test's reporter, as /this/ test level should be using another one again already!
+        $this->assertEqual($reporter->getTestCaseCount(), 1, "%s -> Fail TestCaseCount");
+        $this->assertEqual($reporter->getTestCaseProgress(), 1, "%s -> Fail TestCaseProgress");
+        $this->assertEqual($reporter->getPassCount(), 1, "%s -> Fail getPassCount");
+        $this->assertEqual($reporter->getFailCount(), 1, "%s -> Fail getFailCount");
+        $this->assertEqual($reporter->getExceptionCount(), 0, "%s -> Fail getExceptionCount");
     }
 }
 

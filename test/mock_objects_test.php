@@ -986,39 +986,39 @@ class TestOfProtectedMethodPartialMocks extends UnitTestCase
 
 
 class DummyInvokingMethodsInConstructor4Mock {
-	function __construct() {
-		$this->callMe();
-		$this->callMeToo();
-	}
-	function callMe() {
+    function __construct() {
+        $this->callMe();
+        $this->callMeToo();
+    }
+    function callMe() {
         trigger_error('The Real callMe()');
-		return true;
-	}
-	function callMeToo() {
+        return true;
+    }
+    function callMeToo() {
         trigger_error('The Real callMeToo()');
-		return true;
-	}
+        return true;
+    }
 }
 class DummyInvokingMethodsWithArgumentsInConstructor4Mock {
-	function __construct($arg1 = 1, $arg2 = 2) {
-		$ret = $this->callMe($arg1, $arg2);
-		$this->callMeToo($arg1, $arg2, $ret);
-	}
-	function callMe($arg1, $arg2 = 4) {
+    function __construct($arg1 = 1, $arg2 = 2) {
+        $ret = $this->callMe($arg1, $arg2);
+        $this->callMeToo($arg1, $arg2, $ret);
+    }
+    function callMe($arg1, $arg2 = 4) {
         trigger_error('The Real callMe(' . var_export($arg1, true) . ', ' . var_export($arg2, true) . ')');
-		return 5;
-	}
-	function callMeToo($arg1, $arg2, $arg3, $arg4 = 9) {
+        return 5;
+    }
+    function callMeToo($arg1, $arg2, $arg3, $arg4 = 9) {
         trigger_error('The Real callMeToo(' . var_export($arg1, true) . ', ' . var_export($arg2, true) . ', ' . var_export($arg3, true) . ', ' . var_export($arg4, true) . ')');
-		return 10;
-	}
+        return 10;
+    }
 }
 
 Mock::generate('DummyInvokingMethodsInConstructor4Mock');
 Mock::generatePartial('DummyInvokingMethodsInConstructor4Mock', 'TestDummyInvokingMethodsInConstructor4Mock', array('__construct', 'callMe'));
 Mock::generate('DummyInvokingMethodsWithArgumentsInConstructor4Mock');
 Mock::generatePartial('DummyInvokingMethodsWithArgumentsInConstructor4Mock', 'TestDummyInvokingMethodsWithArgumentsInConstructor4Mock', array('__construct', 'callMe'));
-		
+
 
 class TestOfMockGenerationWithCtorInvokingMethods extends UnitTestCase {
 
@@ -1034,7 +1034,7 @@ class TestOfMockGenerationWithCtorInvokingMethods extends UnitTestCase {
         error_reporting($this->old);
     }
 
-	
+
     function testTheMock() {
         $mock = new MockDummyInvokingMethodsInConstructor4Mock();
         $this->assertTrue(method_exists($mock, "callMe"));
@@ -1042,7 +1042,7 @@ class TestOfMockGenerationWithCtorInvokingMethods extends UnitTestCase {
     }
 
     function testThePartialMock() {
-		$this->expectError(new PatternExpectation('/The Real callMeToo\(\)/'));
+        $this->expectError(new PatternExpectation('/The Real callMeToo\(\)/'));
         $mock = new TestDummyInvokingMethodsInConstructor4Mock();
         $this->assertTrue(method_exists($mock, "callMe"));
         $this->assertNull($mock->callMe());
@@ -1061,27 +1061,27 @@ class TestOfMockGenerationWithCtorInvokingMethods extends UnitTestCase {
     }
 
     function testThePartialMockWithDefaultConstructorArgs() {
-		$this->expectError(new PatternExpectation('/The Real callMeToo\(NULL, NULL, NULL, 9\)/i'));
+        $this->expectError(new PatternExpectation('/The Real callMeToo\(NULL, NULL, NULL, 9\)/i'));
         $mock = new TestDummyInvokingMethodsWithArgumentsInConstructor4Mock();
         $this->assertTrue(method_exists($mock, "callMe"));
         $this->assertNull($mock->callMe('c'));
     }
 
     function testThePartialMockWithConstructorArgs() {
-		$this->expectError(new PatternExpectation('/The Real callMeToo\(\'a\', \'b\', NULL, 9\)/i'));
+        $this->expectError(new PatternExpectation('/The Real callMeToo\(\'a\', \'b\', NULL, 9\)/i'));
         $mock = new TestDummyInvokingMethodsWithArgumentsInConstructor4Mock('a', 'b');
         $this->assertTrue(method_exists($mock, "callMe"));
         $this->assertNull($mock->callMe('c'));
     }
 
-	function ctorInit4testPartialWithArgs($mocker, $props) {
+    function ctorInit4testPartialWithArgs($mocker, $props) {
         $mocker->returnsByValue("callMe", 'xyz');
-		return true;	// allow parent constructor to be executed.
-	}
-	
+        return true;    // allow parent constructor to be executed.
+    }
+
     function testThePartialMockWithArgPresets() {
-		// be reminded that the last two arguments of a mock constructor are the rig_setup_callback and propagate!
-		$this->expectError(new PatternExpectation('/The Real callMeToo\(\'a\', \'b\', \'xyz\', 9\)/'));
+        // be reminded that the last two arguments of a mock constructor are the rig_setup_callback and propagate!
+        $this->expectError(new PatternExpectation('/The Real callMeToo\(\'a\', \'b\', \'xyz\', 9\)/'));
         $mock = new TestDummyInvokingMethodsWithArgumentsInConstructor4Mock('a', 'b', array(&$this, 'ctorInit4testPartialWithArgs') /* , null */ );
         $this->assertTrue(method_exists($mock, "callMe"));
         $this->assertEqual($mock->callMe('c'), 'xyz');

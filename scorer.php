@@ -38,9 +38,9 @@ class SimpleScorer {
         $this->errors = 0;
         $this->exceptions = 0;
         $this->is_dry_run = false;
-		$this->list_tests = false;
-    	$this->show_breadcrumb = true;
-    	$this->show_stacktrace = true;
+        $this->list_tests = false;
+        $this->show_breadcrumb = true;
+        $this->show_stacktrace = true;
     }
 
     /**
@@ -52,51 +52,51 @@ class SimpleScorer {
      *    @access public
      */
     function makeDry($is_dry = true) {
-		$rv = $this->is_dry_run;
+        $rv = $this->is_dry_run;
         $this->is_dry_run = $is_dry;
         return $rv;
     }
 
-	/**
-	 *    Signals that the next run will list the tests.
+    /**
+     *    Signals that the next run will list the tests.
      *    @param boolean $do_list       The next run will show Tests' names if true.
      *    @return boolean               The previous state.
      *    @access public
-	 */
-	function makeList($do_list = true) {
-		$rv = $this->list_tests;
-		$this->list_tests = $do_list;
-		return $rv;
-	}
+     */
+    function makeList($do_list = true) {
+        $rv = $this->list_tests;
+        $this->list_tests = $do_list;
+        return $rv;
+    }
 
     /**
      *    Output of the next run should include 'breadcrumb' invocation chains when available.
-     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeBreadCrumb($state = null) {
-		$rv = $this->show_breadcrumb;
-		if (isset($state)) {
-			$this->show_breadcrumb = (boolean)$state;
-		}
+        $rv = $this->show_breadcrumb;
+        if (isset($state)) {
+            $this->show_breadcrumb = (boolean)$state;
+        }
         return $rv;
     }
 
     /**
      *    Output of the next run should include stack traces when available.
-     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeStackTrace($state = null) {
-		$rv = $this->show_stacktrace;
-		if (isset($state)) {
-			$this->show_stacktrace = (boolean)$state;
-		}
+        $rv = $this->show_stacktrace;
+        if (isset($state)) {
+            $this->show_stacktrace = (boolean)$state;
+        }
         return $rv;
     }
-	
+
     /**
      *    The reporter has a veto on what should be run.
      *    @param string $test_case_name  name of test case.
@@ -182,9 +182,9 @@ class SimpleScorer {
     }
 
     /**
-     *    Increments the pass count. 
+     *    Increments the pass count.
      *
-     *    Note: Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -196,9 +196,9 @@ class SimpleScorer {
     }
 
     /**
-     *    Increments the fail count. 
+     *    Increments the fail count.
      *
-     *    Note: Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -210,9 +210,9 @@ class SimpleScorer {
     }
 
     /**
-     *    Increments the error count. 
+     *    Increments the error count.
      *
-     *    Note: Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -224,9 +224,9 @@ class SimpleScorer {
     }
 
     /**
-     *    Increments the exception count. 
+     *    Increments the exception count.
      *
-     *    Note: Derive from or invoke this method directly when you are 
+     *    Note: Derive from or invoke this method directly when you are
      *          only interested in the test run bookkeeping. Use the paint
      *          methods when you are interested in the visula feedback
      *          of a test run.
@@ -506,19 +506,19 @@ class SimpleReporter extends SimpleScorer {
     }
 
     /**
-     *    Serialize/stringify any object to string through serialization. 
-	 *    Keep strings intact, i.e. do not serialize these.
+     *    Serialize/stringify any object to string through serialization.
+     *    Keep strings intact, i.e. do not serialize these.
      *    @param mixed $object      The item to stringify/serialize.
      *    @return string            The readable form of the object.
      *    @access protected
      */
     protected function serializePayload($object) {
-		if (is_string($object)) {
-			return $object;
-		}
-		else {
-			return serialize($object);
-		}
+        if (is_string($object)) {
+            return $object;
+        }
+        else {
+            return serialize($object);
+        }
     }
 
     /**
@@ -559,20 +559,20 @@ class SimpleReporterDecorator {
         return $this->reporter->makeDry($is_dry);
     }
 
-	/**
-	 *    Signals that the next run will list the tests.
+    /**
+     *    Signals that the next run will list the tests.
      *    @param boolean $do_list             The next run will show Tests' names if true.
      *    @return boolean                     The previous state.
      *    @access public
-	 */
-	function makeList($do_list = true) {
+     */
+    function makeList($do_list = true) {
         return $this->reporter->makeList($do_list);
-	}
+    }
 
     /**
      *    Output of the next run should include 'breadcrumb' invocation chains when available.
-     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeBreadCrumb($state = null) {
@@ -581,8 +581,8 @@ class SimpleReporterDecorator {
 
     /**
      *    Output of the next run should include stack traces when available.
-     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeStackTrace($state = null) {
@@ -837,10 +837,10 @@ class MultipleReporter {
     protected $reporters;
 
     /**
-     *    Set up an MultipleReporter instance which allows you to send 
+     *    Set up an MultipleReporter instance which allows you to send
      *    (paint) messages to multiple reporters in parallel.
      *
-     *    @param Array $reporters       An array of instances of class SimpleReporter or 
+     *    @param Array $reporters       An array of instances of class SimpleReporter or
      *                                  SimpleReporterDecorator or their derivates.
      */
     function __construct($reporters = array()) {
@@ -865,53 +865,53 @@ class MultipleReporter {
      *    @access public
      */
     function makeDry($is_dry = true) {
-		$rv = false;
+        $rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv |= $this->reporters[$i]->makeDry($is_dry);
         }
-		return $rv;
+        return $rv;
     }
 
     /**
-	 *    Signals that the next run will list the tests.
+     *    Signals that the next run will list the tests.
      *    @param boolean $do_list       The next run will show Tests' names if true.
      *    @return boolean               The previous state.
      *    @access public
-	 */
-	function makeList($do_list = true) {
-		$rv = false;
+     */
+    function makeList($do_list = true) {
+        $rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv |= $this->reporters[$i]->makeList($do_list);
         }
-		return $rv;
-	}
+        return $rv;
+    }
 
     /**
      *    Output of the next run should include 'breadcrumb' invocation chains when available.
-     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for breadcrumb inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeBreadCrumb($state = null) {
-		$rv = false;
+        $rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv |= $this->reporters[$i]->includeBreadCrumb($state);
         }
-		return $rv;
+        return $rv;
     }
 
     /**
      *    Output of the next run should include stack traces when available.
-     *    @param boolean $state       True for stack trace inclusion, False for exclusion 
-	 *                                and null if you only want to retrieve the current state.
+     *    @param boolean $state       True for stack trace inclusion, False for exclusion
+     *                                and null if you only want to retrieve the current state.
      *    @return boolean             The previous state.
      */
     function includeStackTrace($state = null) {
-		$rv = false;
+        $rv = false;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv |= $this->reporters[$i]->includeStackTrace($state);
         }
-		return $rv;
+        return $rv;
     }
 
     /**
@@ -939,7 +939,7 @@ class MultipleReporter {
      *    @access public
      */
     function getTestList() {
-		$ret = array();
+        $ret = array();
         for ($i = 0; $i < count($this->reporters); $i++) {
             $ret = array_merge($ret, $this->reporters[$i]->getTestList());
         }
@@ -1189,44 +1189,44 @@ class MultipleReporter {
      *    Accessor for total test size in number
      *    of test cases. Null until the first
      *    test is started.
-	 *
-	 *    Note: This is not an ideal implementation (and no ideal exists)
-	 *          as multiple reporters MAY count the same test cases.
-	 *          Despite this cause for 'overcounting', you may expect
-	 *          @see getTestCaseProgress() to suffer from the same, so
-	 *          the progress to total count ratio should still range between
-	 *          0% and 100%.
-	 *
+     *
+     *    Note: This is not an ideal implementation (and no ideal exists)
+     *          as multiple reporters MAY count the same test cases.
+     *          Despite this cause for 'overcounting', you may expect
+     *          @see getTestCaseProgress() to suffer from the same, so
+     *          the progress to total count ratio should still range between
+     *          0% and 100%.
+     *
      *    @return integer   Total number of cases at start.
      *    @access public
      */
     function getTestCaseCount() {
-		$rv = 0;
+        $rv = 0;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv += $this->reporters[$i]->getTestCaseCount();
         }
-		return $rv;
+        return $rv;
     }
 
     /**
      *    Accessor for the number of test cases
      *    completed so far.
-	 *
-	 *    Note: This is not an ideal implementation (and no ideal exists)
-	 *          as multiple reporters MAY count the same test cases.
-	 *          Despite this cause for 'overcounting', you may expect
-	 *          @see getTestCaseCount() to suffer from the same, so
-	 *          the progress to total count ratio should still range between
-	 *          0% and 100%.
-	 *
+     *
+     *    Note: This is not an ideal implementation (and no ideal exists)
+     *          as multiple reporters MAY count the same test cases.
+     *          Despite this cause for 'overcounting', you may expect
+     *          @see getTestCaseCount() to suffer from the same, so
+     *          the progress to total count ratio should still range between
+     *          0% and 100%.
+     *
      *    @return integer   Number of completed cases.
      *    @access public
      */
     function getTestCaseProgress() {
-		$rv = 0;
+        $rv = 0;
         for ($i = 0; $i < count($this->reporters); $i++) {
             $rv += $this->reporters[$i]->getTestCaseProgress();
         }
-		return $rv;
+        return $rv;
     }
 }

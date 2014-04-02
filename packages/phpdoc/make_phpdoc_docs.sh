@@ -3,13 +3,13 @@ pushd .
 cd $(echo $0 | sed -e 's=[^/]*$==');
 
 #DEST_DIR=../../docs/pkg
-if [ ! -d ../../tutorials ] 
+if [ ! -d ../../tutorials ]
 then
-	mkdir ../../tutorials
+    mkdir ../../tutorials
 fi
 if [ ! -d ../../tutorials/SimpleTest ]
 then
-	mkdir ../../tutorials/SimpleTest
+    mkdir ../../tutorials/SimpleTest
 fi
 DEST_DIR=../../tutorials/SimpleTest
 
@@ -36,8 +36,8 @@ cd $DEST_DIR
 # remove XML declaration
 for f in $(ls *.pkg --color=none)
 do
-	grep -v -e '^<?xml' $f > tmp.pkg
-	mv tmp.pkg $f
+    grep -v -e '^<?xml' $f > tmp.pkg
+    mv tmp.pkg $f
 done
 
 # fix overview title
@@ -48,7 +48,7 @@ popd
 
 rm -rf ../../docs/simpletest.org/api/
 
-PhpDocumentor/phpdoc -c simpletest.ini 
+PhpDocumentor/phpdoc -c simpletest.ini
 
 popd
 

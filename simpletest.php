@@ -76,15 +76,15 @@ class SimpleTest {
      *   @see preferred()
      */
     static function prefer($object, $tag = null) {
-		if (empty($tag)) {
-			$tag = get_class($object);
-		}
-		if (!empty($tag)) {
-			$registry = &SimpleTest::getRegistry();
-			$registry['Preferred'][$tag] = $object;
-			return true;
-		}
-		return false;
+        if (empty($tag)) {
+            $tag = get_class($object);
+        }
+        if (!empty($tag)) {
+            $registry = &SimpleTest::getRegistry();
+            $registry['Preferred'][$tag] = $object;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -102,8 +102,8 @@ class SimpleTest {
         $registry = &SimpleTest::getRegistry();
         foreach ($registry['Preferred'] as $tag => $obj) {
             if (in_array($tag, $classes, true)) {
-				return $obj;
-			}
+                return $obj;
+            }
         }
         return null;
     }
@@ -211,10 +211,10 @@ class SimpleTest {
         return self::$context;
     }
 
-	/**
-	 *    Request a new (child) context and use it from now on, i.e. this is an
-	 *    implicit @see SimpleTest::getContext().
-	 *
+    /**
+     *    Request a new (child) context and use it from now on, i.e. this is an
+     *    implicit @see SimpleTest::getContext().
+     *
      *    @return SimpleTestContext    Current test run.
      */
     static function pushContext() {
@@ -222,38 +222,38 @@ class SimpleTest {
         return self::$context;
     }
 
-	/**
-	 *    Removes ('pops') all child contexts chained to the given context and itself,
-	 *    then makes the parent of the given context the new active context, so this 
-	 *    comes with an implicit @see SimpleTest::getContext().
-	 *
-     *    @param SimpleTestContext $context    The context to pop. It must have been 
-	 *                                         produced before by either
-	 *                                         @see SimpleTest::getContext() or 
-	 *                                         @see SimpleTest::pushContext().
+    /**
+     *    Removes ('pops') all child contexts chained to the given context and itself,
+     *    then makes the parent of the given context the new active context, so this
+     *    comes with an implicit @see SimpleTest::getContext().
+     *
+     *    @param SimpleTestContext $context    The context to pop. It must have been
+     *                                         produced before by either
+     *                                         @see SimpleTest::getContext() or
+     *                                         @see SimpleTest::pushContext().
      *    @return SimpleTestContext            The now activate context.
      */
     static function popContext($ctx) {
-		// see if $ctx is indeed a parent of ours ...
-		$child = self::$context;
-		while ($child && $child !== $ctx)
-		{
-			$child = $child->getParent();
-		}
-		if (!$child) return self::getContext();
-		// ... only when it is do we 'pop' the chain of children:
-		self::$context = $ctx;
-		// ... and see whether there's a valid parent to be had:
-		if ($ctx = $ctx->getParent())
-		{
-			self::$context = $ctx;
-		}
-		/*
-		  The GC should now recognize the child contexts as 'discarded'
-		  as the parent contexts don't reference the children, it's
-		  the other way around, so our 'self::$context' reference should
-		  have been the only thing that kept them alive till now.
-		 */
+        // see if $ctx is indeed a parent of ours ...
+        $child = self::$context;
+        while ($child && $child !== $ctx)
+        {
+            $child = $child->getParent();
+        }
+        if (!$child) return self::getContext();
+        // ... only when it is do we 'pop' the chain of children:
+        self::$context = $ctx;
+        // ... and see whether there's a valid parent to be had:
+        if ($ctx = $ctx->getParent())
+        {
+            self::$context = $ctx;
+        }
+        /*
+          The GC should now recognize the child contexts as 'discarded'
+          as the parent contexts don't reference the children, it's
+          the other way around, so our 'self::$context' reference should
+          have been the only thing that kept them alive till now.
+         */
         return self::$context;
     }
 
@@ -301,21 +301,21 @@ class SimpleTestContext {
     protected $test;
     protected $reporter;
     protected $resources;
-	protected $parent_ctx;
-	public $level;
+    protected $parent_ctx;
+    public $level;
 
     function __construct($parent = null) {
-		$this->clear();
-		$this->parent_ctx = $parent;
-		$this->test = null;
-		$this->reporter = null;
-		$this->level = 1;
-		if (!empty($parent))
-		{
-			$this->test = $parent->test;
-			$this->reporter = $parent->reporter;
-			$this->level = $parent->level + 1;
-		}
+        $this->clear();
+        $this->parent_ctx = $parent;
+        $this->test = null;
+        $this->reporter = null;
+        $this->level = 1;
+        if (!empty($parent))
+        {
+            $this->test = $parent->test;
+            $this->reporter = $parent->reporter;
+            $this->level = $parent->level + 1;
+        }
     }
 
     /**
@@ -338,7 +338,7 @@ class SimpleTestContext {
     }
 
     /**
-     *    Accessor for the parent of this context. 
+     *    Accessor for the parent of this context.
      *    @return SimpleReporter    The parent context; FALSE when there's none.
      */
     function getParent() {

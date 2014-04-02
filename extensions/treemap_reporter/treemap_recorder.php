@@ -1,9 +1,9 @@
 <?php
 /**
- *	extension file for SimpleTest
+ *  extension file for SimpleTest
  *  @package        SimpleTest
  *  @subpackage     Extensions
- *	@version	$Id$
+ *  @version    $Id$
  */
 
 /**
@@ -19,137 +19,137 @@ require_once(dirname(__FILE__) . '/../../scorer.php');
  *  @subpackage     Extensions
  */
 class TreemapRecorder extends SimpleReporter {
-	protected $graph;
-	protected $stack;
-	protected $title;
+    protected $graph;
+    protected $stack;
+    protected $title;
 
-	function __construct() {
-		parent::__construct();
-		$this->stack = new TreemapStack();
-		$this->graph = null;
-	}
+    function __construct() {
+        parent::__construct();
+        $this->stack = new TreemapStack();
+        $this->graph = null;
+    }
 
-	/**
-	 * returns a reference to the root node of the
-	 * collected treemap graph
-	 */
-	function getGraph() {
-		return $this->graph;
-	}
-	
-	/**
-	 * is this test run finished?
-	 */
-	function isComplete() {
-		return ($this->graph != null);
-	}
-	
-	/**
-	 * returns the title of the test
-	 */
-	function getTitle() {
-		return $this->title;
-	}
-	
-	/**
-	 * stashes the title of the test
-	 */
-	function paintHeader($title) {
-		$this->title = $title;
-	}
-	
-	/**
-	 * acceptor for start of test group node
-	 */
-	function paintGroupStart($message, $size) {
-		parent::paintGroupStart($message, $size);
-		$node = new TreemapNode("Group", $message);
-		$this->stack->push($node);
-	}
-	
-	/**
-	 * acceptor for start of test case node
-	 */
-	function paintCaseStart($message) {
-		parent::paintCaseStart($message);
-		$node = new TreemapNode("TestCase", $message);
-		$this->stack->push($node);
-	}
-	
-	/**
-	 * acceptor for start of test method node
-	 */
-	function paintMethodStart($message) {
-		parent::paintMethodStart($message);
-		$node = new TreemapNode("Method", $message);
-		$this->stack->push($node);
-	}
+    /**
+     * returns a reference to the root node of the
+     * collected treemap graph
+     */
+    function getGraph() {
+        return $this->graph;
+    }
 
-	/**
-	 * acceptor for passing assertion node
-	 */
-	function paintPass($message) {
-		parent::paintPass($message);
-		$node = new TreemapNode("Assertion", $message, true);
-		$current = $this->stack->peek();
-		if ($current) {
-			$current->putChild($node);
-		} else {
-			echo "no current node";
-		}
-	}
+    /**
+     * is this test run finished?
+     */
+    function isComplete() {
+        return ($this->graph != null);
+    }
 
-	
-	/**
-	 * acceptor for failing assertion node
-	 */
+    /**
+     * returns the title of the test
+     */
+    function getTitle() {
+        return $this->title;
+    }
 
-	function paintFail($message) {
-		parent::paintFail($message);
-		$node = new TreemapNode("Assertion", $message, false);
-		$current = $this->stack->peek();
-		$current->putChild($node);
-		$current->fail();
-	}
+    /**
+     * stashes the title of the test
+     */
+    function paintHeader($title) {
+        $this->title = $title;
+    }
 
-	/**
-	 * acceptor for end of method node
-	 */
-	function paintMethodEnd($message) {
-		parent::paintMethodEnd($message);
-		$node = $this->stack->pop();
-		$current = $this->stack->peek();
-		if ($node->isFailed()) $current->fail();
-		$current->putChild($node);
-	}
+    /**
+     * acceptor for start of test group node
+     */
+    function paintGroupStart($message, $size) {
+        parent::paintGroupStart($message, $size);
+        $node = new TreemapNode("Group", $message);
+        $this->stack->push($node);
+    }
 
-	/**
-	 * acceptor for end of test case
-	 */
-	function paintCaseEnd($message) {
-		parent::paintCaseEnd($message);
-		$node = $this->stack->pop();
-		$current = $this->stack->peek();
-		if ($node->isFailed()) $current->fail();
-		$current->putChild($node);
-	}
-	
-	/**
-	 * acceptor for end of test group. final group
-	 * pops the collected treemap nodes and assigns
-	 * it to the internal graph property.
-	 */
-	function paintGroupEnd($message) {
-		$node = $this->stack->pop();
-		$current = $this->stack->peek();
-		if ($current) {
-			if ($node->isFailed()) $current->fail();
-			$current->putChild($node);
-		} else {
-			$this->graph = $node;
-		}
-		parent::paintGroupEnd($message);
-	}
+    /**
+     * acceptor for start of test case node
+     */
+    function paintCaseStart($message) {
+        parent::paintCaseStart($message);
+        $node = new TreemapNode("TestCase", $message);
+        $this->stack->push($node);
+    }
+
+    /**
+     * acceptor for start of test method node
+     */
+    function paintMethodStart($message) {
+        parent::paintMethodStart($message);
+        $node = new TreemapNode("Method", $message);
+        $this->stack->push($node);
+    }
+
+    /**
+     * acceptor for passing assertion node
+     */
+    function paintPass($message) {
+        parent::paintPass($message);
+        $node = new TreemapNode("Assertion", $message, true);
+        $current = $this->stack->peek();
+        if ($current) {
+            $current->putChild($node);
+        } else {
+            echo "no current node";
+        }
+    }
+
+
+    /**
+     * acceptor for failing assertion node
+     */
+
+    function paintFail($message) {
+        parent::paintFail($message);
+        $node = new TreemapNode("Assertion", $message, false);
+        $current = $this->stack->peek();
+        $current->putChild($node);
+        $current->fail();
+    }
+
+    /**
+     * acceptor for end of method node
+     */
+    function paintMethodEnd($message) {
+        parent::paintMethodEnd($message);
+        $node = $this->stack->pop();
+        $current = $this->stack->peek();
+        if ($node->isFailed()) $current->fail();
+        $current->putChild($node);
+    }
+
+    /**
+     * acceptor for end of test case
+     */
+    function paintCaseEnd($message) {
+        parent::paintCaseEnd($message);
+        $node = $this->stack->pop();
+        $current = $this->stack->peek();
+        if ($node->isFailed()) $current->fail();
+        $current->putChild($node);
+    }
+
+    /**
+     * acceptor for end of test group. final group
+     * pops the collected treemap nodes and assigns
+     * it to the internal graph property.
+     */
+    function paintGroupEnd($message) {
+        $node = $this->stack->pop();
+        $current = $this->stack->peek();
+        if ($current) {
+            if ($node->isFailed()) $current->fail();
+            $current->putChild($node);
+        } else {
+            $this->graph = $node;
+        }
+        parent::paintGroupEnd($message);
+    }
 
 }
 
@@ -161,107 +161,107 @@ class TreemapRecorder extends SimpleReporter {
  *  @subpackage     Extensions
  */
 class TreemapNode {
-	protected $name;
-	protected $description;
-	protected $status;
-	protected $parent;
-	protected $size;
-	
-	function __construct($name, $description, $status=true) {
-		$this->name = $name;
-		$this->description = $description;
-		$this->status = $status;
-		$this->children = array();
-	}
-	
-	/**
-	 * @return string label of this node
-	 */
-	function getName() {
-		return $this->name;
-	}
-	
-	/**
-	 * @return string description of this node
-	 */
-	function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 * @return string status class string
-	 */
-	function getStatus() {
-		return ($this->status) ? "pass" : "fail";
-	}
-	
-	/** 
-  	 * Return list of child nodes from direct edges.
-	 */
-	function getChildren() {
-		@uksort($this->new_children, array($this, 'compareChildren'));
-		return $this->children;
-	}
+    protected $name;
+    protected $description;
+    protected $status;
+    protected $parent;
+    protected $size;
 
-	/**
- 	 * Comparator method to rank child nodes by total weight.
-	 */
-	function compareChildren($a, $b) {
-		if ($this->children[$a]->getTotalSize() > $this->children[$b]->getTotalSize()) {
-			$node_a = $this->children[$a];
-			$node_b = $this->children[$b];
-			$this->children[$a] = $node_b;
-			$this->children[$b] = $node_a;
-		}
-	}
-	
-	/** 
- 	 * Gets the number of immediate child edges from this node.
-	 */
-	function getSize() {
-		return count($this->children);
-	}
-	
-	/** 
-	 * depth first search to get the total number of nodes 
-	 * that are descendants of this node.
-	 */
-	function getTotalSize() {
-		if (!isset($this->size)) {
-			$size = $this->getSize();
-			if (!$this->isLeaf()) {
-				foreach($this->getChildren() as $child) {
-					$size += $child->getTotalSize();
-				}
-			}
-			$this->size = $size;
-		}
-		return $this->size;
-	}
-	
-	/**
-	 * Fail this node.
-	 * @return void
-	 */
-	function fail() {
-		$this->status = false;
-	}
-	
-	/** Is this node failed? */
-	function isFailed() {
-		return ($this->status == false);
-	}
-	
-	/** Add an edge to a child node */
-	function putChild($node) {
-		$this->children[] = $node;
-	}
-	
-	/** Is this node a leaf node? */
-	function isLeaf() {
-		return (count($this->children) == 0);
-	}
-	
+    function __construct($name, $description, $status=true) {
+        $this->name = $name;
+        $this->description = $description;
+        $this->status = $status;
+        $this->children = array();
+    }
+
+    /**
+     * @return string label of this node
+     */
+    function getName() {
+        return $this->name;
+    }
+
+    /**
+     * @return string description of this node
+     */
+    function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * @return string status class string
+     */
+    function getStatus() {
+        return ($this->status) ? "pass" : "fail";
+    }
+
+    /**
+     * Return list of child nodes from direct edges.
+     */
+    function getChildren() {
+        @uksort($this->new_children, array($this, 'compareChildren'));
+        return $this->children;
+    }
+
+    /**
+     * Comparator method to rank child nodes by total weight.
+     */
+    function compareChildren($a, $b) {
+        if ($this->children[$a]->getTotalSize() > $this->children[$b]->getTotalSize()) {
+            $node_a = $this->children[$a];
+            $node_b = $this->children[$b];
+            $this->children[$a] = $node_b;
+            $this->children[$b] = $node_a;
+        }
+    }
+
+    /**
+     * Gets the number of immediate child edges from this node.
+     */
+    function getSize() {
+        return count($this->children);
+    }
+
+    /**
+     * depth first search to get the total number of nodes
+     * that are descendants of this node.
+     */
+    function getTotalSize() {
+        if (!isset($this->size)) {
+            $size = $this->getSize();
+            if (!$this->isLeaf()) {
+                foreach($this->getChildren() as $child) {
+                    $size += $child->getTotalSize();
+                }
+            }
+            $this->size = $size;
+        }
+        return $this->size;
+    }
+
+    /**
+     * Fail this node.
+     * @return void
+     */
+    function fail() {
+        $this->status = false;
+    }
+
+    /** Is this node failed? */
+    function isFailed() {
+        return ($this->status == false);
+    }
+
+    /** Add an edge to a child node */
+    function putChild($node) {
+        $this->children[] = $node;
+    }
+
+    /** Is this node a leaf node? */
+    function isLeaf() {
+        return (count($this->children) == 0);
+    }
+
 }
 
 /**
@@ -271,40 +271,40 @@ class TreemapNode {
  *  @subpackage     Extensions
  */
 class TreemapStack {
-	protected $list;
+    protected $list;
 
-	function __construct() {
-		$this->list = array();
-	}
+    function __construct() {
+        $this->list = array();
+    }
 
-	/**
-	 * Push an element onto the stack.
-	 */
-	function push($node) {
-		$this->list[] = $node;
-	}
-	
-	/**
-	 * Number of elements in the stack.
-	 */
-	function size() {
-		return count($this->list);
-	}
-	
-	/**
-	 * Take a peek at the top element on the
-	 * stack.
-	 */
-	function peek() {
-		return end($this->list);
-	}
-	
-	/**
-	 * Pops an element off the stack.
-	 */
-	function pop() {
-		return array_pop($this->list);
-	}
+    /**
+     * Push an element onto the stack.
+     */
+    function push($node) {
+        $this->list[] = $node;
+    }
+
+    /**
+     * Number of elements in the stack.
+     */
+    function size() {
+        return count($this->list);
+    }
+
+    /**
+     * Take a peek at the top element on the
+     * stack.
+     */
+    function peek() {
+        return end($this->list);
+    }
+
+    /**
+     * Pops an element off the stack.
+     */
+    function pop() {
+        return array_pop($this->list);
+    }
 
 }
 

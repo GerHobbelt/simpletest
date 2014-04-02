@@ -42,7 +42,7 @@ class SimpleTestCase {
     protected $reporter = false;
     protected $observers;
     protected $should_skip = false;
-	protected $running = false;
+    protected $running = false;
 
     /**
      *    Sets up the test with no display.
@@ -54,7 +54,7 @@ class SimpleTestCase {
         if ($label) {
             $this->label = $label;
         }
-		$this->observers = array();
+        $this->observers = array();
     }
 
     /**
@@ -138,21 +138,21 @@ class SimpleTestCase {
      *    @access public
      */
     function run($reporter) {
-		/*
-		Make sure that each (possibly nested!) test has its own fail/error/... queues, etc.
-		so that the expectXXX() functions work like you'ld expect, even when a test invokes
-		another test instance's run() method.
-		
-		BREAKING CHANGE: We do know that tests might want to access the context which was used
-		to invoke the inner run(), but we MUST pop the context once the run() itself is
-		done to ensure that all expectXXX queues are aligned with the correct (nested)
-		tests. Hence, when a user wants access to the inner context's reporter, they should
-		ask the test instance, not the global scope. (See test/errors_test.php ~ line )testswe do NOT pop context at the end of this call. Instead,
-		we use a heuristic to keep the chain/number of contexts to a minimum by popping
-		all /sub/contexts before we return, as those won't be accessible by grandparent
-		tests anyhow.
-		*/
-		$this->running = true;
+        /*
+        Make sure that each (possibly nested!) test has its own fail/error/... queues, etc.
+        so that the expectXXX() functions work like you'ld expect, even when a test invokes
+        another test instance's run() method.
+
+        BREAKING CHANGE: We do know that tests might want to access the context which was used
+        to invoke the inner run(), but we MUST pop the context once the run() itself is
+        done to ensure that all expectXXX queues are aligned with the correct (nested)
+        tests. Hence, when a user wants access to the inner context's reporter, they should
+        ask the test instance, not the global scope. (See test/errors_test.php ~ line )testswe do NOT pop context at the end of this call. Instead,
+        we use a heuristic to keep the chain/number of contexts to a minimum by popping
+        all /sub/contexts before we return, as those won't be accessible by grandparent
+        tests anyhow.
+        */
+        $this->running = true;
         $context = SimpleTest::pushContext();
         $context->setTest($this);
         $context->setReporter($reporter);
@@ -179,7 +179,7 @@ class SimpleTestCase {
         }
         //$context->setTest(null);
         SimpleTest::popContext($context);
-		$this->running = false;
+        $this->running = false;
         return $reporter->getStatus();
     }
 
@@ -212,7 +212,7 @@ class SimpleTestCase {
      */
     static function isTest($class, $method) {
         return (strtolower(substr($method, 0, 4)) == 'test'
-			&& strtolower($method) != strtolower($class));
+            && strtolower($method) != strtolower($class));
     }
 
     /**
@@ -264,41 +264,41 @@ class SimpleTestCase {
         $this->observers[] = $observer;
     }
 
-	/**
-	 * Determines whether to print a pass/fail/unexpected pass/expected fail
-	 * message, depending on the mode parameter and the fail-queue.
-	 *
-	 * @param string $message      The pass/fail message.
-	 * @param integer $mode        The pass(1)/fail(-1) mode.
-	 * @returns integer            True if this one was counted as a pass after all, otherwise false.
-	 */
-	private function pass_or_fail($message, $mode)
-	{
+    /**
+     * Determines whether to print a pass/fail/unexpected pass/expected fail
+     * message, depending on the mode parameter and the fail-queue.
+     *
+     * @param string $message      The pass/fail message.
+     * @param integer $mode        The pass(1)/fail(-1) mode.
+     * @returns integer            True if this one was counted as a pass after all, otherwise false.
+     */
+    private function pass_or_fail($message, $mode)
+    {
         if (!$this->running) {
             trigger_error('Can only make assertions within test methods');
         }
-		$queue = SimpleTest::getContext()->get('SimpleFailQueue');
-		if ($queue->add($message, $this->getAssertionLine(), $mode) > 0)
-		{
-			$this->reporter->incrementPassCount();
-			$this->reporter->paintPass(
-					$message . $this->getAssertionLine());
-			return 1;
-		}
-		else
-		{
-			$this->reporter->incrementFailCount();
-			$this->reporter->paintFail(
-					$message . $this->getAssertionLine());
-			return -1;
-		}
-	}
-	
+        $queue = SimpleTest::getContext()->get('SimpleFailQueue');
+        if ($queue->add($message, $this->getAssertionLine(), $mode) > 0)
+        {
+            $this->reporter->incrementPassCount();
+            $this->reporter->paintPass(
+                    $message . $this->getAssertionLine());
+            return 1;
+        }
+        else
+        {
+            $this->reporter->incrementFailCount();
+            $this->reporter->paintFail(
+                    $message . $this->getAssertionLine());
+            return -1;
+        }
+    }
+
     /**
      *    @deprecated
      */
     function pass($message = "Pass") {
-		return $this->pass_or_fail($message, 1);
+        return $this->pass_or_fail($message, 1);
     }
 
     /**
@@ -307,7 +307,7 @@ class SimpleTestCase {
      *    @access public
      */
     function fail($message = "Fail") {
-		return $this->pass_or_fail($message, -1);
+        return $this->pass_or_fail($message, -1);
     }
 
     /**
@@ -354,68 +354,68 @@ class SimpleTestCase {
         $this->reporter->paintSignal($type, $payload);
     }
 
-	protected function getURLregex() {
-		static $uri_re;
-		if (empty($uri_re)) {
-			$uri_re = '=^(((([a-z][a-z0-9.+-]+:)?//)';               // mandatory scheme + authority start ('//') -- iff authority is specified
-			$uri_re .=  '([%!$&\'\(\)*+,;=:a-z0-9_~.-]+@)?';         // optional userinfo
-			$uri_re .=  '([%!$&\'\(\)*+,;=:\[\]a-z0-9_~.-]+)';       // authority
-			$uri_re .=  '/)|/)?';                                    // making scheme + hier-part optional -- no requirement for FQDNs here
-																	 // (Note that we also consume the optional leading / of the path here.)
-			$uri_re .=  '((\.+/)*[%!$&\'\(\)*+,;=:@a-z0-9_~-]+[./]+';
-			$uri_re .=   '[%!$&\'\(\)*+,;=:@/a-z0-9_~.-]*[%!$&\'\(\)*+,;=:@/a-z0-9_~-])';	
-																	 // mandatory path, must be obvious, so must contain at least a dot ...
-																	 // ... before the end or a '/' slash beyond the start ...
-																	 // ... and definitely no period at the very end
-			$uri_re .=  '(\?[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?'; // optional query, we accept '[' and ']' in there as well (not in RFC)
-			$uri_re .=  '(#[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?';	 // optional fragment, we accept '[' and ']' in there as well (not in RFC)
-			$uri_re .=  '$=i';
-		}
-		return $uri_re;
-	}
-	
-	/**
+    protected function getURLregex() {
+        static $uri_re;
+        if (empty($uri_re)) {
+            $uri_re = '=^(((([a-z][a-z0-9.+-]+:)?//)';               // mandatory scheme + authority start ('//') -- iff authority is specified
+            $uri_re .=  '([%!$&\'\(\)*+,;=:a-z0-9_~.-]+@)?';         // optional userinfo
+            $uri_re .=  '([%!$&\'\(\)*+,;=:\[\]a-z0-9_~.-]+)';       // authority
+            $uri_re .=  '/)|/)?';                                    // making scheme + hier-part optional -- no requirement for FQDNs here
+                                                                     // (Note that we also consume the optional leading / of the path here.)
+            $uri_re .=  '((\.+/)*[%!$&\'\(\)*+,;=:@a-z0-9_~-]+[./]+';
+            $uri_re .=   '[%!$&\'\(\)*+,;=:@/a-z0-9_~.-]*[%!$&\'\(\)*+,;=:@/a-z0-9_~-])';
+                                                                     // mandatory path, must be obvious, so must contain at least a dot ...
+                                                                     // ... before the end or a '/' slash beyond the start ...
+                                                                     // ... and definitely no period at the very end
+            $uri_re .=  '(\?[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?'; // optional query, we accept '[' and ']' in there as well (not in RFC)
+            $uri_re .=  '(#[%!$&\'\(\)*+,;=:@/?\[\]a-z0-9_~.-]+)?';  // optional fragment, we accept '[' and ']' in there as well (not in RFC)
+            $uri_re .=  '$=i';
+        }
+        return $uri_re;
+    }
+
+    /**
      * Prepares for an failure. If the failure mismatches it
      * passes through, otherwise it is swallowed. Any
-     * left over expected failures are reported before the end 
-	 * of the test.
+     * left over expected failures are reported before the end
+     * of the test.
      *
      * For example, use $this->expectedFail()->assert... to mark the assert as an
-     * expected fail. 
-	 *
-	 * You may want to use expectFail() in two different scenarios:
-	 *
-	 * 1) If your test reveals a bug then use this function with the
-     *    relevant parameter to link/refer to your bugtracker. This is 
-	 *    necessary because it is much easier to write a test than 
-	 *    fix a bug. It's also self-documenting -- before a release, 
-	 *    all these expectFail() calls should be removed.
-	 *
-	 * 2) You want to test the behaviour of SimpleTest itself, including
-	 *    how it renders failed tests. This is a special case which 
-	 *    applies to all expectFail() calls in the SimpleTest:./test/
-	 *    directory.
+     * expected fail.
+     *
+     * You may want to use expectFail() in two different scenarios:
+     *
+     * 1) If your test reveals a bug then use this function with the
+     *    relevant parameter to link/refer to your bugtracker. This is
+     *    necessary because it is much easier to write a test than
+     *    fix a bug. It's also self-documenting -- before a release,
+     *    all these expectFail() calls should be removed.
+     *
+     * 2) You want to test the behaviour of SimpleTest itself, including
+     *    how it renders failed tests. This is a special case which
+     *    applies to all expectFail() calls in the SimpleTest:./test/
+     *    directory.
      *
      * @param SimpleExpectation/string $expected   The error to match.
-     * @param string $message                      A message describing the known bug or an absolute URL pointing 
-	 *                                             to the issue in any bugtracker.
+     * @param string $message                      A message describing the known bug or an absolute URL pointing
+     *                                             to the issue in any bugtracker.
      * @return UnitTestCase                        This test object.
      * @access public
-	 */
+     */
     function expectFail($expected = false, $message = null) {
         $queue = SimpleTest::getContext()->get('SimpleFailQueue');
-		if (!empty($message)) {
-			// test if $message is a URI as per RFC3986; if it is, embed it in an 'expected to fail' message:
-			if (preg_match($this->getURLregex(), $message) == 1) {
-				$message = str_replace('%', '%%', $message);
-				$message = "%s -> This is expected to fail due to a <a href=\"$message\">known bug</a>.";
-			}
-		}
-		else {
-			$message = "%s -> This is expected to fail.";
-		}
+        if (!empty($message)) {
+            // test if $message is a URI as per RFC3986; if it is, embed it in an 'expected to fail' message:
+            if (preg_match($this->getURLregex(), $message) == 1) {
+                $message = str_replace('%', '%%', $message);
+                $message = "%s -> This is expected to fail due to a <a href=\"$message\">known bug</a>.";
+            }
+        }
+        else {
+            $message = "%s -> This is expected to fail.";
+        }
         $queue->expectFail($this->coerceExpectation($expected), $message);
-		return $this;
+        return $this;
     }
 
     /**
@@ -430,7 +430,7 @@ class SimpleTestCase {
     function expectError($expected = false, $message = '%s') {
         $queue = SimpleTest::getContext()->get('SimpleErrorQueue');
         $queue->expectError($this->coerceExpectation($expected), $message);
-		return $this;
+        return $this;
     }
 
     /**
@@ -446,7 +446,7 @@ class SimpleTestCase {
         $queue = SimpleTest::getContext()->get('SimpleExceptionTrap');
         $line = $this->getAssertionLine();
         $queue->expectException($expected, $message . $line);
-		return $this;
+        return $this;
     }
 
     /**
@@ -466,7 +466,7 @@ class SimpleTestCase {
      *    of expectation.
      *    @param mixed $expected      Expected value.
      *    @return SimpleExpectation   Expectation object.
-     *    @access protected	
+     *    @access protected
      */
     protected function coerceExpectation($expected) {
         if ($expected == false) {
@@ -479,48 +479,48 @@ class SimpleTestCase {
                 is_string($expected) ? str_replace('%', '%%', $expected) : $expected);
     }
 
-	/**
-	 *    Construct 'pass' message. Takes expected fails into account.
-     *    @access public
-	 */
-	function constructPassMessage($expectation, $compare, $message = "%s") {
-		$rv = sprintf($message,
-                      $expectation->overlayMessage($compare, $this->getDumper()));
-		return $rv;
-	}	
-   
-	/**
-	 *    Construct 'fail' message. Takes expected fails into account.
-     *    @access public
-	 */
-	function constructFailMessage($expectation, $compare, $message = "%s") {
-		$rv = sprintf($message,
-                      $expectation->overlayMessage($compare, $this->getDumper()));
-		return $rv;
-	}	
-	
-	/**
-	 * Obtain the dumper instance related to this test.
-	 */
-	public function getDumper() {
-		$dumper = null;
-		if ($this->reporter) {
-			$dumper = $this->reporter->getDumper();
-		}
-		else if ($context = SimpleTest::getContext()) {
-			if ($reporter = $context->getReporter()) {
-				$dumper = $reporter->getDumper();
-			}
-		} 
-		if (!$dumper) {
-			$dumper = $expectation->getDumper();
-		}
-		return $dumper;
-	}
-	
     /**
-     *    Runs an expectation directly, taking a possibly expected fail 
-	 *    into account by turning the tables then.
+     *    Construct 'pass' message. Takes expected fails into account.
+     *    @access public
+     */
+    function constructPassMessage($expectation, $compare, $message = "%s") {
+        $rv = sprintf($message,
+                      $expectation->overlayMessage($compare, $this->getDumper()));
+        return $rv;
+    }
+
+    /**
+     *    Construct 'fail' message. Takes expected fails into account.
+     *    @access public
+     */
+    function constructFailMessage($expectation, $compare, $message = "%s") {
+        $rv = sprintf($message,
+                      $expectation->overlayMessage($compare, $this->getDumper()));
+        return $rv;
+    }
+
+    /**
+     * Obtain the dumper instance related to this test.
+     */
+    public function getDumper() {
+        $dumper = null;
+        if ($this->reporter) {
+            $dumper = $this->reporter->getDumper();
+        }
+        else if ($context = SimpleTest::getContext()) {
+            if ($reporter = $context->getReporter()) {
+                $dumper = $reporter->getDumper();
+            }
+        }
+        if (!$dumper) {
+            $dumper = $expectation->getDumper();
+        }
+        return $dumper;
+    }
+
+    /**
+     *    Runs an expectation directly, taking a possibly expected fail
+     *    into account by turning the tables then.
      *    @param SimpleExpectation $expectation  Expectation subclass.
      *    @param mixed $compare                  Value to compare.
      *    @return boolean                        True on pass / expected fail, false on fail / unexpected pass.
@@ -528,9 +528,9 @@ class SimpleTestCase {
      */
     function checkExpectation($expectation, $compare) {
         $rv = $expectation->test($compare);
-		return $rv;
-	}
-		
+        return $rv;
+    }
+
     /**
      *    Runs an expectation directly, for extending the
      *    tests with new expectation classes.
@@ -569,14 +569,14 @@ class SimpleTestCase {
      *    @access public
      */
     function dump($variable, $message = false) {
-		if ($this->reporter) {
-			$dumper = $this->reporter->getDumper();
-			$formatted = $dumper->dump($variable);
-			if ($message) {
-				$formatted = $message . "\n" . $formatted;
-			}
-			$this->reporter->paintFormattedMessage($formatted);
-		}
+        if ($this->reporter) {
+            $dumper = $this->reporter->getDumper();
+            $formatted = $dumper->dump($variable);
+            if ($message) {
+                $formatted = $message . "\n" . $formatted;
+            }
+            $this->reporter->paintFormattedMessage($formatted);
+        }
         return $variable;
     }
 
@@ -608,51 +608,51 @@ class SimpleFileLoader {
     function load($test_file) {
         $existing_classes = get_declared_classes();
         $existing_globals = get_defined_vars();
-		// as the included file can contain errors, we don't want to crash, but report those instead!
-		//
-		// See also: http://us3.php.net/manual/en/function.php-check-syntax.php
-		//
-		// NOTE: you can also load the file content and then pull it through eval(): that one though will 
-		//       NOT report the parse error, only return FALSE  ( http://nl.php.net/manual/en/function.eval.php )
-		$parse_err = -1;
-		if (is_readable($test_file)) {
-			$code = @file_get_contents($test_file);
-			if ($code === false) {
-				return new BadTestSuite($test_file, "Could not load the contents of the file");
-			}
-			
-			$shell = new SimpleShell();
-			$parse_err = $shell->execute('php -l "' . realpath($test_file) . '"');
-			if ($parse_err) {
-				// either we're not being allowed to run a php cli, or we got an actual parse error: find out which it is
-				$out = $shell->getOutput();
-				if (strpos($out, 'syntax error') !== false) {
-					return new BadTestSuite($test_file, "There is a SYNTAX ERROR in the file:\n" . trim($out));
-				}
-				/*
-				 * ELSE: seems we weren't able to run the php cli; we cannot fall back to the eval() way of checking the code
-				 * as that would also /execute/ the code, which is sorta okay, apart from the fact that the code-under-test
-				 * may collide with the simpletest code itself (e.g. when simpletest is used to test itself), resulting in
-				 * eval failures such as 'cannot redefine class', while the code to test is perfectly fine.
-				 *
-				 * We can, however, use runkit_lint_file(), IFF it exists in our PHP install...
-				 */
-				if (function_exists('runkit_lint_file')) 
-				{
-					$ret = runkit_lint_file($test_file);
-					if ($ret === false)
-					{
-						// to display the code causing the error: $code = htmlentities($code, ENT_NOQUOTES);
-						return new BadTestSuite($test_file, "There is a SYNTAX ERROR ($php_errormsg) in the file. Besides, you should adjust your setup so we can invoke 'php -l' as that gives you much more info about this error than a mere 'syntax error'.");
-					}
-				}
-			}
-			
-			include_once($test_file);		// or should this really be 'include' instead of 'include_once'?
-		}
-		else {
+        // as the included file can contain errors, we don't want to crash, but report those instead!
+        //
+        // See also: http://us3.php.net/manual/en/function.php-check-syntax.php
+        //
+        // NOTE: you can also load the file content and then pull it through eval(): that one though will
+        //       NOT report the parse error, only return FALSE  ( http://nl.php.net/manual/en/function.eval.php )
+        $parse_err = -1;
+        if (is_readable($test_file)) {
+            $code = @file_get_contents($test_file);
+            if ($code === false) {
+                return new BadTestSuite($test_file, "Could not load the contents of the file");
+            }
+
+            $shell = new SimpleShell();
+            $parse_err = $shell->execute('php -l "' . realpath($test_file) . '"');
+            if ($parse_err) {
+                // either we're not being allowed to run a php cli, or we got an actual parse error: find out which it is
+                $out = $shell->getOutput();
+                if (strpos($out, 'syntax error') !== false) {
+                    return new BadTestSuite($test_file, "There is a SYNTAX ERROR in the file:\n" . trim($out));
+                }
+                /*
+                 * ELSE: seems we weren't able to run the php cli; we cannot fall back to the eval() way of checking the code
+                 * as that would also /execute/ the code, which is sorta okay, apart from the fact that the code-under-test
+                 * may collide with the simpletest code itself (e.g. when simpletest is used to test itself), resulting in
+                 * eval failures such as 'cannot redefine class', while the code to test is perfectly fine.
+                 *
+                 * We can, however, use runkit_lint_file(), IFF it exists in our PHP install...
+                 */
+                if (function_exists('runkit_lint_file'))
+                {
+                    $ret = runkit_lint_file($test_file);
+                    if ($ret === false)
+                    {
+                        // to display the code causing the error: $code = htmlentities($code, ENT_NOQUOTES);
+                        return new BadTestSuite($test_file, "There is a SYNTAX ERROR ($php_errormsg) in the file. Besides, you should adjust your setup so we can invoke 'php -l' as that gives you much more info about this error than a mere 'syntax error'.");
+                    }
+                }
+            }
+
+            include_once($test_file);       // or should this really be 'include' instead of 'include_once'?
+        }
+        else {
             return new BadTestSuite($test_file, "You don't have read access to the file");
-		}
+        }
         $new_globals = get_defined_vars();
         $this->makeFileVariablesGlobal($existing_globals, $new_globals);
         $new_classes = array_diff(get_declared_classes(), $existing_classes);
@@ -679,12 +679,12 @@ class SimpleFileLoader {
     /**
      *    Lookup classnames from file contents, in case the
      *    file may have been included before.
-	 *
+     *
      *    Note: This is probably too clever by half. Figuring this
      *    out after a failed test case is going to be tricky for us,
      *    never mind the user. A test case should not be included
      *    twice anyway.
-	 *
+     *
      *    @param string $test_file        File name with classes.
      *    @access protected
      */
@@ -711,15 +711,15 @@ class SimpleFileLoader {
                 if ($reflection->isAbstract()) {
                     SimpleTest::ignore($class);
                 } else {
-					// only pick classes which do have test methods we can run:
-					$methods = $reflection->getMethods();
-					foreach($methods as $method) {
-						if (SimpleTestCase::isTest($class, $method))
-						{
-							$classes[] = $class;
-							break;
-						}
-					}
+                    // only pick classes which do have test methods we can run:
+                    $methods = $reflection->getMethods();
+                    foreach($methods as $method) {
+                        if (SimpleTestCase::isTest($class, $method))
+                        {
+                            $classes[] = $class;
+                            break;
+                        }
+                    }
                 }
             }
         }

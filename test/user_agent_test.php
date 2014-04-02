@@ -11,7 +11,7 @@ Mock::generate('SimpleHttpHeaders');
 Mock::generatePartial('SimpleUserAgent', 'MockRequestUserAgent', array('createHttpRequest'));
 
 class TestOfFetchingUrlParameters extends UnitTestCase {
-    
+
     function setUp() {
         $this->headers = new MockSimpleHttpHeaders();
         $this->response = new MockSimpleHttpResponse();
@@ -20,15 +20,15 @@ class TestOfFetchingUrlParameters extends UnitTestCase {
         $this->request = new MockSimpleHttpRequest();
         $this->request->returns('fetch', $this->response);
     }
-    
+
     function testGetRequestWithoutIncidentGivesNoErrors() {
         $url = new SimpleUrl('http://test:secret@this.com/page.html');
         $url->addRequestParameters(array('a' => 'A', 'b' => 'B'));
-        
+
         $agent = new MockRequestUserAgent();
         $agent->returns('createHttpRequest', $this->request);
         //$agent->__construct();
-		
+
         $response = $agent->fetchResponse(
                 new SimpleUrl('http://test:secret@this.com/page.html'),
                 new SimpleGetEncoding(array('a' => 'A', 'b' => 'B')));
@@ -37,21 +37,21 @@ class TestOfFetchingUrlParameters extends UnitTestCase {
 }
 
 class TestOfAdditionalHeaders extends UnitTestCase {
-    
+
     function testAdditionalHeaderAddedToRequest() {
         $response = new MockSimpleHttpResponse();
         $response->setReturnReference('getHeaders', new MockSimpleHttpHeaders());
-        
+
         $request = new MockSimpleHttpRequest();
         $request->setReturnReference('fetch', $response);
         $request->expectOnce(
                 'addHeaderLine',
                 array('User-Agent: SimpleTest'));
-        
+
         $agent = new MockRequestUserAgent();
         $agent->setReturnReference('createHttpRequest', $request);
         //$agent->__construct();
-		
+
         $agent->addHeader('User-Agent: SimpleTest');
         $response = $agent->fetchResponse(new SimpleUrl('http://this.host/'), new SimpleGetEncoding());
     }
@@ -66,7 +66,7 @@ class TestOfBrowserCookies extends UnitTestCase {
         $response->setReturnReference("getHeaders", new MockSimpleHttpHeaders());
         return $response;
     }
-    
+
     protected function createCookieSite($header_lines) {
         $headers = new SimpleHttpHeaders($header_lines);
         $response = new MockSimpleHttpResponse();
@@ -77,34 +77,34 @@ class TestOfBrowserCookies extends UnitTestCase {
         $request->setReturnReference("fetch", $response);
         return $request;
     }
-    
+
     protected function createMockedRequestUserAgent(&$request) {
         $agent = new MockRequestUserAgent();
         $agent->setReturnReference('createHttpRequest', $request);
         //$agent->__construct();
         return $agent;
     }
-    
+
     function testCookieJarIsSentToRequest() {
         $jar = new SimpleCookieJar();
         $jar->setCookie('a', 'A');
-        
+
         $request = new MockSimpleHttpRequest();
         $request->returns('fetch', $this->createStandardResponse());
         $request->expectOnce('readCookiesFromJar', array($jar, '*'));
-        
+
         $agent = $this->createMockedRequestUserAgent($request);
         $agent->setCookie('a', 'A');
         $agent->fetchResponse(
                 new SimpleUrl('http://this.com/this/path/page.html'),
                 new SimpleGetEncoding());
     }
-      
+
     function testNoCookieJarIsSentToRequestWhenCookiesAreDisabled() {
         $request = new MockSimpleHttpRequest();
         $request->returns('fetch', $this->createStandardResponse());
         $request->expectNever('readCookiesFromJar');
-        
+
         $agent = $this->createMockedRequestUserAgent($request);
         $agent->setCookie('a', 'A');
         $agent->ignoreCookies();
@@ -112,7 +112,7 @@ class TestOfBrowserCookies extends UnitTestCase {
                 new SimpleUrl('http://this.com/this/path/page.html'),
                 new SimpleGetEncoding());
     }
-  
+
     function testReadingNewCookie() {
         $request = $this->createCookieSite('Set-cookie: a=AAAA');
         $agent = $this->createMockedRequestUserAgent($request);
@@ -121,7 +121,7 @@ class TestOfBrowserCookies extends UnitTestCase {
                 new SimpleGetEncoding());
         $this->assertEqual($agent->getCookieValue("this.com", "this/path/", "a"), "AAAA");
     }
-  
+
     function testIgnoringNewCookieWhenCookiesDisabled() {
         $request = $this->createCookieSite('Set-cookie: a=AAAA');
         $agent = $this->createMockedRequestUserAgent($request);
@@ -131,7 +131,7 @@ class TestOfBrowserCookies extends UnitTestCase {
                 new SimpleGetEncoding());
         $this->assertIdentical($agent->getCookieValue("this.com", "this/path/", "a"), false);
     }
-   
+
     function testOverwriteCookieThatAlreadyExists() {
         $request = $this->createCookieSite('Set-cookie: a=AAAA');
         $agent = $this->createMockedRequestUserAgent($request);
@@ -141,11 +141,11 @@ class TestOfBrowserCookies extends UnitTestCase {
                 new SimpleGetEncoding());
         $this->assertEqual($agent->getCookieValue("this.com", "this/path/", "a"), "AAAA");
     }
-   
+
     function testClearCookieBySettingExpiry() {
         $request = $this->createCookieSite('Set-cookie: a=b');
         $agent = $this->createMockedRequestUserAgent($request);
-        
+
         $agent->setCookie("a", "A", "this/path/", "Wed, 25-Dec-02 04:24:21 GMT");
         $agent->fetchResponse(
                 new SimpleUrl('http://this.com/this/path/page.html'),
@@ -158,11 +158,11 @@ class TestOfBrowserCookies extends UnitTestCase {
                 $agent->getCookieValue("this.com", "this/path/", "a"),
                 false);
     }
-    
+
     function testAgeingAndClearing() {
         $request = $this->createCookieSite('Set-cookie: a=A; expires=Wed, 25-Dec-02 04:24:21 GMT; path=/this/path');
         $agent = $this->createMockedRequestUserAgent($request);
-        
+
         $agent->fetchResponse(
                 new SimpleUrl('http://this.com/this/path/page.html'),
                 new SimpleGetEncoding());
@@ -176,11 +176,11 @@ class TestOfBrowserCookies extends UnitTestCase {
                 $agent->getCookieValue("this.com", "this/path/", "a"),
                 false);
     }
-    
+
     function testReadingIncomingAndSettingNewCookies() {
         $request = $this->createCookieSite('Set-cookie: a=AAA');
         $agent = $this->createMockedRequestUserAgent($request);
-        
+
         $this->assertNull($agent->getBaseCookieValue("a", false));
         $agent->fetchResponse(
                 new SimpleUrl('http://this.com/this/path/page.html'),
@@ -196,7 +196,7 @@ class TestOfBrowserCookies extends UnitTestCase {
 }
 
 class TestOfHttpRedirects extends UnitTestCase {
-    
+
     function createRedirect($content, $redirect) {
         $headers = new MockSimpleHttpHeaders();
         $headers->setReturnValue('isRedirect', (boolean)$redirect);
@@ -208,7 +208,7 @@ class TestOfHttpRedirects extends UnitTestCase {
         $request->setReturnReference('fetch', $response);
         return $request;
     }
-    
+
     function testDisabledRedirects() {
         $agent = new MockRequestUserAgent();
         $agent->returns(
@@ -220,7 +220,7 @@ class TestOfHttpRedirects extends UnitTestCase {
         $response = $agent->fetchResponse(new SimpleUrl('here.html'), new SimpleGetEncoding());
         $this->assertEqual($response->getContent(), 'stuff');
     }
-    
+
     function testSingleRedirect() {
         $agent = new MockRequestUserAgent();
         $agent->returnsAt(
@@ -233,12 +233,12 @@ class TestOfHttpRedirects extends UnitTestCase {
                 $this->createRedirect('second', 'three.html'));
         $agent->expectCallCount('createHttpRequest', 2);
         //$agent->__construct();
-        
+
         $agent->setMaximumRedirects(1);
         $response = $agent->fetchResponse(new SimpleUrl('one.html'), new SimpleGetEncoding());
         $this->assertEqual($response->getContent(), 'second');
     }
-    
+
     function testDoubleRedirect() {
         $agent = new MockRequestUserAgent();
         $agent->returnsAt(
@@ -255,12 +255,12 @@ class TestOfHttpRedirects extends UnitTestCase {
                 $this->createRedirect('third', 'four.html'));
         $agent->expectCallCount('createHttpRequest', 3);
         //$agent->__construct();
-        
+
         $agent->setMaximumRedirects(2);
         $response = $agent->fetchResponse(new SimpleUrl('one.html'), new SimpleGetEncoding());
         $this->assertEqual($response->getContent(), 'third');
     }
-    
+
     function testSuccessAfterRedirect() {
         $agent = new MockRequestUserAgent();
         $agent->returnsAt(
@@ -277,12 +277,12 @@ class TestOfHttpRedirects extends UnitTestCase {
                 $this->createRedirect('third', 'four.html'));
         $agent->expectCallCount('createHttpRequest', 2);
         //$agent->__construct();
-        
+
         $agent->setMaximumRedirects(2);
         $response = $agent->fetchResponse(new SimpleUrl('one.html'), new SimpleGetEncoding());
         $this->assertEqual($response->getContent(), 'second');
     }
-    
+
     function testRedirectChangesPostToGet() {
         $agent = new MockRequestUserAgent();
         $agent->returnsAt(
@@ -303,7 +303,7 @@ class TestOfHttpRedirects extends UnitTestCase {
 }
 
 class TestOfBadHosts extends UnitTestCase {
-    
+
     protected function createSimulatedBadHost() {
         $response = new MockSimpleHttpResponse();
         $response->setReturnValue('isError', true);
@@ -313,7 +313,7 @@ class TestOfBadHosts extends UnitTestCase {
         $request->setReturnReference('fetch', $response);
         return $request;
     }
-    
+
     function testUntestedHost() {
         $request = $this->createSimulatedBadHost();
         $agent = new MockRequestUserAgent();
@@ -327,17 +327,17 @@ class TestOfBadHosts extends UnitTestCase {
 }
 
 class TestOfAuthorisation extends UnitTestCase {
-    
+
     function testAuthenticateHeaderAdded() {
         $response = new MockSimpleHttpResponse();
         $response->setReturnReference('getHeaders', new MockSimpleHttpHeaders());
-        
+
         $request = new MockSimpleHttpRequest();
         $request->returns('fetch', $response);
         $request->expectOnce(
                 'addHeaderLine',
                 array('Authorization: Basic ' . base64_encode('test:secret')));
-        
+
         $agent = new MockRequestUserAgent();
         $agent->returns('createHttpRequest', $request);
         //$agent->__construct();

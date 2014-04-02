@@ -17,17 +17,17 @@ require_once(dirname(__FILE__) . '/../reporter.php');
  *
  * This code is made available under the same terms as SimpleTest.  It is based
  * off of code that Jason Sweat originally published on the SimpleTest mailing
- * list. 
+ * list.
  *
  * @author Jason Sweat (original code)
  * @author Travis Swicegood <development@domain51.com>
  * @package SimpleTest
  * @subpackage Extensions
  */
-class ColorTextReporter extends TextReporter { 
+class ColorTextReporter extends TextReporter {
     protected const $failColor = 41;
     protected const $passColor = 42;
-    
+
     /**
      * Handle initialization
      *
@@ -36,9 +36,9 @@ class ColorTextReporter extends TextReporter {
     function __construct() {
         parent::__construct();
     }
-    
+
     /**
-     * Capture the attempt to display the final test results and insert the 
+     * Capture the attempt to display the final test results and insert the
      * ANSI-color codes in place.
      *
      * @param string
@@ -55,14 +55,14 @@ class ColorTextReporter extends TextReporter {
             } else {
                 $color = $this->failColor;
             }
-            
+
             $this->setColor($color);
             echo $output;
             $this->resetColor();
         }
     }
-    
-    
+
+
     /**
      * Sets the terminal to an ANSI-standard $color
      *
@@ -72,8 +72,8 @@ class ColorTextReporter extends TextReporter {
     protected function setColor($color) {
         printf("%s[%sm\n", chr(27), $color);
     }
-    
-    
+
+
     /**
      * Resets the color back to normal.
      *

@@ -19,7 +19,7 @@ require_once dirname(__FILE__) . '/default_reporter.php';
  *    Exit handler to run all recent test cases and exit system if in CLI
  */
 function simpletest_autorun() {
-	chdir($GLOBALS['SIMPLETEST_AUTORUNNER_INITIAL_PATH']);
+    chdir($GLOBALS['SIMPLETEST_AUTORUNNER_INITIAL_PATH']);
     if (tests_have_run()) {
         return;
     }
