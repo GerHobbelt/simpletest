@@ -15,6 +15,7 @@ require_once(dirname(__FILE__) . '/page.php');
 require_once(dirname(__FILE__) . '/expectation.php');
 /**#@-*/
 
+
 /**
  *    Test for an HTML widget value match.
  *    @package SimpleTest
@@ -1626,14 +1627,15 @@ class WebTestCase extends UnitTestCase {
      *    is found in the raw content.
      *    @param string $pattern    Perl regex to look for including
      *                              the regex delimiters.
+     *    @param string $subject    String to search in.
      *    @param string $message    Message to display.
      *    @return boolean           True if pass.
      *    @access public
      */
-    function assertPattern($pattern, $message = '%s') {
+    function assertPattern($pattern, $subject = null, $message = '%s') {
         return $this->assert(
                 new PatternExpectation($pattern),
-                $this->browser->getContent(),
+                ($subject === null ? $this->browser->getContent() : $subject),
                 $message);
     }
 
@@ -1642,14 +1644,15 @@ class WebTestCase extends UnitTestCase {
      *    is not present in raw content.
      *    @param string $pattern    Perl regex to look for including
      *                              the regex delimiters.
+     *    @param string $subject    String to search in.
      *    @param string $message    Message to display.
      *    @return boolean           True if pass.
      *    @access public
      */
-    function assertNoPattern($pattern, $message = '%s') {
+    function assertNoPattern($pattern, $subject = null, $message = '%s') {
         return $this->assert(
                 new NoPatternExpectation($pattern),
-                $this->browser->getContent(),
+                ($subject === null ? $this->browser->getContent() : $subject),
                 $message);
     }
 
