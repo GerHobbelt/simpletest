@@ -52,6 +52,7 @@ class TestOfContext extends UnitTestCase {
         $context = new SimpleTestContext();
         $resource = $context->get('DummyResource');
         $context->clear();
-        $this->assertClone($resource, $context->get('DummyResource'));
+        $alleged_clone = $context->get('DummyResource');
+        $this->assertClone($resource, $alleged_clone);
     }
 }
