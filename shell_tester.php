@@ -313,7 +313,7 @@ class SimpleShell {
                                     }
                                     else
                                     {
-                                        $cmd = substr($process->CommandLine, 0, strcspn($cmd, " \t"));
+                                        $cmd = substr($process->CommandLine, 0, strcspn($process->CommandLine, " \t"));
                                     }
                                     // don't test the apache binaries themselves: pretty useless effort anyway:
                                     if (strpos($exename, 'php') !== false)
