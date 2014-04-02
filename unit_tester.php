@@ -36,6 +36,8 @@ class UnitTestCase extends SimpleTestCase {
         parent::__construct($label);
     }
 
+
+
     /**
      *    Called from within the test methods to register
      *    passes and failures.
@@ -47,6 +49,22 @@ class UnitTestCase extends SimpleTestCase {
      */
     function assertTrue($result, $message = '%s') {
         return $this->assert(new TrueExpectation(), $result, $message);
+    }
+    
+    /**
+     *    Wrapper around the assertTrue method for brevity
+     *    @param boolean $result    Pass on true.
+     *    @param string $message    Message to display describing
+     *                              the test state.
+     *    @return boolean           True on pass
+     *    @access public
+     */
+    function t($result, $message = '%s') {
+    	if(!$message){
+	        return $this->assert(new TrueExpectation(), $result);
+	    } else {
+	        return $this->assert(new TrueExpectation(), $result, $message);
+	    }
     }
 
     /**

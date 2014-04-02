@@ -565,6 +565,15 @@ class WebTestCase extends SimpleTestCase {
     function showText() {
         $this->dump(wordwrap($this->browser->getContentAsText(), 80));
     }
+    
+    /**
+     *    Returns an array of XHR content, imploded by comma.
+     *    @access public
+     */
+    function getAjaxData(){
+    	$text = $this->browser->getContentAsText();
+    	return $text? explode(',', $text) : null;
+    }
 
     /**
      *    Simulates the closing and reopening of the browser.
@@ -1456,6 +1465,18 @@ class WebTestCase extends SimpleTestCase {
                 $this->getCookie($name) === null or $this->getCookie($name) === false,
                 sprintf($message, "Not expecting cookie [$name]"));
     }
+
+	    /**
+     *    Wrapper for brevity around the assertTrue() method.
+     *    @param boolean $result    Pass on true.
+     *    @param string $message    Message to display describing
+     *                              the test state.
+     *    @return boolean           True on pass
+     *    @access public
+     */
+	function t($result, $message = '%s'){
+		return $this->assertTrue($result, $message);
+	}
 
     /**
      *    Called from within the test methods to register
