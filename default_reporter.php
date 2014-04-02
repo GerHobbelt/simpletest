@@ -204,32 +204,32 @@ Usage: php <test_file> [args...]
     --class=<class>
     -c <class>      Run only the test-case <class>
 
-	--test=<method>
-	--method=<method>
+    --test=<method>
+    --method=<method>
     -t <method>     Run only the test method <method>
 
-	--no-skip
+    --no-skip
     -s              Suppress skip messages
 
-	--xml
+    --xml
     -x              Return test results in XML
 
-	--dry
-	-n              Request a dry run
+    --dry
+    -n              Request a dry run
 
-	--list
-	-l              Request a list of the tests (cases / methods)
+    --list
+    -l              Request a list of the tests (cases / methods)
 
-	--show-pass
-	-p              Show pass messages too
+    --show-pass
+    -p              Show pass messages too
 
-	--no-breadcrumb
-	-nb             Do not show breadcrumbs in the test results
+    --no-breadcrumb
+    -nb             Do not show breadcrumbs in the test results
 
-	--no-stacktrace
-	-nt             Do not show stack traces in the (failed) test results
+    --no-stacktrace
+    -nt             Do not show stack traces in the (failed) test results
 
-	--help
+    --help
     -h              Display this help message
 
 HELP;
@@ -314,66 +314,66 @@ class WebCommandLineParser extends SimpleCommandLineParser {
         {
             $errlist = implode('</li><li>', $this->error);
             $err = <<<ERR
-	<h1>Error:</h1>
-	<p>These command line arguments were unrecognized:</p>
-	<ul>
-		<li>$errlist</li>
-	</ul>
-	<hr />
+    <h1>Error:</h1>
+    <p>These command line arguments were unrecognized:</p>
+    <ul>
+        <li>$errlist</li>
+    </ul>
+    <hr />
 ERR;
         }
         return <<<HELP
 
 <div class="help-message">
-	$err
-	<h1>Request parameters recognized by SimpleTest (autorun)</h1>
-	<dl>
-		<dt>case=<var>class</var></dt>
-		<dt>class=<var>class</var></dt>
-		<dt>c=<var>class</var></dt>
-		<dd>Run only the test-case <var>class</var></dd>
+    $err
+    <h1>Request parameters recognized by SimpleTest (autorun)</h1>
+    <dl>
+        <dt>case=<var>class</var></dt>
+        <dt>class=<var>class</var></dt>
+        <dt>c=<var>class</var></dt>
+        <dd>Run only the test-case <var>class</var></dd>
 
-		<dt>test=<var>method</var></dt>
-		<dt>method=<var>method</var></dt>
-		<dt>t=<var>method</var></dt>
-		<dd>Run only the test method <var>method</var></dd>
+        <dt>test=<var>method</var></dt>
+        <dt>method=<var>method</var></dt>
+        <dt>t=<var>method</var></dt>
+        <dd>Run only the test method <var>method</var></dd>
 
-		<dt>no-skip</dt>
-		<dt>s</dt>
-		<dd>Suppress skip messages</dd>
+        <dt>no-skip</dt>
+        <dt>s</dt>
+        <dd>Suppress skip messages</dd>
 
-		<dt>xml</dt>
-		<dt>x</dt>
-		<dd>Return test results in XML</dd>
+        <dt>xml</dt>
+        <dt>x</dt>
+        <dd>Return test results in XML</dd>
 
-		<dt>dry</dt>
-		<dt>n</dt>
-		<dd>Request a dry run</dd>
+        <dt>dry</dt>
+        <dt>n</dt>
+        <dd>Request a dry run</dd>
 
-		<dt>list</dt>
-		<dt>l</dt>
-		<dd>Request a list of the tests (cases / methods)</dd>
+        <dt>list</dt>
+        <dt>l</dt>
+        <dd>Request a list of the tests (cases / methods)</dd>
 
-		<dt>show-pass</dt>
-		<dt>pass</dt>
-		<dt>p</dt>
-		<dd>Show pass messages too</dd>
+        <dt>show-pass</dt>
+        <dt>pass</dt>
+        <dt>p</dt>
+        <dd>Show pass messages too</dd>
 
-		<dt>no-breadcrumb</dt>
-		<dt>nb</dt>
-		<dd>Do not show breadcrumbs in the test results</dd>
+        <dt>no-breadcrumb</dt>
+        <dt>nb</dt>
+        <dd>Do not show breadcrumbs in the test results</dd>
 
-		<dt>no-stacktrace</dt>
-		<dt>nt</dt>
-		<dd>Do not show stack traces in the (failed) test results</dd>
+        <dt>no-stacktrace</dt>
+        <dt>nt</dt>
+        <dd>Do not show stack traces in the (failed) test results</dd>
 
-		<dt>help</dt>
-		<dt>h</dt>
-		<dd>Display this help message</dd>
-	</dl>
+        <dt>help</dt>
+        <dt>h</dt>
+        <dd>Display this help message</dd>
+    </dl>
 
-	<p>Note that you can switch any of the boolean options ON or OFF by providing a 'true' (T/J/Y/non zero integer number)
-	or 'false' (F/N/0) value. <em>No value</em> specified implies 'true'.</p>
+    <p>Note that you can switch any of the boolean options ON or OFF by providing a 'true' (T/J/Y/non zero integer number)
+    or 'false' (F/N/0) value. <em>No value</em> specified implies 'true'.</p>
 </div>
 
 HELP;
