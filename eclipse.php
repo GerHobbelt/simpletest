@@ -192,8 +192,7 @@ class EclipseReporter extends SimpleScorer {
      */
     function paintMethodEnd($method) {
         if ($this->fail || $this->error || ! $this->pass) {
-        } 
-		else {
+        } else {
             $this->listener->write(
                         '{status:"pass",message:"' . $this->message . '",group:"' .
                         $this->group . '",case:"' . $this->case . '",method:"' .
@@ -266,8 +265,7 @@ class EclipseReporter extends SimpleScorer {
                     }
                     if ($lcnt > 0) {
                         $cc .= round(($ccnt / $lcnt) * 100, 2) . '%';
-                    }
-					else {
+                    } else {
                         $cc .= "0.00%";
                     }
                     $cc .= "\t". $index . "\n";

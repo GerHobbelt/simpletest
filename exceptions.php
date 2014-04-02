@@ -34,6 +34,7 @@ class SimpleExceptionTrappingInvoker extends SimpleInvokerDecorator {
      *    exceptions. Any left over unthrown exceptions
      *    are then reported as failures.
      *    @param string $method    Test method to call.
+     *    @access public
      */
     function invoke($method) {
         $trap = SimpleTest::getContext()->get('SimpleExceptionTrap');
@@ -91,6 +92,7 @@ class ExceptionExpectation extends SimpleExpectation {
      *    Carry out the test.
      *    @param Exception $compare    Value to check.
      *    @return boolean              True if matched.
+     *    @access public
      */
     function test($compare) {
         if (is_string($this->expected)) {
@@ -106,6 +108,7 @@ class ExceptionExpectation extends SimpleExpectation {
      *    Create the message to display describing the test.
      *    @param Exception $compare     Exception to match.
      *    @return string                Final message.
+     *    @access public
      */
     function testMessage($compare) {
         if (is_string($this->expected)) {
@@ -121,6 +124,7 @@ class ExceptionExpectation extends SimpleExpectation {
      *    Summary of an Exception object.
      *    @param Exception $compare     Exception to describe.
      *    @return string                Text description.
+     *    @access protected
      */
     protected function describeException($exception) {
         return get_class($exception) . ": " . $exception->getMessage();
@@ -176,6 +180,7 @@ class SimpleExceptionTrap {
      *    @param SimpleTestCase $test    Test case to send messages to.
      *    @param Exception $exception    Exception to compare.
      *    @return boolean                False on no match.
+     *    @access public
      */
     function isExpected($test, $exception) {
         if ($this->expected) {
@@ -195,6 +200,7 @@ class SimpleExceptionTrap {
      *                                 class name of exception.
      *    @return SimpleExpectation    Expectation that will match the
      *                                 exception.
+     *    @access protected
      */
     protected function coerceToExpectation($exception) {
         if ($exception === false) {
@@ -209,6 +215,7 @@ class SimpleExceptionTrap {
     /**
      *    Tests for any left over exception.
      *    @return string/false     The failure message or false if none.
+     *    @access public
      */
     function getOutstanding() {
         return sprintf($this->message, 'Failed to trap exception');
@@ -216,6 +223,7 @@ class SimpleExceptionTrap {
 
     /**
      *    Discards the contents of the error queue.
+     *    @access public
      */
     function clear() {
         $this->expected = false;
