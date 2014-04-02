@@ -336,7 +336,7 @@ class <strong>MySiteTest</strong> extends WebTestCase {
                     </tr>
                 </tbody></table>
 				L'integrazione con PHP 5 è completa il che significa che a partire dalla
-				versione 1.1 di SimpleTest verrà supportato solo PHP versione 5.0.5 o superiore.
+				versione 1.1 di SimpleTest verrà supportato solo PHP versione 5.4.0 o superiore.
                 Le precedenti versioni di SimpleTest sono compatibili con PHP dalla versione 4.2
 				alla versione 5 (non E_STRICT).
             </p>
