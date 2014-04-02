@@ -8,7 +8,7 @@
 // The following tests are a bit hacky. Whilst Kent Beck tried to
 // build a unit tester with a unit tester, I am not that brave.
 // Instead I have just hacked together odd test scripts until
-// I have enough of a tester to procede more formally.
+// I have enough of a tester to proceed more formally.
 //
 // The proper tests start in all_tests.php
 require_once(dirname(__FILE__) . '/../unit_tester.php');

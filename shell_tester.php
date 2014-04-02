@@ -21,10 +21,16 @@ class SimpleShell {
     protected $output;
 
     /**
-     *    Executes the shell comand and stashes the output.
+     *    Executes the shell command and stashes the output.
      *    @access public
      */
     function __construct() {
+        /*
+        And a little hack to make sure PHP does not timeout
+        */
+        //   http://www.php.net/manual/en/info.configuration.php#ini.max-execution-time
+        set_time_limit(max(5 * 60, ini_get('max_execution_time')));
+        
         $this->output = false;
     }
 
@@ -115,7 +121,7 @@ class SimpleShell {
 			$fileset[] = $dir . $binname;
 		}
 		
-		// also accomodate environments where php binary names are augmented, e.g. 'php-5.2.8.exe', but
+		// also accommodate environments where php binary names are augmented, e.g. 'php-5.2.8.exe', but
 		// don't use glob() when we expect the platform shell to resolve our path issue for us at the same time:
 		if (!empty($dir))
 		{
@@ -231,7 +237,7 @@ class SimpleShell {
                     continue 2;
 				
 				case 4:
-					// once more inpired by http://stackoverflow.com/questions/2372624/get-current-php-executable-from-within-script
+					// once more inspired by http://stackoverflow.com/questions/2372624/get-current-php-executable-from-within-script
 					//
 					// This time around we expect either the path to PHP itself or to the PHP_CGI version or in case of apache running
 					// with PHP as a module, the path to Apache.
