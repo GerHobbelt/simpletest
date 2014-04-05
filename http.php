@@ -443,7 +443,8 @@ class SimpleHttpHeaders {
             $this->location = trim($matches[1]);
         }
         if (preg_match('/Set-cookie:(.*)/i', $header_line, $matches)) {
-            $this->cookies[] = $this->parseCookie($matches[1]);
+            $cookie = $this->parseCookie($matches[1]);
+            if (!$cookie->isExpired(time())) { $this->cookies[] = $cookie; }
         }
         if (preg_match('/WWW-Authenticate:\s+(\S+)\s+realm=\"(.*?)\"/i', $header_line, $matches)) {
             $this->authentication = $matches[1];
