@@ -173,7 +173,7 @@ class SimpleCookie {
      */
     function isExpired($now) {
         if (! $this->expiry) {
-            return true;
+            return false;
         }
         if (is_string($now)) {
             $now = strtotime($now);
@@ -289,6 +289,9 @@ class SimpleCookieJar {
             $cookie->setHost($host);
         }
         $this->cookies[$this->findFirstMatch($cookie)] = $cookie;
+        if ($cookie->isExpired(time())) {
+            unset($this->cookies[$this->findFirstMatch($cookie)]);
+        }
     }
 
     /**

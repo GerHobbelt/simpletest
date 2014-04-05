@@ -444,7 +444,7 @@ class SimpleHttpHeaders {
         }
         if (preg_match('/Set-cookie:(.*)/i', $header_line, $matches)) {
             $cookie = $this->parseCookie($matches[1]);
-            if (!$cookie->isExpired(time())) { $this->cookies[] = $cookie; }
+            $this->cookies[] = $cookie;
         }
         if (preg_match('/WWW-Authenticate:\s+(\S+)\s+realm=\"(.*?)\"/i', $header_line, $matches)) {
             $this->authentication = $matches[1];
@@ -464,7 +464,7 @@ class SimpleHttpHeaders {
         preg_match('/\s*(.*?)\s*=(.*)/', array_shift($parts), $cookie);
         foreach ($parts as $part) {
             if (preg_match('/\s*(.*?)\s*=(.*)/', $part, $matches)) {
-                $cookie[$matches[1]] = trim($matches[2]);
+                $cookie[strtolower($matches[1])] = trim($matches[2]);
             }
         }
         return new SimpleCookie(
