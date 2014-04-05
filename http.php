@@ -72,7 +72,7 @@ class SimpleRoute {
      *    @access protected
      */
     protected function getAgentLine() {
-        return 'User-Agent: ' . empty($this->useragent) ? 'SimpleTest ' . SimpleTest::getVersion() : $this->useragent;
+        return 'User-Agent: ' . (empty($this->useragent) ? 'SimpleTest ' . SimpleTest::getVersion() : $this->useragent);
     }
 
     /**
