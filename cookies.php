@@ -291,6 +291,11 @@ class SimpleCookieJar {
         $this->cookies[$this->findFirstMatch($cookie)] = $cookie;
         if ($cookie->isExpired(time())) {
             unset($this->cookies[$this->findFirstMatch($cookie)]);
+
+            // Rebuild cookies array without the one we just removed.
+            $new = array();
+            foreach ($this->cookies as $c) { $new[] = $c; }
+            $this->cookies = $new;
         }
     }
 
