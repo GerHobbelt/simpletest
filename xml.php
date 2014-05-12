@@ -486,8 +486,8 @@ class SimpleTestXmlParser {
      *    @access public
      */
     function SimpleTestXmlParser(&$listener) {
-        $this->listener = &$listener;
-        $this->expat = &$this->createParser();
+        $this->listener = $listener;
+        $this->expat = $this->createParser();
         $this->tag_stack = array();
         $this->in_content_tag = false;
         $this->content = '';
@@ -515,7 +515,7 @@ class SimpleTestXmlParser {
      *    @return resource        Expat handle.
      *    @access protected
      */
-    protected function &createParser() {
+    protected function createParser() {
         $expat = xml_parser_create();
         xml_set_object($expat, $this);
         xml_set_element_handler($expat, 'startElement', 'endElement');
@@ -540,7 +540,7 @@ class SimpleTestXmlParser {
      *                             being parsed.
      *    @access private
      */
-    protected function &getCurrentNestingTag() {
+    protected function getCurrentNestingTag() {
         return $this->tag_stack[0];
     }
 
@@ -600,7 +600,7 @@ class SimpleTestXmlParser {
             $nesting_tag = $this->popNestingTag();
             $nesting_tag->paintEnd($this->listener);
         } elseif ($tag == 'NAME') {
-            $nesting_tag = &$this->getCurrentNestingTag();
+            $nesting_tag = $this->getCurrentNestingTag();
             $nesting_tag->setName($this->content);
             $nesting_tag->paintStart($this->listener);
         } elseif ($tag == 'PASS') {

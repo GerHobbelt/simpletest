@@ -28,7 +28,7 @@ class EclipseReporter extends SimpleScorer {
      *    @param boolean $cc        Whether to include test coverage.
      */
     function __construct(&$listener, $cc=false){
-        $this->listener = &$listener;
+        $this->listener = $listener;
         $this->SimpleScorer();
         $this->case = "";
         $this->group = "";
@@ -52,8 +52,8 @@ class EclipseReporter extends SimpleScorer {
      *    @param string $host       Normally localhost.
      *    @return SimpleSocket      Connection to Eclipse.
      */
-    function &createListener($port, $host="127.0.0.1"){
-        $tmplistener = &new SimpleSocket($host, $port, 5);
+    function createListener($port, $host="127.0.0.1"){
+        $tmplistener = new SimpleSocket($host, $port, 5);
         return $tmplistener;
     }
 
@@ -63,8 +63,8 @@ class EclipseReporter extends SimpleScorer {
      *    @return EclipseInvoker            Decorator with output buffering.
      *    @access public
      */
-    function &createInvoker(&$invoker){
-        $eclinvoker = &new EclipseInvoker($invoker, $this->listener);
+    function createInvoker(&$invoker){
+        $eclinvoker = new EclipseInvoker($invoker, $this->listener);
         return $eclinvoker;
     }
 
@@ -274,7 +274,7 @@ class EclipseReporter extends SimpleScorer {
  */
 class EclipseInvoker extends SimpleInvokerDecorator{
     function __construct(&$invoker, &$listener) {
-        $this->listener = &$listener;
+        $this->listener = $listener;
         $this->SimpleInvokerDecorator($invoker);
     }
 

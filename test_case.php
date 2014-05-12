@@ -232,7 +232,7 @@ class SimpleTestCase {
      *    @access public
      */
     function tell($observer) {
-        $this->observers[] = &$observer;
+        $this->observers[] = $observer;
     }
 
     /**
