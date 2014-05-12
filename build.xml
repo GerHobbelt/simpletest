@@ -1,0 +1,54 @@
+<project name="simpletest" basedir="." default="package">
+
+    <target name="package" depends="prepare,pear,tar" />
+
+    <target name="prepare">
+        <copy todir="build/simpletest-1.0.1" >
+            <fileset dir="." defaultexcludes=".git">
+                <include name="*.php" />
+                <include name="extensions/**" />
+            </fileset>
+        </copy>
+
+    </target>
+
+    <target name="pear">
+        <pearpkg2 name="simpletest" dir="build/simpletest-1.0.1">
+            <fileset dir="build/simpletest-1.0.1">
+                <include name="**" />
+            </fileset>
+            <option name="packagedirectory" value="build/simpletest-1.0.1"/>
+            <option name="outputdirectory" value="build/"/>
+            <option name="baseinstalldir" value="simpletest"/>
+            <option name="channel" value="pear.php.net"/>
+            <option name="summary" value="SimpleTest"/>
+            <option name="description" value="Unit testing"/>
+            <option name="apiversion" value="1.0"/>
+            <option name="apistability" value="stable"/>
+            <option name="releaseversion" value="1.0.1"/>
+            <option name="releasestability" value="stable"/>
+            <option name="license" value="LGPL"/>
+            <option name="phpdep" value="5.0.0"/>
+            <option name="pearinstallerdep" value="1.4.6"/>
+            <option name="packagetype" value="php"/>
+            <option name="notes" value="test"/>
+            <mapping name="maintainers">
+                <element>
+                    <element key="handle" value="hlellelid"/>
+                    <element key="name" value="Hans"/>
+                    <element key="email" value="hans@xmpl.org"/>
+                    <element key="role" value="lead"/>
+                </element>
+            </mapping>
+        </pearpkg2>
+    </target>
+
+    <target name="tar">
+        <tar destfile="simpletest.tgz" compression="gzip">
+            <fileset dir="build/">
+                <include name="**" />
+            </fileset>
+        </tar>
+    </target>
+
+</project>
