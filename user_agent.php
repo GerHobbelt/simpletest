@@ -38,6 +38,7 @@ class SimpleUserAgent {
     private $proxy_password = false;
     private $connection_timeout = DEFAULT_CONNECTION_TIMEOUT;
     private $additional_headers = array();
+    private $useragent = '';
 
     /**
      *    Starts with no cookies, realms or proxies.
@@ -70,6 +71,14 @@ class SimpleUserAgent {
      */
     function addHeader($header) {
         $this->additional_headers[] = $header;
+    }
+
+    /**
+     *    Set an alternative user-agent to use for requests.
+     *    @param string $agent UserAgent to use.
+     */
+    public function setUserAgent($agent) {
+        $this->useragent = $agent;
     }
 
     /**

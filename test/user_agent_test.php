@@ -46,12 +46,12 @@ class TestOfAdditionalHeaders extends UnitTestCase {
         $request->setReturnReference('fetch', $response);
         $request->expectOnce(
                 'addHeaderLine',
-                array('User-Agent: SimpleTest'));
+                array('Test-Header: Test-Header'));
         
         $agent = new MockRequestUserAgent();
         $agent->setReturnReference('createHttpRequest', $request);
         $agent->__construct();
-        $agent->addHeader('User-Agent: SimpleTest');
+        $agent->addHeader('Test-Header: Test-Header');
         $response = $agent->fetchResponse(new SimpleUrl('http://this.host/'), new SimpleGetEncoding());
     }
 }
