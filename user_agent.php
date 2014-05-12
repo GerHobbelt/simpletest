@@ -266,7 +266,8 @@ class SimpleUserAgent {
      */
     protected function fetch($url, $encoding) {
         $request = $this->createRequest($url, $encoding);
-        return $request->fetch($this->connection_timeout);
+        $t = $this->connection_timeout;
+        return $request->fetch($t);
     }
 
     /**
