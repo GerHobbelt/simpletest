@@ -142,7 +142,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testGet() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $this->assertTrue($browser->get($this->getServerUrl() . 'network_confirm.php'));
         $this->assertPattern('/target for the SimpleTest/');
         $this->assertPattern('/Request method.*?<dd>GET<\/dd>/');
@@ -153,7 +152,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testPost() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $this->assertTrue($browser->post($this->getServerUrl() . 'network_confirm.php'));
         $this->assertPattern('/target for the SimpleTest/');
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
@@ -161,7 +159,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testAbsoluteLinkFollowing() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLink('Absolute'));
         $this->assertPattern('/target for the SimpleTest/');
@@ -169,7 +166,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testRelativeEncodedLinkFollowing() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'link_confirm.php');
         // Warning: the below data is ISO 8859-1 encoded
         $this->assertTrue($browser->clickLink("m\xE4rc\xEAl kiek'eboe"));
@@ -178,7 +174,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testRelativeLinkFollowing() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLink('Relative'));
         $this->assertPattern('/target for the SimpleTest/');
@@ -186,7 +181,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testUnifiedClickLinkClicking() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->click('Relative'));
         $this->assertPattern('/target for the SimpleTest/');
@@ -194,7 +188,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testIdLinkFollowing() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'link_confirm.php');
         $this->assertTrue($browser->clickLinkById(1));
         $this->assertPattern('/target for the SimpleTest/');
@@ -202,7 +195,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testCookieReading() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'set_cookies.php');
         $this->assertEqual($browser->getCurrentCookieValue('session_cookie'), 'A');
         $this->assertEqual($browser->getCurrentCookieValue('short_cookie'), 'B');
@@ -211,7 +203,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testSimpleSubmit() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($browser->clickSubmit('Go!'));
         $this->assertPattern('/Request method.*?<dd>POST<\/dd>/');
@@ -220,7 +211,6 @@ class TestOfLiveBrowser extends SimpleTestAcceptanceTest {
 
     function testUnifiedClickCanSubmit() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $browser->get($this->getServerUrl() . 'form.html');
         $this->assertTrue($browser->click('Go!'));
         $this->assertPattern('/go=\[Go!\]/');
@@ -236,7 +226,6 @@ class TestOfLocalFileBrowser extends SimpleTestAcceptanceTest {
 
     function testGet() {
         $browser = $this->getBrowser();
-        $browser->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
         $this->assertTrue($browser->get($this->getServerUrl() . 'file.html'));
         $this->assertPattern('/Link to SimpleTest/');
         $this->assertEqual($browser->getTitle(), 'Link to SimpleTest');
@@ -314,7 +303,6 @@ class TestRadioFields extends SimpleTestAcceptanceTest {
 
 class TestOfLiveFetching extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testFormWithArrayBasedInputs() {
@@ -411,7 +399,6 @@ class TestOfLiveFetching extends SimpleTestAcceptanceTest {
 
 class TestOfLinkFollowing extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testLinkAssertions() {
@@ -455,7 +442,6 @@ class TestOfLinkFollowing extends SimpleTestAcceptanceTest {
 
 class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testClickToExplicitelyNamedSelfReturns() {
@@ -510,7 +496,6 @@ class TestOfLivePageLinkingWithMinimalLinks extends SimpleTestAcceptanceTest {
 
 class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testJumpToNamedPage() {
@@ -626,7 +611,6 @@ class TestOfLiveFrontControllerEmulation extends SimpleTestAcceptanceTest {
 
 class TestOfLiveHeaders extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testConfirmingHeaderExistence() {
@@ -640,7 +624,6 @@ class TestOfLiveHeaders extends SimpleTestAcceptanceTest {
 
 class TestOfLiveRedirects extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testNoRedirects() {
@@ -686,7 +669,6 @@ class TestOfLiveRedirects extends SimpleTestAcceptanceTest {
 
 class TestOfLiveCookies extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function here() {
@@ -791,7 +773,6 @@ class TestOfLiveCookies extends SimpleTestAcceptanceTest {
 
 class LiveTestOfForms extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testSimpleSubmit() {
@@ -1211,7 +1192,6 @@ class LiveTestOfForms extends SimpleTestAcceptanceTest {
 
 class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testDefaultFormValueSubmission() {
@@ -1302,7 +1282,6 @@ class TestOfLiveMultiValueWidgets extends SimpleTestAcceptanceTest {
 
 class TestOfFileUploads extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testSingleFileUpload() {
@@ -1339,7 +1318,6 @@ class TestOfFileUploads extends SimpleTestAcceptanceTest {
 
 class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testRetry() {
@@ -1407,7 +1385,6 @@ class TestOfLiveHistoryNavigation extends SimpleTestAcceptanceTest {
 
 class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testChallengeFromProtectedPage() {
@@ -1481,7 +1458,6 @@ class TestOfLiveAuthentication extends SimpleTestAcceptanceTest {
 
 class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testNoFramesContentWhenFramesDisabled() {
@@ -1728,7 +1704,6 @@ class TestOfLoadingFrames extends SimpleTestAcceptanceTest {
 
 class TestOfFrameAuthentication extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testUnauthenticatedFrameSendsChallenge() {
@@ -1772,7 +1747,6 @@ class TestOfFrameAuthentication extends SimpleTestAcceptanceTest {
 
 class TestOfNestedFrames extends SimpleTestAcceptanceTest {
     function setUp() {
-        $this->addHeader('User-Agent: SimpleTest ' . SimpleTest::getVersion());
     }
 
     function testCanNavigateToSpecificContent() {

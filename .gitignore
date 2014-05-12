@@ -2,6 +2,8 @@
 *~
 *.bak
 
+.svn
+
 test/site/temp/
 vendor/
-
+bootstrap.php

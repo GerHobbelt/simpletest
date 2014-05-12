@@ -78,26 +78,30 @@ class SimpleTagBuilder {
         }
         $type = strtolower(trim($attributes['type']));
         $map = array(
-                'submit' => 'SimpleSubmitTag',
-                'image' => 'SimpleImageSubmitTag',
-                'checkbox' => 'SimpleCheckboxTag',
-                'radio' => 'SimpleRadioButtonTag',
-                'text' => 'SimpleTextTag',
-                'email' => 'SimpleTextTag',
-                'tel' => 'SimpleTextTag',
-                'url' => 'SimpleTextTag',
-                'search' => 'SimpleTextTag',
-                'number' => 'SimpleTextTag',
-                'color' => 'SimpleTextTag',
-                'datetime' => 'SimpleTextTag',
-                'datetime-local' => 'SimpleTextTag',
-                'date' => 'SimpleTextTag',
-                'month' => 'SimpleTextTag',
-                'week' => 'SimpleTextTag',
-                'time' => 'SimpleTextTag',
-                'hidden' => 'SimpleTextTag',
-                'password' => 'SimpleTextTag',
-                'file' => 'SimpleUploadTag');
+            'submit'         => 'SimpleSubmitTag',
+            'image'          => 'SimpleImageSubmitTag',
+            'checkbox'       => 'SimpleCheckboxTag',
+            'radio'          => 'SimpleRadioButtonTag',
+            'text'           => 'SimpleTextTag',
+            'hidden'         => 'SimpleTextTag',
+            'password'       => 'SimpleTextTag',
+            'file'           => 'SimpleUploadTag',
+            // HTML 5 new input types
+            'color'          => 'SimpleTextTag',
+            'date'           => 'SimpleTextTag',
+            'datetime'       => 'SimpleTextTag',
+            'datetime-local' => 'SimpleTextTag',
+            'email'          => 'SimpleTextTag',
+            'month'          => 'SimpleTextTag',
+            'number'         => 'SimpleTextTag',
+            'range'          => 'SimpleTextTag',
+            'search'         => 'SimpleTextTag',
+            'tel'            => 'SimpleTextTag',
+            'time'           => 'SimpleTextTag',
+            'url'            => 'SimpleTextTag',
+            'week'           => 'SimpleTextTag'
+        );
+
         if (array_key_exists($type, $map)) {
             $tag_class = $map[$type];
             return new $tag_class($attributes);
@@ -481,13 +485,15 @@ class SimpleTextTag extends SimpleWidget {
 
     /**
      *    Sets the current form element value. Cannot
-     *    change the value of a hidden field.
+     *    change the value of a hidden field unless you
+     *    set the @a $force argument to TRUE.
      *    @param string $value       New value.
+     *    @param boolean $force      Force setting even if field is hidden.
      *    @return boolean            True if allowed.
      *    @access public
      */
-    function setValue($value) {
-        if ($this->getAttribute('type') == 'hidden') {
+    function setValue($value, $force = false) {
+        if (!$force && $this->getAttribute('type') === 'hidden') {
             return false;
         }
         return parent::setValue($value);
@@ -925,7 +931,7 @@ class MultipleSelectionTag extends SimpleWidget {
      */
     function addTag($tag) {
         if ($tag->getTagName() == 'option') {
-            $this->options[] = &$tag;
+            $this->options[] = $tag;
         }
     }
 

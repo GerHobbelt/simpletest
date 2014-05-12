@@ -22,6 +22,7 @@ require_once(dirname(__FILE__) . '/url.php');
  */
 class SimpleRoute {
     protected $url;
+    protected $useragent = '';
 
     /**
      *    Sets the target URL.
@@ -66,6 +67,23 @@ class SimpleRoute {
     }
 
     /**
+     *    Creates the user agent part of the request.
+     *    @return string          Host line content.
+     *    @access protected
+     */
+    protected function getAgentLine() {
+        return 'User-Agent: ' . (empty($this->useragent) ? 'SimpleTest ' . SimpleTest::getVersion() : $this->useragent);
+    }
+
+    /**
+     *    Set an alternative user-agent to use for requests.
+     *    @param string $agent UserAgent to use.
+     */
+    public function setUserAgent($agent) {
+        $this->useragent = $agent;
+    }
+
+    /**
      *    Opens a socket to the route.
      *    @param string $method      HTTP request method, usually GET.
      *    @param integer $timeout    Connection timeout.
@@ -82,6 +100,7 @@ class SimpleRoute {
         if (! $socket->isError()) {
             $socket->write($this->getRequestLine($method) . "\r\n");
             $socket->write($this->getHostLine() . "\r\n");
+            $socket->write($this->getAgentLine() . "\r\n");
             $socket->write("Connection: close\r\n");
         }
         return $socket;
@@ -259,6 +278,15 @@ class SimpleHttpRequest {
      */
     function addHeaderLine($header_line) {
         $this->headers[] = $header_line;
+    }
+
+    /**
+     *    Get the headers to be sent with the request.
+     *    @access public
+     *    @return array
+     */
+    function getHeaders() {
+        return $this->headers;
     }
 
     /**
@@ -443,7 +471,8 @@ class SimpleHttpHeaders {
             $this->location = trim($matches[1]);
         }
         if (preg_match('/Set-cookie:(.*)/i', $header_line, $matches)) {
-            $this->cookies[] = $this->parseCookie($matches[1]);
+            $cookie = $this->parseCookie($matches[1]);
+            $this->cookies[] = $cookie;
         }
         if (preg_match('/WWW-Authenticate:\s+(\S+)\s+realm=\"(.*?)\"/i', $header_line, $matches)) {
             $this->authentication = $matches[1];
@@ -463,7 +492,7 @@ class SimpleHttpHeaders {
         preg_match('/\s*(.*?)\s*=(.*)/', array_shift($parts), $cookie);
         foreach ($parts as $part) {
             if (preg_match('/\s*(.*?)\s*=(.*)/', $part, $matches)) {
-                $cookie[$matches[1]] = trim($matches[2]);
+                $cookie[strtolower($matches[1])] = trim($matches[2]);
             }
         }
         return new SimpleCookie(

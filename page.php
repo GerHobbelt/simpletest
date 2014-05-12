@@ -490,13 +490,16 @@ class SimplePage {
      *    available.
      *    @param SimpleSelector $selector    Field finder.
      *    @param string $value               Value to set field to.
+     *    @param boolean $position
+     *    @param boolean $force              Force setting even if field is
+     *                                       hidden?
      *    @return boolean                    True if value is valid.
      *    @access public
      */
-    function setField($selector, $value, $position=false) {
+    function setField($selector, $value, $position=false, $force=false) {
         $is_set = false;
         for ($i = 0; $i < count($this->forms); $i++) {
-            if ($this->forms[$i]->setField($selector, $value, $position)) {
+            if ($this->forms[$i]->setField($selector, $value, $position, $force)) {
                 $is_set = true;
             }
         }

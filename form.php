@@ -163,7 +163,7 @@ class SimpleForm {
         } elseif (strtolower($tag->getAttribute('type')) == 'checkbox') {
             $this->addCheckbox($tag);
         } else {
-            $this->widgets[] = &$tag;
+            $this->widgets[] = $tag;
         }
     }
 
@@ -225,19 +225,22 @@ class SimpleForm {
      *    Sets a widget value within the form.
      *    @param SimpleSelector $selector   Criteria to apply.
      *    @param string $value              Value to input into the widget.
+     *    @param boolean $position
+     *    @param boolean $force             Force setting even if field is
+     *                                      hidden?
      *    @return boolean                   True if value is legal, false
      *                                      otherwise. If the field is not
      *                                      present, nothing will be set.
      *    @access public
      */
-    function setField($selector, $value, $position=false) {
+    function setField($selector, $value, $position=false, $force=false) {
         $success = false;
         $_position = 0;
         for ($i = 0, $count = count($this->widgets); $i < $count; $i++) {
             if ($selector->isMatch($this->widgets[$i])) {
                 $_position++;
                 if ($position === false or $_position === (int)$position) {
-                    if ($this->widgets[$i]->setValue($value)) {
+                    if ($this->widgets[$i]->setValue($value, $force)) {
                         $success = true;
                     }
                 }

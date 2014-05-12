@@ -204,6 +204,14 @@ class SimpleBrowser {
     }
 
     /**
+     *    Set an alternative user-agent to use for requests.
+     *    @param string $agent UserAgent to use.
+     */
+    public function setUserAgent($agent) {
+        $this->user_agent->setUserAgent($agent);
+    }
+
+    /**
      *    Get the HTML parser to use. Can be overridden by
      *    setParser. Otherwise scans through the available parsers and
      *    uses the first one which is available.
@@ -304,6 +312,11 @@ class SimpleBrowser {
      *    @access protected
      */
     protected function fetch($url, $encoding, $depth = 0) {
+        if ($http_referer = $this->history->getUrl()) {
+            $this->user_agent->setReferer($http_referer->asString());
+        } else {
+            $this->user_agent->setReferer(null);
+        }
         $response = $this->user_agent->fetchResponse($url, $encoding);
         if ($response->isError()) {
             return new SimplePage($response);
@@ -823,11 +836,13 @@ class SimpleBrowser {
      *    Sets all form fields with that name.
      *    @param string $label   Name or label of field in forms.
      *    @param string $value   New value of field.
+     *    @param boolean $position
+     *    @param boolean $force  Force setting even if field is hidden?
      *    @return boolean        True if field exists, otherwise false.
      *    @access public
      */
-    function setField($label, $value, $position=false) {
-        return $this->page->setField(new SimpleByLabelOrName($label), $value, $position);
+    function setField($label, $value, $position=false, $force=false) {
+        return $this->page->setField(new SimpleByLabelOrName($label), $value, $position, $force);
     }
 
     /**
@@ -835,22 +850,25 @@ class SimpleBrowser {
      *    one is available (not yet implemented).
      *    @param string $name    Name of field in forms.
      *    @param string $value   New value of field.
+     *    @param boolean $position
+     *    @param boolean $force  Force setting even if field is hidden?
      *    @return boolean        True if field exists, otherwise false.
      *    @access public
      */
-    function setFieldByName($name, $value, $position=false) {
-        return $this->page->setField(new SimpleByName($name), $value, $position);
+    function setFieldByName($name, $value, $position=false, $force=false) {
+        return $this->page->setField(new SimpleByName($name), $value, $position, $force);
     }
 
     /**
      *    Sets all form fields with that id attribute.
      *    @param string/integer $id   Id of field in forms.
      *    @param string $value        New value of field.
+     *    @param boolean $force  Force setting even if field is hidden?
      *    @return boolean             True if field exists, otherwise false.
      *    @access public
      */
-    function setFieldById($id, $value) {
-        return $this->page->setField(new SimpleById($id), $value);
+    function setFieldById($id, $value, $force=false) {
+        return $this->page->setField(new SimpleById($id), $value, false, $force);
     }
 
     /**
