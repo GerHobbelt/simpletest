@@ -94,12 +94,12 @@ class SimpleTagBuilder {
             'email'          => 'SimpleTextTag',
             'month'          => 'SimpleTextTag',
             'number'         => 'SimpleTextTag',
-            'ranje'          => 'SimpleTextTag',
+            'range'          => 'SimpleTextTag',
             'search'         => 'SimpleTextTag',
             'tel'            => 'SimpleTextTag',
             'time'           => 'SimpleTextTag',
             'url'            => 'SimpleTextTag',
-            'weel'           => 'SimpleTextTag'
+            'week'           => 'SimpleTextTag'
         );
 
         if (array_key_exists($type, $map)) {
