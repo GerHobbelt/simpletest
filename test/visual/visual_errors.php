@@ -19,7 +19,7 @@ class VisualTestOfErrors extends UnitTestCase {
         $this->expectError();
         trigger_error('Error');
     }
-    
+
     function testUnusedErrorExpectationsCauseFailures() {
         $this->dump('Two failures...');
         $this->expectError('Some error');

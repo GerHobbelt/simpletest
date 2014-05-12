@@ -40,7 +40,7 @@ class TestOfMockInterfaces extends UnitTestCase {
 }
 
 class TestOfSpl extends UnitTestCase {
-    
+
     function skip() {
         $this->skipUnless(function_exists('spl_classes'), 'No SPL module loaded');
     }
@@ -108,7 +108,7 @@ class TestOfImplementations extends UnitTestCase {
         $hinter = new WithHint();
         $hinter->hinted($mock);
     }
-    
+
     function testNoSpuriousWarningsWhenSkippingDefaultedParameter() {
         $mock = new MockImplementsDummy();
         $mock->extraMethod();

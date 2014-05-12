@@ -252,7 +252,7 @@ class TestOfBrowserNavigation extends UnitTestCase {
         $agent->expectAt(
                 4,
                 'fetchResponse',
-                array(new SimpleUrl('http://this.com/head.req'), new SimpleHeadEncoding()));                               
+                array(new SimpleUrl('http://this.com/head.req'), new SimpleHeadEncoding()));
         $agent->expectCallCount('fetchResponse', 5);
 
         $page = new MockSimplePage();
@@ -263,8 +263,8 @@ class TestOfBrowserNavigation extends UnitTestCase {
         $browser->put('http://this.com/put.req');
         $browser->delete('http://this.com/delete.req');
         $browser->head('http://this.com/head.req');
-    }  
-    
+    }
+
     function testClickLinkRequestsPage() {
         $agent = new MockSimpleUserAgent();
         $agent->returns('fetchResponse', new MockSimpleHttpResponse());

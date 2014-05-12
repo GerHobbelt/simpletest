@@ -348,11 +348,11 @@ function xSlide(e) {
     newY = Math.round(e.yA * s + e.yD);
     xMoveTo(e, newX, newY);
     e.moving = true;
-  }  
+  }
   else {
     xMoveTo(e, e.xTarget, e.yTarget);
     e.moving = false;
-  }  
+  }
 }
 // Event:
 function xAddEventListener(e,eventType,eventListener,useCapture) {

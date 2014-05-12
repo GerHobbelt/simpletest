@@ -23,7 +23,7 @@ register_shutdown_function('simpletest_autorun');
  *    Exit handler to run all recent test cases and exit system if in CLI
  */
 function simpletest_autorun() {
-	chdir($GLOBALS['SIMPLETEST_AUTORUNNER_INITIAL_PATH']);
+    chdir($GLOBALS['SIMPLETEST_AUTORUNNER_INITIAL_PATH']);
     if (tests_have_run()) {
         return;
     }

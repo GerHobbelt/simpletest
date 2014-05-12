@@ -8,12 +8,12 @@
             </p>
             <p>
                 It means we consider SimpleTest to be really stable.
-				And that each new release will add bug-fixes only.
+                And that each new release will add bug-fixes only.
             </p>
             <p>
                 Of course we'll follow closely all new versions of PHP,
-				and hopefully release a new version each time a newer version
-				breaks something ! 
+                and hopefully release a new version each time a newer version
+                breaks something !
             </p>
         </section>
         <section name="plan" title="Release plan" version="1.1">
