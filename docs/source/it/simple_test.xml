@@ -246,9 +246,6 @@ class AllTests extends <strong>TestSuite</strong> {
 				l'inconveniente è sufficiente marcare la classe base 
 				come <code>abstract</code>. 
 				SimpleTest non esegue classi abstract. 
-				Nell'uso con PHP4, la direttiva 
-				<code>SimpleTestOptions::ignore()</code> in qualche punto 
-				del test case sortisce lo stesso effetto.
 			
             </p>
             <p>

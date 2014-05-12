@@ -242,9 +242,7 @@ class AllTests extends <strong>TestSuite</strong> {
                 pendant la procédure.
                 Pas vraiement un problème majeure, mais pour éviter cet inconvénient
                 il suffit de marquer vos classes de base comme <code>abstract</code>.
-                SimpleTest ne lance pas les classes abstraites. Et si vous utilisez encore
-                PHP4 alors une directive <code>SimpleTestOptions::ignore()</code>
-                dans votre fichier de scénario de test aura le même effet.
+                SimpleTest ne lance pas les classes abstraites.
             </p>
             <p>
                 Par ailleurs, le fichier avec le scénario de test ne devrait pas

@@ -104,7 +104,7 @@ class SimpleFileSocket extends SimpleStickyError {
     }
 
     /**
-     *    Reads data from the socket. The error suppresion
+     *    Reads data from the socket. The error suppression
      *    is a workaround for PHP4 always throwing a warning
      *    with a secure socket.
      *    @return integer/boolean           Incoming bytes. False
@@ -216,7 +216,7 @@ class SimpleSocket extends SimpleStickyError {
     }
 
     /**
-     *    Reads data from the socket. The error suppresion
+     *    Reads data from the socket. The error suppression
      *    is a workaround for PHP4 always throwing a warning
      *    with a secure socket.
      *    @return integer/boolean           Incoming bytes. False

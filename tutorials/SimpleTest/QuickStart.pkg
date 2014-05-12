@@ -223,9 +223,6 @@ class AllTests extends TestSuite {
                 Hardly a major problem, but to avoid this inconvenience simply mark your
                 base class as <span class="new_code">abstract</span>.
                 SimpleTest won't run abstract classes.
-                If you are still using PHP4, then
-                a <span class="new_code">SimpleTestOptions::ignore()</span> directive
-                somewhere in the test case file will have the same effect.
             </para>
             <para>
                 Also, the test case file should not have been included

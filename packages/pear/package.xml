@@ -61,8 +61,7 @@
         <file name="page.php" role="php" baseinstalldir="simpletest" />
         <file name="php_parser.php" role="php" baseinstalldir="simpletest" />
         <file name="recorder.php" role="php" baseinstalldir="simpletest" />
-        <file name="reflection_php4.php" role="php" baseinstalldir="simpletest" />
-        <file name="reflection_php5.php" role="php" baseinstalldir="simpletest" />
+        <file name="reflection.php" role="php" baseinstalldir="simpletest" />
         <file name="remote.php" role="php" baseinstalldir="simpletest" />
         <file name="reporter.php" role="php" baseinstalldir="simpletest" />
         <file name="scorer.php" role="php" baseinstalldir="simpletest" />

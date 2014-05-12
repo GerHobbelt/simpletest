@@ -2,7 +2,7 @@
 // $Id$
 require_once(dirname(__FILE__) . '/../autorun.php');
 require_once(dirname(__FILE__) . '/../errors.php');
-require_once(dirname(__FILE__) . '/../reflection_php5.php');
+require_once(dirname(__FILE__) . '/../reflection.php');
 
 class AnyOldLeafClass {
     function aMethod() { }
