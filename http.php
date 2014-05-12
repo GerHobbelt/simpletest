@@ -281,6 +281,15 @@ class SimpleHttpRequest {
     }
 
     /**
+     *    Get the headers to be sent with the request.
+     *    @access public
+     *    @return array
+     */
+    function getHeaders() {
+        return $this->headers;
+    }
+
+    /**
      *    Reads all the relevant cookies from the
      *    cookie jar.
      *    @param SimpleCookieJar $jar     Jar to read
